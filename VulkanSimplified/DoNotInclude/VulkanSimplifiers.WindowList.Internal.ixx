@@ -4,8 +4,7 @@ import std;
 import ListTemplates.UnsortedList;
 import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Window.Data;
-
-export typedef std::unique_ptr<WindowInternal> WindowPointer;
+import VulkanSimplifiers.WindowList.Data;
 
 export class WindowListInternal
 {

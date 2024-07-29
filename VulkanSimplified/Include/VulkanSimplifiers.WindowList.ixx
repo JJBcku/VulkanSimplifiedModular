@@ -1,10 +1,11 @@
 export module VulkanSimplifiers.WindowList;
 
+import std;
 import ListTemplates.UnsortedList;
 import VulkanSimplifiers.WindowList.Internal;
-import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Window;
 import VulkanSimplifiers.Window.Data;
+import VulkanSimplifiers.WindowList.Data;
 
 export class WindowListSimplifier
 {

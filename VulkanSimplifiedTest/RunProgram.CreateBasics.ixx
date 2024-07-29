@@ -10,5 +10,6 @@ import VulkanSimplifiers.Window.Data;
 import VulkanSimplifiers.Window;
 import VulkanSimplifiers.WindowList;
 import VulkanSimplifiers.InstanceList;
+import VulkanSimplifiers.Common.VulkanVersionData;
 
 export void CreateBasics(VulkanData& data, MainSettings& settings);

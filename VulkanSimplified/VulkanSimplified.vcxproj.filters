@@ -237,5 +237,11 @@
     <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

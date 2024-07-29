@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp" />
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
     <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.cpp" />
     <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.Internal.cpp" />
     <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="DoNotInclude\VulkanSimplifiers.Window.Internal.ixx" />
     <ClCompile Include="DoNotInclude\VulkanSimplifiers.WindowList.Internal.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx" />
     <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.Data.ixx" />
     <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.ixx" />
     <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.ixx" />

@@ -6,6 +6,7 @@ import VulkanSimplifiers.Window.Data;
 import VulkanSimplifiers.Window;
 import VulkanSimplifiers.WindowList;
 import VulkanSimplifiers.InstanceList;
+import VulkanSimplifiers.Common.VulkanVersionData;
 import std;
 
 import MainSettings;
@@ -37,6 +38,8 @@ int main()
     auto windowSimplifier = windowList.GetWindowSimplifier(windowId);
 
     auto instanceList = core.GetInstanceListSimplifier();
+
+    auto vulkanMaxVersion = instanceList.GetMaxAvailableVulkanVersion();
 
     while (!settings.GetQuit())
     {

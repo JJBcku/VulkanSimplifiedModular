@@ -7,3 +7,8 @@ InstanceListSimplifier::InstanceListSimplifier(InstanceListInternal& ref) : _int
 InstanceListSimplifier::~InstanceListSimplifier()
 {
 }
+
+VulkanVersionData InstanceListSimplifier::GetMaxAvailableVulkanVersion() const
+{
+	return _internal.GetMaxAvailableVulkanVersion();
+}

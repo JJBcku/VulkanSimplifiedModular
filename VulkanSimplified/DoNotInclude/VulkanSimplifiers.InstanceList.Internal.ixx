@@ -1,8 +1,13 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 export module VulkanSimplifiers.InstanceList.Internal;
 
 import std;
 import ListTemplates.UnsortedList;
 import VulkanSimplifiers.Instance.Internal;
+import VulkanSimplifiers.Common.VulkanVersionData;
 
 export typedef std::unique_ptr<InstanceInternal> InstancePointer;
 
@@ -16,6 +21,14 @@ public:
 
 	InstanceListInternal& operator=(const InstanceListInternal&) noexcept = delete;
 
+	VulkanVersionData GetMaxAvailableVulkanVersion() const;
+
 private:
+	VulkanVersionData _maxApiVersion;
 	UnsortedList<InstancePointer> _instanceList;
+
+	std::vector<VkExtensionProperties> _availableExtensions;
+	std::vector<VkLayerProperties> _availableLayer;
+
+	std::uint32_t FindMaximumAvailableVulkanVersion() const;
 };

@@ -5,7 +5,7 @@ module;
 
 module VulkanSimplifiers.InstanceList.Internal;
 
-InstanceListInternal::InstanceListInternal(size_t initialListCapacity) : _instanceList(initialListCapacity)
+InstanceListInternal::InstanceListInternal(size_t initialListCapacity, WindowListInternal& windowList) : _instanceList(initialListCapacity), _windowList(windowList)
 {
 	std::uint32_t data = FindMaximumAvailableVulkanVersion();
 	_maxApiVersion = VulkanVersionData(data);

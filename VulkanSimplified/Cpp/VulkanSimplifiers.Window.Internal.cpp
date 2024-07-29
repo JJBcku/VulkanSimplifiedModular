@@ -90,6 +90,11 @@ bool WindowInternal::GetResized()
 	return ret;
 }
 
+SDL_Window* WindowInternal::GetWindow() const
+{
+	return _window;
+}
+
 void WindowInternal::CreateWindow(WindowCreationData data)
 {
 	if (_window != nullptr)

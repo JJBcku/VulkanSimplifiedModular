@@ -5,7 +5,7 @@ module;
 module VulkanSimplifiers.Main.Internal;
 
 MainInternal::MainInternal(const MainSimplifierInitData& initData) : _eventHandler(initData.eventHandlerData),
-_instanceList(initData.instancesListInitialCapacity), _windowList(initData.windowsListInitialCapacity)
+_instanceList(initData.instancesListInitialCapacity, _windowList), _windowList(initData.windowsListInitialCapacity)
 {
 	int result = SDL_Init(SDL_INIT_VIDEO);
 	 if (result < 0)

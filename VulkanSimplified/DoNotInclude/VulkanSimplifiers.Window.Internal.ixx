@@ -23,6 +23,8 @@ public:
 	bool GetPaused() const;
 	bool GetResized();
 
+	SDL_Window* GetWindow() const;
+
 private:
 	SDL_Window* _window;
 	std::size_t _padding;

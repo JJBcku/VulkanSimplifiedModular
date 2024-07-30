@@ -52,5 +52,5 @@ export struct EventHandlerInitData
 	size_t renderTargetsResetEventFunctionListInitialCapacity;
 	size_t renderDeviceResetEventFunctionListInitialCapacity;
 
-	EventHandlerInitData();
+	EventHandlerInitData(size_t commonReserveSize = 0);
 };

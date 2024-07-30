@@ -16,5 +16,5 @@ export struct InstanceInitInfo
 	std::vector<const char*> requestedExtensions;
 	std::vector<const char*> requestedLayers;
 
-	InstanceInitInfo() = default;
+	InstanceInitInfo();
 };

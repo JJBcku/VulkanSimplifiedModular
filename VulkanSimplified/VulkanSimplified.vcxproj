@@ -45,10 +45,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllProjectBMIsArePublic>false</AllProjectBMIsArePublic>
-    <PublicModuleDirectories>Include;Include\EventHandling;Include\Common</PublicModuleDirectories>
+    <PublicModuleDirectories>Include;Include\Common;Include\Instance;Include\Main;Include\Main\EventHandling</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PublicModuleDirectories>Include;Include\EventHandling;Include\Common</PublicModuleDirectories>
+    <PublicModuleDirectories>Include;Include\Common;Include\Instance;Include\Main;Include\Main\EventHandling</PublicModuleDirectories>
     <AllProjectBMIsArePublic>false</AllProjectBMIsArePublic>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -116,71 +116,72 @@
   <ItemGroup>
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.Internal.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AudioDeviceEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ClipboardEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ControllerEvents.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DisplayEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DropEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.JoyEvents.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.KeyboardEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.LocaleChangedEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.MouseEvents.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.RenderEvents.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.SensorEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TextEvents.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.cpp" />
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.Data.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.Instance.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.Instance.Internal.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.Main.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.Main.Data.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.Main.Internal.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.Window.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.Window.Internal.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.WindowList.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.WindowList.Internal.cpp" />
-    <ClCompile Include="DoNotInclude\EventHandling\VulkanSimplifiers.EventHandling.Internal.ixx" />
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.Instance.Internal.ixx" />
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.Main.Internal.ixx" />
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.Window.Internal.ixx" />
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.WindowList.Internal.ixx" />
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.Instance.Data.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.Internal.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AudioDeviceEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ClipboardEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ControllerEvents.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DisplayEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DropEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.JoyEvents.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.KeyboardEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.LocaleChangedEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.MouseEvents.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.RenderEvents.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.SensorEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TextEvents.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.cpp" />
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.Data.cpp" />
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.Instance.cpp" />
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.Instance.Internal.cpp" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Main.cpp" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Main.Data.cpp" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Main.Internal.cpp" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Window.cpp" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Window.Internal.cpp" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.cpp" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.Internal.cpp" />
+    <ClCompile Include="DoNotInclude\Main\EventHandling\VulkanSimplifiers.EventHandling.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Instance\VulkanSimplifiers.Instance.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Main.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Window.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.WindowList.Internal.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.Data.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AudioDeviceEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ClipboardEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ControllerEvents.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DisplayEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DropEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.JoyEvents.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.KeyboardEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.LocaleChangedEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.MouseEvents.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.RenderEvents.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.SensorEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TextEvents.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.ixx" />
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.Instance.Data.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.Instance.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.Main.Data.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.Main.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.Window.Data.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.Window.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.WindowList.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.WindowList.Data.ixx" />
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.DebugCallback.ixx" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.DebugCallback.cpp" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.Data.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AudioDeviceEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ClipboardEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ControllerEvents.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DisplayEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DropEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.JoyEvents.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.KeyboardEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.LocaleChangedEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.MouseEvents.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.RenderEvents.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.SensorEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TextEvents.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.ixx" />
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.ixx" />
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.Instance.Data.ixx" />
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.Instance.ixx" />
+    <ClCompile Include="Include\Main\VulkanSimplifiers.Main.Data.ixx" />
+    <ClCompile Include="Include\Main\VulkanSimplifiers.Main.ixx" />
+    <ClCompile Include="Include\Main\VulkanSimplifiers.Window.Data.ixx" />
+    <ClCompile Include="Include\Main\VulkanSimplifiers.Window.ixx" />
+    <ClCompile Include="Include\Main\VulkanSimplifiers.WindowList.ixx" />
+    <ClCompile Include="Include\Main\VulkanSimplifiers.WindowList.Data.ixx" />
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.DebugCallback.ixx" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.DebugCallback.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

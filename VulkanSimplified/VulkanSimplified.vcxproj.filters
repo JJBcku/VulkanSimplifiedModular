@@ -42,187 +42,187 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.Data.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.Data.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.Internal.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.Internal.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AudioDeviceEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AudioDeviceEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ClipboardEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ClipboardEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ControllerEvents.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ControllerEvents.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DisplayEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DisplayEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DropEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DropEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.JoyEvents.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.JoyEvents.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.KeyboardEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.KeyboardEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.LocaleChangedEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.LocaleChangedEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.MouseEvents.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.MouseEvents.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.RenderEvents.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.RenderEvents.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.SensorEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.SensorEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TextEvents.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TextEvents.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.cpp">
+    <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp">
       <Filter>Source Files\Cpp Files\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.Instance.cpp">
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.Instance.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.Instance.Internal.cpp">
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.Instance.Internal.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.Main.cpp">
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Main.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.Main.Data.cpp">
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Main.Data.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.Main.Internal.cpp">
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Main.Internal.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.Window.cpp">
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Window.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.Window.Internal.cpp">
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Window.Internal.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.WindowList.cpp">
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.WindowList.Internal.cpp">
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.Internal.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.Instance.Internal.ixx">
+    <ClCompile Include="DoNotInclude\Instance\VulkanSimplifiers.Instance.Internal.ixx">
       <Filter>Source Files\DoNotInclude</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.Main.Internal.ixx">
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Main.Internal.ixx">
       <Filter>Source Files\DoNotInclude</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.Window.Internal.ixx">
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Window.Internal.ixx">
       <Filter>Source Files\DoNotInclude</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.WindowList.Internal.ixx">
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.WindowList.Internal.ixx">
       <Filter>Source Files\DoNotInclude</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\EventHandling\VulkanSimplifiers.EventHandling.Internal.ixx">
+    <ClCompile Include="DoNotInclude\Main\EventHandling\VulkanSimplifiers.EventHandling.Internal.ixx">
       <Filter>Source Files\DoNotInclude\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.Data.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.Data.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AudioDeviceEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AudioDeviceEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ClipboardEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ClipboardEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ControllerEvents.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.ControllerEvents.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DisplayEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DisplayEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DropEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.DropEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.JoyEvents.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.JoyEvents.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.KeyboardEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.KeyboardEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.LocaleChangedEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.LocaleChangedEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.MouseEvents.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.MouseEvents.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.RenderEvents.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.RenderEvents.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.SensorEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.SensorEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TextEvents.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TextEvents.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.ixx">
       <Filter>Source Files\Include\EventHandling</Filter>
     </ClCompile>
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.ixx">
       <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.Instance.ixx">
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.Instance.ixx">
       <Filter>Source Files\Include</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.Main.Data.ixx">
+    <ClCompile Include="Include\Main\VulkanSimplifiers.Main.Data.ixx">
       <Filter>Source Files\Include</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.Main.ixx">
+    <ClCompile Include="Include\Main\VulkanSimplifiers.Main.ixx">
       <Filter>Source Files\Include</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.Window.Data.ixx">
+    <ClCompile Include="Include\Main\VulkanSimplifiers.Window.Data.ixx">
       <Filter>Source Files\Include</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.Window.ixx">
+    <ClCompile Include="Include\Main\VulkanSimplifiers.Window.ixx">
       <Filter>Source Files\Include</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.WindowList.ixx">
+    <ClCompile Include="Include\Main\VulkanSimplifiers.WindowList.ixx">
       <Filter>Source Files\Include</Filter>
     </ClCompile>
-    <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.ixx">
+    <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.QuitEvent.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx">
@@ -231,16 +231,19 @@
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.WindowList.Data.ixx">
+    <ClCompile Include="Include\Main\VulkanSimplifiers.WindowList.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.Instance.Data.ixx">
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.Instance.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.DebugCallback.ixx">
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.DebugCallback.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.DebugCallback.cpp">
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.DebugCallback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.Instance.Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

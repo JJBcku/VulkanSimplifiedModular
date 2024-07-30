@@ -119,6 +119,9 @@ InstanceExtensionList MainInternal::GetAvailableInstanceExtensions() const
 
 void MainInternal::CreateIntance(const InstanceCreationInfo& instanceInfo)
 {
+	if (_instance)
+		throw std::runtime_error("MainInternal::CreateIntance Error: Program tried to create an already existing vulkan instance!");
+
 	InstanceInitInfo initInfo;
 
 	initInfo.appName = _appName;

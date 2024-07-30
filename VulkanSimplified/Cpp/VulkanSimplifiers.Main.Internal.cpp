@@ -8,7 +8,8 @@ module VulkanSimplifiers.Main.Internal;
 
 MainInternal::MainInternal(const MainSimplifierInitData& initData) : _eventHandler(initData.eventHandlerData), _windowList(initData.windowsListInitialCapacity)
 {
-	int result = SDL_Init(SDL_INIT_VIDEO);
+	int result = SDL_InitSubSystem(SDL_INIT_VIDEO);
+
 	 if (result < 0)
 		throw std::runtime_error("Program failed to initialize SDL, error code" + std::to_string(result));
 
@@ -69,6 +70,9 @@ MainInternal::MainInternal(const MainSimplifierInitData& initData) : _eventHandl
 
 MainInternal::~MainInternal()
 {
+	_windowList.DeleteAll(1);
+	_instance.reset();
+	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	SDL_Quit();
 }
 

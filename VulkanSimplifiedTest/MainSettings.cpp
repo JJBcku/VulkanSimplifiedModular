@@ -30,6 +30,5 @@ bool MainSettings::QuitEventCallback(const SDLModuleQuitEvent&, void* instance)
 
 void MainSettings::SetQuit()
 {
-	std::lock_guard<std::mutex> guard(lock);
 	_quit = true;
 }

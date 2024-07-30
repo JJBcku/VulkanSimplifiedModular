@@ -18,7 +18,6 @@ public:
 	static bool QuitEventCallback(const SDLModuleQuitEvent&, void* instance);
 
 private:
-	std::mutex lock;
 	bool _quit;
 	char _padding[7];
 

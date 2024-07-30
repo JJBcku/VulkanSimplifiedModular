@@ -13,6 +13,11 @@ IDObject<WindowPointer> WindowListInternal::CreateWindow(WindowCreationData data
 	return _windowList.AddObject(std::make_unique<WindowInternal>(data), addReserved);
 }
 
+void WindowListInternal::DeleteAll(size_t capacityAfterReserve)
+{
+	_windowList.Reset(capacityAfterReserve);
+}
+
 WindowInternal& WindowListInternal::GetWindowSimplifier(IDObject<WindowPointer> windowID)
 {
 	auto& window = _windowList.GetObject(windowID);

@@ -17,6 +17,7 @@ public:
 	WindowListInternal& operator=(const WindowListInternal&) noexcept = delete;
 
 	IDObject<WindowPointer> CreateWindow(WindowCreationData data, size_t addReserved);
+	void DeleteAll(size_t capacityAfterReserve);
 
 	WindowInternal& GetWindowSimplifier(IDObject<WindowPointer> windowID);
 

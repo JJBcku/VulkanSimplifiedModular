@@ -13,8 +13,8 @@ export typedef std::unique_ptr<InstanceInternal> InstancePointer;
 
 export struct MainSimplifierInitData
 {
-	std::string appTitle;
-	std::string appVariantTitle;
+	std::string appName;
+	std::string appVariantName;
 	VulkanVersionData appVersion;
 	std::string engineName;
 	VulkanVersionData engineVersion;
@@ -37,5 +37,5 @@ export struct InstanceCreationInfo
 	InstanceExtensionList requestedExtensions;
 	std::optional<IDObject<WindowPointer>> windowExampleID;
 
-	InstanceCreationInfo() = default;
+	InstanceCreationInfo();
 };

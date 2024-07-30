@@ -25,6 +25,9 @@ public:
 	WindowListSimplifier GetWindowListSimplifier();
 
 	VulkanVersionData GetMaxAvailableVulkanVersion() const;
+	InstanceExtensionList GetAvailableInstanceExtensions() const;
+
+	void CreateIntance(const InstanceCreationInfo& instanceCreateInfo);
 
 private:
 	std::unique_ptr<MainInternal> _internal;

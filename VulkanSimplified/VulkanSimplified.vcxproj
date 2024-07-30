@@ -179,6 +179,8 @@
     <ClCompile Include="Include\VulkanSimplifiers.Window.ixx" />
     <ClCompile Include="Include\VulkanSimplifiers.WindowList.ixx" />
     <ClCompile Include="Include\VulkanSimplifiers.WindowList.Data.ixx" />
+    <ClCompile Include="DoNotInclude\VulkanSimplifiers.DebugCallback.ixx" />
+    <ClCompile Include="Cpp\VulkanSimplifiers.DebugCallback.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -237,5 +237,11 @@
     <ClCompile Include="Include\VulkanSimplifiers.Instance.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\VulkanSimplifiers.DebugCallback.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\VulkanSimplifiers.DebugCallback.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

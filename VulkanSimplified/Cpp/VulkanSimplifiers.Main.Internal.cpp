@@ -1,7 +1,8 @@
 module;
 
-#include <SDL2/SDL.h>
 #include <vulkan/vulkan.hpp>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_vulkan.h>
 
 module VulkanSimplifiers.Main.Internal;
 
@@ -11,8 +12,8 @@ MainInternal::MainInternal(const MainSimplifierInitData& initData) : _eventHandl
 	 if (result < 0)
 		throw std::runtime_error("Program failed to initialize SDL, error code" + std::to_string(result));
 
-	 _appTitle = initData.appTitle;
-	 _appVariantTitle = initData.appVariantTitle;
+	 _appName = initData.appName;
+	 _appVariantName = initData.appVariantName;
 	 _appVersion = initData.appVersion;
 	 _engineName = initData.engineName;
 	 _engineVersion = initData.engineVersion;
@@ -116,6 +117,21 @@ InstanceExtensionList MainInternal::GetAvailableInstanceExtensions() const
 	return _availableExtensions;
 }
 
+void MainInternal::CreateIntance(const InstanceCreationInfo& instanceInfo)
+{
+	InstanceInitInfo initInfo;
+
+	initInfo.appName = _appName;
+	initInfo.appVersion = _appVersion.GetVulkanApiCompatibleVersion();
+	initInfo.engineName = _engineName;
+	initInfo.engineVersion = _engineVersion.GetVulkanApiCompatibleVersion();
+	initInfo.usedVulkanApiVersion = instanceInfo.usedVulkanApiVersion.GetVulkanApiCompatibleVersion();
+	initInfo.requestedExtensions = CompileRequestedExtensionsList(instanceInfo.requestedExtensions, instanceInfo.windowExampleID);
+	initInfo.requestedLayers = CompileRequestedLayersList();
+
+	_instance = std::make_unique<InstanceInternal>(initInfo);
+}
+
 std::uint32_t MainInternal::FindMaximumAvailableVulkanVersion() const
 {
 #pragma warning(push)
@@ -146,6 +162,51 @@ InstanceExtensionList MainInternal::CompileAvailableExtensionList(const std::vec
 		if (std::strcmp(extension.extensionName, VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME) == 0)
 			ret |= SWAPCHAIN_EXTENDED_COLORSPACE;
 	}
+
+	return ret;
+}
+
+std::vector<const char*> MainInternal::CompileRequestedExtensionsList(InstanceExtensionList requestedExtensions, const std::optional<IDObject<WindowPointer>>& windowID) const
+{
+	std::vector<const char*> ret;
+
+#if defined(_DEBUG) || defined(DEBUG) || defined(DEBUG_UTILS)
+	ret.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+#endif
+
+	std::vector<const char*> sdlRequired;
+
+	if (windowID.has_value())
+	{
+		std::uint32_t size = 0;
+		SDL_Vulkan_GetInstanceExtensions(nullptr, &size, nullptr);
+
+		SDL_Vulkan_GetInstanceExtensions(nullptr, &size, sdlRequired.data());
+	}
+
+	ret.reserve(ret.size() + sdlRequired.size() + sizeof(requestedExtensions) * 8);
+
+	if (!sdlRequired.empty())
+	{
+		ret.insert(ret.end(), sdlRequired.begin(), sdlRequired.end());
+	}
+
+	if ((requestedExtensions & _availableExtensions) != requestedExtensions)
+		throw std::runtime_error("CompileRequestedExtensionsList Error: Program tried to create instance with an unavailable extension!");
+
+	if ((requestedExtensions & SWAPCHAIN_EXTENDED_COLORSPACE) == SWAPCHAIN_EXTENDED_COLORSPACE)
+		ret.push_back(VK_EXT_SWAPCHAIN_COLOR_SPACE_EXTENSION_NAME);
+
+	return ret;
+}
+
+std::vector<const char*> MainInternal::CompileRequestedLayersList() const
+{
+	std::vector<const char*> ret;
+
+#if defined(_DEBUG) || defined(DEBUG) || defined(DEBUG_UTILS)
+	ret.push_back("VK_LAYER_KHRONOS_validation");
+#endif
 
 	return ret;
 }

@@ -1,15 +1,21 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 export module VulkanSimplifiers.Instance.Internal;
 
 import std;
 
 import VulkanSimplifiers.Instance.Data;
+import VulkanSimplifiers.DebugCallback;
 
 export class InstanceInternal
 {
 public:
-	InstanceInternal();
+	InstanceInternal(const InstanceInitInfo& initInfo);
 	~InstanceInternal();
 
 private:
-	int stump;
+	VkInstance _instance;
+	VkDebugUtilsMessengerEXT _debugMessenger;
 };

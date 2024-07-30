@@ -35,3 +35,13 @@ VulkanVersionData MainSimplifier::GetMaxAvailableVulkanVersion() const
 {
 	return _internal->GetMaxAvailableVulkanVersion();
 }
+
+InstanceExtensionList MainSimplifier::GetAvailableInstanceExtensions() const
+{
+	return _internal->GetAvailableInstanceExtensions();
+}
+
+void MainSimplifier::CreateIntance(const InstanceCreationInfo& instanceCreateInfo)
+{
+	_internal->CreateIntance(instanceCreateInfo);
+}

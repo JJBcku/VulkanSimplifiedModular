@@ -8,11 +8,11 @@ void CreateBasics(VulkanData& data, MainSettings& settings)
 
 	MainSimplifierInitData initData;
 
-	initData.appTitle = "Vulkan Simplified test app";
+	initData.appName = "Vulkan Simplified test app";
 #if defined(_DEBUG) || defined(DEBUG)
-	initData.appVariantTitle = "x64 Debug";
+	initData.appVariantName = "x64 Debug";
 #else
-	initData.appVariantTitle = "x64 Release";
+	initData.appVariantName = "x64 Release";
 #endif
 	initData.appVersion.SetVulkanPatchVersion(2);
 	initData.engineName = "Vulkan Simplified Test Engine";
@@ -37,5 +37,9 @@ void CreateBasics(VulkanData& data, MainSettings& settings)
 
 	auto windowSimplifier = windowList.GetWindowSimplifier(basic.windowID);
 
-	auto vulkanMaxVersion = main.GetMaxAvailableVulkanVersion();
+	InstanceCreationInfo instanceInit;
+	instanceInit.usedVulkanApiVersion = main.GetMaxAvailableVulkanVersion();
+	instanceInit.windowExampleID = basic.windowID;
+
+	main.CreateIntance(instanceInit);
 }

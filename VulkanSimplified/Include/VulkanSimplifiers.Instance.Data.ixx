@@ -5,13 +5,6 @@ import ListTemplates.IDObject;
 import VulkanSimplifiers.Common.VulkanVersionData;
 import VulkanSimplifiers.WindowList.Data;
 
-export typedef std::uint64_t InstanceExtensionList;
-
-export enum VulkanInstanceExtensionFlags : InstanceExtensionList
-{
-	SWAPCHAIN_EXTENDED_COLORSPACE = 0x1,
-};
-
 export struct InstanceInitInfo
 {
 	std::string appName;

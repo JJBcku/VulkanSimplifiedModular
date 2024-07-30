@@ -3,10 +3,11 @@ export module VulkanSimplifiers.Main;
 import std;
 import VulkanSimplifiers.Main.Data;
 import ListTemplates.IDObject;
+
 import VulkanSimplifiers.EventHandling;
 import VulkanSimplifiers.Main.Internal;
-import VulkanSimplifiers.InstanceList;
 import VulkanSimplifiers.WindowList;
+import VulkanSimplifiers.Instance;
 
 export class MainSimplifier
 {
@@ -17,9 +18,13 @@ public:
 	MainSimplifier(const MainSimplifier&) = delete;
 	MainSimplifier& operator=(const MainSimplifier&) = delete;
 
+	VulkanVersionData GetAppVersion() const;
+
 	EventHandlingSimplifier GetEventHandler();
-	InstanceListSimplifier GetInstanceListSimplifier();
+	InstanceSimplifier GetInstanceSimplifier();
 	WindowListSimplifier GetWindowListSimplifier();
+
+	VulkanVersionData GetMaxAvailableVulkanVersion() const;
 
 private:
 	std::unique_ptr<MainInternal> _internal;

@@ -1,11 +1,17 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 export module VulkanSimplifiers.Main.Internal;
 
 import std;
 import VulkanSimplifiers.Main.Data;
 import ListTemplates.UnsortedList;
 import VulkanSimplifiers.EventHandling.Internal;
-import VulkanSimplifiers.InstanceList.Internal;
 import VulkanSimplifiers.WindowList.Internal;
+import VulkanSimplifiers.Instance.Internal;
+
+import VulkanSimplifiers.Common.VulkanVersionData;
 
 export class MainInternal
 {
@@ -16,19 +22,35 @@ public:
 	MainInternal(const MainInternal&) = delete;
 	MainInternal& operator=(const MainInternal&) = delete;
 
+	VulkanVersionData GetAppVersion() const;
+
 	EventHandlingInternal& GetEventHandler();
-	InstanceListInternal& GetInstanceListSimplifier();
+	InstanceInternal& GetInstanceSimplifier();
 	WindowListInternal& GetWindowListSimplifier();
 
 	const EventHandlingInternal& GetEventHandler() const;
-	const InstanceListInternal& GetInstanceListSimplifier() const;
+	const InstanceInternal& GetInstanceSimplifier() const;
 	const WindowListInternal& GetWindowListSimplifier() const;
 
+	VulkanVersionData GetMaxAvailableVulkanVersion() const;
+	InstanceExtensionList GetAvailableInstanceExtensions() const;
+
 private:
-	NonVulkanVersionData _appVersion;
 	std::string _appTitle;
-	std::string _appVariantTile;
+	std::string _appVariantTitle;
+	VulkanVersionData _appVersion;
+	std::string _engineName;
+	VulkanVersionData _engineVersion;
+
+	VulkanVersionData _maxApiVersion;
+	InstanceExtensionList _availableExtensions;
+
 	EventHandlingInternal _eventHandler;
-	InstanceListInternal _instanceList;
+	InstancePointer _instance;
 	WindowListInternal _windowList;
+
+	std::uint32_t FindMaximumAvailableVulkanVersion() const;
+	InstanceExtensionList CompileAvailableExtensionList(const std::vector<VkExtensionProperties>& extensions) const;
+
+	std::vector<const char*> CompileRequestedExtensionsList();
 };

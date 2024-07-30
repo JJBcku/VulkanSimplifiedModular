@@ -1,7 +1,7 @@
 export module VulkanSimplifiers.WindowList;
 
 import std;
-import ListTemplates.UnsortedList;
+import ListTemplates.IDObject;
 import VulkanSimplifiers.WindowList.Internal;
 import VulkanSimplifiers.Window;
 import VulkanSimplifiers.Window.Data;

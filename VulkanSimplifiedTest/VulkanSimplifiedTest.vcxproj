@@ -112,7 +112,7 @@
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4514;4710;4711;5045</DisableSpecificWarnings>
-      <AdditionalModuleDependencies>$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.UnsortedList.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.IDObject.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.OrderIndependentDeletionStack.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.CommonVectorObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
+      <AdditionalModuleDependencies>$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.IDObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,7 +137,7 @@
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4514;4710;4711;5045</DisableSpecificWarnings>
-      <AdditionalModuleDependencies>$(SolutionDir)ExternalModules\x64 Release\ListTemplates.UnsortedList.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.IDObject.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.OrderIndependentDeletionStack.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.CommonVectorObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
+      <AdditionalModuleDependencies>$(SolutionDir)ExternalModules\x64 Release\ListTemplates.IDObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

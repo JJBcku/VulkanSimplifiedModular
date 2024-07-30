@@ -138,8 +138,6 @@
     <ClCompile Include="Cpp\VulkanSimplifiers.EventHandler.Data.cpp" />
     <ClCompile Include="Cpp\VulkanSimplifiers.Instance.cpp" />
     <ClCompile Include="Cpp\VulkanSimplifiers.Instance.Internal.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.InstanceList.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.InstanceList.Internal.cpp" />
     <ClCompile Include="Cpp\VulkanSimplifiers.Main.cpp" />
     <ClCompile Include="Cpp\VulkanSimplifiers.Main.Data.cpp" />
     <ClCompile Include="Cpp\VulkanSimplifiers.Main.Internal.cpp" />
@@ -149,7 +147,6 @@
     <ClCompile Include="Cpp\VulkanSimplifiers.WindowList.Internal.cpp" />
     <ClCompile Include="DoNotInclude\EventHandling\VulkanSimplifiers.EventHandling.Internal.ixx" />
     <ClCompile Include="DoNotInclude\VulkanSimplifiers.Instance.Internal.ixx" />
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.InstanceList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\VulkanSimplifiers.Main.Internal.ixx" />
     <ClCompile Include="DoNotInclude\VulkanSimplifiers.Window.Internal.ixx" />
     <ClCompile Include="DoNotInclude\VulkanSimplifiers.WindowList.Internal.ixx" />
@@ -174,8 +171,8 @@
     <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.ixx" />
     <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.ixx" />
     <ClCompile Include="Include\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.ixx" />
+    <ClCompile Include="Include\VulkanSimplifiers.Instance.Data.ixx" />
     <ClCompile Include="Include\VulkanSimplifiers.Instance.ixx" />
-    <ClCompile Include="Include\VulkanSimplifiers.InstanceList.ixx" />
     <ClCompile Include="Include\VulkanSimplifiers.Main.Data.ixx" />
     <ClCompile Include="Include\VulkanSimplifiers.Main.ixx" />
     <ClCompile Include="Include\VulkanSimplifiers.Window.Data.ixx" />

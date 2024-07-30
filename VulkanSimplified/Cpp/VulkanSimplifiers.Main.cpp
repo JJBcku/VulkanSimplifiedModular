@@ -11,17 +11,27 @@ MainSimplifier::~MainSimplifier()
 {
 }
 
+VulkanVersionData MainSimplifier::GetAppVersion() const
+{
+	return _internal->GetAppVersion();
+}
+
 EventHandlingSimplifier MainSimplifier::GetEventHandler()
 {
 	return _internal->GetEventHandler();
 }
 
-InstanceListSimplifier MainSimplifier::GetInstanceListSimplifier()
+InstanceSimplifier MainSimplifier::GetInstanceSimplifier()
 {
-	return _internal->GetInstanceListSimplifier();
+	return _internal->GetInstanceSimplifier();
 }
 
 WindowListSimplifier MainSimplifier::GetWindowListSimplifier()
 {
 	return _internal->GetWindowListSimplifier();
+}
+
+VulkanVersionData MainSimplifier::GetMaxAvailableVulkanVersion() const
+{
+	return _internal->GetMaxAvailableVulkanVersion();
 }

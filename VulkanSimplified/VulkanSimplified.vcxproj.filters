@@ -111,12 +111,6 @@
     <ClCompile Include="Cpp\VulkanSimplifiers.Instance.Internal.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.InstanceList.cpp">
-      <Filter>Source Files\Cpp Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.InstanceList.Internal.cpp">
-      <Filter>Source Files\Cpp Files</Filter>
-    </ClCompile>
     <ClCompile Include="Cpp\VulkanSimplifiers.Main.cpp">
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
@@ -139,9 +133,6 @@
       <Filter>Source Files\Cpp Files</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VulkanSimplifiers.Instance.Internal.ixx">
-      <Filter>Source Files\DoNotInclude</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\VulkanSimplifiers.InstanceList.Internal.ixx">
       <Filter>Source Files\DoNotInclude</Filter>
     </ClCompile>
     <ClCompile Include="DoNotInclude\VulkanSimplifiers.Main.Internal.ixx">
@@ -216,9 +207,6 @@
     <ClCompile Include="Include\VulkanSimplifiers.Instance.ixx">
       <Filter>Source Files\Include</Filter>
     </ClCompile>
-    <ClCompile Include="Include\VulkanSimplifiers.InstanceList.ixx">
-      <Filter>Source Files\Include</Filter>
-    </ClCompile>
     <ClCompile Include="Include\VulkanSimplifiers.Main.Data.ixx">
       <Filter>Source Files\Include</Filter>
     </ClCompile>
@@ -244,6 +232,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\VulkanSimplifiers.WindowList.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\VulkanSimplifiers.Instance.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,6 +8,8 @@ public:
 	VulkanVersionData(std::uint16_t variant = 0, std::uint16_t major = 0, std::uint16_t minor = 0, std::uint16_t patch = 0);
 	VulkanVersionData(std::uint32_t vulkanApiVersion);
 
+	std::uint32_t GetVulkanApiCompatibleVersion() const;
+
 	std::uint16_t GetVulkanVariantVersion() const;
 	std::uint16_t GetVulkanMajorVersion() const;
 	std::uint16_t GetVulkanMinorVersion() const;

@@ -1,3 +1,7 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 module VulkanSimplifiers.Common.VulkanVersionData;
 
 VulkanVersionData::VulkanVersionData(std::uint16_t variant, std::uint16_t major, std::uint16_t minor, std::uint16_t patch)
@@ -26,6 +30,11 @@ VulkanVersionData::VulkanVersionData(std::uint32_t vulkanApiVersion)
 	_major = (vulkanApiVersion >> 22) & 0x7F;
 	_minor = (vulkanApiVersion >> 12) & 0x3FF;
 	_patch = vulkanApiVersion & 0xFFF;
+}
+
+std::uint32_t VulkanVersionData::GetVulkanApiCompatibleVersion() const
+{
+	return VK_MAKE_API_VERSION(_variant, _major, _minor, _patch);
 }
 
 std::uint16_t VulkanVersionData::GetVulkanVariantVersion() const

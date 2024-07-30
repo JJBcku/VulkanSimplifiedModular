@@ -45,7 +45,7 @@
     <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\VulkanSimplifiers.EventHandler.Data.cpp">
+    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.Data.cpp">
       <Filter>Source Files\Cpp Files\EventHandling</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.Internal.cpp">

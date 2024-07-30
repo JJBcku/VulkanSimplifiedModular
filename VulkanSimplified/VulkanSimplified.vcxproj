@@ -135,7 +135,7 @@
     <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.TouchpadEvents.cpp" />
     <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.UserEvent.cpp" />
     <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.WindowEvent.cpp" />
-    <ClCompile Include="Cpp\VulkanSimplifiers.EventHandler.Data.cpp" />
+    <ClCompile Include="Cpp\EventHandling\VulkanSimplifiers.EventHandling.Data.cpp" />
     <ClCompile Include="Cpp\VulkanSimplifiers.Instance.cpp" />
     <ClCompile Include="Cpp\VulkanSimplifiers.Instance.Internal.cpp" />
     <ClCompile Include="Cpp\VulkanSimplifiers.Main.cpp" />

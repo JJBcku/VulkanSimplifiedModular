@@ -15,6 +15,7 @@ export struct InstanceInitInfo
 	std::uint32_t usedVulkanApiVersion;
 	std::vector<const char*> requestedExtensions;
 	std::vector<const char*> requestedLayers;
+	size_t logicalDeviceListInitialCapacity;
 
 	InstanceInitInfo();
 };

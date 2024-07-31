@@ -4,7 +4,7 @@ module;
 
 module VulkanSimplifiers.Instance.Internal;
 
-InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo)
+InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo) : _deviceList(initInfo.logicalDeviceListInitialCapacity)
 {
 	_instance = VK_NULL_HANDLE;
 	_debugMessenger = VK_NULL_HANDLE;

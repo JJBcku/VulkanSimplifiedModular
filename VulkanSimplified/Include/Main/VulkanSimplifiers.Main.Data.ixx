@@ -36,6 +36,7 @@ export struct InstanceCreationInfo
 	VulkanVersionData usedVulkanApiVersion;
 	InstanceExtensionList requestedExtensions;
 	std::optional<IDObject<WindowPointer>> windowExampleID;
+	size_t logicalDeviceListInitialCapacity;
 
 	InstanceCreationInfo();
 };

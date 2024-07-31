@@ -8,4 +8,5 @@ MainSimplifierInitData::MainSimplifierInitData()
 InstanceCreationInfo::InstanceCreationInfo()
 {
 	requestedExtensions = 0;
+	logicalDeviceListInitialCapacity = 0;
 }

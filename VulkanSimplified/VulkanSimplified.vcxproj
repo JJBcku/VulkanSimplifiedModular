@@ -118,6 +118,8 @@
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.Internal.cpp" />
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DeviceList.cpp" />
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DeviceList.Internal.cpp" />
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.Instance.Data.cpp" />
     <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.cpp" />
     <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.Internal.cpp" />
@@ -149,6 +151,7 @@
     <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.cpp" />
     <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.Internal.cpp" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDevice.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Instance\VulkanSimplifiers.DeviceList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Main\EventHandling\VulkanSimplifiers.EventHandling.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Instance\VulkanSimplifiers.Instance.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Main.Internal.ixx" />
@@ -157,6 +160,8 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDevice.ixx" />
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.Data.ixx" />
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.ixx" />
     <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.Data.ixx" />
     <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.ixx" />
     <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.SDLModule.AppEvents.ixx" />

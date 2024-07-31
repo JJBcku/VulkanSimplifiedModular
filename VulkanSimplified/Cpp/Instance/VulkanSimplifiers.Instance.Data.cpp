@@ -10,4 +10,5 @@ InstanceInitInfo::InstanceInitInfo()
 	padding = 0;
 	engineVersion = 0;
 	usedVulkanApiVersion = VK_API_VERSION_1_0;
+	logicalDeviceListInitialCapacity = 0;
 }

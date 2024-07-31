@@ -10,6 +10,8 @@ public:
 	LogicalDeviceInternal();
 	~LogicalDeviceInternal();
 
+	LogicalDeviceInternal(const LogicalDeviceInternal&) noexcept = delete;
+
 private:
 	VkDevice _logicalDevice;
 };

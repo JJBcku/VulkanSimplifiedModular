@@ -135,6 +135,7 @@ void MainInternal::CreateIntance(const InstanceCreationInfo& instanceInfo)
 	initInfo.usedVulkanApiVersion = instanceInfo.usedVulkanApiVersion.GetVulkanApiCompatibleVersion();
 	initInfo.requestedExtensions = CompileRequestedExtensionsList(instanceInfo.requestedExtensions, instanceInfo.windowExampleID);
 	initInfo.requestedLayers = CompileRequestedLayersList();
+	initInfo.logicalDeviceListInitialCapacity = instanceInfo.logicalDeviceListInitialCapacity;
 
 	_instance = std::make_unique<InstanceInternal>(initInfo);
 }

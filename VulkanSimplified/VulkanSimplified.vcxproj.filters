@@ -273,5 +273,17 @@
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DeviceList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\Instance\VulkanSimplifiers.PhysicalDevice.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.PhysicalDevice.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.PhysicalDevice.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.PhysicalDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

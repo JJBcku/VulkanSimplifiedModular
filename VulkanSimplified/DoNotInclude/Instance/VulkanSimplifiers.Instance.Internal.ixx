@@ -23,5 +23,5 @@ public:
 private:
 	VkInstance _instance;
 	VkDebugUtilsMessengerEXT _debugMessenger;
-	DeviceListInternal _deviceList;
+	std::optional<DeviceListInternal> _deviceList;
 };

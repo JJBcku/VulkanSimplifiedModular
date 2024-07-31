@@ -1,20 +1,29 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 export module VulkanSimplifiers.DeviceList.Internal;
 
 import std;
 import ListTemplates.UnsortedList;
 import VulkanSimplifiers.LogicalDevice.Internal;
 import VulkanSimplifiers.DeviceList.Data;
+import VulkanSimplifiers.PhysicalDevice.Internal;
 
 export class DeviceListInternal
 {
 public:
-	DeviceListInternal(size_t logicalDeviceListInitialCapacity);
+	DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity);
 	~DeviceListInternal();
 
 	DeviceListInternal(const DeviceListInternal&) noexcept = delete;
 
 	DeviceListInternal& operator=(const DeviceListInternal&) noexcept = delete;
 
+	void EnumeratePhysicalDevices();
+
 private:
+	VkInstance _instance;
+	std::vector<PhysicalDeviceInternal> _physicalDeviceList;
 	UnsortedList<LogicalDevicePointer> _logicalDeviceList;
 };

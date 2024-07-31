@@ -4,7 +4,7 @@ module;
 
 module VulkanSimplifiers.Instance.Internal;
 
-InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo) : _deviceList(initInfo.logicalDeviceListInitialCapacity)
+InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo)
 {
 	_instance = VK_NULL_HANDLE;
 	_debugMessenger = VK_NULL_HANDLE;
@@ -54,10 +54,16 @@ InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo) : _deviceLi
 		throw std::runtime_error("Error: Program failed to create a debug messenger!");
 	}
 #endif
+
+	_deviceList.emplace(_instance, initInfo.logicalDeviceListInitialCapacity);
+
+	_deviceList.value().EnumeratePhysicalDevices();
 }
 
 InstanceInternal::~InstanceInternal()
 {
+	_deviceList.reset();
+
 	if (_debugMessenger != VK_NULL_HANDLE)
 	{
 #pragma warning(push)

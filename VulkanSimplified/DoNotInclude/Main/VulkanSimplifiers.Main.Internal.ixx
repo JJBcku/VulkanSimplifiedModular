@@ -51,7 +51,7 @@ private:
 	InstanceExtensionList _availableExtensions;
 
 	EventHandlingInternal _eventHandler;
-	InstancePointer _instance;
+	std::optional<InstanceInternal> _instance;
 	WindowListInternal _windowList;
 
 	std::uint32_t FindMaximumAvailableVulkanVersion() const;

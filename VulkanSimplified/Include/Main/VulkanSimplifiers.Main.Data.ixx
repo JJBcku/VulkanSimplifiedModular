@@ -9,8 +9,6 @@ import VulkanSimplifiers.WindowList.Data;
 
 import std;
 
-export typedef std::unique_ptr<InstanceInternal> InstancePointer;
-
 export struct MainSimplifierInitData
 {
 	std::string appName;

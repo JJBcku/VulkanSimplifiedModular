@@ -88,7 +88,10 @@ EventHandlingInternal& MainInternal::GetEventHandler()
 
 InstanceInternal& MainInternal::GetInstanceSimplifier()
 {
-	return *_instance;
+	if (!_instance.has_value())
+		throw std::runtime_error("MainInternal::GetInstanceSimplifier Error: Program tried to get a non-existent instance!");
+
+	return _instance.value();
 }
 
 WindowListInternal& MainInternal::GetWindowListSimplifier()
@@ -103,7 +106,10 @@ const EventHandlingInternal& MainInternal::GetEventHandler() const
 
 const InstanceInternal& MainInternal::GetInstanceSimplifier() const
 {
-	return *_instance;
+	if (!_instance.has_value())
+		throw std::runtime_error("MainInternal::GetInstanceSimplifier const Error: Program tried to get a non-existent instance!");
+
+	return _instance.value();
 }
 
 const WindowListInternal& MainInternal::GetWindowListSimplifier() const
@@ -123,7 +129,7 @@ InstanceExtensionList MainInternal::GetAvailableInstanceExtensions() const
 
 void MainInternal::CreateIntance(const InstanceCreationInfo& instanceInfo)
 {
-	if (_instance)
+	if (_instance.has_value())
 		throw std::runtime_error("MainInternal::CreateIntance Error: Program tried to create an already existing vulkan instance!");
 
 	InstanceInitInfo initInfo;
@@ -137,7 +143,7 @@ void MainInternal::CreateIntance(const InstanceCreationInfo& instanceInfo)
 	initInfo.requestedLayers = CompileRequestedLayersList();
 	initInfo.logicalDeviceListInitialCapacity = instanceInfo.logicalDeviceListInitialCapacity;
 
-	_instance = std::make_unique<InstanceInternal>(initInfo);
+	_instance.emplace(initInfo);
 }
 
 std::uint32_t MainInternal::FindMaximumAvailableVulkanVersion() const

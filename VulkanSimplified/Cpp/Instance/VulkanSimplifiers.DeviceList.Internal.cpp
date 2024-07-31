@@ -43,3 +43,19 @@ size_t DeviceListInternal::GetPhysicalDeviceListSize() const
 {
 	return _physicalDeviceList.size();
 }
+
+PhysicalDeviceInternal& DeviceListInternal::GetPhysicalDeviceSimplifier(size_t deviceIndex)
+{
+	if (deviceIndex >= _physicalDeviceList.size())
+		throw std::runtime_error("DeviceListInternal::GetPhysicalDeviceSimplifier Error: Program tried to get a non-existent physical device data!");
+
+	return _physicalDeviceList[deviceIndex];
+}
+
+const PhysicalDeviceInternal& DeviceListInternal::GetPhysicalDeviceSimplifier(size_t deviceIndex) const
+{
+	if (deviceIndex >= _physicalDeviceList.size())
+		throw std::runtime_error("DeviceListInternal::GetPhysicalDeviceSimplifier const Error: Program tried to get a non-existent physical device data!");
+
+	return _physicalDeviceList[deviceIndex];
+}

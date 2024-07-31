@@ -24,6 +24,10 @@ public:
 
 	size_t GetPhysicalDeviceListSize() const;
 
+	PhysicalDeviceInternal& GetPhysicalDeviceSimplifier(size_t deviceIndex);
+
+	const PhysicalDeviceInternal& GetPhysicalDeviceSimplifier(size_t deviceIndex) const;
+
 private:
 	VkInstance _instance;
 	std::vector<PhysicalDeviceInternal> _physicalDeviceList;

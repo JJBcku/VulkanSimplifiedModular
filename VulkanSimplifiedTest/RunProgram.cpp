@@ -7,6 +7,7 @@ void RunProgram()
     VulkanData data;
 
     CreateBasics(data, settings);
+    CreateInstanceDependent(data);
 
     while (!settings.GetQuit())
     {

@@ -48,5 +48,11 @@
     <ClCompile Include="RunProgram.EventHandling.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RunProgram.CreateInstanceDependent.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateInstanceDependent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

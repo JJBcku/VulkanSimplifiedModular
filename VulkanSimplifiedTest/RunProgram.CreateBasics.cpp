@@ -14,7 +14,7 @@ void CreateBasics(VulkanData& data, MainSettings& settings)
 #else
 	initData.appVariantName = "x64 Release";
 #endif
-	initData.appVersion.SetVulkanPatchVersion(3);
+	initData.appVersion.SetVulkanPatchVersion(4);
 	initData.appVersion.SetVulkanMinorVersion(1);
 	initData.engineName = "Vulkan Simplified Test Engine";
 	initData.engineVersion = initData.appVersion;
@@ -44,6 +44,4 @@ void CreateBasics(VulkanData& data, MainSettings& settings)
 	instanceInit.logicalDeviceListInitialCapacity = 1;
 
 	main.CreateIntance(instanceInit);
-
-	auto instance = main.GetInstanceSimplifier();
 }

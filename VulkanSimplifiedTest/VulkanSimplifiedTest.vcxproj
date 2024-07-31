@@ -99,6 +99,8 @@
     <ClCompile Include="RunProgram.cpp" />
     <ClCompile Include="RunProgram.CreateBasics.cpp" />
     <ClCompile Include="RunProgram.CreateBasics.ixx" />
+    <ClCompile Include="RunProgram.CreateInstanceDependent.cpp" />
+    <ClCompile Include="RunProgram.CreateInstanceDependent.ixx" />
     <ClCompile Include="RunProgram.EventHandling.cpp" />
     <ClCompile Include="RunProgram.EventHandling.ixx" />
     <ClCompile Include="RunProgram.ixx" />

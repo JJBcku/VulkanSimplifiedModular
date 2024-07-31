@@ -20,6 +20,10 @@ public:
 
 	InstanceInternal& operator=(const InstanceInternal&) noexcept = delete;
 
+	DeviceListInternal& GetDeviceListSimplifier();
+
+	const DeviceListInternal& GetDeviceListSimplifier() const;
+
 private:
 	VkInstance _instance;
 	VkDebugUtilsMessengerEXT _debugMessenger;

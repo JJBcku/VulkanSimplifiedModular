@@ -80,3 +80,19 @@ InstanceInternal::~InstanceInternal()
 		vkDestroyInstance(_instance, nullptr);
 	}
 }
+
+DeviceListInternal& InstanceInternal::GetDeviceListSimplifier()
+{
+	if (!_deviceList.has_value())
+		throw std::runtime_error("InstanceInternal::GetDeviceListSimplifier Error: Program tried to get an non-existent device list!");
+
+	return _deviceList.value();
+}
+
+const DeviceListInternal& InstanceInternal::GetDeviceListSimplifier() const
+{
+	if (!_deviceList.has_value())
+		throw std::runtime_error("InstanceInternal::GetDeviceListSimplifier const Error: Program tried to get an non-existent device list!");
+
+	return _deviceList.value();
+}

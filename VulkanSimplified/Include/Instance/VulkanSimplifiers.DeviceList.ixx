@@ -11,6 +11,8 @@ public:
 
 	DeviceListSimplifier& operator=(const DeviceListSimplifier&) noexcept = delete;
 
+	size_t GetPhysicalDeviceListSize() const;
+
 private:
 	DeviceListInternal& _internal;
 };

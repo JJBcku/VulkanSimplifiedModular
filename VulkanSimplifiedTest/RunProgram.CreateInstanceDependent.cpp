@@ -7,4 +7,6 @@ void CreateInstanceDependent(VulkanData& data)
 	auto instance = main.GetInstanceSimplifier();
 
 	auto deviceList = instance.GetDeviceListSimplifier();
+
+	size_t physicalDeviceAmount = deviceList.GetPhysicalDeviceListSize();
 }

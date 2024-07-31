@@ -22,6 +22,8 @@ public:
 
 	void EnumeratePhysicalDevices();
 
+	size_t GetPhysicalDeviceListSize() const;
+
 private:
 	VkInstance _instance;
 	std::vector<PhysicalDeviceInternal> _physicalDeviceList;

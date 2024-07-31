@@ -38,3 +38,8 @@ void DeviceListInternal::EnumeratePhysicalDevices()
 		throw std::runtime_error("DeviceListInternal::EnumeratePhysicalDevices Error: Program failed to find any Vulkan compatible devices!");
 	}
 }
+
+size_t DeviceListInternal::GetPhysicalDeviceListSize() const
+{
+	return _physicalDeviceList.size();
+}

@@ -7,3 +7,8 @@ DeviceListSimplifier::DeviceListSimplifier(DeviceListInternal& ref) : _internal(
 DeviceListSimplifier::~DeviceListSimplifier()
 {
 }
+
+size_t DeviceListSimplifier::GetPhysicalDeviceListSize() const
+{
+	return _internal.GetPhysicalDeviceListSize();
+}

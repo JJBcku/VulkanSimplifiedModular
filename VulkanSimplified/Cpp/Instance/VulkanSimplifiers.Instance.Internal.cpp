@@ -55,7 +55,7 @@ InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo)
 	}
 #endif
 
-	_deviceList.emplace(_instance, initInfo.logicalDeviceListInitialCapacity);
+	_deviceList.emplace(_instance, initInfo.logicalDeviceListInitialCapacity, initInfo.usedVulkanApiVersion);
 
 	_deviceList.value().EnumeratePhysicalDevices();
 }

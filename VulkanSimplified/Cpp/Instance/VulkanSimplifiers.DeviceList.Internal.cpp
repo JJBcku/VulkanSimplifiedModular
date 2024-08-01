@@ -4,7 +4,8 @@ module;
 
 module VulkanSimplifiers.DeviceList.Internal;
 
-DeviceListInternal::DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity) : _instance(instance), _logicalDeviceList(logicalDeviceListInitialCapacity)
+DeviceListInternal::DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity, std::uint32_t instanceVulkanVersion) : _instance(instance),
+_logicalDeviceList(logicalDeviceListInitialCapacity), _instanceVulkanVersion(instanceVulkanVersion)
 {
 }
 
@@ -30,7 +31,7 @@ void DeviceListInternal::EnumeratePhysicalDevices()
 
 		for (auto& device : physicalDevices)
 		{
-			_physicalDeviceList.emplace_back(device);
+			_physicalDeviceList.emplace_back(device, _instanceVulkanVersion);
 		}
 	}
 	else

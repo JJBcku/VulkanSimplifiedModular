@@ -122,6 +122,7 @@
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DeviceList.Internal.cpp" />
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.Instance.Data.cpp" />
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.PhysicalDevice.cpp" />
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.PhysicalDevice.Data.cpp" />
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.PhysicalDevice.Internal.cpp" />
     <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.cpp" />
     <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.Internal.cpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDevice.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.Data.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.ixx" />
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.PhysicalDevice.Data.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.PhysicalDevice.ixx" />
     <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.Data.ixx" />
     <ClCompile Include="Include\Main\EventHandling\VulkanSimplifiers.EventHandling.ixx" />

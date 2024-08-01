@@ -13,7 +13,7 @@ import VulkanSimplifiers.PhysicalDevice.Internal;
 export class DeviceListInternal
 {
 public:
-	DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity);
+	DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity, std::uint32_t instanceVulkanVersion);
 	~DeviceListInternal();
 
 	DeviceListInternal(const DeviceListInternal&) noexcept = delete;
@@ -32,4 +32,7 @@ private:
 	VkInstance _instance;
 	std::vector<PhysicalDeviceInternal> _physicalDeviceList;
 	UnsortedList<LogicalDevicePointer> _logicalDeviceList;
+
+	std::uint32_t _instanceVulkanVersion;
+	std::uint32_t _padding;
 };

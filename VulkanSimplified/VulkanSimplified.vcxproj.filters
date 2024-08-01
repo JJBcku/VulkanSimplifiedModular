@@ -285,5 +285,11 @@
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.PhysicalDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Instance\VulkanSimplifiers.PhysicalDevice.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.PhysicalDevice.Data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

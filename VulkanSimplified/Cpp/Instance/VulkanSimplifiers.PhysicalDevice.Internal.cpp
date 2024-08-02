@@ -1,4 +1,4 @@
-module;
+	module;
 
 #include <vulkan/vulkan.hpp>
 
@@ -63,6 +63,32 @@ PhysicalDeviceInternal::PhysicalDeviceInternal(VkPhysicalDevice physicalDevice, 
 
 		if (instanceVulkanVersion >= VK_MAKE_API_VERSION(0, 1, 3, 0) && _vulkanProperties.apiMaxSupportedVersion >= VK_MAKE_API_VERSION(0, 1, 3, 0))
 			_device13features = CompileVulkan13DeviceFeatures(vulkan13Features);
+	}
+
+	std::uint32_t queueCount = 0;
+	std::vector<VkQueueFamilyProperties> queueFamilies;
+
+	vkGetPhysicalDeviceQueueFamilyProperties(_physicalDevice, &queueCount, nullptr);
+
+	if (queueCount > 0)
+	{
+		queueFamilies.resize(queueCount);
+		vkGetPhysicalDeviceQueueFamilyProperties(_physicalDevice, &queueCount, queueFamilies.data());
+
+		_vulkanProperties.queueFamilies.resize(queueCount);
+
+		for (size_t i = 0; i < queueFamilies.size(); i++)
+		{
+			auto& family = queueFamilies[i];
+			auto& queueData = _vulkanProperties.queueFamilies[i];
+
+			queueData.queueTypes = family.queueFlags;
+			queueData.queueCount = family.queueCount;
+			queueData.timespampValidBits = family.timestampValidBits;
+			queueData.minImageTransferGranularityWidth = family.minImageTransferGranularity.width;
+			queueData.minImageTransferGranularityHeight = family.minImageTransferGranularity.height;
+			queueData.minImageTransferGranularityDepth = family.minImageTransferGranularity.depth;
+		}
 	}
 }
 

@@ -99,6 +99,16 @@ Vulkan10DeviceLimits::Vulkan10DeviceLimits()
 	maxColorAttachments = 0;
 }
 
+QueueFamily::QueueFamily()
+{
+	queueTypes = 0;
+	queueCount = 0;
+	timespampValidBits = 0;
+	minImageTransferGranularityWidth = 0;
+	minImageTransferGranularityHeight = 0;
+	minImageTransferGranularityDepth = 0;
+}
+
 DeviceVulkanPropertiesSimplified::DeviceVulkanPropertiesSimplified()
 {
 	apiMaxSupportedVersion = 0;

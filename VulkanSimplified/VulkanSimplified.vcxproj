@@ -45,10 +45,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllProjectBMIsArePublic>false</AllProjectBMIsArePublic>
-    <PublicModuleDirectories>Include;Include\Common;Include\Instance;Include\Main;Include\Main\EventHandling</PublicModuleDirectories>
+    <PublicModuleDirectories>Include;Include\Common;Include\Device;Include\Instance;Include\Main;Include\Main\EventHandling</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PublicModuleDirectories>Include;Include\Common;Include\Instance;Include\Main;Include\Main\EventHandling</PublicModuleDirectories>
+    <PublicModuleDirectories>Include;Include\Common;Include\Device;Include\Instance;Include\Main;Include\Main\EventHandling</PublicModuleDirectories>
     <AllProjectBMIsArePublic>false</AllProjectBMIsArePublic>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,6 +117,7 @@
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.Data.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.Internal.cpp" />
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DeviceList.cpp" />
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DeviceList.Internal.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.WindowList.Internal.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDevice.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDevice.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.Data.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.ixx" />

@@ -24,6 +24,8 @@ public:
 	VulkanDeviceFeatureFlags GetVulkan12Features() const;
 	VulkanDeviceFeatureFlags GetVulkan13Features() const;
 
+	VkPhysicalDevice GetPhysicalDevice() const;
+
 private:
 	VkPhysicalDevice _physicalDevice;
 	DeviceVulkanPropertiesSimplified _vulkanProperties;

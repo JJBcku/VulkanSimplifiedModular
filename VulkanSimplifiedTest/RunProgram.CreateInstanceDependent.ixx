@@ -4,10 +4,13 @@ import std;
 
 import VulkanData;
 import VulkanData.Basic;
+import VulkanData.InstanceDependent;
 import MainSettings;
 
 import VulkanSimplifiers.Main;
 import VulkanSimplifiers.Instance;
 import VulkanSimplifiers.DeviceList;
+import VulkanSimplifiers.PhysicalDevice;
+import VulkanSimplifiers.LogicalDevice.Data;
 
 export void CreateInstanceDependent(VulkanData& data);

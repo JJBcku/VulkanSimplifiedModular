@@ -9,6 +9,7 @@ import ListTemplates.UnsortedList;
 import VulkanSimplifiers.LogicalDevice.Internal;
 import VulkanSimplifiers.DeviceList.Data;
 import VulkanSimplifiers.PhysicalDevice.Internal;
+import VulkanSimplifiers.LogicalDevice.Data;
 
 export class DeviceListInternal
 {
@@ -27,6 +28,8 @@ public:
 	PhysicalDeviceInternal& GetPhysicalDeviceSimplifier(size_t deviceIndex);
 
 	const PhysicalDeviceInternal& GetPhysicalDeviceSimplifier(size_t deviceIndex) const;
+
+	IDObject<LogicalDevicePointer> AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, size_t addOnReserve);
 
 private:
 	VkInstance _instance;

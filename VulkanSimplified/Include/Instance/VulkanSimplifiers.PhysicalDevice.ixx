@@ -1,6 +1,8 @@
 export module VulkanSimplifiers.PhysicalDevice;
 
 import std;
+import ListTemplates.IDObject;
+
 import VulkanSimplifiers.PhysicalDevice.Internal;
 import VulkanSimplifiers.PhysicalDevice.Data;
 

@@ -17,3 +17,8 @@ PhysicalDeviceSimplifier DeviceListSimplifier::GetPhysicalDeviceSimplifier(size_
 {
 	return _internal.GetPhysicalDeviceSimplifier(deviceIndex);
 }
+
+IDObject<LogicalDevicePointer> DeviceListSimplifier::AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, size_t addOnReserve)
+{
+	return _internal.AddLogicalDevice(createInfo, addOnReserve);
+}

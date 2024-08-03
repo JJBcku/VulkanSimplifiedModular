@@ -2,10 +2,12 @@ export module VulkanData;
 
 import std;
 import VulkanData.Basic;
+import VulkanData.InstanceDependent;
 
 export struct VulkanData
 {
 	std::unique_ptr<VulkanDataBasic> basicData;
+	std::unique_ptr<VulkanDataInstanceDependent> instanceDependent;
 
 	VulkanData() = default;
 

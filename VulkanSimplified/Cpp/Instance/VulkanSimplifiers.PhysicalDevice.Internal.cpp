@@ -121,6 +121,11 @@ VulkanDeviceFeatureFlags PhysicalDeviceInternal::GetVulkan13Features() const
 	return _device13features;
 }
 
+VkPhysicalDevice PhysicalDeviceInternal::GetPhysicalDevice() const
+{
+	return _physicalDevice;
+}
+
 DeviceType PhysicalDeviceInternal::GetDeviceType(const VkPhysicalDeviceType& deviceType)
 {
 	DeviceType ret = DeviceType::OTHER;

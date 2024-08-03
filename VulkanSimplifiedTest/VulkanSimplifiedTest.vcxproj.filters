@@ -54,5 +54,8 @@
     <ClCompile Include="RunProgram.CreateInstanceDependent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VulkanData.InstanceDependent.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

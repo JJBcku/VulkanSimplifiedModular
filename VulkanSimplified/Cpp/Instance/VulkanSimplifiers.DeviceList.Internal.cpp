@@ -11,6 +11,8 @@ _logicalDeviceList(logicalDeviceListInitialCapacity), _instanceVulkanVersion(ins
 
 DeviceListInternal::~DeviceListInternal()
 {
+	_logicalDeviceList.Reset(0);
+	_physicalDeviceList.clear();
 }
 
 void DeviceListInternal::EnumeratePhysicalDevices()
@@ -59,4 +61,19 @@ const PhysicalDeviceInternal& DeviceListInternal::GetPhysicalDeviceSimplifier(si
 		throw std::runtime_error("DeviceListInternal::GetPhysicalDeviceSimplifier const Error: Program tried to get a non-existent physical device data!");
 
 	return _physicalDeviceList[deviceIndex];
+}
+
+IDObject<LogicalDevicePointer> DeviceListInternal::AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, size_t addOnReserve)
+{
+	auto& physicalDevice = GetPhysicalDeviceSimplifier(createInfo.physicalGPUIndex);
+
+	auto physicalDeviceData = physicalDevice.GetVulkanPropertiesSimplified();
+
+	LogicalDeviceInitData initData;
+	initData.creationInfo = createInfo;
+	initData.apiVersion = std::min(_instanceVulkanVersion, physicalDeviceData.apiMaxSupportedVersion);
+	initData.physicalDevice = physicalDevice.GetPhysicalDevice();
+	initData.physicalDeviceName = physicalDeviceData.deviceName;
+
+	return _logicalDeviceList.AddObject(std::make_unique<LogicalDeviceInternal>(initData), addOnReserve);
 }

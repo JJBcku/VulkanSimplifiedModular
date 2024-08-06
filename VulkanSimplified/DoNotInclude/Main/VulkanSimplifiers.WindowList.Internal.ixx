@@ -1,7 +1,7 @@
 export module VulkanSimplifiers.WindowList.Internal;
 
 import std;
-import ListTemplates.UnsortedList;
+import ListTemplates.IterativeUnsortedList;
 import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Window.Data;
 import VulkanSimplifiers.WindowList.Data;
@@ -24,5 +24,5 @@ public:
 	const WindowInternal& GetWindowSimplifier(IDObject<WindowPointer> windowID) const;
 
 private:
-	UnsortedList<WindowPointer> _windowList;
+	IterativeUnsortedList<WindowPointer> _windowList;
 };

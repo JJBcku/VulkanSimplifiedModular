@@ -6,11 +6,9 @@ export module VulkanSimplifiers.Main.Internal;
 
 import std;
 import VulkanSimplifiers.Main.Data;
-import ListTemplates.UnsortedList;
 import VulkanSimplifiers.EventHandling.Internal;
 import VulkanSimplifiers.WindowList.Internal;
 import VulkanSimplifiers.WindowList.Data;
-import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Instance.Internal;
 import VulkanSimplifiers.Instance.Data;
 

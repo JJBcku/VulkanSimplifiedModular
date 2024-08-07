@@ -242,3 +242,10 @@ export enum Vulkan13DeviceFeaturesFlagBits : VulkanDeviceFeatureFlags
 	VULKAN13_DEVICE_FEATURE_TEXTURE_COMPRESSION_ASTC_HDR = 0X2,
 	VULKAN13_DEVICE_FEATURE_MAINTENANCE4 = 0X4,
 };
+
+export struct SurfaceSupportData
+{
+	std::vector<bool> queuePresentingSupport;
+
+	SurfaceSupportData();
+};

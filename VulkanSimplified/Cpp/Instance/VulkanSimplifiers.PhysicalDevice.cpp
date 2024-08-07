@@ -32,3 +32,8 @@ VulkanDeviceFeatureFlags PhysicalDeviceSimplifier::GetVulkan13Features() const
 {
 	return _internal.GetVulkan13Features();
 }
+
+SurfaceSupportData PhysicalDeviceSimplifier::GetSurfaceSupport(IDObject<WindowPointer> windowID) const
+{
+	return _internal.GetSurfaceSupport(windowID);
+}

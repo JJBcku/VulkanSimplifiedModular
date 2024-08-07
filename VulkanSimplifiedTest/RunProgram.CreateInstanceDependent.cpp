@@ -72,20 +72,31 @@ size_t ChooseGPU(DeviceListSimplifier& deviceList)
 	return ret;
 }
 
-std::uint32_t PickGraphicQueueFamily(const PhysicalDeviceSimplifier& physicalDevice)
+std::pair<std::uint32_t, bool> PickGraphicQueueFamily(PhysicalDeviceSimplifier& physicalDevice, const std::vector<bool>& queuePresentSupport)
 {
-	std::uint32_t choosenFamily = std::numeric_limits<std::uint32_t>::max();
+	std::pair<std::uint32_t, bool> choosenFamily = { std::numeric_limits<std::uint32_t>::max(), false};
 
 	auto deviceData = physicalDevice.GetVulkanPropertiesSimplified();
 	auto& queueData = deviceData.queueFamilies;
 
-	std::optional<std::uint32_t> bestNonVideoGraphicQueueFamily;
-	std::uint32_t bestNonVideoGraphicQueueFamilyGranularity = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestNonVideoGraphicQueueFamilyTimestamp = 0;
+	if (queueData.size() != queuePresentSupport.size())
+		throw std::runtime_error("PickGraphicQueueFamily Error: vector size mismatch!");
 
-	std::optional<std::uint32_t> bestVideoGraphicQueueFamily;
-	std::uint32_t bestVideoGraphicQueueFamilyGranularity = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestVideoGraphicQueueFamilyTimestamp = 0;
+	std::optional<std::uint32_t> bestNonVideoGraphicQueueFamilyPresenting;
+	std::uint32_t bestNonVideoGraphicQueueFamilyGranularityPresenting = std::numeric_limits<std::uint32_t>::max();
+	std::uint32_t bestNonVideoGraphicQueueFamilyTimestampPresenting = 0;
+
+	std::optional<std::uint32_t> bestNonVideoGraphicQueueFamilyNonPresenting;
+	std::uint32_t bestNonVideoGraphicQueueFamilyGranularityNonPresenting = std::numeric_limits<std::uint32_t>::max();
+	std::uint32_t bestNonVideoGraphicQueueFamilyTimestampNonPresenting = 0;
+
+	std::optional<std::uint32_t> bestVideoGraphicQueueFamilyPresenting;
+	std::uint32_t bestVideoGraphicQueueFamilyGranularityPresenting = std::numeric_limits<std::uint32_t>::max();
+	std::uint32_t bestVideoGraphicQueueFamilyTimestampPresenting = 0;
+
+	std::optional<std::uint32_t> bestVideoGraphicQueueFamilyNonPresenting;
+	std::uint32_t bestVideoGraphicQueueFamilyGranularityNonPresenting = std::numeric_limits<std::uint32_t>::max();
+	std::uint32_t bestVideoGraphicQueueFamilyTimestampNonPresenting = 0;
 
 	for (size_t i = 0; i < queueData.size(); i++)
 	{
@@ -99,49 +110,103 @@ std::uint32_t PickGraphicQueueFamily(const PhysicalDeviceSimplifier& physicalDev
 
 		if ((family.queueTypes & QUEUE_TYPE_VIDEO_DECODE) != QUEUE_TYPE_VIDEO_DECODE && (family.queueTypes & QUEUE_TYPE_VIDEO_ENCODE) != QUEUE_TYPE_VIDEO_ENCODE)
 		{
-			if (bestNonVideoGraphicQueueFamilyGranularity > biggestGranularity)
+			if (queuePresentSupport[i])
 			{
-				better = true;
-			}
-			else if (bestNonVideoGraphicQueueFamilyGranularity == biggestGranularity && bestNonVideoGraphicQueueFamilyTimestamp < family.timespampValidBits)
-			{
-				better = true;
-			}
+				if (bestNonVideoGraphicQueueFamilyGranularityPresenting > biggestGranularity)
+				{
+					better = true;
+				}
+				else if (bestNonVideoGraphicQueueFamilyGranularityPresenting == biggestGranularity && bestNonVideoGraphicQueueFamilyTimestampPresenting < family.timespampValidBits)
+				{
+					better = true;
+				}
 
-			if (better)
+				if (better)
+				{
+					bestNonVideoGraphicQueueFamilyPresenting = static_cast<std::uint32_t>(i);
+					bestNonVideoGraphicQueueFamilyGranularityPresenting = biggestGranularity;
+					bestNonVideoGraphicQueueFamilyTimestampPresenting = family.timespampValidBits;
+				}
+			}
+			else
 			{
-				bestNonVideoGraphicQueueFamily = static_cast<std::uint32_t>(i);
-				bestNonVideoGraphicQueueFamilyGranularity = biggestGranularity;
-				bestNonVideoGraphicQueueFamilyTimestamp = family.timespampValidBits;
+				if (bestNonVideoGraphicQueueFamilyGranularityNonPresenting > biggestGranularity)
+				{
+					better = true;
+				}
+				else if (bestNonVideoGraphicQueueFamilyGranularityNonPresenting == biggestGranularity && bestNonVideoGraphicQueueFamilyTimestampNonPresenting < family.timespampValidBits)
+				{
+					better = true;
+				}
+
+				if (better)
+				{
+					bestNonVideoGraphicQueueFamilyNonPresenting = static_cast<std::uint32_t>(i);
+					bestNonVideoGraphicQueueFamilyGranularityNonPresenting = biggestGranularity;
+					bestNonVideoGraphicQueueFamilyTimestampNonPresenting = family.timespampValidBits;
+				}
 			}
 		}
 		else
 		{
-			if (bestVideoGraphicQueueFamilyGranularity > biggestGranularity)
+			if (queuePresentSupport[i])
 			{
-				better = true;
-			}
-			else if (bestVideoGraphicQueueFamilyGranularity == biggestGranularity && bestVideoGraphicQueueFamilyTimestamp < family.timespampValidBits)
-			{
-				better = true;
-			}
+				if (bestVideoGraphicQueueFamilyGranularityPresenting > biggestGranularity)
+				{
+					better = true;
+				}
+				else if (bestVideoGraphicQueueFamilyGranularityPresenting == biggestGranularity && bestVideoGraphicQueueFamilyTimestampPresenting < family.timespampValidBits)
+				{
+					better = true;
+				}
 
-			if (better)
+				if (better)
+				{
+					bestVideoGraphicQueueFamilyPresenting = static_cast<std::uint32_t>(i);
+					bestVideoGraphicQueueFamilyGranularityPresenting = biggestGranularity;
+					bestVideoGraphicQueueFamilyTimestampPresenting = family.timespampValidBits;
+				}
+			}
+			else
 			{
-				bestVideoGraphicQueueFamily = static_cast<std::uint32_t>(i);
-				bestVideoGraphicQueueFamilyGranularity = biggestGranularity;
-				bestVideoGraphicQueueFamilyTimestamp = family.timespampValidBits;
+				if (bestVideoGraphicQueueFamilyGranularityNonPresenting > biggestGranularity)
+				{
+					better = true;
+				}
+				else if (bestVideoGraphicQueueFamilyGranularityNonPresenting == biggestGranularity && bestVideoGraphicQueueFamilyTimestampNonPresenting < family.timespampValidBits)
+				{
+					better = true;
+				}
+
+				if (better)
+				{
+					bestVideoGraphicQueueFamilyNonPresenting = static_cast<std::uint32_t>(i);
+					bestVideoGraphicQueueFamilyGranularityNonPresenting = biggestGranularity;
+					bestVideoGraphicQueueFamilyTimestampNonPresenting = family.timespampValidBits;
+				}
 			}
 		}
 	}
 
-	if (bestNonVideoGraphicQueueFamily.has_value())
+	if (bestNonVideoGraphicQueueFamilyPresenting.has_value())
 	{
-		choosenFamily = bestNonVideoGraphicQueueFamily.value();
+		choosenFamily.first = bestNonVideoGraphicQueueFamilyPresenting.value();
+		choosenFamily.second = true;
 	}
-	else if (bestVideoGraphicQueueFamily.has_value())
+	else if (bestNonVideoGraphicQueueFamilyNonPresenting.has_value())
 	{
-		choosenFamily = bestVideoGraphicQueueFamily.value();
+		choosenFamily.first = bestNonVideoGraphicQueueFamilyNonPresenting.value();
+		choosenFamily.second = false;
+	}
+	else if (bestVideoGraphicQueueFamilyPresenting.has_value())
+	{
+		choosenFamily.first = bestVideoGraphicQueueFamilyPresenting.value();
+		choosenFamily.second = true;
+	}
+	else if (bestVideoGraphicQueueFamilyNonPresenting.has_value())
+	{
+		choosenFamily.first = bestVideoGraphicQueueFamilyNonPresenting.value();
+		choosenFamily.second = false;
 	}
 	else
 	{
@@ -229,6 +294,25 @@ std::optional<std::uint32_t> TryToFindTransferOnlyQueue(const PhysicalDeviceSimp
 	return choosenFamily;
 }
 
+std::uint32_t FindPresentingQueue(const std::vector<bool>& queuePresentSupport)
+{
+	std::uint32_t ret = std::numeric_limits<std::uint32_t>::max();
+
+	for (size_t i = 0; i < queuePresentSupport.size(); i++)
+	{
+		if (queuePresentSupport[i])
+		{
+			ret = static_cast<std::uint32_t>(i);
+			break;
+		}
+	}
+
+	if (ret == std::numeric_limits<std::uint32_t>::max())
+		throw std::runtime_error("PickGraphicQueueFamily Error: Program failed to find a present queue!");
+
+	return ret;
+}
+
 void CreateInstanceDependent(VulkanData& data)
 {
 	auto& main = data.basicData.get()->main.value();
@@ -245,11 +329,15 @@ void CreateInstanceDependent(VulkanData& data)
 
 	LogicalDeviceCreationInfo deviceCreationInfo;
 	deviceCreationInfo.physicalGPUIndex = choosenGPU;
-	deviceCreationInfo.queuesCreateInfo.reserve(2);
-	deviceCreationInfo.deviceInstanceName = "Only Used Device";
+	deviceCreationInfo.queuesCreateInfo.reserve(3);
+	deviceCreationInfo.logicalDeviceName = "Only device used";
+
+	auto surfaceSupport = physicalDevice.GetSurfaceSupport(data.basicData->windowID);
 	
 	QueueCreateInfo graphicQueueCreateInfo;
-	graphicQueueCreateInfo.queueFamily = PickGraphicQueueFamily(physicalDevice);
+
+	auto graphicQueueData = PickGraphicQueueFamily(physicalDevice, surfaceSupport.queuePresentingSupport);
+	graphicQueueCreateInfo.queueFamily = graphicQueueData.first;
 	deviceCreationInfo.queuesCreateInfo.push_back(graphicQueueCreateInfo);
 	data.instanceDependent->graphicsQueue = 0U;
 
@@ -257,10 +345,22 @@ void CreateInstanceDependent(VulkanData& data)
 
 	if (transferOnly.has_value())
 	{
+		data.instanceDependent->transferQueue = deviceCreationInfo.queuesCreateInfo.size();
 		QueueCreateInfo transferOnlyQueueCreateInfo;
 		transferOnlyQueueCreateInfo.queueFamily = transferOnly.value();
 		deviceCreationInfo.queuesCreateInfo.push_back(transferOnlyQueueCreateInfo);
-		data.instanceDependent->transferQueue = 1U;
+	}
+
+	if (graphicQueueData.second)
+	{
+		data.instanceDependent->presentQueue = data.instanceDependent->graphicsQueue;
+	}
+	else
+	{
+		data.instanceDependent->presentQueue = deviceCreationInfo.queuesCreateInfo.size();
+		QueueCreateInfo presentOnlyQueueCreateInfo;
+		presentOnlyQueueCreateInfo.queueFamily = FindPresentingQueue(surfaceSupport.queuePresentingSupport);
+		deviceCreationInfo.queuesCreateInfo.push_back(presentOnlyQueueCreateInfo);
 	}
 
 	data.instanceDependent->deviceID = deviceList.AddLogicalDevice(deviceCreationInfo);

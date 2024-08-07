@@ -4,7 +4,8 @@
 
 module VulkanSimplifiers.PhysicalDevice.Internal;
 
-PhysicalDeviceInternal::PhysicalDeviceInternal(VkPhysicalDevice physicalDevice, std::uint32_t instanceVulkanVersion) : _physicalDevice(physicalDevice)
+PhysicalDeviceInternal::PhysicalDeviceInternal(VkPhysicalDevice physicalDevice, std::uint32_t instanceVulkanVersion, WindowListInternal& windowList) : _physicalDevice(physicalDevice),
+_windowList(windowList)
 {
 	_device10features = 0;
 	_device11features = 0;
@@ -124,6 +125,28 @@ VulkanDeviceFeatureFlags PhysicalDeviceInternal::GetVulkan13Features() const
 VkPhysicalDevice PhysicalDeviceInternal::GetPhysicalDevice() const
 {
 	return _physicalDevice;
+}
+
+SurfaceSupportData PhysicalDeviceInternal::GetSurfaceSupport(IDObject<WindowPointer> windowID)
+{
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+	auto surface = window.GetSurface();
+
+	SurfaceSupportData ret;
+
+	ret.queuePresentingSupport.resize(_vulkanProperties.queueFamilies.size(), false);
+
+	for (size_t i = 0; i < ret.queuePresentingSupport.size(); i++)
+	{
+		VkBool32 presentationSupport = VK_FALSE;
+
+		if (vkGetPhysicalDeviceSurfaceSupportKHR(_physicalDevice, static_cast<uint32_t>(i), surface, &presentationSupport) != VK_SUCCESS)
+			throw std::runtime_error("PhysicalDeviceInternal::GetSurfaceSupport Error: Program failed to query a queues presentation support!");
+
+		ret.queuePresentingSupport[i] = presentationSupport == VK_TRUE;
+	}
+
+	return ret;
 }
 
 DeviceType PhysicalDeviceInternal::GetDeviceType(const VkPhysicalDeviceType& deviceType)

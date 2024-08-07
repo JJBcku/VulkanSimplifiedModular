@@ -120,3 +120,7 @@ DeviceVulkanPropertiesSimplified::DeviceVulkanPropertiesSimplified()
 	for (size_t i = 0; i < pipelineCacheID.size(); i++)
 		pipelineCacheID[i] = 0;
 }
+
+SurfaceSupportData::SurfaceSupportData()
+{
+}

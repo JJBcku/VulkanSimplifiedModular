@@ -11,10 +11,12 @@ import VulkanSimplifiers.DeviceList.Data;
 import VulkanSimplifiers.PhysicalDevice.Internal;
 import VulkanSimplifiers.LogicalDevice.Data;
 
+import VulkanSimplifiers.WindowList.Internal;
+
 export class DeviceListInternal
 {
 public:
-	DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity, std::uint32_t instanceVulkanVersion);
+	DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity, std::uint32_t instanceVulkanVersion, WindowListInternal& windowList);
 	~DeviceListInternal();
 
 	DeviceListInternal(const DeviceListInternal&) noexcept = delete;
@@ -38,4 +40,6 @@ private:
 
 	std::uint32_t _instanceVulkanVersion;
 	std::uint32_t _padding;
+
+	WindowListInternal& _windowList;
 };

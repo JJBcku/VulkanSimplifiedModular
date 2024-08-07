@@ -10,6 +10,7 @@ export struct VulkanDataInstanceDependent
 	IDObject<LogicalDevicePointer> deviceID;
 	size_t graphicsQueue;
 	std::optional<size_t> transferQueue;
+	size_t presentQueue;
 
 	VulkanDataInstanceDependent() = default;
 };

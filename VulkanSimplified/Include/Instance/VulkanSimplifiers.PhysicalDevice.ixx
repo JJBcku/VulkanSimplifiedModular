@@ -5,6 +5,7 @@ import ListTemplates.IDObject;
 
 import VulkanSimplifiers.PhysicalDevice.Internal;
 import VulkanSimplifiers.PhysicalDevice.Data;
+import VulkanSimplifiers.WindowList.Data;
 
 export class PhysicalDeviceSimplifier
 {
@@ -20,6 +21,8 @@ public:
 	VulkanDeviceFeatureFlags GetVulkan11Features() const;
 	VulkanDeviceFeatureFlags GetVulkan12Features() const;
 	VulkanDeviceFeatureFlags GetVulkan13Features() const;
+
+	SurfaceSupportData GetSurfaceSupport(IDObject<WindowPointer> windowID) const;
 
 private:
 	PhysicalDeviceInternal& _internal;

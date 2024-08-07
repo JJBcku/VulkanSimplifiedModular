@@ -27,6 +27,7 @@ public:
 	bool GetResized();
 
 	SDL_Window* GetWindow() const;
+	VkSurfaceKHR GetSurface() const;
 
 private:
 	SDL_Window* _window;

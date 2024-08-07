@@ -30,7 +30,7 @@ export struct LogicalDeviceCreationInfo
 	VulkanDeviceFeatureFlags vulkan12Features;
 	VulkanDeviceFeatureFlags vulkan13Features;
 
-	std::string deviceInstanceName;
+	std::string logicalDeviceName;
 
 	LogicalDeviceCreationInfo();
 };

@@ -18,7 +18,7 @@ LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initDa
 	_physicalDevice = initData.physicalDevice;
 
 	_physicalDeviceName = initData.physicalDeviceName;
-	_logicalDeviceName = initData.creationInfo.deviceInstanceName;
+	_logicalDeviceName = initData.creationInfo.logicalDeviceName;
 	_apiVersion = initData.apiVersion;
 	_padding = 0;
 

@@ -12,5 +12,6 @@ import VulkanSimplifiers.Instance;
 import VulkanSimplifiers.DeviceList;
 import VulkanSimplifiers.PhysicalDevice;
 import VulkanSimplifiers.LogicalDevice.Data;
+import VulkanSimplifiers.WindowList.Data;
 
 export void CreateInstanceDependent(VulkanData& data);

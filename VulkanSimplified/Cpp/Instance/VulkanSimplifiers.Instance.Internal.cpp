@@ -4,7 +4,7 @@ module;
 
 module VulkanSimplifiers.Instance.Internal;
 
-InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo)
+InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo, WindowListInternal& windowList) : _windowList(windowList)
 {
 	_instance = VK_NULL_HANDLE;
 	_debugMessenger = VK_NULL_HANDLE;
@@ -55,7 +55,7 @@ InstanceInternal::InstanceInternal(const InstanceInitInfo& initInfo)
 	}
 #endif
 
-	_deviceList.emplace(_instance, initInfo.logicalDeviceListInitialCapacity, initInfo.usedVulkanApiVersion);
+	_deviceList.emplace(_instance, initInfo.logicalDeviceListInitialCapacity, initInfo.usedVulkanApiVersion, _windowList);
 
 	_deviceList.value().EnumeratePhysicalDevices();
 }
@@ -81,7 +81,7 @@ InstanceInternal::~InstanceInternal()
 	}
 }
 
-VkInstance InstanceInternal::GetInstance()
+VkInstance InstanceInternal::GetInstance() const
 {
 	return _instance;
 }

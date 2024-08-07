@@ -5,17 +5,30 @@ module;
 export module VulkanSimplifiers.PhysicalDevice.Internal;
 
 import std;
+import ListTemplates.IDObject;
+
 import VulkanSimplifiers.PhysicalDevice.Data;
+import VulkanSimplifiers.WindowList.Internal;
+import VulkanSimplifiers.WindowList.Data;
+
+struct QueueSupportSavedData
+{
+	VkSurfaceKHR surface;
+	SurfaceSupportData queueData;
+
+	QueueSupportSavedData();
+	QueueSupportSavedData(VkSurfaceKHR initSurface, const SurfaceSupportData& initQueueData);
+};
 
 export class PhysicalDeviceInternal
 {
 public:
-	PhysicalDeviceInternal(VkPhysicalDevice physicalDevice, std::uint32_t instanceVulkanVersion);
+	PhysicalDeviceInternal(VkPhysicalDevice physicalDevice, std::uint32_t instanceVulkanVersion, WindowListInternal& windowList);
 	~PhysicalDeviceInternal();
 
 	PhysicalDeviceInternal(const PhysicalDeviceInternal&) noexcept = default;
 
-	PhysicalDeviceInternal& operator=(const PhysicalDeviceInternal&) noexcept = default;
+	PhysicalDeviceInternal& operator=(const PhysicalDeviceInternal&) noexcept = delete;
 
 	DeviceVulkanPropertiesSimplified GetVulkanPropertiesSimplified() const;
 
@@ -26,6 +39,8 @@ public:
 
 	VkPhysicalDevice GetPhysicalDevice() const;
 
+	SurfaceSupportData GetSurfaceSupport(IDObject<WindowPointer> windowID);
+
 private:
 	VkPhysicalDevice _physicalDevice;
 	DeviceVulkanPropertiesSimplified _vulkanProperties;
@@ -34,6 +49,8 @@ private:
 	VulkanDeviceFeatureFlags _device11features;
 	VulkanDeviceFeatureFlags _device12features;
 	VulkanDeviceFeatureFlags _device13features;
+
+	WindowListInternal& _windowList;
 
 	DeviceType GetDeviceType(const VkPhysicalDeviceType& deviceType);
 

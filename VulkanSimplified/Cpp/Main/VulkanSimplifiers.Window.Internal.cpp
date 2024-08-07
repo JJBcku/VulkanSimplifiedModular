@@ -119,6 +119,11 @@ SDL_Window* WindowInternal::GetWindow() const
 	return _window;
 }
 
+VkSurfaceKHR WindowInternal::GetSurface() const
+{
+	return _surface;
+}
+
 void WindowInternal::CreateWindow(WindowCreationData data)
 {
 	if (_window != nullptr)

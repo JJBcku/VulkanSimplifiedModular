@@ -91,6 +91,20 @@ _windowList(windowList)
 			queueData.minImageTransferGranularityDepth = family.minImageTransferGranularity.depth;
 		}
 	}
+
+	std::vector<VkExtensionProperties> availableExtensions;
+	std::uint32_t size = 0;
+
+	vkEnumerateDeviceExtensionProperties(_physicalDevice, nullptr, &size, nullptr);
+
+	if (size > 0)
+	{
+		availableExtensions.resize(size);
+
+		vkEnumerateDeviceExtensionProperties(_physicalDevice, nullptr, &size, availableExtensions.data());
+
+		_vulkanProperties.deviceExtensions.khrExtensions = CompileKHRDeviceExtensionList(availableExtensions);
+	}
 }
 
 PhysicalDeviceInternal::~PhysicalDeviceInternal()
@@ -149,7 +163,7 @@ SurfaceSupportData PhysicalDeviceInternal::GetSurfaceSupport(IDObject<WindowPoin
 	return ret;
 }
 
-DeviceType PhysicalDeviceInternal::GetDeviceType(const VkPhysicalDeviceType& deviceType)
+DeviceType PhysicalDeviceInternal::GetDeviceType(const VkPhysicalDeviceType& deviceType) const
 {
 	DeviceType ret = DeviceType::OTHER;
 
@@ -177,7 +191,7 @@ DeviceType PhysicalDeviceInternal::GetDeviceType(const VkPhysicalDeviceType& dev
 	return ret;
 }
 
-Vulkan10DeviceLimits PhysicalDeviceInternal::CompileVulkan10DeviceLimits(const VkPhysicalDeviceLimits& deviceLimits)
+Vulkan10DeviceLimits PhysicalDeviceInternal::CompileVulkan10DeviceLimits(const VkPhysicalDeviceLimits& deviceLimits) const
 {
 	Vulkan10DeviceLimits ret;
 
@@ -256,7 +270,7 @@ Vulkan10DeviceLimits PhysicalDeviceInternal::CompileVulkan10DeviceLimits(const V
 	return ret;
 }
 
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan10DeviceFeatures(const VkPhysicalDeviceFeatures& deviceFeatures)
+VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan10DeviceFeatures(const VkPhysicalDeviceFeatures& deviceFeatures) const
 {
 	VulkanDeviceFeatureFlags ret = 0;
 
@@ -335,7 +349,7 @@ VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan10DeviceFeatures(c
 	return ret;
 }
 
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan11DeviceFeatures(const VkPhysicalDeviceVulkan11Features& deviceFeatures)
+VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan11DeviceFeatures(const VkPhysicalDeviceVulkan11Features& deviceFeatures) const
 {
 	VulkanDeviceFeatureFlags ret = 0;
 
@@ -357,7 +371,7 @@ VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan11DeviceFeatures(c
 	return ret;
 }
 
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan12DeviceFeatures(const VkPhysicalDeviceVulkan12Features& deviceFeatures)
+VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan12DeviceFeatures(const VkPhysicalDeviceVulkan12Features& deviceFeatures) const
 {
 	VulkanDeviceFeatureFlags ret = 0;
 
@@ -388,7 +402,7 @@ VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan12DeviceFeatures(c
 	return ret;
 }
 
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan13DeviceFeatures(const VkPhysicalDeviceVulkan13Features& deviceFeatures)
+VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan13DeviceFeatures(const VkPhysicalDeviceVulkan13Features& deviceFeatures) const
 {
 	VulkanDeviceFeatureFlags ret = 0;
 
@@ -400,6 +414,23 @@ VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan13DeviceFeatures(c
 
 	if (deviceFeatures.maintenance4 == VK_TRUE)
 		ret |= VULKAN13_DEVICE_FEATURE_MAINTENANCE4;
+
+	return ret;
+}
+
+DeviceExtensionFlags PhysicalDeviceInternal::CompileKHRDeviceExtensionList(const std::vector<VkExtensionProperties>& availableExtensions) const
+{
+	DeviceExtensionFlags ret = 0;
+
+	for (size_t i = 0; i < availableExtensions.size(); i++)
+	{
+		const char* extensionName = availableExtensions[i].extensionName;
+
+		if (std::strcmp(extensionName, VK_KHR_SWAPCHAIN_EXTENSION_NAME) == 0)
+		{
+			ret |= DEVICE_KHR_EXTENSION_SWAPCHAIN;
+		}
+	}
 
 	return ret;
 }

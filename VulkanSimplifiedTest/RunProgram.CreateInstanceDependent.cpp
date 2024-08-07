@@ -20,6 +20,9 @@ size_t ChooseGPU(DeviceListSimplifier& deviceList)
 		auto deviceInfo = deviceList.GetPhysicalDeviceSimplifier(i);
 		auto deviceProperties = deviceInfo.GetVulkanPropertiesSimplified();
 
+		if ((deviceProperties.deviceExtensions.khrExtensions & DEVICE_KHR_EXTENSION_SWAPCHAIN) != DEVICE_KHR_EXTENSION_SWAPCHAIN)
+			continue;
+
 		switch (deviceProperties.deviceType)
 		{
 		case DeviceType::OTHER:
@@ -331,6 +334,8 @@ void CreateInstanceDependent(VulkanData& data)
 	deviceCreationInfo.physicalGPUIndex = choosenGPU;
 	deviceCreationInfo.queuesCreateInfo.reserve(3);
 	deviceCreationInfo.logicalDeviceName = "Only device used";
+
+	deviceCreationInfo.requestedExtensions.khrExtensions = DEVICE_KHR_EXTENSION_SWAPCHAIN;
 
 	auto surfaceSupport = physicalDevice.GetSurfaceSupport(data.basicData->windowID);
 	

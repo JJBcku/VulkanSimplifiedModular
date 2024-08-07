@@ -127,6 +127,14 @@ LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initDa
 		}
 	}
 
+	auto deviceRequestedExtensions = CompileRequestedExtensions(initData.creationInfo.requestedExtensions);
+
+	if (!deviceRequestedExtensions.empty())
+	{
+		createInfo.enabledExtensionCount = static_cast<std::uint32_t>(deviceRequestedExtensions.size());
+		createInfo.ppEnabledExtensionNames = deviceRequestedExtensions.data();
+	}
+
 	if (vkCreateDevice(initData.physicalDevice, &createInfo, nullptr, &_logicalDevice) != VK_SUCCESS)
 		throw std::runtime_error("LogicalDeviceInternal Contructor Error: Program failed to create a logical device!");
 
@@ -361,4 +369,21 @@ VkPhysicalDeviceVulkan13Features LogicalDeviceInternal::CompileRequestedVulkan13
 		ret.maintenance4 = VK_TRUE;
 
 	return ret;
+}
+
+std::vector<const char*> LogicalDeviceInternal::CompileRequestedExtensions(const RequestedExtensionList& deviceExtensionList) const
+{
+	std::vector<const char*> ret;
+
+	CompileRequestedKHRExtensions(ret, deviceExtensionList.khrExtensions);
+
+	return ret;
+}
+
+void LogicalDeviceInternal::CompileRequestedKHRExtensions(std::vector<const char*>& requiredExtensions, DeviceExtensionFlags khrExtensions) const
+{
+	requiredExtensions.reserve(requiredExtensions.size() + (sizeof(DeviceExtensionFlags) << 3));
+
+	if ((khrExtensions & DEVICE_KHR_EXTENSION_SWAPCHAIN) == DEVICE_KHR_EXTENSION_SWAPCHAIN)
+		requiredExtensions.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
 }

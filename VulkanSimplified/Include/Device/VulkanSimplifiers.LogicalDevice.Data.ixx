@@ -20,6 +20,13 @@ export struct QueueCreateInfo
 	QueueCreateInfo();
 };
 
+export struct RequestedExtensionList
+{
+	DeviceExtensionFlags khrExtensions;
+
+	RequestedExtensionList();
+};
+
 export struct LogicalDeviceCreationInfo
 {
 	size_t physicalGPUIndex;
@@ -31,6 +38,8 @@ export struct LogicalDeviceCreationInfo
 	VulkanDeviceFeatureFlags vulkan13Features;
 
 	std::string logicalDeviceName;
+
+	RequestedExtensionList requestedExtensions;
 
 	LogicalDeviceCreationInfo();
 };

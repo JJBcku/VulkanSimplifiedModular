@@ -42,4 +42,8 @@ private:
 	VkPhysicalDeviceVulkan11Features CompileRequestedVulkan11Features(VulkanDeviceFeatureFlags featureFlags);
 	VkPhysicalDeviceVulkan12Features CompileRequestedVulkan12Features(VulkanDeviceFeatureFlags featureFlags);
 	VkPhysicalDeviceVulkan13Features CompileRequestedVulkan13Features(VulkanDeviceFeatureFlags featureFlags);
+
+	std::vector<const char*> CompileRequestedExtensions(const RequestedExtensionList& deviceExtensionList) const;
+
+	void CompileRequestedKHRExtensions(std::vector<const char*>& requiredExtensions, DeviceExtensionFlags khrExtensions) const;
 };

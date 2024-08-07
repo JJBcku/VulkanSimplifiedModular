@@ -52,12 +52,14 @@ private:
 
 	WindowListInternal& _windowList;
 
-	DeviceType GetDeviceType(const VkPhysicalDeviceType& deviceType);
+	DeviceType GetDeviceType(const VkPhysicalDeviceType& deviceType) const;
 
-	Vulkan10DeviceLimits CompileVulkan10DeviceLimits(const VkPhysicalDeviceLimits& deviceLimits);
+	Vulkan10DeviceLimits CompileVulkan10DeviceLimits(const VkPhysicalDeviceLimits& deviceLimits) const;
 
-	VulkanDeviceFeatureFlags CompileVulkan10DeviceFeatures(const VkPhysicalDeviceFeatures& deviceFeatures);
-	VulkanDeviceFeatureFlags CompileVulkan11DeviceFeatures(const VkPhysicalDeviceVulkan11Features& deviceFeatures);
-	VulkanDeviceFeatureFlags CompileVulkan12DeviceFeatures(const VkPhysicalDeviceVulkan12Features& deviceFeatures);
-	VulkanDeviceFeatureFlags CompileVulkan13DeviceFeatures(const VkPhysicalDeviceVulkan13Features& deviceFeatures);
+	VulkanDeviceFeatureFlags CompileVulkan10DeviceFeatures(const VkPhysicalDeviceFeatures& deviceFeatures) const;
+	VulkanDeviceFeatureFlags CompileVulkan11DeviceFeatures(const VkPhysicalDeviceVulkan11Features& deviceFeatures) const;
+	VulkanDeviceFeatureFlags CompileVulkan12DeviceFeatures(const VkPhysicalDeviceVulkan12Features& deviceFeatures) const;
+	VulkanDeviceFeatureFlags CompileVulkan13DeviceFeatures(const VkPhysicalDeviceVulkan13Features& deviceFeatures) const;
+
+	DeviceExtensionFlags CompileKHRDeviceExtensionList(const std::vector<VkExtensionProperties>& availableExtensions) const;
 };

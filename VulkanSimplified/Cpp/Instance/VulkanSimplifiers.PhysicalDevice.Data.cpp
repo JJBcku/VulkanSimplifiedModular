@@ -109,6 +109,11 @@ QueueFamily::QueueFamily()
 	minImageTransferGranularityDepth = 0;
 }
 
+DeviceExtensionLists::DeviceExtensionLists()
+{
+	khrExtensions = 0;
+}
+
 DeviceVulkanPropertiesSimplified::DeviceVulkanPropertiesSimplified()
 {
 	apiMaxSupportedVersion = 0;

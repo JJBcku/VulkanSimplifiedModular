@@ -7,6 +7,11 @@ QueueCreateInfo::QueueCreateInfo()
 	queueCreationFlags = 0;
 }
 
+RequestedExtensionList::RequestedExtensionList()
+{
+	khrExtensions = 0;
+}
+
 LogicalDeviceCreationInfo::LogicalDeviceCreationInfo()
 {
 	physicalGPUIndex = std::numeric_limits<size_t>::max();

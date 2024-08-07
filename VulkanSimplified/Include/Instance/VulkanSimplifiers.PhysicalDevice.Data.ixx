@@ -168,6 +168,20 @@ struct QueueFamily
 	QueueFamily();
 };
 
+export typedef std::uint64_t DeviceExtensionFlags;
+
+export enum DeviceKHRExtensionFlagBits : DeviceExtensionFlags
+{
+	DEVICE_KHR_EXTENSION_SWAPCHAIN = 0x1,
+};
+
+export struct DeviceExtensionLists
+{
+	DeviceExtensionFlags khrExtensions;
+
+	DeviceExtensionLists();
+};
+
 export struct DeviceVulkanPropertiesSimplified
 {
 	std::uint32_t apiMaxSupportedVersion;
@@ -179,6 +193,8 @@ export struct DeviceVulkanPropertiesSimplified
 	std::array<std::uint8_t, 16> pipelineCacheID;
 
 	std::vector<QueueFamily> queueFamilies;
+
+	DeviceExtensionLists deviceExtensions;
 
 	Vulkan10DeviceLimits device10Limits;
 

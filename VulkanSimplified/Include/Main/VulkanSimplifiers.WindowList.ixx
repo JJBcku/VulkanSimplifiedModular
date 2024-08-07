@@ -16,6 +16,8 @@ public:
 	WindowListSimplifier& operator=(const WindowListSimplifier&) noexcept = delete;
 
 	IDObject<WindowPointer> CreateWindow(WindowCreationData data, size_t addOnReservation = 0);
+	bool DeleteWindow(IDObject<WindowPointer> windowID, bool throwOnIDNotFound = true);
+	void DeleteAll(size_t capacityAfterReserve = 0);
 
 	WindowSimplifier GetWindowSimplifier(IDObject<WindowPointer> windowID);
 

@@ -1,3 +1,7 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 export module VulkanSimplifiers.WindowList.Internal;
 
 import std;
@@ -17,6 +21,7 @@ public:
 	WindowListInternal& operator=(const WindowListInternal&) noexcept = delete;
 
 	IDObject<WindowPointer> CreateWindow(WindowCreationData data, size_t addReserved);
+	bool DeleteWindow(IDObject<WindowPointer> windowID, bool throwOnIDNotFound);
 	void DeleteAll(size_t capacityAfterReserve);
 
 	WindowInternal& GetWindowSimplifier(IDObject<WindowPointer> windowID);
@@ -25,4 +30,5 @@ public:
 
 private:
 	IterativeUnsortedList<WindowPointer> _windowList;
+	VkInstance _instance;
 };

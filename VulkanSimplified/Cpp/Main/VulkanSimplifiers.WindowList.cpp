@@ -13,6 +13,16 @@ IDObject<WindowPointer> WindowListSimplifier::CreateWindow(WindowCreationData da
 	return _internal.CreateWindow(data, addOnReservation);
 }
 
+bool WindowListSimplifier::DeleteWindow(IDObject<WindowPointer> windowID, bool throwOnIDNotFound)
+{
+	return _internal.DeleteWindow(windowID, throwOnIDNotFound);
+}
+
+void WindowListSimplifier::DeleteAll(size_t capacityAfterReserve)
+{
+	_internal.DeleteAll(capacityAfterReserve);
+}
+
 WindowSimplifier WindowListSimplifier::GetWindowSimplifier(IDObject<WindowPointer> windowID)
 {
 	return _internal.GetWindowSimplifier(windowID);

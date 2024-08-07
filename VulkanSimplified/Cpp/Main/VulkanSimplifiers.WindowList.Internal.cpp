@@ -14,7 +14,7 @@ WindowListInternal::~WindowListInternal()
 
 IDObject<WindowPointer> WindowListInternal::CreateWindow(WindowCreationData data, size_t addReserved)
 {
-	return _windowList.AddObject(std::make_unique<WindowInternal>(data), addReserved);
+	return _windowList.AddObject(std::make_unique<WindowInternal>(data, _instance), addReserved);
 }
 
 bool WindowListInternal::DeleteWindow(IDObject<WindowPointer> windowID, bool throwOnIDNotFound)
@@ -25,6 +25,31 @@ bool WindowListInternal::DeleteWindow(IDObject<WindowPointer> windowID, bool thr
 void WindowListInternal::DeleteAll(size_t capacityAfterReserve)
 {
 	_windowList.Reset(capacityAfterReserve);
+}
+
+void WindowListInternal::SetInstance(VkInstance instance)
+{
+	if (_instance != VK_NULL_HANDLE)
+		throw std::runtime_error("WindowListInternal::SetInstance Error: Program tried to set already set vulkan instance value!");
+
+	_instance = instance;
+
+	if (_instance != VK_NULL_HANDLE)
+	{
+		size_t listSize = _windowList.GetSize();
+
+		for (size_t i = 0; i < listSize; i++)
+		{
+			auto& windowOptional = _windowList.GetObjectOptional(i);
+
+			if (windowOptional.has_value())
+			{
+				auto& window = windowOptional.value();
+
+				window->SetInstace(_instance);
+			}
+		}
+	}
 }
 
 WindowInternal& WindowListInternal::GetWindowSimplifier(IDObject<WindowPointer> windowID)

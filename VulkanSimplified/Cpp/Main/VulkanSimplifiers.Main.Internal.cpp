@@ -144,6 +144,7 @@ void MainInternal::CreateIntance(const InstanceCreationInfo& instanceInfo)
 	initInfo.logicalDeviceListInitialCapacity = instanceInfo.logicalDeviceListInitialCapacity;
 
 	_instance.emplace(initInfo);
+	_windowList.SetInstance(_instance->GetInstance());
 }
 
 std::uint32_t MainInternal::FindMaximumAvailableVulkanVersion() const
@@ -195,6 +196,7 @@ std::vector<const char*> MainInternal::CompileRequestedExtensionsList(InstanceEx
 		std::uint32_t size = 0;
 		SDL_Vulkan_GetInstanceExtensions(nullptr, &size, nullptr);
 
+		sdlRequired.resize(size);
 		SDL_Vulkan_GetInstanceExtensions(nullptr, &size, sdlRequired.data());
 	}
 

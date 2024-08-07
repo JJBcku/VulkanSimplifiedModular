@@ -24,6 +24,8 @@ public:
 	bool DeleteWindow(IDObject<WindowPointer> windowID, bool throwOnIDNotFound);
 	void DeleteAll(size_t capacityAfterReserve);
 
+	void SetInstance(VkInstance instance);
+
 	WindowInternal& GetWindowSimplifier(IDObject<WindowPointer> windowID);
 
 	const WindowInternal& GetWindowSimplifier(IDObject<WindowPointer> windowID) const;

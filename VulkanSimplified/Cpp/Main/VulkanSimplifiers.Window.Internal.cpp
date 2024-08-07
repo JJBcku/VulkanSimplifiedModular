@@ -1,17 +1,22 @@
 module;
 
+#include <vulkan/vulkan.hpp>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_vulkan.h>
 
 module VulkanSimplifiers.Window.Internal;
 
-WindowInternal::WindowInternal(WindowCreationData data)
+WindowInternal::WindowInternal(WindowCreationData data, VkInstance instance)
 {
 	_width = static_cast<uint32_t>(data.windowWidth);
 	_height = static_cast<uint32_t>(data.windowHeight);
 	
 	_window = nullptr;
+	_instance = VK_NULL_HANDLE;
 	CreateWindow(data);
-	_padding = 0;
+
+	_surface = VK_NULL_HANDLE;
+	SetInstace(instance);
 
 	_minimized = false;
 	_hidden = false;
@@ -29,8 +34,8 @@ WindowInternal::~WindowInternal()
 	DestroyWindow();
 }
 
-WindowInternal::WindowInternal(WindowInternal&& other) : _window(other._window), _padding(0), _width(other._width), _height(other._height), _minimized(other._minimized),
-_hidden(other._hidden), _quit(other._quit), _resized(other._resized)
+WindowInternal::WindowInternal(WindowInternal&& other) : _window(other._window), _instance(other._instance), _surface(other._surface), _width(other._width), _height(other._height),
+_minimized(other._minimized), _hidden(other._hidden), _quit(other._quit), _resized(other._resized)
 {
 	_cpadding[0] = 0;
 	_cpadding[1] = 0;
@@ -38,6 +43,8 @@ _hidden(other._hidden), _quit(other._quit), _resized(other._resized)
 	_cpadding[3] = 0;
 
 	other._window = nullptr;
+	other._instance = VK_NULL_HANDLE;
+	other._surface = VK_NULL_HANDLE;
 	other._width = 0;
 	other._height = 0;
 	other._minimized = false;
@@ -49,7 +56,8 @@ _hidden(other._hidden), _quit(other._quit), _resized(other._resized)
 WindowInternal& WindowInternal::operator=(WindowInternal&& other)
 {
 	_window = other._window;
-	_padding = 0;
+	_instance = other._instance;
+	_surface = other._surface;
 	_width = other._width;
 	_height = other._height;
 	_minimized = other._minimized;
@@ -62,6 +70,8 @@ WindowInternal& WindowInternal::operator=(WindowInternal&& other)
 	_cpadding[3] = 0;
 
 	other._window = nullptr;
+	other._instance = VK_NULL_HANDLE;
+	other._surface = VK_NULL_HANDLE;
 	other._width = 0;
 	other._height = 0;
 	other._minimized = false;
@@ -70,6 +80,20 @@ WindowInternal& WindowInternal::operator=(WindowInternal&& other)
 	other._resized = false;
 
 	return *this;
+}
+
+void WindowInternal::SetInstace(VkInstance instance)
+{
+	if (_instance != VK_NULL_HANDLE)
+		throw std::runtime_error("WindowInternal::SetInstace Error: Program tried to set already set vulkan instance value!");
+
+	_instance = instance;
+
+	if (_instance != VK_NULL_HANDLE)
+	{
+		if (SDL_Vulkan_CreateSurface(_window, _instance, &_surface) != SDL_TRUE)
+			throw std::runtime_error("WindowInternal::SetInstace Error: Program failed to create the window surface!");
+	}
 }
 
 bool WindowInternal::GetQuit() const
@@ -130,6 +154,12 @@ void WindowInternal::CreateWindow(WindowCreationData data)
 
 void WindowInternal::DestroyWindow()
 {
+	if (_instance != VK_NULL_HANDLE)
+	{
+		vkDestroySurfaceKHR(_instance, _surface, nullptr);
+		_surface = VK_NULL_HANDLE;
+	}
+
 	if (_window != nullptr)
 	{
 		SDL_DestroyWindow(_window);

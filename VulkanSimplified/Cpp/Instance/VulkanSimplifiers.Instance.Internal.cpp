@@ -81,6 +81,11 @@ InstanceInternal::~InstanceInternal()
 	}
 }
 
+VkInstance InstanceInternal::GetInstance()
+{
+	return _instance;
+}
+
 DeviceListInternal& InstanceInternal::GetDeviceListSimplifier()
 {
 	if (!_deviceList.has_value())

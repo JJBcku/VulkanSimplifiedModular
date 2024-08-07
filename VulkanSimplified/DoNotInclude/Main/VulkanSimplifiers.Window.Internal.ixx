@@ -1,6 +1,7 @@
 module;
 
 #include <SDL2/SDL.h>
+#include <vulkan/vulkan.hpp>
 
 export module VulkanSimplifiers.Window.Internal;
 
@@ -10,7 +11,7 @@ import std;
 export class WindowInternal
 {
 public:
-	WindowInternal(WindowCreationData data);
+	WindowInternal(WindowCreationData data, VkInstance instance);
 	~WindowInternal();
 
 	WindowInternal(const WindowInternal&) = delete;
@@ -18,6 +19,8 @@ public:
 
 	WindowInternal& operator=(const WindowInternal&) = delete;
 	WindowInternal& operator=(WindowInternal&& other);
+
+	void SetInstace(VkInstance instance);
 
 	bool GetQuit() const;
 	bool GetPaused() const;
@@ -27,7 +30,9 @@ public:
 
 private:
 	SDL_Window* _window;
-	std::size_t _padding;
+	VkInstance _instance;
+
+	VkSurfaceKHR _surface;
 
 	std::uint32_t _width, _height;
 

@@ -20,6 +20,8 @@ public:
 
 	InstanceInternal& operator=(const InstanceInternal&) noexcept = delete;
 
+	VkInstance GetInstance();
+
 	DeviceListInternal& GetDeviceListSimplifier();
 
 	const DeviceListInternal& GetDeviceListSimplifier() const;

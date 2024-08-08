@@ -3,6 +3,7 @@ export module VulkanSimplifiers.PhysicalDevice.Data;
 import std;
 
 export import VulkanSimplifiers.Common.ImageUsageFlags;
+export import VulkanSimplifiers.Common.ImageFormatFlags;
 
 export struct Vulkan10MaxImageSizeLimits
 {
@@ -271,6 +272,13 @@ export enum SurfacePresentModeBits : SurfacePresentModes
 	PRESENT_MODE_FIFO_RELAXED = 0x8,
 };
 
+export struct SurfaceSupportedColorspaceFormatsLists
+{
+	ImageFormatFlags srgbNonlinearColorspace;
+
+	SurfaceSupportedColorspaceFormatsLists();
+};
+
 export struct SurfaceSupportData
 {
 	std::vector<bool> queuePresentingSupport;
@@ -280,6 +288,7 @@ export struct SurfaceSupportData
 
 	ImageUsageFlags surfaceUsageFlags;
 	SurfacePresentModes surfacePresentModes;
+	SurfaceSupportedColorspaceFormatsLists surfaceSupportedSwapchainFormats;
 
 	SurfaceSupportData();
 };

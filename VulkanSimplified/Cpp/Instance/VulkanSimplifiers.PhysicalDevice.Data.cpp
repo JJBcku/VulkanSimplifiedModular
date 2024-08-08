@@ -126,6 +126,11 @@ DeviceVulkanPropertiesSimplified::DeviceVulkanPropertiesSimplified()
 		pipelineCacheID[i] = 0;
 }
 
+SurfaceSupportedColorspaceFormatsLists::SurfaceSupportedColorspaceFormatsLists()
+{
+	srgbNonlinearColorspace = 0;
+}
+
 SurfaceSupportData::SurfaceSupportData()
 {
 	minImageCount = 0;

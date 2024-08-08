@@ -31,6 +31,11 @@ size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer> windo
 		if ((deviceSurfaceSupport.surfacePresentModes & PRESENT_MODE_FIFO_STRICT) != PRESENT_MODE_FIFO_STRICT)
 			continue;
 
+		auto& srgb = deviceSurfaceSupport.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
+
+		if ((srgb & IMAGE_FORMAT_BGRA_8BIT_SRGB) != IMAGE_FORMAT_BGRA_8BIT_SRGB && (srgb & IMAGE_FORMAT_RGBA_8BIT_SRGB) != IMAGE_FORMAT_RGBA_8BIT_SRGB)
+			continue;
+
 		switch (deviceProperties.deviceType)
 		{
 		case DeviceType::OTHER:

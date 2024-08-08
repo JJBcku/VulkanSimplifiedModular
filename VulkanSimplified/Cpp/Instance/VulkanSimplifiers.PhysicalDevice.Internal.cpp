@@ -217,6 +217,94 @@ SurfaceSupportData PhysicalDeviceInternal::GetSurfaceSupport(IDObject<WindowPoin
 					ret.surfacePresentModes |= PRESENT_MODE_FIFO_RELAXED;
 			}
 		}
+
+		size = 0;
+
+		vkGetPhysicalDeviceSurfaceFormatsKHR(_physicalDevice, surface, &size, nullptr);
+
+		std::vector<VkSurfaceFormatKHR> supportedSwapchainFormats;
+
+		if (size > 0)
+		{
+			supportedSwapchainFormats.resize(size);
+
+			vkGetPhysicalDeviceSurfaceFormatsKHR(_physicalDevice, surface, &size, supportedSwapchainFormats.data());
+
+			for (auto& formatData : supportedSwapchainFormats)
+			{
+				if (formatData.colorSpace == VK_COLORSPACE_SRGB_NONLINEAR_KHR)
+				{
+					if (formatData.format == VK_FORMAT_A1R5G5B5_UNORM_PACK16)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_A_1BIT_RGB_5BIT_UNORM_PACK16BIT;
+
+					if (formatData.format == VK_FORMAT_A2B10G10R10_UNORM_PACK32)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_A_2BIT_BGR_10BIT_UNORM_PACK32BIT;
+
+					if (formatData.format == VK_FORMAT_A2R10G10B10_UNORM_PACK32)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_A_2BIT_RGB_10BIT_UNORM_PACK32BIT;
+
+					if (formatData.format == VK_FORMAT_A8B8G8R8_SNORM_PACK32)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_ABGR_8BIT_SNORM_PACK32BIT;
+
+					if (formatData.format == VK_FORMAT_A8B8G8R8_SRGB_PACK32)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_ABGR_8BIT_SRGB_PACK32BIT;
+
+					if (formatData.format == VK_FORMAT_A8B8G8R8_UNORM_PACK32)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_ABGR_8BIT_UNORM_PACK32BIT;
+
+					if (formatData.format == VK_FORMAT_B10G11R11_UFLOAT_PACK32)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_B_10BIT_GR_11BIT_UFLOAT_PACK32BIT;
+
+					if (formatData.format == VK_FORMAT_B4G4R4A4_UNORM_PACK16)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_BGRA_4BIT_UNORM_PACK16BIT;
+
+					if (formatData.format == VK_FORMAT_B5G5R5A1_UNORM_PACK16)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_BGR_5BIT_A_1BIT_UNORM_PACK16BIT;
+
+					if (formatData.format == VK_FORMAT_B5G6R5_UNORM_PACK16)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_B_5BIT_G_6BIT_R_5BIT_UNORM_PACK16BIT;
+
+					if (formatData.format == VK_FORMAT_B8G8R8A8_SNORM)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_BGRA_8BIT_SNORM;
+
+					if (formatData.format == VK_FORMAT_B8G8R8A8_SRGB)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_BGRA_8BIT_SRGB;
+
+					if (formatData.format == VK_FORMAT_B8G8R8A8_UNORM)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_BGRA_8BIT_UNORM;
+
+					if (formatData.format == VK_FORMAT_R16G16B16A16_SFLOAT)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_RGBA_16BIT_SFLOAT;
+
+					if (formatData.format == VK_FORMAT_R16G16B16A16_SNORM)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_RGBA_16BIT_SNORM;
+
+					if (formatData.format == VK_FORMAT_B8G8R8A8_UNORM)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_RGBA_16BIT_UNORM;
+
+					if (formatData.format == VK_FORMAT_R4G4B4A4_UNORM_PACK16)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_RGBA_4BIT_UNORM_PACK16BIT;
+
+					if (formatData.format == VK_FORMAT_R5G5B5A1_UNORM_PACK16)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_RGB_5BIT_A_1BIT_UNORM_PACK16BIT;
+
+					if (formatData.format == VK_FORMAT_R5G6B5_UNORM_PACK16)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_R_5BIT_G_6BIT_B_5BIT_UNORM_PACK16BIT;
+
+					if (formatData.format == VK_FORMAT_R8_UNORM)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_R_8BIT_UNORM;
+
+					if (formatData.format == VK_FORMAT_R8G8B8A8_SNORM)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_RGBA_8BIT_SNORM;
+
+					if (formatData.format == VK_FORMAT_R8G8B8A8_SRGB)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_RGBA_8BIT_SRGB;
+
+					if (formatData.format == VK_FORMAT_R8G8B8A8_UNORM)
+						ret.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace |= IMAGE_FORMAT_RGBA_8BIT_UNORM;
+				}
+			}
+		}
 	}
 
 	return ret;

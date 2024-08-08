@@ -300,5 +300,8 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageUsageFlags.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageFormatFlags.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

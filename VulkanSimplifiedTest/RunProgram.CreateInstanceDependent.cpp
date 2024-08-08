@@ -1,6 +1,6 @@
 module RunProgram.CreateInstanceDependent;
 
-size_t ChooseGPU(DeviceListSimplifier& deviceList)
+size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer> windowID)
 {
 	size_t ret = 0;
 
@@ -21,6 +21,14 @@ size_t ChooseGPU(DeviceListSimplifier& deviceList)
 		auto deviceProperties = deviceInfo.GetVulkanPropertiesSimplified();
 
 		if ((deviceProperties.deviceExtensions.khrExtensions & DEVICE_KHR_EXTENSION_SWAPCHAIN) != DEVICE_KHR_EXTENSION_SWAPCHAIN)
+			continue;
+
+		auto deviceSurfaceSupport = deviceInfo.GetSurfaceSupport(windowID);
+
+		if ((deviceSurfaceSupport.surfaceUsageFlags & IMAGE_USAGE_TRANSFER_DST) != IMAGE_USAGE_TRANSFER_DST)
+			continue;
+
+		if ((deviceSurfaceSupport.surfacePresentModes & PRESENT_MODE_FIFO_STRICT) != PRESENT_MODE_FIFO_STRICT)
 			continue;
 
 		switch (deviceProperties.deviceType)
@@ -324,7 +332,7 @@ void CreateInstanceDependent(VulkanData& data)
 
 	auto deviceList = instance.GetDeviceListSimplifier();
 
-	size_t choosenGPU = ChooseGPU(deviceList);
+	size_t choosenGPU = ChooseGPU(deviceList, data.basicData->windowID);
 
 	auto physicalDevice = deviceList.GetPhysicalDeviceSimplifier(choosenGPU);
 

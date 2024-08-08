@@ -160,6 +160,65 @@ SurfaceSupportData PhysicalDeviceInternal::GetSurfaceSupport(IDObject<WindowPoin
 		ret.queuePresentingSupport[i] = presentationSupport == VK_TRUE;
 	}
 
+	{
+		VkSurfaceCapabilitiesKHR surfaceCapabilities{};
+		
+		vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_physicalDevice, surface, &surfaceCapabilities);
+
+		ret.minImageCount = surfaceCapabilities.minImageCount;
+		ret.maxImageCount = surfaceCapabilities.maxImageCount;
+
+		if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_TRANSFER_SRC_BIT) == VK_IMAGE_USAGE_TRANSFER_SRC_BIT)
+			ret.surfaceUsageFlags |= IMAGE_USAGE_TRANSFER_SRC;
+
+		if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_TRANSFER_DST_BIT) == VK_IMAGE_USAGE_TRANSFER_DST_BIT)
+			ret.surfaceUsageFlags |= IMAGE_USAGE_TRANSFER_DST;
+
+		if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_SAMPLED_BIT) == VK_IMAGE_USAGE_SAMPLED_BIT)
+			ret.surfaceUsageFlags |= IMAGE_USAGE_SAMPLED;
+
+		if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_STORAGE_BIT) == VK_IMAGE_USAGE_STORAGE_BIT)
+			ret.surfaceUsageFlags |= IMAGE_USAGE_STORAGE;
+
+		if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT) == VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT)
+			ret.surfaceUsageFlags |= IMAGE_USAGE_COLOR_ATTACHMENT;
+
+		if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT) == VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT)
+			ret.surfaceUsageFlags |= IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT;
+
+		if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT) == VK_IMAGE_USAGE_TRANSIENT_ATTACHMENT_BIT)
+			ret.surfaceUsageFlags |= IMAGE_USAGE_TRANSIENT_ATTACHMENT;
+
+		if ((surfaceCapabilities.supportedUsageFlags & VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT) == VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT)
+			ret.surfaceUsageFlags |= IMAGE_USAGE_INPUT_ATTACHMENT;
+
+		std::vector<VkPresentModeKHR> surfacePresentModes;
+		std::uint32_t size = 0;
+
+		vkGetPhysicalDeviceSurfacePresentModesKHR(_physicalDevice, surface, &size, nullptr);
+
+		if (size > 0)
+		{
+			surfacePresentModes.resize(size);
+			vkGetPhysicalDeviceSurfacePresentModesKHR(_physicalDevice, surface, &size, surfacePresentModes.data());
+
+			for (auto& presentMode : surfacePresentModes)
+			{
+				if (presentMode == VK_PRESENT_MODE_IMMEDIATE_KHR)
+					ret.surfacePresentModes |= PRESENT_MODE_IMMEDIATE;
+
+				if (presentMode == VK_PRESENT_MODE_MAILBOX_KHR)
+					ret.surfacePresentModes |= PRESENT_MODE_MAILBOX;
+
+				if (presentMode == VK_PRESENT_MODE_FIFO_KHR)
+					ret.surfacePresentModes |= PRESENT_MODE_FIFO_STRICT;
+
+				if (presentMode == VK_PRESENT_MODE_FIFO_RELAXED_KHR)
+					ret.surfacePresentModes |= PRESENT_MODE_FIFO_RELAXED;
+			}
+		}
+	}
+
 	return ret;
 }
 

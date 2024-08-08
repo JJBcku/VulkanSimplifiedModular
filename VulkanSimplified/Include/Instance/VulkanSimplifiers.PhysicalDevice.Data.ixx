@@ -2,6 +2,8 @@ export module VulkanSimplifiers.PhysicalDevice.Data;
 
 import std;
 
+export import VulkanSimplifiers.Common.ImageUsageFlags;
+
 export struct Vulkan10MaxImageSizeLimits
 {
 	std::uint64_t maxImageDimension1D;
@@ -259,9 +261,25 @@ export enum Vulkan13DeviceFeaturesFlagBits : VulkanDeviceFeatureFlags
 	VULKAN13_DEVICE_FEATURE_MAINTENANCE4 = 0X4,
 };
 
+export typedef std::uint64_t SurfacePresentModes;
+
+export enum SurfacePresentModeBits : SurfacePresentModes
+{
+	PRESENT_MODE_IMMEDIATE = 0x1,
+	PRESENT_MODE_MAILBOX = 0x2,
+	PRESENT_MODE_FIFO_STRICT = 0x4,
+	PRESENT_MODE_FIFO_RELAXED = 0x8,
+};
+
 export struct SurfaceSupportData
 {
 	std::vector<bool> queuePresentingSupport;
+
+	std::uint32_t minImageCount;
+	std::uint32_t maxImageCount;
+
+	ImageUsageFlags surfaceUsageFlags;
+	SurfacePresentModes surfacePresentModes;
 
 	SurfaceSupportData();
 };

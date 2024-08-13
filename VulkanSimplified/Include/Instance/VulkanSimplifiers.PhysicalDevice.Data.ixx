@@ -3,7 +3,7 @@ export module VulkanSimplifiers.PhysicalDevice.Data;
 import std;
 
 export import VulkanSimplifiers.Common.ImageUsageFlags;
-export import VulkanSimplifiers.Common.ImageFormatFlags;
+export import VulkanSimplifiers.Common.DataFormatFlags;
 
 export struct Vulkan10MaxImageSizeLimits
 {
@@ -185,6 +185,25 @@ export struct DeviceExtensionLists
 	DeviceExtensionLists();
 };
 
+export struct FormatsSupportedFeaturesList
+{
+	DataFormatFlags sampledImage;
+	DataFormatFlags storageImage;
+	DataFormatFlags storageImageAtomic;
+	DataFormatFlags uniformTexelBuffer;
+	DataFormatFlags storageTexelBuffer;
+	DataFormatFlags storageTexelBufferAtomic;
+	DataFormatFlags vertexBuffer;
+	DataFormatFlags colorAttachment;
+	DataFormatFlags colorAttachmentBlend;
+	DataFormatFlags depthStencilAttachment;
+	DataFormatFlags blitSrc;
+	DataFormatFlags blitDst;
+	DataFormatFlags sampledImageFilterLinear;
+
+	FormatsSupportedFeaturesList();
+};
+
 export struct DeviceVulkanPropertiesSimplified
 {
 	std::uint32_t apiMaxSupportedVersion;
@@ -200,6 +219,8 @@ export struct DeviceVulkanPropertiesSimplified
 	DeviceExtensionLists deviceExtensions;
 
 	Vulkan10DeviceLimits device10Limits;
+
+	FormatsSupportedFeaturesList formatFeaturesSupport;
 
 	DeviceVulkanPropertiesSimplified();
 };
@@ -274,7 +295,7 @@ export enum SurfacePresentModeBits : SurfacePresentModes
 
 export struct SurfaceSupportedColorspaceFormatsLists
 {
-	ImageFormatFlags srgbNonlinearColorspace;
+	DataFormatFlags srgbNonlinearColorspace;
 
 	SurfaceSupportedColorspaceFormatsLists();
 };

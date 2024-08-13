@@ -1,6 +1,11 @@
 module RunProgram.CreateInstanceDependent;
 
-size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer> windowID)
+static bool CheckFormatSupport(const DataFormatFlags& deviceBlitDSTUsage, const DataFormatFlags& surfaceColorspace, DataFormatFlagBits format)
+{
+	return (deviceBlitDSTUsage & format) == format && (surfaceColorspace & format) == format;
+}
+
+static size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer> windowID)
 {
 	size_t ret = 0;
 
@@ -32,8 +37,9 @@ size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer> windo
 			continue;
 
 		auto& srgb = deviceSurfaceSupport.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
+		auto& blitDst = deviceProperties.formatFeaturesSupport.blitDst;
 
-		if ((srgb & IMAGE_FORMAT_BGRA_8BIT_SRGB) != IMAGE_FORMAT_BGRA_8BIT_SRGB && (srgb & IMAGE_FORMAT_RGBA_8BIT_SRGB) != IMAGE_FORMAT_RGBA_8BIT_SRGB)
+		if (!CheckFormatSupport(blitDst, srgb, DATA_FORMAT_BGRA_8BIT_SRGB) && !CheckFormatSupport(blitDst, srgb, DATA_FORMAT_RGBA_8BIT_SRGB))
 			continue;
 
 		switch (deviceProperties.deviceType)
@@ -88,7 +94,7 @@ size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer> windo
 	return ret;
 }
 
-std::pair<std::uint32_t, bool> PickGraphicQueueFamily(PhysicalDeviceSimplifier& physicalDevice, const std::vector<bool>& queuePresentSupport)
+static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(PhysicalDeviceSimplifier& physicalDevice, const std::vector<bool>& queuePresentSupport)
 {
 	std::pair<std::uint32_t, bool> choosenFamily = { std::numeric_limits<std::uint32_t>::max(), false};
 
@@ -232,7 +238,7 @@ std::pair<std::uint32_t, bool> PickGraphicQueueFamily(PhysicalDeviceSimplifier& 
 	return choosenFamily;
 }
 
-std::optional<std::uint32_t> TryToFindTransferOnlyQueue(const PhysicalDeviceSimplifier& physicalDevice)
+static std::optional<std::uint32_t> TryToFindTransferOnlyQueue(const PhysicalDeviceSimplifier& physicalDevice)
 {
 	std::optional<std::uint32_t> choosenFamily;
 
@@ -310,7 +316,7 @@ std::optional<std::uint32_t> TryToFindTransferOnlyQueue(const PhysicalDeviceSimp
 	return choosenFamily;
 }
 
-std::uint32_t FindPresentingQueue(const std::vector<bool>& queuePresentSupport)
+static std::uint32_t FindPresentingQueue(const std::vector<bool>& queuePresentSupport)
 {
 	std::uint32_t ret = std::numeric_limits<std::uint32_t>::max();
 

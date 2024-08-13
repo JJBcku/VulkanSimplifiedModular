@@ -62,4 +62,7 @@ private:
 	VulkanDeviceFeatureFlags CompileVulkan13DeviceFeatures(const VkPhysicalDeviceVulkan13Features& deviceFeatures) const;
 
 	DeviceExtensionFlags CompileKHRDeviceExtensionList(const std::vector<VkExtensionProperties>& availableExtensions) const;
+
+	FormatsSupportedFeaturesList CompileFormatsSupportedFeaturesList() const;
+	void GetFormatsSupportedFeatures(FormatsSupportedFeaturesList& featureList, VkFormat format, DataFormatFlagBits flagSetBit) const;
 };

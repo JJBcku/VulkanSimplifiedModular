@@ -114,6 +114,23 @@ DeviceExtensionLists::DeviceExtensionLists()
 	khrExtensions = 0;
 }
 
+FormatsSupportedFeaturesList::FormatsSupportedFeaturesList()
+{
+	sampledImage = 0;
+	storageImage = 0;
+	storageImageAtomic = 0;
+	uniformTexelBuffer = 0;
+	storageTexelBuffer = 0;
+	storageTexelBufferAtomic = 0;
+	vertexBuffer = 0;
+	colorAttachment = 0;
+	colorAttachmentBlend = 0;
+	depthStencilAttachment = 0;
+	blitSrc = 0;
+	blitDst = 0;
+	sampledImageFilterLinear = 0;
+}
+
 DeviceVulkanPropertiesSimplified::DeviceVulkanPropertiesSimplified()
 {
 	apiMaxSupportedVersion = 0;

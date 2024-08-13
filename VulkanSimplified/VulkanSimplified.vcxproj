@@ -163,7 +163,7 @@
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Window.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.WindowList.Internal.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageFormatFlags.ixx" />
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageUsageFlags.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DataFormatFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDevice.Data.ixx" />

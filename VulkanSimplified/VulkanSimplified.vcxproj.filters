@@ -297,7 +297,7 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageUsageFlags.ixx">
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DataFormatFlags.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageFormatFlags.ixx">

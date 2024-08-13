@@ -114,21 +114,16 @@ DeviceExtensionLists::DeviceExtensionLists()
 	khrExtensions = 0;
 }
 
-FormatsSupportedFeaturesList::FormatsSupportedFeaturesList()
+FormatsSupportedBufferFeaturesList::FormatsSupportedBufferFeaturesList()
 {
-	sampledImage = 0;
-	storageImage = 0;
-	storageImageAtomic = 0;
-	uniformTexelBuffer = 0;
-	storageTexelBuffer = 0;
-	storageTexelBufferAtomic = 0;
-	vertexBuffer = 0;
-	colorAttachment = 0;
-	colorAttachmentBlend = 0;
-	depthStencilAttachment = 0;
-	blitSrc = 0;
-	blitDst = 0;
-	sampledImageFilterLinear = 0;
+}
+
+FormatsSupportedImageFeaturesList::FormatsSupportedImageFeaturesList()
+{
+}
+
+FormatsSupportedFullFeatures::FormatsSupportedFullFeatures()
+{
 }
 
 DeviceVulkanPropertiesSimplified::DeviceVulkanPropertiesSimplified()
@@ -141,18 +136,4 @@ DeviceVulkanPropertiesSimplified::DeviceVulkanPropertiesSimplified()
 
 	for (size_t i = 0; i < pipelineCacheID.size(); i++)
 		pipelineCacheID[i] = 0;
-}
-
-SurfaceSupportedColorspaceFormatsLists::SurfaceSupportedColorspaceFormatsLists()
-{
-	srgbNonlinearColorspace = 0;
-}
-
-SurfaceSupportData::SurfaceSupportData()
-{
-	minImageCount = 0;
-	maxImageCount = 0;
-
-	surfaceUsageFlags = 0;
-	surfacePresentModes = 0;
 }

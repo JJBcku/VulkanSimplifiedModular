@@ -63,6 +63,13 @@ private:
 
 	DeviceExtensionFlags CompileKHRDeviceExtensionList(const std::vector<VkExtensionProperties>& availableExtensions) const;
 
-	FormatsSupportedFeaturesList CompileFormatsSupportedFeaturesList() const;
-	void GetFormatsSupportedFeatures(FormatsSupportedFeaturesList& featureList, VkFormat format, DataFormatFlagBits flagSetBit) const;
+	FormatsSupportedFullFeatures CompileFormatsSupportedFeatures() const;
+
+	void GetFirstSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatFirstFlagSetBits flagSetBit) const;
+	void GetSecondSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatSecondFlagSetBits flagSetBit) const;
+	void GetThirdSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatThirdFlagSetBits flagSetBit) const;
+	void GetFourthSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatFourthFlagSetBits flagSetBit) const;
+	void GetFifthSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatFifthFlagSetBits flagSetBit) const;
+	void GetSixthSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatSixthFlagSetBits flagSetBit) const;
+	void GetSeventhSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatSeventhFlagSetBits flagSetBit) const;
 };

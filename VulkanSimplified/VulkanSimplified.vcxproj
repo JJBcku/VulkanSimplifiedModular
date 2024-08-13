@@ -114,7 +114,9 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.DataFormatFlags.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp" />
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.SurfaceData.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.Data.cpp" />
@@ -162,9 +164,10 @@
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Main.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Window.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.WindowList.Internal.ixx" />
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageFormatFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DataFormatFlags.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageUsageFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.SurfaceData.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDevice.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDevice.ixx" />

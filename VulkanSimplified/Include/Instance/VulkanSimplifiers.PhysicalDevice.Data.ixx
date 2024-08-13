@@ -2,8 +2,7 @@ export module VulkanSimplifiers.PhysicalDevice.Data;
 
 import std;
 
-export import VulkanSimplifiers.Common.ImageUsageFlags;
-export import VulkanSimplifiers.Common.DataFormatFlags;
+export import VulkanSimplifiers.Common.SurfaceData;
 
 export struct Vulkan10MaxImageSizeLimits
 {
@@ -185,23 +184,38 @@ export struct DeviceExtensionLists
 	DeviceExtensionLists();
 };
 
-export struct FormatsSupportedFeaturesList
+export struct FormatsSupportedBufferFeaturesList
 {
-	DataFormatFlags sampledImage;
-	DataFormatFlags storageImage;
-	DataFormatFlags storageImageAtomic;
-	DataFormatFlags uniformTexelBuffer;
-	DataFormatFlags storageTexelBuffer;
-	DataFormatFlags storageTexelBufferAtomic;
-	DataFormatFlags vertexBuffer;
-	DataFormatFlags colorAttachment;
-	DataFormatFlags colorAttachmentBlend;
-	DataFormatFlags depthStencilAttachment;
-	DataFormatFlags blitSrc;
-	DataFormatFlags blitDst;
-	DataFormatFlags sampledImageFilterLinear;
+	DataFormatFullSet uniformTexelBuffer;
+	DataFormatFullSet storageTexelBuffer;
+	DataFormatFullSet storageTexelBufferAtomic;
+	DataFormatFullSet vertexBuffer;
 
-	FormatsSupportedFeaturesList();
+	FormatsSupportedBufferFeaturesList();
+};
+
+export struct FormatsSupportedImageFeaturesList
+{
+	DataFormatFullSet sampledImage;
+	DataFormatFullSet storageImage;
+	DataFormatFullSet storageImageAtomic;
+	DataFormatFullSet colorAttachment;
+	DataFormatFullSet colorAttachmentBlend;
+	DataFormatFullSet depthStencilAttachment;
+	DataFormatFullSet blitSrc;
+	DataFormatFullSet blitDst;
+	DataFormatFullSet sampledImageFilterLinear;
+
+	FormatsSupportedImageFeaturesList();
+};
+
+export struct FormatsSupportedFullFeatures
+{
+	FormatsSupportedBufferFeaturesList formatFeaturesBufferSupport;
+	FormatsSupportedImageFeaturesList formatFeaturesLinearImageSupport;
+	FormatsSupportedImageFeaturesList formatFeaturesOptimalImageSupport;
+
+	FormatsSupportedFullFeatures();
 };
 
 export struct DeviceVulkanPropertiesSimplified
@@ -220,7 +234,7 @@ export struct DeviceVulkanPropertiesSimplified
 
 	Vulkan10DeviceLimits device10Limits;
 
-	FormatsSupportedFeaturesList formatFeaturesSupport;
+	FormatsSupportedFullFeatures deviceFormatsSupport;
 
 	DeviceVulkanPropertiesSimplified();
 };
@@ -281,35 +295,4 @@ export enum Vulkan13DeviceFeaturesFlagBits : VulkanDeviceFeatureFlags
 	VULKAN13_DEVICE_FEATURE_SYNCHRONIZATION2 = 0X1,
 	VULKAN13_DEVICE_FEATURE_TEXTURE_COMPRESSION_ASTC_HDR = 0X2,
 	VULKAN13_DEVICE_FEATURE_MAINTENANCE4 = 0X4,
-};
-
-export typedef std::uint64_t SurfacePresentModes;
-
-export enum SurfacePresentModeBits : SurfacePresentModes
-{
-	PRESENT_MODE_IMMEDIATE = 0x1,
-	PRESENT_MODE_MAILBOX = 0x2,
-	PRESENT_MODE_FIFO_STRICT = 0x4,
-	PRESENT_MODE_FIFO_RELAXED = 0x8,
-};
-
-export struct SurfaceSupportedColorspaceFormatsLists
-{
-	DataFormatFlags srgbNonlinearColorspace;
-
-	SurfaceSupportedColorspaceFormatsLists();
-};
-
-export struct SurfaceSupportData
-{
-	std::vector<bool> queuePresentingSupport;
-
-	std::uint32_t minImageCount;
-	std::uint32_t maxImageCount;
-
-	ImageUsageFlags surfaceUsageFlags;
-	SurfacePresentModes surfacePresentModes;
-	SurfaceSupportedColorspaceFormatsLists surfaceSupportedSwapchainFormats;
-
-	SurfaceSupportData();
 };

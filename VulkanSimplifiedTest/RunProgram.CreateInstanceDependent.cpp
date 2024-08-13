@@ -1,6 +1,6 @@
 module RunProgram.CreateInstanceDependent;
 
-static bool CheckFormatSupport(const DataFormatFlags& deviceBlitDSTUsage, const DataFormatFlags& surfaceColorspace, DataFormatFlagBits format)
+static bool CheckFormatSupport(const DataFormatFlags& deviceBlitDSTUsage, const DataFormatFlags& surfaceColorspace, DataFormatFlags format)
 {
 	return (deviceBlitDSTUsage & format) == format && (surfaceColorspace & format) == format;
 }
@@ -37,9 +37,12 @@ static size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer
 			continue;
 
 		auto& srgb = deviceSurfaceSupport.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
-		auto& blitDst = deviceProperties.formatFeaturesSupport.blitDst;
+		auto& blitDst = deviceProperties.deviceFormatsSupport.formatFeaturesOptimalImageSupport.blitDst;
 
-		if (!CheckFormatSupport(blitDst, srgb, DATA_FORMAT_BGRA_8BIT_SRGB) && !CheckFormatSupport(blitDst, srgb, DATA_FORMAT_RGBA_8BIT_SRGB))
+		if (!CheckFormatSupport(blitDst.secondSet, srgb.secondSet, DATA_FORMAT_BGRA8_SRGB) && !CheckFormatSupport(blitDst.seventhSet, srgb.seventhSet, DATA_FORMAT_RGBA8_SRGB))
+			continue;
+
+		if ((deviceProperties.deviceFormatsSupport.formatFeaturesBufferSupport.vertexBuffer.sixthSet & DATA_FORMAT_RGBA32_SFLOAT) != DATA_FORMAT_RGBA32_SFLOAT)
 			continue;
 
 		switch (deviceProperties.deviceType)

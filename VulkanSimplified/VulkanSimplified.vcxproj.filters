@@ -297,10 +297,19 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageUsageFlags.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DataFormatFlags.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageFormatFlags.ixx">
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.DataFormatFlags.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.SurfaceData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.SurfaceData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

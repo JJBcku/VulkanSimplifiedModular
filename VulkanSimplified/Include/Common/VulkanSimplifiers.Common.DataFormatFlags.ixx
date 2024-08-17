@@ -266,17 +266,21 @@ export VkFormat TranslateDataFormatSeventhSetToVKFormat(DataFormatSeventhFlagSet
 export enum class DataFormatSetEnum : DataFormatFlags
 {
 	DATA_SET_UNKNOWN = 0x0,
-	DATA_SET_FIRST = 0x1,
-	DATA_SET_SECOND = 0x2,
-	DATA_SET_THIRD = 0x4,
-	DATA_SET_FOURTH = 0x8,
-	DATA_SET_FIFTH = 0x10,
-	DATA_SET_SIXTH = 0x20,
-	DATA_SET_SEVENTH = 0x40,
+	DATA_SET_ONE = 0x1,
+	DATA_SET_TWO = 0x2,
+	DATA_SET_THREE = 0x4,
+	DATA_SET_FOUR = 0x8,
+	DATA_SET_FIVE = 0x10,
+	DATA_SET_SIX = 0x20,
+	DATA_SET_SEVEN = 0x40,
 };
 
 export struct DataFormatSetIndependentID
 {
 	DataFormatSetEnum dataSet;
 	DataFormatFlags dataFormat;
+
+	DataFormatSetIndependentID();
 };
+
+export VkFormat TranslateDataFormatToVkFormat(DataFormatSetIndependentID formatID);

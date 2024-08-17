@@ -241,20 +241,28 @@ static std::pair<std::uint32_t, bool> PickGraphicQueueFamily(PhysicalDeviceSimpl
 	return choosenFamily;
 }
 
-static std::optional<std::uint32_t> TryToFindTransferOnlyQueue(const PhysicalDeviceSimplifier& physicalDevice)
+static std::optional<std::pair<std::uint32_t, bool>> TryToFindTransferOnlyQueue(const PhysicalDeviceSimplifier& physicalDevice, const std::vector<bool>& queuePresentSupport)
 {
-	std::optional<std::uint32_t> choosenFamily;
+	std::optional<std::pair<std::uint32_t, bool>> choosenFamily;
 
 	auto deviceData = physicalDevice.GetVulkanPropertiesSimplified();
 	auto& queueData = deviceData.queueFamilies;
 
-	std::optional<std::uint32_t> bestNonVideoTransferOnlyQueueFamily;
-	std::uint32_t bestNonVideoTransferOnlyQueueFamilyGranularity = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestNonVideoTransferOnlyQueueFamilyTimestamp = 0;
+	std::optional<std::uint32_t> bestNonVideoTransferOnlyQueueFamilyPresenting;
+	std::uint32_t bestNonVideoTransferOnlyQueueFamilyGranularityPresenting = std::numeric_limits<std::uint32_t>::max();
+	std::uint32_t bestNonVideoTransferOnlyQueueFamilyTimestampPresenting = 0;
 
-	std::optional<std::uint32_t> bestVideoTransferOnlyQueueFamily;
-	std::uint32_t bestVideoTransferOnlyQueueFamilyGranularity = std::numeric_limits<std::uint32_t>::max();
-	std::uint32_t bestVideoTransferOnlyQueueFamilyTimestamp = 0;
+	std::optional<std::uint32_t> bestNonVideoTransferOnlyQueueFamilyNonPresenting;
+	std::uint32_t bestNonVideoTransferOnlyQueueFamilyGranularityNonPresenting = std::numeric_limits<std::uint32_t>::max();
+	std::uint32_t bestNonVideoTransferOnlyQueueFamilyTimestampNonPresenting = 0;
+
+	std::optional<std::uint32_t> bestVideoTransferOnlyQueueFamilyPresenting;
+	std::uint32_t bestVideoTransferOnlyQueueFamilyGranularityPresenting = std::numeric_limits<std::uint32_t>::max();
+	std::uint32_t bestVideoTransferOnlyQueueFamilyTimestampPresenting = 0;
+
+	std::optional<std::uint32_t> bestVideoTransferOnlyQueueFamilyNonPresenting;
+	std::uint32_t bestVideoTransferOnlyQueueFamilyGranularityNonPresenting = std::numeric_limits<std::uint32_t>::max();
+	std::uint32_t bestVideoTransferOnlyQueueFamilyTimestampNonPresenting = 0;
 
 	for (size_t i = 0; i < queueData.size(); i++)
 	{
@@ -271,49 +279,99 @@ static std::optional<std::uint32_t> TryToFindTransferOnlyQueue(const PhysicalDev
 
 		if ((family.queueTypes & QUEUE_TYPE_VIDEO_DECODE) != QUEUE_TYPE_VIDEO_DECODE && (family.queueTypes & QUEUE_TYPE_VIDEO_ENCODE) != QUEUE_TYPE_VIDEO_ENCODE)
 		{
-			if (bestNonVideoTransferOnlyQueueFamilyGranularity > biggestGranularity)
+			if (queuePresentSupport[i])
 			{
-				better = true;
-			}
-			else if (bestNonVideoTransferOnlyQueueFamilyGranularity == biggestGranularity && bestNonVideoTransferOnlyQueueFamilyTimestamp < family.timespampValidBits)
-			{
-				better = true;
-			}
+				if (bestNonVideoTransferOnlyQueueFamilyGranularityPresenting > biggestGranularity)
+				{
+					better = true;
+				}
+				else if (bestNonVideoTransferOnlyQueueFamilyGranularityPresenting == biggestGranularity && bestNonVideoTransferOnlyQueueFamilyTimestampPresenting < family.timespampValidBits)
+				{
+					better = true;
+				}
 
-			if (better)
-			{
-				bestNonVideoTransferOnlyQueueFamily = static_cast<std::uint32_t>(i);
-				bestNonVideoTransferOnlyQueueFamilyGranularity = biggestGranularity;
-				bestNonVideoTransferOnlyQueueFamilyTimestamp = family.timespampValidBits;
+				if (better)
+				{
+					bestNonVideoTransferOnlyQueueFamilyPresenting = static_cast<std::uint32_t>(i);
+					bestNonVideoTransferOnlyQueueFamilyGranularityPresenting = biggestGranularity;
+					bestNonVideoTransferOnlyQueueFamilyTimestampPresenting = family.timespampValidBits;
+				}
 			}
+			else
+			{
+				if (bestNonVideoTransferOnlyQueueFamilyGranularityNonPresenting > biggestGranularity)
+				{
+					better = true;
+				}
+				else if (bestNonVideoTransferOnlyQueueFamilyGranularityNonPresenting == biggestGranularity && bestNonVideoTransferOnlyQueueFamilyTimestampNonPresenting < family.timespampValidBits)
+				{
+					better = true;
+				}
+
+				if (better)
+				{
+					bestNonVideoTransferOnlyQueueFamilyNonPresenting = static_cast<std::uint32_t>(i);
+					bestNonVideoTransferOnlyQueueFamilyGranularityNonPresenting = biggestGranularity;
+					bestNonVideoTransferOnlyQueueFamilyTimestampNonPresenting = family.timespampValidBits;
+				}
+			}		
 		}
 		else
 		{
-			if (bestVideoTransferOnlyQueueFamilyGranularity > biggestGranularity)
+			if (queuePresentSupport[i])
 			{
-				better = true;
-			}
-			else if (bestVideoTransferOnlyQueueFamilyGranularity == biggestGranularity && bestVideoTransferOnlyQueueFamilyTimestamp < family.timespampValidBits)
-			{
-				better = true;
-			}
+				if (bestVideoTransferOnlyQueueFamilyGranularityPresenting > biggestGranularity)
+				{
+					better = true;
+				}
+				else if (bestVideoTransferOnlyQueueFamilyGranularityPresenting == biggestGranularity && bestVideoTransferOnlyQueueFamilyTimestampPresenting < family.timespampValidBits)
+				{
+					better = true;
+				}
 
-			if (better)
+				if (better)
+				{
+					bestVideoTransferOnlyQueueFamilyPresenting = static_cast<std::uint32_t>(i);
+					bestVideoTransferOnlyQueueFamilyGranularityPresenting = biggestGranularity;
+					bestVideoTransferOnlyQueueFamilyTimestampPresenting = family.timespampValidBits;
+				}
+			}
+			else
 			{
-				bestVideoTransferOnlyQueueFamily = static_cast<std::uint32_t>(i);
-				bestVideoTransferOnlyQueueFamilyGranularity = biggestGranularity;
-				bestVideoTransferOnlyQueueFamilyTimestamp = family.timespampValidBits;
+				if (bestVideoTransferOnlyQueueFamilyGranularityNonPresenting > biggestGranularity)
+				{
+					better = true;
+				}
+				else if (bestVideoTransferOnlyQueueFamilyGranularityNonPresenting == biggestGranularity && bestVideoTransferOnlyQueueFamilyTimestampNonPresenting < family.timespampValidBits)
+				{
+					better = true;
+				}
+
+				if (better)
+				{
+					bestVideoTransferOnlyQueueFamilyNonPresenting = static_cast<std::uint32_t>(i);
+					bestVideoTransferOnlyQueueFamilyGranularityNonPresenting = biggestGranularity;
+					bestVideoTransferOnlyQueueFamilyTimestampNonPresenting = family.timespampValidBits;
+				}
 			}
 		}
 	}
 
-	if (bestNonVideoTransferOnlyQueueFamily.has_value())
+	if (bestNonVideoTransferOnlyQueueFamilyPresenting.has_value())
 	{
-		choosenFamily = bestNonVideoTransferOnlyQueueFamily.value();
+		choosenFamily = { bestNonVideoTransferOnlyQueueFamilyPresenting.value(), true };
 	}
-	else if (bestVideoTransferOnlyQueueFamily.has_value())
+	else if (bestNonVideoTransferOnlyQueueFamilyNonPresenting.has_value())
 	{
-		choosenFamily = bestVideoTransferOnlyQueueFamily.value();
+		choosenFamily = { bestNonVideoTransferOnlyQueueFamilyNonPresenting.value(), false };
+	}
+	else if (bestVideoTransferOnlyQueueFamilyPresenting.has_value())
+	{
+		choosenFamily = { bestVideoTransferOnlyQueueFamilyPresenting.value(), true };
+	}
+	else if (bestVideoTransferOnlyQueueFamilyNonPresenting.has_value())
+	{
+		choosenFamily = { bestVideoTransferOnlyQueueFamilyNonPresenting.value(), false };
 	}
 
 	return choosenFamily;
@@ -349,6 +407,7 @@ void CreateInstanceDependent(VulkanData& data)
 	size_t choosenGPU = ChooseGPU(deviceList, data.basicData->windowID);
 
 	auto physicalDevice = deviceList.GetPhysicalDeviceSimplifier(choosenGPU);
+	auto deviceProperties = physicalDevice.GetVulkanPropertiesSimplified();
 
 	data.instanceDependent = std::make_unique<VulkanDataInstanceDependent>();
 
@@ -368,17 +427,21 @@ void CreateInstanceDependent(VulkanData& data)
 	deviceCreationInfo.queuesCreateInfo.push_back(graphicQueueCreateInfo);
 	data.instanceDependent->graphicsQueue = 0U;
 
-	auto transferOnly = TryToFindTransferOnlyQueue(physicalDevice);
+	auto transferOnly = TryToFindTransferOnlyQueue(physicalDevice, surfaceSupport.queuePresentingSupport);
 
 	if (transferOnly.has_value())
 	{
 		data.instanceDependent->transferQueue = deviceCreationInfo.queuesCreateInfo.size();
 		QueueCreateInfo transferOnlyQueueCreateInfo;
-		transferOnlyQueueCreateInfo.queueFamily = transferOnly.value();
+		transferOnlyQueueCreateInfo.queueFamily = transferOnly.value().first;
 		deviceCreationInfo.queuesCreateInfo.push_back(transferOnlyQueueCreateInfo);
 	}
 
-	if (graphicQueueData.second)
+	if (transferOnly.has_value() && transferOnly.value().second)
+	{
+		data.instanceDependent->presentQueue = data.instanceDependent->transferQueue.value();
+	}
+	else if (graphicQueueData.second)
 	{
 		data.instanceDependent->presentQueue = data.instanceDependent->graphicsQueue;
 	}
@@ -391,4 +454,8 @@ void CreateInstanceDependent(VulkanData& data)
 	}
 
 	data.instanceDependent->deviceID = deviceList.AddLogicalDevice(deviceCreationInfo);
+	data.instanceDependent->usedDeviceExtensions = deviceCreationInfo.requestedExtensions;
+	data.instanceDependent->device10Limits = deviceProperties.device10Limits;
+	data.instanceDependent->deviceFormatsSupport = deviceProperties.deviceFormatsSupport;
+	data.instanceDependent->surfaceSupport = surfaceSupport;
 }

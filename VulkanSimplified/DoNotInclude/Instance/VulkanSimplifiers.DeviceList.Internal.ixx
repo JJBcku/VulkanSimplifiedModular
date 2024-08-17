@@ -28,8 +28,10 @@ public:
 	size_t GetPhysicalDeviceListSize() const;
 
 	PhysicalDeviceInternal& GetPhysicalDeviceSimplifier(size_t deviceIndex);
+	LogicalDeviceInternal& GetLogicalDeviceSimplifier(IDObject<LogicalDevicePointer> deviceID);
 
 	const PhysicalDeviceInternal& GetPhysicalDeviceSimplifier(size_t deviceIndex) const;
+	const LogicalDeviceInternal& GetLogicalDeviceSimplifier(IDObject<LogicalDevicePointer> deviceID) const;
 
 	IDObject<LogicalDevicePointer> AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, size_t addOnReserve);
 

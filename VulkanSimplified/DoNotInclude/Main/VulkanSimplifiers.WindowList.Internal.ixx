@@ -22,7 +22,7 @@ public:
 
 	IDObject<WindowPointer> CreateWindow(WindowCreationData data, size_t addReserved);
 	bool DeleteWindow(IDObject<WindowPointer> windowID, bool throwOnIDNotFound);
-	void DeleteAll(size_t capacityAfterReserve);
+	void DeleteAll(size_t capacityAfterReserve = 0);
 
 	void SetInstance(VkInstance instance);
 

@@ -57,5 +57,11 @@
     <ClCompile Include="VulkanData.InstanceDependent.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RunProgram.CreateDeviceDependent.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateDeviceDependent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ LogicalDeviceInitData::LogicalDeviceInitData()
 	padding = 0;
 }
 
-LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initData)
+LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initData, WindowListInternal& windowList) : _windowList(windowList)
 {
 	_logicalDevice = VK_NULL_HANDLE;
 	_physicalDevice = initData.physicalDevice;
@@ -138,7 +138,7 @@ LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initDa
 	if (vkCreateDevice(initData.physicalDevice, &createInfo, nullptr, &_logicalDevice) != VK_SUCCESS)
 		throw std::runtime_error("LogicalDeviceInternal Contructor Error: Program failed to create a logical device!");
 
-	_queues.resize(queuesCreateData.size(), VK_NULL_HANDLE);
+	_queues.resize(queuesCreateData.size(), { VK_NULL_HANDLE, std::numeric_limits<std::uint32_t>::max() });
 	std::vector<std::uint32_t> queuesFamilesGot;
 	queuesFamilesGot.resize(uniqueQueueFamilies.size(), 0);
 
@@ -148,6 +148,8 @@ LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initDa
 		bool isProtectedQueue = GetProtectedFlagsValue(queuesCreateData[i].queueCreationFlags);
 		std::uint32_t queueFamily = queuesCreateData[i].queueFamily;
 		std::uint32_t queueIndex = std::numeric_limits<std::uint32_t>::max();
+
+		_queues[i].second = queueFamily;
 
 		for (size_t j = 0; j < uniqueQueueFamilies.size(); j++)
 		{
@@ -164,7 +166,7 @@ LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initDa
 
 		if (initData.apiVersion < VK_MAKE_API_VERSION(0, 1, 1, 0))
 		{
-			vkGetDeviceQueue(_logicalDevice, queueFamily, queueIndex, &_queues[i]);
+			vkGetDeviceQueue(_logicalDevice, queueFamily, queueIndex, &_queues[i].first);
 		}
 		else
 		{
@@ -175,9 +177,9 @@ LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initDa
 			deviceQueueInfo2.queueFamilyIndex = queueFamily;
 			deviceQueueInfo2.queueIndex = queueIndex;
 
-			vkGetDeviceQueue2(_logicalDevice, &deviceQueueInfo2, &_queues[i]);
+			vkGetDeviceQueue2(_logicalDevice, &deviceQueueInfo2, &_queues[i].first);
 
-			if (_queues[i] == VK_NULL_HANDLE)
+			if (_queues[i].first == VK_NULL_HANDLE)
 			{
 				bool foundConcat = false;
 
@@ -196,11 +198,11 @@ LogicalDeviceInternal::LogicalDeviceInternal(const LogicalDeviceInitData& initDa
 
 				deviceQueueInfo2.queueIndex = queueIndex;
 
-				vkGetDeviceQueue2(_logicalDevice, &deviceQueueInfo2, &_queues[i]);
+				vkGetDeviceQueue2(_logicalDevice, &deviceQueueInfo2, &_queues[i].first);
 			}
 		}
 
-		if (_queues[i] == VK_NULL_HANDLE)
+		if (_queues[i].first == VK_NULL_HANDLE)
 			throw std::runtime_error("LogicalDeviceInternal Contructor Error: Program failed to get a device queue!");
 	}
 
@@ -210,6 +212,37 @@ LogicalDeviceInternal::~LogicalDeviceInternal()
 {
 	if (_logicalDevice != VK_NULL_HANDLE)
 		vkDestroyDevice(_logicalDevice, nullptr);
+}
+
+void LogicalDeviceInternal::CreateSwapchain(IDObject<WindowPointer> windowID, const SwapchainCreationData& surfaceCreateInfo, bool createProtected,
+	bool throwOnSwapchainExist, bool throwOnDeviceChange)
+{
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	SwapchainInitData initData;
+
+	initData.device = _logicalDevice;
+	initData.surfacePresentMode = TranslatePresentMode(surfaceCreateInfo.surfacePresentMode);
+	initData.format = TranslateDataFormatToVkFormat(surfaceCreateInfo.format);
+	if (createProtected)
+		initData.flags |= VK_SWAPCHAIN_CREATE_PROTECTED_BIT_KHR;
+	initData.imageAmount = surfaceCreateInfo.imageAmount;
+
+	initData.queueFamilies.reserve(surfaceCreateInfo.queuesUsingSwapchain.size());
+
+	for (auto& queueID : surfaceCreateInfo.queuesUsingSwapchain)
+	{
+		if (queueID >= _queues.size())
+			throw std::runtime_error("LogicalDeviceInternal::CreateSwapchain Error: Program tried to access non-existent queue's data!");
+
+		initData.queueFamilies.push_back(_queues[queueID].second);
+	}
+
+	std::sort(initData.queueFamilies.begin(), initData.queueFamilies.end());
+	auto it = std::unique(initData.queueFamilies.begin(), initData.queueFamilies.end());
+	initData.queueFamilies.erase(it, initData.queueFamilies.end());
+
+	window.CreateSwapchain(initData, throwOnSwapchainExist, throwOnDeviceChange);
 }
 
 bool LogicalDeviceInternal::GetProtectedFlagsValue(QueueCreationFlags queueFlags)
@@ -386,4 +419,29 @@ void LogicalDeviceInternal::CompileRequestedKHRExtensions(std::vector<const char
 
 	if ((khrExtensions & DEVICE_KHR_EXTENSION_SWAPCHAIN) == DEVICE_KHR_EXTENSION_SWAPCHAIN)
 		requiredExtensions.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+}
+
+VkPresentModeKHR LogicalDeviceInternal::TranslatePresentMode(SurfacePresentModeBits presentMode) const
+{
+	VkPresentModeKHR ret = VK_PRESENT_MODE_MAX_ENUM_KHR;
+
+	switch (presentMode)
+	{
+	case PRESENT_MODE_FIFO_RELAXED:
+		ret = VK_PRESENT_MODE_FIFO_RELAXED_KHR;
+		break;
+	case PRESENT_MODE_FIFO_STRICT:
+		ret = VK_PRESENT_MODE_FIFO_KHR;
+		break;
+	case PRESENT_MODE_MAILBOX:
+		ret = VK_PRESENT_MODE_MAILBOX_KHR;
+		break;
+	case PRESENT_MODE_IMMEDIATE:
+		ret = VK_PRESENT_MODE_IMMEDIATE_KHR;
+		break;
+	default:
+		throw std::runtime_error("LogicalDeviceInternal::TranslatePresentMode Error: Program tried to translate an unknown value!");
+	}
+
+	return ret;
 }

@@ -70,7 +70,7 @@ MainInternal::MainInternal(const MainSimplifierInitData& initData) : _eventHandl
 
 MainInternal::~MainInternal()
 {
-	_windowList.DeleteAll(1);
+	_windowList.DeleteAll();
 	_instance.reset();
 	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	SDL_Quit();

@@ -55,12 +55,22 @@ PhysicalDeviceInternal& DeviceListInternal::GetPhysicalDeviceSimplifier(size_t d
 	return _physicalDeviceList[deviceIndex];
 }
 
+LogicalDeviceInternal& DeviceListInternal::GetLogicalDeviceSimplifier(IDObject<LogicalDevicePointer> deviceID)
+{
+	return *_logicalDeviceList.GetObject(deviceID);
+}
+
 const PhysicalDeviceInternal& DeviceListInternal::GetPhysicalDeviceSimplifier(size_t deviceIndex) const
 {
 	if (deviceIndex >= _physicalDeviceList.size())
 		throw std::runtime_error("DeviceListInternal::GetPhysicalDeviceSimplifier const Error: Program tried to get a non-existent physical device data!");
 
 	return _physicalDeviceList[deviceIndex];
+}
+
+const LogicalDeviceInternal& DeviceListInternal::GetLogicalDeviceSimplifier(IDObject<LogicalDevicePointer> deviceID) const
+{
+	return *_logicalDeviceList.GetConstObject(deviceID);
 }
 
 IDObject<LogicalDevicePointer> DeviceListInternal::AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, size_t addOnReserve)
@@ -75,5 +85,5 @@ IDObject<LogicalDevicePointer> DeviceListInternal::AddLogicalDevice(const Logica
 	initData.physicalDevice = physicalDevice.GetPhysicalDevice();
 	initData.physicalDeviceName = physicalDeviceData.deviceName;
 
-	return _logicalDeviceList.AddObject(std::make_unique<LogicalDeviceInternal>(initData), addOnReserve);
+	return _logicalDeviceList.AddObject(std::make_unique<LogicalDeviceInternal>(initData, _windowList), addOnReserve);
 }

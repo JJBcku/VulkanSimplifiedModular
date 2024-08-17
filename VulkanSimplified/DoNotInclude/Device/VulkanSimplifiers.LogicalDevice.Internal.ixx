@@ -4,7 +4,14 @@ module;
 
 export module VulkanSimplifiers.LogicalDevice.Internal;
 
+import std;
+import ListTemplates.IDObject;
+
 import VulkanSimplifiers.LogicalDevice.Data;
+import VulkanSimplifiers.WindowList.Internal;
+import VulkanSimplifiers.WindowList.Data;
+import VulkanSimplifiers.Window.InternalData;
+import VulkanSimplifiers.Window.Internal;
 
 export struct LogicalDeviceInitData
 {
@@ -22,19 +29,25 @@ export struct LogicalDeviceInitData
 export class LogicalDeviceInternal
 {
 public:
-	LogicalDeviceInternal(const LogicalDeviceInitData& initData);
+	LogicalDeviceInternal(const LogicalDeviceInitData& initData, WindowListInternal& windowList);
 	~LogicalDeviceInternal();
 
 	LogicalDeviceInternal(const LogicalDeviceInternal&) noexcept = delete;
 
+	LogicalDeviceInternal& operator=(const LogicalDeviceInternal&) noexcept = delete;
+
+	void CreateSwapchain(IDObject<WindowPointer> windowID, const SwapchainCreationData& surfaceCreateInfo, bool createProtected, bool throwOnSwapchainExist, bool throwOnDeviceChange);
+
 private:
+	WindowListInternal& _windowList;
+
 	VkDevice _logicalDevice;
 	VkPhysicalDevice _physicalDevice;
 	std::string _physicalDeviceName;
 	std::string _logicalDeviceName;
 	std::uint32_t _apiVersion;
 	std::uint32_t _padding;
-	std::vector<VkQueue> _queues;
+	std::vector<std::pair<VkQueue, std::uint32_t>> _queues;
 
 	bool GetProtectedFlagsValue(QueueCreationFlags queueFlags);
 
@@ -46,4 +59,6 @@ private:
 	std::vector<const char*> CompileRequestedExtensions(const RequestedExtensionList& deviceExtensionList) const;
 
 	void CompileRequestedKHRExtensions(std::vector<const char*>& requiredExtensions, DeviceExtensionFlags khrExtensions) const;
+
+	VkPresentModeKHR TranslatePresentMode(SurfacePresentModeBits presentMode) const;
 };

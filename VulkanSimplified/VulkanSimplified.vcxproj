@@ -118,6 +118,7 @@
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.SurfaceData.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
+    <ClCompile Include="Cpp\Main\VulkanSimplifiers.Window.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.Data.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDevice.Internal.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="DoNotInclude\Instance\VulkanSimplifiers.Instance.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Main.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Window.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.Window.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.WindowList.Internal.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DataFormatFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageUsageFlags.ixx" />
@@ -202,8 +204,8 @@
     <ClCompile Include="Include\Main\VulkanSimplifiers.Window.ixx" />
     <ClCompile Include="Include\Main\VulkanSimplifiers.WindowList.ixx" />
     <ClCompile Include="Include\Main\VulkanSimplifiers.WindowList.Data.ixx" />
-    <ClCompile Include="DoNotInclude\Main\VulkanSimplifiers.DebugCallback.ixx" />
-    <ClCompile Include="Cpp\Main\VulkanSimplifiers.DebugCallback.cpp" />
+    <ClCompile Include="DoNotInclude\Instance\VulkanSimplifiers.DebugCallback.ixx" />
+    <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DebugCallback.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

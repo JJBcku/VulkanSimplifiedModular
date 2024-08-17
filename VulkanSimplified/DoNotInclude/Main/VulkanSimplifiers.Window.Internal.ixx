@@ -1,12 +1,13 @@
 module;
 
-#include <SDL2/SDL.h>
 #include <vulkan/vulkan.hpp>
+#include <SDL2/SDL.h>
 
 export module VulkanSimplifiers.Window.Internal;
 
-import VulkanSimplifiers.Window.Data;
 import std;
+import VulkanSimplifiers.Window.Data;
+import VulkanSimplifiers.Window.InternalData;
 
 export class WindowInternal
 {
@@ -29,13 +30,27 @@ public:
 	SDL_Window* GetWindow() const;
 	VkSurfaceKHR GetSurface() const;
 
+	void CreateSwapchain(SwapchainInitData swapchainInit, bool throwOnSwapchainExist, bool throwOnDeviceChange);
+
 private:
+	std::uint32_t _width, _height;
+
 	SDL_Window* _window;
 	VkInstance _instance;
 
 	VkSurfaceKHR _surface;
 
-	std::uint32_t _width, _height;
+	VkDevice _device;
+	VkSwapchainKHR _swapchain;
+
+	std::vector<VkImage> _swapchainImages;
+
+	VkPresentModeKHR _surfacePresentMode;
+	VkFormat _format;
+	VkSwapchainCreateFlagsKHR _swapchainFlags;
+	std::uint32_t _imageAmount;
+
+	std::vector<std::uint32_t> _queueFamilies;
 
 	bool _minimized, _hidden, _quit, _resized;
 
@@ -43,4 +58,7 @@ private:
 
 	void CreateWindow(WindowCreationData data);
 	void DestroyWindow();
+
+	void ReCreateSwapchain();
+	void DestroySwapchain();
 };

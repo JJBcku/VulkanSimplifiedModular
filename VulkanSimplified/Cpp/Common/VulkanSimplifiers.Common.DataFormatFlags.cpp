@@ -723,3 +723,45 @@ VkFormat TranslateDataFormatSeventhSetToVKFormat(DataFormatSeventhFlagSetBits fo
 
 	return ret;
 }
+
+DataFormatSetIndependentID::DataFormatSetIndependentID()
+{
+	dataSet = DataFormatSetEnum::DATA_SET_UNKNOWN;
+	dataFormat = 0;
+}
+
+VkFormat TranslateDataFormatToVkFormat(DataFormatSetIndependentID formatID)
+{
+	VkFormat ret = VK_FORMAT_UNDEFINED;
+
+	switch (formatID.dataSet)
+	{
+	case DataFormatSetEnum::DATA_SET_UNKNOWN:
+		break;
+	case DataFormatSetEnum::DATA_SET_ONE:
+		ret = TranslateDataFormatFirstSetToVKFormat(static_cast<DataFormatFirstFlagSetBits>(formatID.dataFormat));
+		break;
+	case DataFormatSetEnum::DATA_SET_TWO:
+		ret = TranslateDataFormatSecondSetToVKFormat(static_cast<DataFormatSecondFlagSetBits>(formatID.dataFormat));
+		break;
+	case DataFormatSetEnum::DATA_SET_THREE:
+		ret = TranslateDataFormatThirdSetToVKFormat(static_cast<DataFormatThirdFlagSetBits>(formatID.dataFormat));
+		break;
+	case DataFormatSetEnum::DATA_SET_FOUR:
+		ret = TranslateDataFormatFourthSetToVKFormat(static_cast<DataFormatFourthFlagSetBits>(formatID.dataFormat));
+		break;
+	case DataFormatSetEnum::DATA_SET_FIVE:
+		ret = TranslateDataFormatFifthSetToVKFormat(static_cast<DataFormatFifthFlagSetBits>(formatID.dataFormat));
+		break;
+	case DataFormatSetEnum::DATA_SET_SIX:
+		ret = TranslateDataFormatSixthSetToVKFormat(static_cast<DataFormatSixthFlagSetBits>(formatID.dataFormat));
+		break;
+	case DataFormatSetEnum::DATA_SET_SEVEN:
+		ret = TranslateDataFormatSeventhSetToVKFormat(static_cast<DataFormatSeventhFlagSetBits>(formatID.dataFormat));
+		break;
+	default:
+		break;
+	}
+
+	return ret;
+}

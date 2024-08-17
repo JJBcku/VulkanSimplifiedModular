@@ -1,0 +1,49 @@
+; SPIR-V
+; Version: 1.0
+; Generator: Google Shaderc over Glslang; 11
+; Bound: 14
+; Schema: 0
+               OpCapability Shader
+          %2 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %main "main" %outColor %inColor
+               OpExecutionMode %main OriginUpperLeft
+          %1 = OpString "basicFragmentShader.frag"
+               OpSource GLSL 450 %1 "// OpModuleProcessed entry-point main
+// OpModuleProcessed client vulkan100
+// OpModuleProcessed target-env vulkan1.0
+// OpModuleProcessed entry-point main
+#line 1
+#version 450
+
+layout(location = 0) in vec4 inColor;
+
+layout(location = 0) out vec4 outColor;
+
+void main()
+{
+	outColor = inColor;
+}"
+               OpSourceExtension "GL_GOOGLE_cpp_style_line_directive"
+               OpSourceExtension "GL_GOOGLE_include_directive"
+               OpName %main "main"
+               OpName %outColor "outColor"
+               OpName %inColor "inColor"
+               OpDecorate %outColor Location 0
+               OpDecorate %inColor Location 0
+       %void = OpTypeVoid
+          %4 = OpTypeFunction %void
+      %float = OpTypeFloat 32
+    %v4float = OpTypeVector %float 4
+%_ptr_Output_v4float = OpTypePointer Output %v4float
+   %outColor = OpVariable %_ptr_Output_v4float Output
+%_ptr_Input_v4float = OpTypePointer Input %v4float
+    %inColor = OpVariable %_ptr_Input_v4float Input
+               OpLine %1 7 11
+       %main = OpFunction %void None %4
+          %6 = OpLabel
+               OpLine %1 9 0
+         %13 = OpLoad %v4float %inColor
+               OpStore %outColor %13
+               OpReturn
+               OpFunctionEnd

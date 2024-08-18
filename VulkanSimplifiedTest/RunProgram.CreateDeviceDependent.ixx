@@ -5,6 +5,7 @@ import std;
 import VulkanData;
 import VulkanData.Basic;
 import VulkanData.InstanceDependent;
+import VulkanData.DeviceDependent;
 
 import VulkanSimplifiers.Main;
 import VulkanSimplifiers.Instance;

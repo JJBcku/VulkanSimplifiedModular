@@ -107,6 +107,7 @@
     <ClCompile Include="RunProgram.EventHandling.ixx" />
     <ClCompile Include="RunProgram.ixx" />
     <ClCompile Include="VulkanData.Basic.ixx" />
+    <ClCompile Include="VulkanData.DeviceDependent.ixx" />
     <ClCompile Include="VulkanData.InstanceDependent.ixx" />
     <ClCompile Include="VulkanData.ixx" />
     <ClCompile Include="VulkanSimplifiersTest.cpp" />

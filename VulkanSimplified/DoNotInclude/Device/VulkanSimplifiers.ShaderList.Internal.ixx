@@ -16,6 +16,9 @@ public:
 	ShaderListInternal(const ShaderListCreationData& initData, VkDevice device);
 	~ShaderListInternal();
 
+	IDObject<AutoCleanUpFragmentShader> AddFragmentShader(const std::vector<char>& shaderCode, size_t addOnResize);
+	IDObject<AutoCleanUpVertexShader> AddVertexShader(const std::vector<char>& shaderCode, size_t addOnResize);
+
 private:
 	VkDevice _device;
 

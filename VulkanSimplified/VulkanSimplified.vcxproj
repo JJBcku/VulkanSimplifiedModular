@@ -165,8 +165,11 @@
     <ClCompile Include="Cpp\Main\VulkanSimplifiers.Window.Internal.cpp" />
     <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.cpp" />
     <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.Internal.cpp" />
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.cpp" />
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.Internal.cpp" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.InternalData.ixx" />
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.CreationData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ShaderList.Internal.ixx" />
@@ -226,6 +229,8 @@
     <ClCompile Include="Include\Main\VulkanSimplifiers.WindowList.Data.ixx" />
     <ClCompile Include="DoNotInclude\Instance\VulkanSimplifiers.DebugCallback.ixx" />
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DebugCallback.cpp" />
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.CreationData.ixx" />
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

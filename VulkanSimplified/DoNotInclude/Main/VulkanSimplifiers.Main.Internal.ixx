@@ -12,6 +12,8 @@ import VulkanSimplifiers.WindowList.Data;
 import VulkanSimplifiers.Instance.Internal;
 import VulkanSimplifiers.Instance.Data;
 
+import VulkanSimplifiers.SharedDataList.Internal;
+
 import VulkanSimplifiers.Common.VulkanVersionData;
 
 export class MainInternal
@@ -28,10 +30,12 @@ public:
 	EventHandlingInternal& GetEventHandler();
 	InstanceInternal& GetInstanceSimplifier();
 	WindowListInternal& GetWindowListSimplifier();
+	SharedDataListInternal& GetSharedDataListSimplifier();
 
 	const EventHandlingInternal& GetEventHandler() const;
 	const InstanceInternal& GetInstanceSimplifier() const;
 	const WindowListInternal& GetWindowListSimplifier() const;
+	const SharedDataListInternal& GetSharedDataListSimplifier() const;
 
 	VulkanVersionData GetMaxAvailableVulkanVersion() const;
 	InstanceExtensionList GetAvailableInstanceExtensions() const;
@@ -51,6 +55,7 @@ private:
 	EventHandlingInternal _eventHandler;
 	std::optional<InstanceInternal> _instance;
 	WindowListInternal _windowList;
+	SharedDataListInternal _sharedData;
 
 	std::uint32_t FindMaximumAvailableVulkanVersion() const;
 	InstanceExtensionList CompileAvailableExtensionList(const std::vector<VkExtensionProperties>& extensions) const;

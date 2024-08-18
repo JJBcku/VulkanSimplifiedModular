@@ -31,6 +31,11 @@ WindowListSimplifier MainSimplifier::GetWindowListSimplifier()
 	return _internal->GetWindowListSimplifier();
 }
 
+SharedDataListSimplifier MainSimplifier::GetSharedDataListSimplifier()
+{
+	return _internal->GetSharedDataListSimplifier();
+}
+
 VulkanVersionData MainSimplifier::GetMaxAvailableVulkanVersion() const
 {
 	return _internal->GetMaxAvailableVulkanVersion();

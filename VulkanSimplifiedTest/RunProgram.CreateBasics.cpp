@@ -14,7 +14,7 @@ void CreateBasics(VulkanData& data, MainSettings& settings)
 #else
 	initData.appVariantName = "x64 Release";
 #endif
-	initData.appVersion.SetVulkanPatchVersion(1);
+	initData.appVersion.SetVulkanPatchVersion(2);
 	initData.appVersion.SetVulkanMinorVersion(2);
 	initData.engineName = "Vulkan Simplified Test Engine";
 	initData.engineVersion = initData.appVersion;

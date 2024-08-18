@@ -87,4 +87,6 @@ void CreateDeviceDependent(VulkanData& data)
 
 	data.deviceDependent->fragmentShader = shaderList.AddFragmentShader(fragmentData);
 	data.deviceDependent->vertexShader = shaderList.AddVertexShader(vertexData);
+
+	auto sharedDataList = data.basicData->main.value().GetSharedDataListSimplifier();
 }

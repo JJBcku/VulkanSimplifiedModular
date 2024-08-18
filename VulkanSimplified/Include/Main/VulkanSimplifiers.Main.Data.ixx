@@ -2,6 +2,7 @@ export module VulkanSimplifiers.Main.Data;
 export import VulkanSimplifiers.EventHandling.Data;
 
 export import VulkanSimplifiers.Common.VulkanVersionData;
+export import VulkanSimplifiers.SharedDataList.CreationData;
 import VulkanSimplifiers.Instance.Internal;
 
 import ListTemplates.IDObject;
@@ -18,6 +19,8 @@ export struct MainSimplifierInitData
 	VulkanVersionData engineVersion;
 	EventHandlerInitData eventHandlerData;
 	size_t windowsListInitialCapacity;
+
+	SharedDataListCreationData sharedDataListInitData;
 
 	MainSimplifierInitData();
 };

@@ -6,7 +6,8 @@ module;
 
 module VulkanSimplifiers.Main.Internal;
 
-MainInternal::MainInternal(const MainSimplifierInitData& initData) : _eventHandler(initData.eventHandlerData), _windowList(initData.windowsListInitialCapacity)
+MainInternal::MainInternal(const MainSimplifierInitData& initData) : _eventHandler(initData.eventHandlerData), _windowList(initData.windowsListInitialCapacity),
+_sharedData(initData.sharedDataListInitData)
 {
 	int result = SDL_InitSubSystem(SDL_INIT_VIDEO);
 
@@ -99,6 +100,11 @@ WindowListInternal& MainInternal::GetWindowListSimplifier()
 	return _windowList;
 }
 
+SharedDataListInternal& MainInternal::GetSharedDataListSimplifier()
+{
+	return _sharedData;
+}
+
 const EventHandlingInternal& MainInternal::GetEventHandler() const
 {
 	return _eventHandler;
@@ -115,6 +121,11 @@ const InstanceInternal& MainInternal::GetInstanceSimplifier() const
 const WindowListInternal& MainInternal::GetWindowListSimplifier() const
 {
 	return _windowList;
+}
+
+const SharedDataListInternal& MainInternal::GetSharedDataListSimplifier() const
+{
+	return _sharedData;
 }
 
 VulkanVersionData MainInternal::GetMaxAvailableVulkanVersion() const

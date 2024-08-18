@@ -9,6 +9,9 @@ import VulkanSimplifiers.Main.Internal;
 import VulkanSimplifiers.WindowList;
 import VulkanSimplifiers.Instance;
 
+import VulkanSimplifiers.SharedDataList;
+import VulkanSimplifiers.SharedDataList.Internal;
+
 export class MainSimplifier
 {
 public:
@@ -23,6 +26,7 @@ public:
 	EventHandlingSimplifier GetEventHandler();
 	InstanceSimplifier GetInstanceSimplifier();
 	WindowListSimplifier GetWindowListSimplifier();
+	SharedDataListSimplifier GetSharedDataListSimplifier();
 
 	VulkanVersionData GetMaxAvailableVulkanVersion() const;
 	InstanceExtensionList GetAvailableInstanceExtensions() const;

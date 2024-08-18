@@ -15,6 +15,12 @@ ShaderListInternal::~ShaderListInternal()
 
 IDObject<AutoCleanUpFragmentShader> ShaderListInternal::AddFragmentShader(const std::vector<char>& shaderCode, size_t addOnResize)
 {
+	if (shaderCode.size() == 0)
+		throw std::runtime_error("ShaderListInternal::AddFragmentShader Error: Program tried to create an empty shader!");
+
+	if (shaderCode.size() % 4 != 0)
+		throw std::runtime_error("ShaderListInternal::AddFragmentShader Error: Program tried to use code with size that is not a multiplication of four!");
+
 	VkShaderModuleCreateInfo createInfo{};
 	createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 	createInfo.codeSize = shaderCode.size();
@@ -30,6 +36,12 @@ IDObject<AutoCleanUpFragmentShader> ShaderListInternal::AddFragmentShader(const 
 
 IDObject<AutoCleanUpVertexShader> ShaderListInternal::AddVertexShader(const std::vector<char>& shaderCode, size_t addOnResize)
 {
+	if (shaderCode.size() == 0)
+		throw std::runtime_error("ShaderListInternal::AddVertexShader Error: Program tried to create an empty shader!");
+
+	if (shaderCode.size() % 4 != 0)
+		throw std::runtime_error("ShaderListInternal::AddVertexShader Error: Program tried to use code with size that is not a multiplication of four!");
+
 	VkShaderModuleCreateInfo createInfo{};
 	createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
 	createInfo.codeSize = shaderCode.size();

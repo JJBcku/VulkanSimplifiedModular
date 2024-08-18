@@ -109,11 +109,6 @@ QueueFamily::QueueFamily()
 	minImageTransferGranularityDepth = 0;
 }
 
-DeviceExtensionLists::DeviceExtensionLists()
-{
-	khrExtensions = 0;
-}
-
 FormatsSupportedBufferFeaturesList::FormatsSupportedBufferFeaturesList()
 {
 }

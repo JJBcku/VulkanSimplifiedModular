@@ -1,6 +1,6 @@
 export module VulkanSimplifiers.DeviceList.Data;
 
 import std;
-import VulkanSimplifiers.LogicalDevice.Internal;
+import VulkanSimplifiers.LogicalDeviceMain.Internal;
 
-export typedef std::unique_ptr<LogicalDeviceInternal> LogicalDevicePointer;
+export typedef std::unique_ptr<LogicalDeviceMainInternal> LogicalDevicePointer;

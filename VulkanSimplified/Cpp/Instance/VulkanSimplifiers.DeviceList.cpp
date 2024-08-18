@@ -18,12 +18,12 @@ PhysicalDeviceSimplifier DeviceListSimplifier::GetPhysicalDeviceSimplifier(size_
 	return _internal.GetPhysicalDeviceSimplifier(deviceIndex);
 }
 
-LogicalDeviceSimplifier DeviceListSimplifier::GetLogicalDeviceSimplifier(IDObject<LogicalDevicePointer> deviceID)
+LogicalDeviceMainSimplifier DeviceListSimplifier::GetLogicalDeviceMainSimplifier(IDObject<LogicalDevicePointer> deviceID)
 {
-	return _internal.GetLogicalDeviceSimplifier(deviceID);
+	return _internal.GetLogicalDeviceMainSimplifier(deviceID);
 }
 
-IDObject<LogicalDevicePointer> DeviceListSimplifier::AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, size_t addOnReserve)
+IDObject<LogicalDevicePointer> DeviceListSimplifier::AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, const DeviceMainCreationData& mainCreationData, size_t addOnReserve)
 {
-	return _internal.AddLogicalDevice(createInfo, addOnReserve);
+	return _internal.AddLogicalDevice(createInfo, mainCreationData, addOnReserve);
 }

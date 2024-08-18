@@ -17,9 +17,6 @@ PhysicalDeviceInternal::PhysicalDeviceInternal(VkPhysicalDevice physicalDevice, 
 _windowList(windowList)
 {
 	_device10features = 0;
-	_device11features = 0;
-	_device12features = 0;
-	_device13features = 0;
 
 	VkPhysicalDeviceProperties vulkanProperties{};
 
@@ -68,11 +65,6 @@ _windowList(windowList)
 		vkGetPhysicalDeviceFeatures2(_physicalDevice, &vulkan10Features);
 
 		_device10features = CompileVulkan10DeviceFeatures(vulkan10Features.features);
-		_device11features = CompileVulkan11DeviceFeatures(vulkan11Features);
-		_device12features = CompileVulkan12DeviceFeatures(vulkan12Features);
-
-		if (instanceVulkanVersion >= VK_MAKE_API_VERSION(0, 1, 3, 0) && _vulkanProperties.apiMaxSupportedVersion >= VK_MAKE_API_VERSION(0, 1, 3, 0))
-			_device13features = CompileVulkan13DeviceFeatures(vulkan13Features);
 	}
 
 	std::uint32_t queueCount = 0;
@@ -130,21 +122,6 @@ DeviceVulkanPropertiesSimplified PhysicalDeviceInternal::GetVulkanPropertiesSimp
 VulkanDeviceFeatureFlags PhysicalDeviceInternal::GetVulkan10Features() const
 {
 	return _device10features;
-}
-
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::GetVulkan11Features() const
-{
-	return _device11features;
-}
-
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::GetVulkan12Features() const
-{
-	return _device12features;
-}
-
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::GetVulkan13Features() const
-{
-	return _device13features;
 }
 
 VkPhysicalDevice PhysicalDeviceInternal::GetPhysicalDevice() const
@@ -443,9 +420,6 @@ VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan10DeviceFeatures(c
 	if (deviceFeatures.fillModeNonSolid == VK_TRUE)
 		ret |= VULKAN10_DEVICE_FEATURE_FILL_MODE_NONSOLID;
 
-	if (deviceFeatures.multiViewport == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_MULTI_VIEWPORT;
-
 	if (deviceFeatures.samplerAnisotropy == VK_TRUE)
 		ret |= VULKAN10_DEVICE_FEATURE_SAMPLER_ANISOTROPY;
 
@@ -472,108 +446,6 @@ VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan10DeviceFeatures(c
 
 	if (deviceFeatures.shaderResourceMinLod == VK_TRUE)
 		ret |= VULKAN10_DEVICE_FEATURE_SHADER_RESOURCE_MINIMUM_LOD;
-
-	if (deviceFeatures.sparseBinding == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_BINDING;
-
-	if (deviceFeatures.sparseResidencyBuffer == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_RESIDENCY_BUFFER;
-
-	if (deviceFeatures.sparseResidencyImage2D == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_RESIDENCY_IMAGE2D;
-
-	if (deviceFeatures.sparseResidencyImage3D == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_RESIDENCY_IMAGE3D;
-
-	if (deviceFeatures.sparseResidency2Samples == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_RESIDENCY_2_SAMPLES;
-
-	if (deviceFeatures.sparseResidency4Samples == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_RESIDENCY_4_SAMPLES;
-
-	if (deviceFeatures.sparseResidency8Samples == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_RESIDENCY_8_SAMPLES;
-
-	if (deviceFeatures.sparseResidency16Samples == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_RESIDENCY_16_SAMPLES;
-
-	if (deviceFeatures.sparseResidencyAliased == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_SPARSE_RESIDENCY_ALIASED;
-
-	if (deviceFeatures.variableMultisampleRate == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_VARIABLE_MULTISAMPLE_RATE;
-
-	if (deviceFeatures.inheritedQueries == VK_TRUE)
-		ret |= VULKAN10_DEVICE_FEATURE_INHERITED_QUERIES;
-
-	return ret;
-}
-
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan11DeviceFeatures(const VkPhysicalDeviceVulkan11Features& deviceFeatures) const
-{
-	VulkanDeviceFeatureFlags ret = 0;
-
-	if (deviceFeatures.storageBuffer16BitAccess == VK_TRUE)
-		ret |= VULKAN11_DEVICE_FEATURE_STORAGE_BUFFER_16BIT_ACCESS;
-
-	if (deviceFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE)
-		ret |= VULKAN11_DEVICE_FEATURE_UNIFORM_AND_STORAGE_BUFFER_16BIT_ACCESS;
-
-	if (deviceFeatures.storagePushConstant16 == VK_TRUE)
-		ret |= VULKAN11_DEVICE_FEATURE_STORAGE_PUSH_CONSTANT_16BIT;
-
-	if (deviceFeatures.storageInputOutput16 == VK_TRUE)
-		ret |= VULKAN11_DEVICE_FEATURE_STORAGE_INPUT_OUTPUT_16BIT;
-
-	if (deviceFeatures.multiview == VK_TRUE)
-		ret |= VULKAN11_DEVICE_FEATURE_MULTIVIEW;
-
-	return ret;
-}
-
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan12DeviceFeatures(const VkPhysicalDeviceVulkan12Features& deviceFeatures) const
-{
-	VulkanDeviceFeatureFlags ret = 0;
-
-	if (deviceFeatures.storageBuffer8BitAccess == VK_TRUE)
-		ret |= VULKAN12_DEVICE_FEATURE_STORAGE_BUFFER_8BIT_ACCESS;
-
-	if (deviceFeatures.uniformAndStorageBuffer8BitAccess == VK_TRUE)
-		ret |= VULKAN12_DEVICE_FEATURE_UNIFORM_AND_STORAGE_BUFFER_8BIT_ACCESS;
-
-	if (deviceFeatures.storagePushConstant8 == VK_TRUE)
-		ret |= VULKAN12_DEVICE_FEATURE_STORAGE_PUSH_CONSTANT_8BIT;
-
-	if (deviceFeatures.shaderBufferInt64Atomics == VK_TRUE)
-		ret |= VULKAN12_DEVICE_FEATURE_SHADER_BUFFER_INT64_ATOMICS;
-
-	if (deviceFeatures.shaderSharedInt64Atomics == VK_TRUE)
-		ret |= VULKAN12_DEVICE_FEATURE_SHADER_SHARED_INT64_ATOMICS;
-
-	if (deviceFeatures.shaderFloat16 == VK_TRUE)
-		ret |= VULKAN12_DEVICE_FEATURE_SHADER_FLOAT_16BIT;
-
-	if (deviceFeatures.shaderInt8 == VK_TRUE)
-		ret |= VULKAN12_DEVICE_FEATURE_SHADER_INT_8BIT;
-
-	if (deviceFeatures.scalarBlockLayout == VK_TRUE)
-		ret |= VULKAN12_DEVICE_FEATURE_SCALAR_BLOCK_LAYOUT;
-
-	return ret;
-}
-
-VulkanDeviceFeatureFlags PhysicalDeviceInternal::CompileVulkan13DeviceFeatures(const VkPhysicalDeviceVulkan13Features& deviceFeatures) const
-{
-	VulkanDeviceFeatureFlags ret = 0;
-
-	if (deviceFeatures.synchronization2 == VK_TRUE)
-		ret |= VULKAN13_DEVICE_FEATURE_SYNCHRONIZATION2;
-
-	if (deviceFeatures.textureCompressionASTC_HDR == VK_TRUE)
-		ret |= VULKAN13_DEVICE_FEATURE_TEXTURE_COMPRESSION_ASTC_HDR;
-
-	if (deviceFeatures.maintenance4 == VK_TRUE)
-		ret |= VULKAN13_DEVICE_FEATURE_MAINTENANCE4;
 
 	return ret;
 }

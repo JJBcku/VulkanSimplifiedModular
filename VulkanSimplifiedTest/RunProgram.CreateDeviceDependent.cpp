@@ -26,7 +26,8 @@ void CreateDeviceDependent(VulkanData& data)
 
 	auto instance = data.basicData->main.value().GetInstanceSimplifier();
 	auto deviceList = instance.GetDeviceListSimplifier();
-	auto device = deviceList.GetLogicalDeviceSimplifier(data.instanceDependent->deviceID);
+	auto deviceMain = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
+	auto device = deviceMain.GetLogicalDeviceCoreSimplifier();
 
 	device.CreateSwapchain(data.basicData->windowID, swapchainCreation, false, true, true);
 }

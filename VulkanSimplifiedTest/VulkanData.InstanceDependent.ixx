@@ -3,7 +3,9 @@ export module VulkanData.InstanceDependent;
 import std;
 export import ListTemplates.IDObject;
 import VulkanSimplifiers.DeviceList.Data;
-import VulkanSimplifiers.LogicalDevice.Data;
+import VulkanSimplifiers.LogicalDeviceCore.Data;
+import VulkanSimplifiers.Common.DeviceExtensionsFlags;
+
 export struct VulkanDataInstanceDependent
 {
 	IDObject<LogicalDevicePointer> deviceID;
@@ -11,7 +13,7 @@ export struct VulkanDataInstanceDependent
 	std::optional<size_t> transferQueue;
 	size_t presentQueue;
 
-	RequestedExtensionList usedDeviceExtensions;
+	DeviceExtensionList usedDeviceExtensions;
 	Vulkan10DeviceLimits device10Limits;
 	FormatsSupportedFullFeatures deviceFormatsSupport;
 	SurfaceSupportData surfaceSupport;

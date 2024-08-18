@@ -7,8 +7,10 @@ import VulkanSimplifiers.DeviceList.Internal;
 import VulkanSimplifiers.PhysicalDevice.Internal;
 import VulkanSimplifiers.PhysicalDevice;
 import VulkanSimplifiers.DeviceList.Data;
-import VulkanSimplifiers.LogicalDevice.Data;
-import VulkanSimplifiers.LogicalDevice;
+import VulkanSimplifiers.LogicalDeviceMain;
+import VulkanSimplifiers.LogicalDeviceMain.Internal;
+import VulkanSimplifiers.LogicalDeviceMain.CreationData;
+import VulkanSimplifiers.LogicalDeviceCore.CreationData;
 
 export class DeviceListSimplifier
 {
@@ -21,9 +23,9 @@ public:
 	size_t GetPhysicalDeviceListSize() const;
 
 	PhysicalDeviceSimplifier GetPhysicalDeviceSimplifier(size_t deviceIndex);
-	LogicalDeviceSimplifier GetLogicalDeviceSimplifier(IDObject<LogicalDevicePointer> deviceID);
+	LogicalDeviceMainSimplifier GetLogicalDeviceMainSimplifier(IDObject<LogicalDevicePointer> deviceID);
 
-	IDObject<LogicalDevicePointer> AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, size_t addOnReserve = 0);
+	IDObject<LogicalDevicePointer> AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, const DeviceMainCreationData& mainCreationData, size_t addOnReserve = 0);
 
 private:
 	DeviceListInternal& _internal;

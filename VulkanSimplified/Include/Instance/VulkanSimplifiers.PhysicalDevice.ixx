@@ -7,6 +7,8 @@ import VulkanSimplifiers.PhysicalDevice.Internal;
 import VulkanSimplifiers.PhysicalDevice.Data;
 import VulkanSimplifiers.WindowList.Data;
 
+import VulkanSimplifiers.Common.DeviceFeatureFlags;
+
 export class PhysicalDeviceSimplifier
 {
 public:
@@ -18,9 +20,6 @@ public:
 	DeviceVulkanPropertiesSimplified GetVulkanPropertiesSimplified() const;
 
 	VulkanDeviceFeatureFlags GetVulkan10Features() const;
-	VulkanDeviceFeatureFlags GetVulkan11Features() const;
-	VulkanDeviceFeatureFlags GetVulkan12Features() const;
-	VulkanDeviceFeatureFlags GetVulkan13Features() const;
 
 	SurfaceSupportData GetSurfaceSupport(IDObject<WindowPointer> windowID) const;
 

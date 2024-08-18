@@ -453,7 +453,12 @@ void CreateInstanceDependent(VulkanData& data)
 		deviceCreationInfo.queuesCreateInfo.push_back(presentOnlyQueueCreateInfo);
 	}
 
-	data.instanceDependent->deviceID = deviceList.AddLogicalDevice(deviceCreationInfo);
+	DeviceMainCreationData mainCreationData;
+
+	mainCreationData.shaderList.initialFragmentListCapacity = 1;
+	mainCreationData.shaderList.initialVertexListCapacity = 1;
+
+	data.instanceDependent->deviceID = deviceList.AddLogicalDevice(deviceCreationInfo, mainCreationData);
 	data.instanceDependent->usedDeviceExtensions = deviceCreationInfo.requestedExtensions;
 	data.instanceDependent->device10Limits = deviceProperties.device10Limits;
 	data.instanceDependent->deviceFormatsSupport = deviceProperties.deviceFormatsSupport;

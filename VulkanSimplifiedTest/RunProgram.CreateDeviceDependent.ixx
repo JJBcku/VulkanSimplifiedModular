@@ -13,6 +13,7 @@ import VulkanSimplifiers.DeviceList;
 import VulkanSimplifiers.LogicalDeviceMain;
 import VulkanSimplifiers.LogicalDeviceCore;
 import VulkanSimplifiers.SharedDataList;
+import VulkanSimplifiers.SharedPipelineData;
 
 import VulkanSimplifiers.Common.SurfaceData;
 

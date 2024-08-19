@@ -420,5 +420,32 @@
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.Data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

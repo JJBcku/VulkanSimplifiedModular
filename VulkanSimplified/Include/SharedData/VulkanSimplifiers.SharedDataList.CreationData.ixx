@@ -1,8 +1,10 @@
 export module VulkanSimplifiers.SharedDataList.CreationData;
 
+export import VulkanSimplifiers.SharedPipelineData.CreationData;
+
 export struct SharedDataListCreationData
 {
-	long long int stump;
+	SharedPipelineDataCreationInfo sharedPipelineData;
 
 	SharedDataListCreationData() = default;
 };

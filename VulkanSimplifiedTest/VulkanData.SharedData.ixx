@@ -7,7 +7,7 @@ export import VulkanSimplifiers.SharedPipelineData.Data;
 
 export struct VulkanSharedData
 {
-	IDObject<ShaderSharedPipelineData> _pipelineSharedData;
+	IDObject<ShaderSharedPipelineData> _pipelineShaderData;
 
 	VulkanSharedData() = default;
 };

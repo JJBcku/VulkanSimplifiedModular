@@ -66,5 +66,14 @@
     <ClCompile Include="VulkanData.DeviceDependent.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VulkanData.SharedData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateSharedData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateSharedData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

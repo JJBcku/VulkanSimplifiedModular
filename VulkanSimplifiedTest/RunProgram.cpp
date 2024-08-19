@@ -9,6 +9,7 @@ void RunProgram()
     CreateBasics(data, settings);
     CreateInstanceDependent(data);
     CreateDeviceDependent(data);
+    CreateSharedData(data);
 
     while (!settings.GetQuit())
     {

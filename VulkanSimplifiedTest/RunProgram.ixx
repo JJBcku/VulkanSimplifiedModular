@@ -9,5 +9,6 @@ import RunProgram.EventHandling;
 import RunProgram.CreateBasics;
 import RunProgram.CreateInstanceDependent;
 import RunProgram.CreateDeviceDependent;
+import RunProgram.CreateSharedData;
 
 export void RunProgram();

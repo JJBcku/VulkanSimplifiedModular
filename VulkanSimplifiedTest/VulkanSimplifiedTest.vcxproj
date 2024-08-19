@@ -103,6 +103,8 @@
     <ClCompile Include="RunProgram.CreateDeviceDependent.ixx" />
     <ClCompile Include="RunProgram.CreateInstanceDependent.cpp" />
     <ClCompile Include="RunProgram.CreateInstanceDependent.ixx" />
+    <ClCompile Include="RunProgram.CreateSharedData.cpp" />
+    <ClCompile Include="RunProgram.CreateSharedData.ixx" />
     <ClCompile Include="RunProgram.EventHandling.cpp" />
     <ClCompile Include="RunProgram.EventHandling.ixx" />
     <ClCompile Include="RunProgram.ixx" />
@@ -110,6 +112,7 @@
     <ClCompile Include="VulkanData.DeviceDependent.ixx" />
     <ClCompile Include="VulkanData.InstanceDependent.ixx" />
     <ClCompile Include="VulkanData.ixx" />
+    <ClCompile Include="VulkanData.SharedData.ixx" />
     <ClCompile Include="VulkanSimplifiersTest.cpp" />
   </ItemGroup>
   <ItemGroup>

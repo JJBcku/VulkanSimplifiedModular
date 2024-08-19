@@ -1,0 +1,4 @@
+export module VulkanSimplifiers.SharedPipelineData.Data;
+
+export struct ShaderSpecializationElement;
+export struct ShaderSharedPipelineData;

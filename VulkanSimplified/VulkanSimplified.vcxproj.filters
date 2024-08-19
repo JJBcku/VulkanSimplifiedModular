@@ -447,5 +447,8 @@
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -239,6 +239,7 @@
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.CreationData.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.ixx" />
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.Data.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

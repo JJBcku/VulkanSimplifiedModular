@@ -9,5 +9,7 @@ export struct VulkanSharedData
 {
 	IDObject<ShaderSharedPipelineData> _pipelineShaderData;
 
+	IDObject<VertexInputSharedPipelineData> _vertexInputData;
+
 	VulkanSharedData() = default;
 };

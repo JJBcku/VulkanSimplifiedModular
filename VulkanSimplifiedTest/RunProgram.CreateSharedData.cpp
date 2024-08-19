@@ -9,4 +9,5 @@ void CreateSharedData(VulkanData& data)
 	auto sharedPipelineData = sharedDataList.GetSharedPipelineDataSimplifier();
 
 	data.sharedData->_pipelineShaderData = sharedPipelineData.AddShaderSharedPipelineData("main", {});
+	data.sharedData->_vertexInputData = sharedPipelineData.AddVertexInputSharedPipelineData({}, {});
 }

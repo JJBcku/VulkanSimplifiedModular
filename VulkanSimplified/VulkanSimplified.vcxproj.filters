@@ -450,5 +450,8 @@
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

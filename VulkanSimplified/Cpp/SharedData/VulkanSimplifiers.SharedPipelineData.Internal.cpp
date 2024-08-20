@@ -197,12 +197,12 @@ IDObject<PipelineMultisampleData> SharedPipelineDataInternal::AddPipelineMultisa
 	if (minSampleShading.has_value())
 	{
 		add.sampleShadingEnable = VK_TRUE;
-		add.minSampleShading = static_cast<float>(minSampleShading.value()) / static_cast<float>(std::numeric_limits<std::uint32_t>::max());
+		add.minSampleShading = minSampleShading.value();
 	}
 	else
 	{
 		add.sampleShadingEnable = VK_FALSE;
-		add.minSampleShading = 0.0f;
+		add.minSampleShading = 0;
 	}
 
 	return _pipelineMultisampleInfo.AddUniqueObject(add, addOnReserve);

@@ -177,6 +177,7 @@
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.CreationData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ShaderList.Internal.ixx" />

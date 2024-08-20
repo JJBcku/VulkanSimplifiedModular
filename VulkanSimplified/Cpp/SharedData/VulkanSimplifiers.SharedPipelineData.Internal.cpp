@@ -1,8 +1,13 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 module VulkanSimplifiers.SharedPipelineData.Internal;
 
 SharedPipelineDataInternal::SharedPipelineDataInternal(SharedPipelineDataCreationInfo initInfo) : _shaderSpecializationElements(initInfo.initialSpecializationElementsCapacity),
 _shaderPipelineInfo(initInfo.initialShaderPipelineInfoCapacity), _vertexBindingInfo(initInfo.initialVertexBindingInfoCapacity),
-_vertexAttributeInfo(initInfo.initialVertexAttributeInfoCapacity), _vertexPipelineInfo(initInfo.initialVertexInputPipelineInfoCapacity)
+_vertexAttributeInfo(initInfo.initialVertexAttributeInfoCapacity), _vertexPipelineInfo(initInfo.initialVertexInputPipelineInfoCapacity),
+_pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity), _pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity)
 {
 }
 
@@ -71,4 +76,87 @@ IDObject<VertexInputSharedPipelineData> SharedPipelineDataInternal::AddVertexInp
 	add.vectorAttributes = attributes;
 
 	return _vertexPipelineInfo.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+IDObject<PipelineInputAssemblyData> SharedPipelineDataInternal::AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve)
+{
+	PipelineInputAssemblyData add;
+	
+	switch (topology)
+	{
+	case PipelinePrimitiveTopology::PATCH_LIST:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_PATCH_LIST;
+		break;
+	case PipelinePrimitiveTopology::TRIANGLE_STRIP_WITH_ADJACENCY:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP_WITH_ADJACENCY;
+		break;
+	case PipelinePrimitiveTopology::TRIANGLE_LIST_WITH_ADJACENCY:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY;
+		break;
+	case PipelinePrimitiveTopology::LINE_STRIP_WITH_ADJACENCY:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP_WITH_ADJACENCY;
+		break;
+	case PipelinePrimitiveTopology::LINE_LIST_WITH_ADJACENCY:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST_WITH_ADJACENCY;
+		break;
+	case PipelinePrimitiveTopology::TRIANGLE_FAN:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_FAN;
+		break;
+	case PipelinePrimitiveTopology::TRIANGLE_STRIP:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP;
+		break;
+	case PipelinePrimitiveTopology::TRIANGLE_LIST:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+		break;
+	case PipelinePrimitiveTopology::LINE_STRIP:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_STRIP;
+		break;
+	case PipelinePrimitiveTopology::LINE_LIST:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_LINE_LIST;
+		break;
+	case PipelinePrimitiveTopology::POINT_LIST:
+		add.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
+		break;
+	default:
+		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineInputAssemblyData Error: Program was given an erroneous pipeline primitive topology value!");
+	}
+
+	if (primitiveRestartEnable)
+		add.primitiveRestartEnable = VK_TRUE;
+	else
+		add.primitiveRestartEnable = VK_FALSE;
+
+	return _pipelineInputAssemblyInfo.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+IDObject<PipelineRasterizationData> SharedPipelineDataInternal::AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygons, bool frontClockwise, size_t addOnReserve)
+{
+	PipelineRasterizationData add;
+	
+	switch (polygonMode)
+	{
+	case PipelinePolygonMode::POINT:
+		add.polygonMode = VK_POLYGON_MODE_POINT;
+		break;
+	case PipelinePolygonMode::LINE:
+		add.polygonMode = VK_POLYGON_MODE_LINE;
+		break;
+	case PipelinePolygonMode::FILL:
+		add.polygonMode = VK_POLYGON_MODE_FILL;
+		break;
+	default:
+		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineRasterizationData Error: Program was given an erroneous pipeline polygon mode value!");
+	}
+
+	if (cullPolygons)
+		add.cullMode = VK_CULL_MODE_FRONT_BIT;
+	else
+		add.cullMode = VK_CULL_MODE_NONE;
+
+	if (frontClockwise)
+		add.frontFace = VK_FRONT_FACE_CLOCKWISE;
+	else
+		add.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+
+	return _pipelineRasterizationInfo.AddUniqueObject(add, addOnReserve);
 }

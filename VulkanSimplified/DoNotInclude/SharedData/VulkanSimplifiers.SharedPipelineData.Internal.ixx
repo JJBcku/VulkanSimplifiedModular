@@ -25,6 +25,9 @@ public:
 	IDObject<VertexInputSharedPipelineData> AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& attributes, size_t addOnReserve);
 
+	IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve);
+	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygons, bool frontClockwise, size_t addOnReserve);
+
 private:
 	UnsortedList<ShaderSpecializationElement> _shaderSpecializationElements;
 	UnsortedList<ShaderSharedPipelineData> _shaderPipelineInfo;
@@ -32,4 +35,7 @@ private:
 	UnsortedList<VertexBindingDescriptionData> _vertexBindingInfo;
 	UnsortedList<VertexAttributeDescriptionData> _vertexAttributeInfo;
 	UnsortedList<VertexInputSharedPipelineData> _vertexPipelineInfo;
+
+	UnsortedList<PipelineInputAssemblyData> _pipelineInputAssemblyInfo;
+	UnsortedList<PipelineRasterizationData> _pipelineRasterizationInfo;
 };

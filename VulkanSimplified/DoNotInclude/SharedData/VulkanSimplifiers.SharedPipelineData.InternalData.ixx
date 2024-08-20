@@ -66,3 +66,27 @@ export struct VertexInputSharedPipelineData
 	bool operator==(const VertexInputSharedPipelineData& rhs) const noexcept = default;
 	std::strong_ordering operator<=>(const VertexInputSharedPipelineData& rhs) const noexcept = default;
 };
+
+export struct PipelineInputAssemblyData
+{
+	VkPrimitiveTopology topology;
+	VkBool32 primitiveRestartEnable;
+
+	PipelineInputAssemblyData();
+
+	bool operator==(const PipelineInputAssemblyData& rhs) const noexcept = default;
+	std::strong_ordering operator<=>(const PipelineInputAssemblyData& rhs) const noexcept = default;
+};
+
+export struct PipelineRasterizationData
+{
+	VkPolygonMode polygonMode;
+	VkCullModeFlagBits cullMode;
+	VkFrontFace frontFace;
+	std::uint32_t padding;
+
+	PipelineRasterizationData();
+
+	bool operator==(const PipelineRasterizationData& rhs) const noexcept = default;
+	std::strong_ordering operator<=>(const PipelineRasterizationData& rhs) const noexcept = default;
+};

@@ -36,3 +36,14 @@ IDObject<VertexInputSharedPipelineData> SharedPipelineDataSimplifier::AddVertexI
 {
 	return _internal.AddVertexInputSharedPipelineData(bindings, attributes, addOnReserve);
 }
+
+IDObject<PipelineInputAssemblyData> SharedPipelineDataSimplifier::AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve)
+{
+	return _internal.AddPipelineInputAssemblyData(topology, primitiveRestartEnable, addOnReserve);
+}
+
+IDObject<PipelineRasterizationData> SharedPipelineDataSimplifier::AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygons, bool frontClockwise,
+	size_t addOnReserve)
+{
+	return _internal.AddPipelineRasterizationData(polygonMode, cullPolygons, frontClockwise, addOnReserve);
+}

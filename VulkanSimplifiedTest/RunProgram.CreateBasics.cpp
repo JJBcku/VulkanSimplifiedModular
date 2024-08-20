@@ -21,6 +21,8 @@ void CreateBasics(VulkanData& data, MainSettings& settings)
 
 	initData.sharedDataListInitData.sharedPipelineData.initialShaderPipelineInfoCapacity = 1;
 	initData.sharedDataListInitData.sharedPipelineData.initialVertexInputPipelineInfoCapacity = 1;
+	initData.sharedDataListInitData.sharedPipelineData.initialPipelineInputAssemblyInfoCapacity = 1;
+	initData.sharedDataListInitData.sharedPipelineData.initialPipelineRasterizationInfoCapacity = 1;
 
 	basic.main.emplace(initData);
 

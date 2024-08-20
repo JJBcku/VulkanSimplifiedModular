@@ -26,3 +26,17 @@ VertexAttributeDescriptionData::VertexAttributeDescriptionData()
 	format = VK_FORMAT_UNDEFINED;
 	offset = std::numeric_limits<std::uint32_t>::max();
 }
+
+PipelineInputAssemblyData::PipelineInputAssemblyData()
+{
+	topology = static_cast<VkPrimitiveTopology>(std::numeric_limits<std::uint32_t>::max());
+	primitiveRestartEnable = static_cast<VkBool32>(std::numeric_limits<std::uint32_t>::max());
+}
+
+PipelineRasterizationData::PipelineRasterizationData()
+{
+	polygonMode = static_cast<VkPolygonMode>(std::numeric_limits<std::uint32_t>::max());
+	cullMode = static_cast<VkCullModeFlagBits>(std::numeric_limits<std::uint32_t>::max());
+	frontFace = static_cast<VkFrontFace>(std::numeric_limits<std::uint32_t>::max());
+	padding = 0;
+}

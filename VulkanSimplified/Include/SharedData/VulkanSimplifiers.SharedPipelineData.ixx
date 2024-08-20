@@ -26,6 +26,9 @@ public:
 	IDObject<VertexInputSharedPipelineData> AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& attributes, size_t addOnReserve = 0);
 
+	IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve = 0);
+	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygons, bool frontClockwise, size_t addOnReserve = 0);
+
 private:
 	SharedPipelineDataInternal& _internal;
 };

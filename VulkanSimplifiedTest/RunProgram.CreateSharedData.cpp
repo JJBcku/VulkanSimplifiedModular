@@ -10,4 +10,6 @@ void CreateSharedData(VulkanData& data)
 
 	data.sharedData->_pipelineShaderData = sharedPipelineData.AddShaderSharedPipelineData("main", {});
 	data.sharedData->_vertexInputData = sharedPipelineData.AddVertexInputSharedPipelineData({}, {});
+	data.sharedData->_pipelineInputAssembly = sharedPipelineData.AddPipelineInputAssemblyData(PipelinePrimitiveTopology::TRIANGLE_LIST, false);
+	data.sharedData->_pipelineRasterizationAssembly = sharedPipelineData.AddPipelineRasterizationData(PipelinePolygonMode::FILL, true, true);
 }

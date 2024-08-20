@@ -197,7 +197,7 @@ IDObject<PipelineMultisampleData> SharedPipelineDataInternal::AddPipelineMultisa
 	if (minSampleShading.has_value())
 	{
 		add.sampleShadingEnable = VK_TRUE;
-		add.minSampleShading = minSampleShading.value();
+		add.minSampleShading = static_cast<float>(minSampleShading.value()) / static_cast<float>(std::numeric_limits<std::uint32_t>::max());
 	}
 	else
 	{

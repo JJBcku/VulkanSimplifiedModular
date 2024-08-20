@@ -95,11 +95,11 @@ export struct PipelineMultisampleData
 {
 	VkSampleCountFlagBits sampleCount;
 	VkBool32 sampleShadingEnable;
-	std::uint32_t minSampleShading;
+	float minSampleShading;
 	std::uint32_t padding;
 
 	PipelineMultisampleData();
 
 	bool operator==(const PipelineMultisampleData& rhs) const noexcept = default;
-	std::strong_ordering operator<=>(const PipelineMultisampleData& rhs) const noexcept = default;
+	std::partial_ordering operator<=>(const PipelineMultisampleData& rhs) const noexcept = default;
 };

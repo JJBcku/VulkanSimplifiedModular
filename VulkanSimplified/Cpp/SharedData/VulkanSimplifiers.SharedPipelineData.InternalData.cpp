@@ -45,6 +45,6 @@ PipelineMultisampleData::PipelineMultisampleData()
 {
 	sampleCount = static_cast<VkSampleCountFlagBits>(std::numeric_limits<std::uint32_t>::max());
 	sampleShadingEnable = static_cast<VkBool32>(std::numeric_limits<std::uint32_t>::max());
-	minSampleShading = std::numeric_limits<std::uint32_t>::max();
+	minSampleShading = std::numeric_limits<float>::max();
 	padding = 0;
 }

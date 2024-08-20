@@ -149,7 +149,7 @@ IDObject<PipelineRasterizationData> SharedPipelineDataInternal::AddPipelineRaste
 	}
 
 	if (cullPolygons)
-		add.cullMode = VK_CULL_MODE_FRONT_BIT;
+		add.cullMode = VK_CULL_MODE_BACK_BIT;
 	else
 		add.cullMode = VK_CULL_MODE_NONE;
 

@@ -7,6 +7,7 @@ import VulkanSimplifiers.SharedPipelineData.Internal;
 import VulkanSimplifiers.SharedPipelineData.Data;
 
 import VulkanSimplifiers.Common.DataFormatFlags;
+import VulkanSimplifiers.Common.ImageSampleFlags;
 
 export class SharedPipelineDataSimplifier
 {
@@ -28,6 +29,7 @@ public:
 
 	IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve = 0);
 	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise, size_t addOnReserve = 0);
+	IDObject<PipelineMultisampleData> AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting, std::optional<std::uint32_t> minSampleShading, size_t addOnReserve = 0);
 
 private:
 	SharedPipelineDataInternal& _internal;

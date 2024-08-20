@@ -12,6 +12,7 @@ export struct VulkanSharedData
 	IDObject<VertexInputSharedPipelineData> _vertexInputData;
 	IDObject<PipelineInputAssemblyData> _pipelineInputAssembly;
 	IDObject<PipelineRasterizationData> _pipelineRasterizationAssembly;
+	IDObject<PipelineMultisampleData> _pipelineMultisampling;
 
 	VulkanSharedData() = default;
 };

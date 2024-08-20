@@ -47,3 +47,9 @@ IDObject<PipelineRasterizationData> SharedPipelineDataSimplifier::AddPipelineRas
 {
 	return _internal.AddPipelineRasterizationData(polygonMode, cullPolygonBacks, frontClockwise, addOnReserve);
 }
+
+IDObject<PipelineMultisampleData> SharedPipelineDataSimplifier::AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting, std::optional<std::uint32_t> minSampleShading,
+	size_t addOnReserve)
+{
+	return _internal.AddPipelineMultisampleData(samplingSetting, minSampleShading, addOnReserve);
+}

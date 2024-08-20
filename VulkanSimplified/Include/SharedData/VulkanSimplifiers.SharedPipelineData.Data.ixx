@@ -11,6 +11,7 @@ export struct VertexInputSharedPipelineData;
 
 export struct PipelineInputAssemblyData;
 export struct PipelineRasterizationData;
+export struct PipelineMultisampleData;
 
 export enum class VertexBindingInputRate : std::uint64_t
 {

@@ -7,7 +7,8 @@ module VulkanSimplifiers.SharedPipelineData.Internal;
 SharedPipelineDataInternal::SharedPipelineDataInternal(SharedPipelineDataCreationInfo initInfo) : _shaderSpecializationElements(initInfo.initialSpecializationElementsCapacity),
 _shaderPipelineInfo(initInfo.initialShaderPipelineInfoCapacity), _vertexBindingInfo(initInfo.initialVertexBindingInfoCapacity),
 _vertexAttributeInfo(initInfo.initialVertexAttributeInfoCapacity), _vertexPipelineInfo(initInfo.initialVertexInputPipelineInfoCapacity),
-_pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity), _pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity)
+_pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity), _pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity),
+_pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity)
 {
 }
 
@@ -159,4 +160,50 @@ IDObject<PipelineRasterizationData> SharedPipelineDataInternal::AddPipelineRaste
 		add.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
 
 	return _pipelineRasterizationInfo.AddUniqueObject(add, addOnReserve);
+}
+
+IDObject<PipelineMultisampleData> SharedPipelineDataInternal::AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting, std::optional<std::uint32_t> minSampleShading,
+	size_t addOnReserve)
+{
+	PipelineMultisampleData add;
+
+	switch (samplingSetting)
+	{
+	case SAMPLE_64:
+		add.sampleCount = VK_SAMPLE_COUNT_64_BIT;
+		break;
+	case SAMPLE_32:
+		add.sampleCount = VK_SAMPLE_COUNT_32_BIT;
+		break;
+	case SAMPLE_16:
+		add.sampleCount = VK_SAMPLE_COUNT_16_BIT;
+		break;
+	case SAMPLE_8:
+		add.sampleCount = VK_SAMPLE_COUNT_8_BIT;
+		break;
+	case SAMPLE_4:
+		add.sampleCount = VK_SAMPLE_COUNT_4_BIT;
+		break;
+	case SAMPLE_2:
+		add.sampleCount = VK_SAMPLE_COUNT_2_BIT;
+		break;
+	case SAMPLE_1:
+		add.sampleCount = VK_SAMPLE_COUNT_1_BIT;
+		break;
+	default:
+		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineMultisampleData Error: Program was given an erroneous pipeline sampling value!");
+	}
+
+	if (minSampleShading.has_value())
+	{
+		add.sampleShadingEnable = VK_TRUE;
+		add.minSampleShading = static_cast<float>(minSampleShading.value()) / static_cast<float>(std::numeric_limits<std::uint32_t>::max());
+	}
+	else
+	{
+		add.sampleShadingEnable = VK_FALSE;
+		add.minSampleShading = 0.0f;
+	}
+
+	return _pipelineMultisampleInfo.AddUniqueObject(add, addOnReserve);
 }

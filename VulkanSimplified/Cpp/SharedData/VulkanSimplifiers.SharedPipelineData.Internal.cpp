@@ -8,7 +8,7 @@ SharedPipelineDataInternal::SharedPipelineDataInternal(SharedPipelineDataCreatio
 _shaderPipelineInfo(initInfo.initialShaderPipelineInfoCapacity), _vertexBindingInfo(initInfo.initialVertexBindingInfoCapacity),
 _vertexAttributeInfo(initInfo.initialVertexAttributeInfoCapacity), _vertexPipelineInfo(initInfo.initialVertexInputPipelineInfoCapacity),
 _pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity), _pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity),
-_pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity)
+_pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity), _pipelineDepthStencilInfo(initInfo.initialPipelineDepthStencilInfoCapacity)
 {
 }
 
@@ -159,7 +159,7 @@ IDObject<PipelineRasterizationData> SharedPipelineDataInternal::AddPipelineRaste
 	else
 		add.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
 
-	return _pipelineRasterizationInfo.AddUniqueObject(add, addOnReserve);
+	return _pipelineRasterizationInfo.AddUniqueObject(std::move(add), addOnReserve);
 }
 
 IDObject<PipelineMultisampleData> SharedPipelineDataInternal::AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting, std::optional<std::uint32_t> minSampleShading,
@@ -205,5 +205,64 @@ IDObject<PipelineMultisampleData> SharedPipelineDataInternal::AddPipelineMultisa
 		add.minSampleShading = 0;
 	}
 
-	return _pipelineMultisampleInfo.AddUniqueObject(add, addOnReserve);
+	return _pipelineMultisampleInfo.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+IDObject<PipelineDepthStencilStateData> SharedPipelineDataInternal::AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationType compareOp,
+	float minDepth, float maxDepth, size_t addOnReserve)
+{
+	PipelineDepthStencilStateData add;
+
+	switch (depthUsage)
+	{
+	case DepthUsage::TEST_AND_WRITE:
+		add.depthTestEnable = VK_TRUE;
+		add.depthWriteEnable = VK_TRUE;
+		break;
+	case DepthUsage::WRITE:
+		add.depthTestEnable = VK_FALSE;
+		add.depthWriteEnable = VK_TRUE;
+		break;
+	case DepthUsage::TEST:
+		add.depthTestEnable = VK_TRUE;
+		add.depthWriteEnable = VK_FALSE;
+		break;
+	default:
+		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineDepthStencilStateData Error: Program was given an erroneous pipeline depth usage value!");
+	}
+
+	switch (compareOp)
+	{
+	case CompareOperationType::COMPARE_OPERATION_NOT_EQUAL:
+		add.compareOp = VK_COMPARE_OP_NOT_EQUAL;
+		break;
+	case CompareOperationType::COMPARE_OPERATION_GREATER_OR_EQUAL:
+		add.compareOp = VK_COMPARE_OP_GREATER_OR_EQUAL;
+		break;
+	case CompareOperationType::COMPARE_OPERATION_GREATER:
+		add.compareOp = VK_COMPARE_OP_GREATER;
+		break;
+	case CompareOperationType::COMPARE_OPERATION_LESS_OR_EQUAL:
+		add.compareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
+		break;
+	case CompareOperationType::COMPARE_OPERATION_LESS:
+		add.compareOp = VK_COMPARE_OP_LESS;
+		break;
+	case CompareOperationType::COMPARE_OPERATION_EQUAL:
+		add.compareOp = VK_COMPARE_OP_EQUAL;
+		break;
+	case CompareOperationType::COMPARE_OPERATION_ALWAYS:
+		add.compareOp = VK_COMPARE_OP_ALWAYS;
+		break;
+	case CompareOperationType::COMPARE_OPERATION_NEVER:
+		add.compareOp = VK_COMPARE_OP_NEVER;
+		break;
+	default:
+		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineDepthStencilStateData Error: Program was given an erroneous compare operation value!");
+	}
+
+	add.minDepth = minDepth;
+	add.maxDepth = maxDepth;
+
+	return _pipelineDepthStencilInfo.AddUniqueObject(std::move(add), addOnReserve);
 }

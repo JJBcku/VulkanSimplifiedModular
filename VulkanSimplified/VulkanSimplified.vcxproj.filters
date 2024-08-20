@@ -453,5 +453,8 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.CompareOperation.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

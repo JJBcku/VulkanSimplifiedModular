@@ -2,7 +2,7 @@ export module VulkanSimplifiers.Common.ImageSampleFlags;
 
 import std;
 
-export typedef std::uint8_t ImageSampleFlags;
+export typedef std::uint64_t ImageSampleFlags;
 
 export enum ImageSampleFlagBits : ImageSampleFlags
 {

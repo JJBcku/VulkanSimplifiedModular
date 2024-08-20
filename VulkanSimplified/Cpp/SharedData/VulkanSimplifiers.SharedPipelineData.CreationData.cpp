@@ -12,4 +12,5 @@ SharedPipelineDataCreationInfo::SharedPipelineDataCreationInfo()
 	initialPipelineInputAssemblyInfoCapacity = 0;
 	initialPipelineRasterizationInfoCapacity = 0;
 	initialPipelineMultisampleInfoCapacity = 0;
+	initialPipelineDepthStencilInfoCapacity = 0;
 }

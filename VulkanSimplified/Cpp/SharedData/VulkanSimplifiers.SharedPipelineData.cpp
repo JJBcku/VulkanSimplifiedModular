@@ -53,3 +53,9 @@ IDObject<PipelineMultisampleData> SharedPipelineDataSimplifier::AddPipelineMulti
 {
 	return _internal.AddPipelineMultisampleData(samplingSetting, minSampleShading, addOnReserve);
 }
+
+IDObject<PipelineDepthStencilStateData> SharedPipelineDataSimplifier::AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationType compareOp,
+	float minDepth, float maxDepth, size_t addOnReserve)
+{
+	return _internal.AddPipelineDepthStencilStateData(depthUsage, compareOp, minDepth, maxDepth, addOnReserve);
+}

@@ -12,6 +12,7 @@ export struct VertexInputSharedPipelineData;
 export struct PipelineInputAssemblyData;
 export struct PipelineRasterizationData;
 export struct PipelineMultisampleData;
+export struct PipelineDepthStencilStateData;
 
 export enum class VertexBindingInputRate : std::uint64_t
 {
@@ -39,4 +40,11 @@ export enum class PipelinePolygonMode : std::uint64_t
 	FILL = 1,
 	LINE = 2,
 	POINT = 3,
+};
+
+export enum class DepthUsage : std::uint64_t
+{
+	TEST = 1,
+	WRITE = 2,
+	TEST_AND_WRITE = 3,
 };

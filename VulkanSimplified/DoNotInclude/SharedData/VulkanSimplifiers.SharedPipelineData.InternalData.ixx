@@ -103,3 +103,18 @@ export struct PipelineMultisampleData
 	bool operator==(const PipelineMultisampleData& rhs) const noexcept = default;
 	std::partial_ordering operator<=>(const PipelineMultisampleData& rhs) const noexcept = default;
 };
+
+export struct PipelineDepthStencilStateData
+{
+	VkBool32 depthTestEnable;
+	VkBool32 depthWriteEnable;
+	VkCompareOp compareOp;
+	float minDepth;
+	float maxDepth;
+	std::uint32_t padding;
+
+	PipelineDepthStencilStateData();
+
+	bool operator==(const PipelineDepthStencilStateData& rhs) const noexcept = default;
+	std::partial_ordering operator<=>(const PipelineDepthStencilStateData& rhs) const noexcept = default;
+};

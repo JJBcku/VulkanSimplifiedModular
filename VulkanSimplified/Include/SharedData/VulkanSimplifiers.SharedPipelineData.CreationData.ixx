@@ -13,6 +13,7 @@ export struct SharedPipelineDataCreationInfo
 	size_t initialPipelineRasterizationInfoCapacity;
 	size_t initialPipelineMultisampleInfoCapacity;
 	size_t initialPipelineDepthStencilInfoCapacity;
+	size_t initialPipelineColorBlendAttachmentInfoCapacity;
 
 	SharedPipelineDataCreationInfo();
 };

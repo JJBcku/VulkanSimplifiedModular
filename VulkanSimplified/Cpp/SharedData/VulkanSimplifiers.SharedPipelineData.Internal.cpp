@@ -8,7 +8,8 @@ SharedPipelineDataInternal::SharedPipelineDataInternal(SharedPipelineDataCreatio
 _shaderPipelineInfo(initInfo.initialShaderPipelineInfoCapacity), _vertexBindingInfo(initInfo.initialVertexBindingInfoCapacity),
 _vertexAttributeInfo(initInfo.initialVertexAttributeInfoCapacity), _vertexPipelineInfo(initInfo.initialVertexInputPipelineInfoCapacity),
 _pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity), _pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity),
-_pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity), _pipelineDepthStencilInfo(initInfo.initialPipelineDepthStencilInfoCapacity)
+_pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity), _pipelineDepthStencilInfo(initInfo.initialPipelineDepthStencilInfoCapacity),
+_pipelineColorBlendAttachmentInfo(initInfo.initialPipelineColorBlendAttachmentInfoCapacity)
 {
 }
 
@@ -265,4 +266,56 @@ IDObject<PipelineDepthStencilStateData> SharedPipelineDataInternal::AddPipelineD
 	add.maxDepth = maxDepth;
 
 	return _pipelineDepthStencilInfo.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+IDObject<PipelineColorBlendAttachment> SharedPipelineDataInternal::AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents,
+	ColorBlendingPreset blendingPreset, size_t addOnReserve)
+{
+	PipelineColorBlendAttachment add;
+
+	switch (blendingPreset)
+	{
+	case ColorBlendingPreset::NO_BLENDING:
+		add.blendEnable = VK_FALSE;
+		add.srcColorBlend = VK_BLEND_FACTOR_ONE;
+		add.dstColorBlend = VK_BLEND_FACTOR_ZERO;
+		add.colorBlendOp = VK_BLEND_OP_ADD;
+		add.srcAlphaBlend = VK_BLEND_FACTOR_ONE;
+		add.dstAlphaBlend = VK_BLEND_FACTOR_ZERO;
+		add.alphaBlendOp = VK_BLEND_OP_ADD;
+		break;
+	default:
+		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineColorBlendAttachment Error: Program was given an erroneous blending preset value!");
+	}
+
+	add.colorWriteMask = 0;
+
+	if ((blendingComponents & COLOR_COMPONENT_R) == COLOR_COMPONENT_R)
+	{
+		add.colorWriteMask |= VK_COLOR_COMPONENT_R_BIT;
+		blendingComponents ^= COLOR_COMPONENT_R;
+	}
+
+	if ((blendingComponents & COLOR_COMPONENT_G) == COLOR_COMPONENT_G)
+	{
+		add.colorWriteMask |= VK_COLOR_COMPONENT_G_BIT;
+		blendingComponents ^= COLOR_COMPONENT_G;
+	}
+
+	if ((blendingComponents & COLOR_COMPONENT_B) == COLOR_COMPONENT_B)
+	{
+		add.colorWriteMask |= VK_COLOR_COMPONENT_B_BIT;
+		blendingComponents ^= COLOR_COMPONENT_B;
+	}
+
+	if ((blendingComponents & COLOR_COMPONENT_A) == COLOR_COMPONENT_A)
+	{
+		add.colorWriteMask |= VK_COLOR_COMPONENT_A_BIT;
+		blendingComponents ^= COLOR_COMPONENT_A;
+	}
+
+	if (blendingComponents != 0)
+		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineColorBlendAttachment Error: Program was given an erroneous blending components value!");
+
+	return _pipelineColorBlendAttachmentInfo.AddUniqueObject(std::move(add), addOnReserve);
 }

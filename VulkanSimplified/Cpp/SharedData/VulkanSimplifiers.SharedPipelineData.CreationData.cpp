@@ -13,4 +13,5 @@ SharedPipelineDataCreationInfo::SharedPipelineDataCreationInfo()
 	initialPipelineRasterizationInfoCapacity = 0;
 	initialPipelineMultisampleInfoCapacity = 0;
 	initialPipelineDepthStencilInfoCapacity = 0;
+	initialPipelineColorBlendAttachmentInfoCapacity = 0;
 }

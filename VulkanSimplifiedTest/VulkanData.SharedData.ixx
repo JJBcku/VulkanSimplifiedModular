@@ -13,6 +13,7 @@ export struct VulkanSharedData
 	IDObject<PipelineInputAssemblyData> _pipelineInputAssembly;
 	IDObject<PipelineRasterizationData> _pipelineRasterizationAssembly;
 	IDObject<PipelineMultisampleData> _pipelineMultisampling;
+	IDObject<PipelineColorBlendAttachment> _pipelineColorBlendAttachment;
 
 	VulkanSharedData() = default;
 };

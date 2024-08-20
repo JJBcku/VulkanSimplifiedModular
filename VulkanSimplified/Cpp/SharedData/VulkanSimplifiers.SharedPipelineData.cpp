@@ -59,3 +59,9 @@ IDObject<PipelineDepthStencilStateData> SharedPipelineDataSimplifier::AddPipelin
 {
 	return _internal.AddPipelineDepthStencilStateData(depthUsage, compareOp, minDepth, maxDepth, addOnReserve);
 }
+
+IDObject<PipelineColorBlendAttachment> SharedPipelineDataSimplifier::AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents,
+	ColorBlendingPreset blendingPreset, size_t addOnReserve)
+{
+	return _internal.AddPipelineColorBlendAttachment(blendingComponents, blendingPreset, addOnReserve);
+}

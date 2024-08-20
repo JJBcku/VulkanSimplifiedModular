@@ -13,6 +13,7 @@ export struct PipelineInputAssemblyData;
 export struct PipelineRasterizationData;
 export struct PipelineMultisampleData;
 export struct PipelineDepthStencilStateData;
+export struct PipelineColorBlendAttachment;
 
 export enum class VertexBindingInputRate : std::uint64_t
 {
@@ -47,4 +48,19 @@ export enum class DepthUsage : std::uint64_t
 	TEST = 1,
 	WRITE = 2,
 	TEST_AND_WRITE = 3,
+};
+
+export typedef std::uint64_t ColorBlendingComponentFlags;
+
+export enum ColorBlendingComponentBits : ColorBlendingComponentFlags
+{
+	COLOR_COMPONENT_R = 0x1,
+	COLOR_COMPONENT_G = 0x2,
+	COLOR_COMPONENT_B = 0x4,
+	COLOR_COMPONENT_A = 0x8,
+};
+
+export enum class ColorBlendingPreset : std::uint64_t
+{
+	NO_BLENDING = 1,
 };

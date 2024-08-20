@@ -31,6 +31,7 @@ public:
 	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise, size_t addOnReserve);
 	IDObject<PipelineMultisampleData> AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting, std::optional<std::uint32_t> minSampleShading, size_t addOnReserve);
 	IDObject<PipelineDepthStencilStateData> AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationType compareOp, float minDepth, float maxDepth, size_t addOnReserve);
+	IDObject<PipelineColorBlendAttachment> AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents, ColorBlendingPreset blendingPreset, size_t addOnReserve);
 
 private:
 	UnsortedList<ShaderSpecializationElement> _shaderSpecializationElements;
@@ -44,4 +45,5 @@ private:
 	UnsortedList<PipelineRasterizationData> _pipelineRasterizationInfo;
 	UnsortedList<PipelineMultisampleData> _pipelineMultisampleInfo;
 	UnsortedList<PipelineDepthStencilStateData> _pipelineDepthStencilInfo;
+	UnsortedList<PipelineColorBlendAttachment> _pipelineColorBlendAttachmentInfo;
 };

@@ -26,7 +26,7 @@ public:
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& attributes, size_t addOnReserve);
 
 	IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve);
-	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygons, bool frontClockwise, size_t addOnReserve);
+	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise, size_t addOnReserve);
 
 private:
 	UnsortedList<ShaderSpecializationElement> _shaderSpecializationElements;

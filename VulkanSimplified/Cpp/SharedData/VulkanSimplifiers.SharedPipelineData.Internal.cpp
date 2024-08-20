@@ -129,7 +129,7 @@ IDObject<PipelineInputAssemblyData> SharedPipelineDataInternal::AddPipelineInput
 	return _pipelineInputAssemblyInfo.AddUniqueObject(std::move(add), addOnReserve);
 }
 
-IDObject<PipelineRasterizationData> SharedPipelineDataInternal::AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygons, bool frontClockwise, size_t addOnReserve)
+IDObject<PipelineRasterizationData> SharedPipelineDataInternal::AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise, size_t addOnReserve)
 {
 	PipelineRasterizationData add;
 	
@@ -148,7 +148,7 @@ IDObject<PipelineRasterizationData> SharedPipelineDataInternal::AddPipelineRaste
 		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineRasterizationData Error: Program was given an erroneous pipeline polygon mode value!");
 	}
 
-	if (cullPolygons)
+	if (cullPolygonBacks)
 		add.cullMode = VK_CULL_MODE_BACK_BIT;
 	else
 		add.cullMode = VK_CULL_MODE_NONE;

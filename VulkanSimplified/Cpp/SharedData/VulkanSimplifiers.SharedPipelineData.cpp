@@ -42,8 +42,8 @@ IDObject<PipelineInputAssemblyData> SharedPipelineDataSimplifier::AddPipelineInp
 	return _internal.AddPipelineInputAssemblyData(topology, primitiveRestartEnable, addOnReserve);
 }
 
-IDObject<PipelineRasterizationData> SharedPipelineDataSimplifier::AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygons, bool frontClockwise,
+IDObject<PipelineRasterizationData> SharedPipelineDataSimplifier::AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise,
 	size_t addOnReserve)
 {
-	return _internal.AddPipelineRasterizationData(polygonMode, cullPolygons, frontClockwise, addOnReserve);
+	return _internal.AddPipelineRasterizationData(polygonMode, cullPolygonBacks, frontClockwise, addOnReserve);
 }

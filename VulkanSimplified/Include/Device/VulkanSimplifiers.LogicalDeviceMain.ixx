@@ -7,6 +7,7 @@ import VulkanSimplifiers.ShaderList.Internal;
 
 import VulkanSimplifiers.LogicalDeviceCore;
 import VulkanSimplifiers.ShaderList;
+import VulkanSimplifiers.DeviceDescriptorData;
 
 export class LogicalDeviceMainSimplifier
 {
@@ -18,6 +19,11 @@ public:
 
 	LogicalDeviceCoreSimplifier GetLogicalDeviceCoreSimplifier();
 	ShaderListSimplifier GetShaderListSimplifier();
+	DeviceDescriptorDataSimpifier GetDeviceDescriptorDataSimplifier();
+
+	const LogicalDeviceCoreSimplifier GetLogicalDeviceCoreSimplifier() const;
+	const ShaderListSimplifier GetShaderListSimplifier() const;
+	const DeviceDescriptorDataSimpifier GetDeviceDescriptorDataSimplifier() const;
 
 private:
 	LogicalDeviceMainInternal& _internal;

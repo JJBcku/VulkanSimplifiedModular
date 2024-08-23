@@ -1,7 +1,7 @@
 module VulkanSimplifiers.LogicalDeviceMain.Internal;
 
 LogicalDeviceMainInternal::LogicalDeviceMainInternal(const LogicalDeviceInitData& initData, const DeviceMainCreationData& mainCreationData, WindowListInternal& windowList) :
-	_windowList(windowList), _core(initData, windowList), _shaderList(mainCreationData.shaderList, _core.GetDevice())
+	_windowList(windowList), _core(initData, windowList), _shaderList(mainCreationData.shaderList, _core.GetDevice()), _descriptorList(mainCreationData.deviceDescriptors)
 {
 }
 
@@ -19,6 +19,11 @@ ShaderListInternal& LogicalDeviceMainInternal::GetShaderListSimplifier()
 	return _shaderList;
 }
 
+DeviceDescriptorDataInternal& LogicalDeviceMainInternal::GetDeviceDescriptorDataSimplifier()
+{
+	return _descriptorList;
+}
+
 const LogicalDeviceCoreInternal& LogicalDeviceMainInternal::GetLogicalDeviceCoreSimplifier() const
 {
 	return _core;
@@ -27,4 +32,9 @@ const LogicalDeviceCoreInternal& LogicalDeviceMainInternal::GetLogicalDeviceCore
 const ShaderListInternal& LogicalDeviceMainInternal::GetShaderListSimplifier() const
 {
 	return _shaderList;
+}
+
+const DeviceDescriptorDataInternal& LogicalDeviceMainInternal::GetDeviceDescriptorDataSimplifier() const
+{
+	return _descriptorList;
 }

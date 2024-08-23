@@ -1,0 +1,3 @@
+export module VulkanSimplifiers.SharedDescriptorData.Data;
+
+export struct DescriptorSetLayoutBindingData;

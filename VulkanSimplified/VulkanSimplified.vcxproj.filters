@@ -480,5 +480,14 @@
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

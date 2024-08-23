@@ -2,7 +2,7 @@ export module VulkanSimplifiers.SharedDescriptorData.CreationData;
 
 export struct SharedDescriptorDataCreationInfo
 {
-	long long int stump;
+	size_t descriptorSetLayoutBindingsInitialCapacity;
 
 	SharedDescriptorDataCreationInfo();
 };

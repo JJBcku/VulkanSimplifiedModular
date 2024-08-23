@@ -82,15 +82,15 @@ std::vector<VkDescriptorSetLayoutBinding> SharedDescriptorDataInternal::GetDescr
 	if ((std::numeric_limits<std::uint32_t>::max() - static_cast<unsigned long long>(firstBinding)) < (bindingIDs.size() - 1))
 		throw std::runtime_error("SharedDescriptorDataInternal::GetDescriptorSetLayoutBindings Error: Program was given too high first binding value to fit all bindings in the list!");
 
+	auto bindingList = _descriptorSetLayoutBindings.GetObjectList(bindingIDs);
+
 	for (size_t i = 0; i < bindingIDs.size(); i++)
 	{
-		auto& binding = _descriptorSetLayoutBindings.GetConstObject(bindingIDs[i]);
-
 		VkDescriptorSetLayoutBinding add{};
 		add.binding = currentBinding++;
-		add.descriptorType = binding.descriptorType;
-		add.descriptorCount = binding.descriptorCount;
-		add.stageFlags = binding.shaderStages;
+		add.descriptorType = bindingList[i].descriptorType;
+		add.descriptorCount = bindingList[i].descriptorCount;
+		add.stageFlags = bindingList[i].shaderStages;
 		add.pImmutableSamplers = nullptr;
 
 		ret.push_back(add);

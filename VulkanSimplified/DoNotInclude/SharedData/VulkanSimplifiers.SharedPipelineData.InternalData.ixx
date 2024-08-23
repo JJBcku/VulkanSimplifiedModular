@@ -30,23 +30,10 @@ export struct ShaderSharedPipelineData
 	std::strong_ordering operator<=>(const ShaderSharedPipelineData& rhs) const noexcept = default;
 };
 
-export struct VertexBindingDescriptionData
-{
-	std::uint32_t stride;
-	VkVertexInputRate inputRate;
-
-	VertexBindingDescriptionData();
-
-	bool operator==(const VertexBindingDescriptionData& rhs) const noexcept = default;
-	std::strong_ordering operator<=>(const VertexBindingDescriptionData & rhs) const noexcept = default;
-};
-
 export struct VertexAttributeDescriptionData
 {
-	std::uint32_t binding;
 	VkFormat format;
 	std::uint32_t offset;
-	std::uint32_t padding;
 
 	VertexAttributeDescriptionData();
 
@@ -54,10 +41,22 @@ export struct VertexAttributeDescriptionData
 	std::strong_ordering operator<=>(const VertexAttributeDescriptionData& rhs) const noexcept = default;
 };
 
+export struct VertexBindingDescriptionData
+{
+	std::uint32_t stride;
+	VkVertexInputRate inputRate;
+
+	std::vector<IDObject<VertexAttributeDescriptionData>> vertexAttributes;
+
+	VertexBindingDescriptionData();
+
+	bool operator==(const VertexBindingDescriptionData& rhs) const noexcept = default;
+	std::strong_ordering operator<=>(const VertexBindingDescriptionData& rhs) const noexcept = default;
+};
+
 export struct VertexInputSharedPipelineData
 {
-	std::vector<IDObject<VertexBindingDescriptionData>> vectorBindings;
-	std::vector<IDObject<VertexAttributeDescriptionData>> vectorAttributes;
+	std::vector<IDObject<VertexBindingDescriptionData>> vertexBindings;
 
 	VertexInputSharedPipelineData() = default;
 

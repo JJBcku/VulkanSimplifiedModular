@@ -19,10 +19,8 @@ VertexBindingDescriptionData::VertexBindingDescriptionData()
 
 VertexAttributeDescriptionData::VertexAttributeDescriptionData()
 {
-	binding = std::numeric_limits<std::uint32_t>::max();
 	format = VK_FORMAT_UNDEFINED;
 	offset = std::numeric_limits<std::uint32_t>::max();
-	padding = 0;
 }
 
 PipelineInputAssemblyData::PipelineInputAssemblyData()

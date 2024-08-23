@@ -21,11 +21,10 @@ public:
 	IDObject<ShaderSharedPipelineData> AddShaderSharedPipelineData(const std::string& entryPointName,
 		const std::vector<IDObject<ShaderSpecializationElement>>& specializations, size_t addOnReserve);
 
-	IDObject<VertexBindingDescriptionData> AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate, size_t addOnReserve);
-	IDObject<VertexAttributeDescriptionData> AddVertexAttributeData(std::uint32_t binding, std::uint32_t offset, DataFormatSetIndependentID format,
-		size_t addOnReserve);
-	IDObject<VertexInputSharedPipelineData> AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
-		const std::vector<IDObject<VertexAttributeDescriptionData>>& attributes, size_t addOnReserve);
+	IDObject<VertexBindingDescriptionData> AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate,
+		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserve);
+	IDObject<VertexAttributeDescriptionData> AddVertexAttributeData(std::uint32_t offset, DataFormatSetIndependentID format, size_t addOnReserve);
+	IDObject<VertexInputSharedPipelineData> AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings, size_t addOnReserve);
 
 	IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve);
 	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise, size_t addOnReserve);

@@ -17,7 +17,7 @@ public:
 
 	SharedDescriptorDataSimplifier& operator=(const SharedDescriptorDataSimplifier&) noexcept = delete;
 
-	IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(std::uint32_t bindings, DescriptorTypeFlags descriptorType, std::uint32_t descriptorAmount,
+	IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(DescriptorTypeFlags descriptorType, std::uint32_t descriptorAmount,
 		ShaderTypeFlags shaderStageFlags, size_t addOnReserve = 0);
 
 private:

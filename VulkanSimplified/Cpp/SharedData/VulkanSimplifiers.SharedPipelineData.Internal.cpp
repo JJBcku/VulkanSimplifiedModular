@@ -37,7 +37,8 @@ IDObject<ShaderSharedPipelineData> SharedPipelineDataInternal::AddShaderSharedPi
 	return _shaderPipelineInfo.AddUniqueObject(std::move(add), addOnReserve);
 }
 
-IDObject<VertexBindingDescriptionData> SharedPipelineDataInternal::AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate, size_t addOnReserve)
+IDObject<VertexBindingDescriptionData> SharedPipelineDataInternal::AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate,
+	const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserve)
 {
 	VertexBindingDescriptionData add;
 	add.stride = stride;
@@ -54,14 +55,14 @@ IDObject<VertexBindingDescriptionData> SharedPipelineDataInternal::AddVertexBind
 		throw std::runtime_error("SharedPipelineDataInternal::AddVertexBindingData Error: Program was give an erroneous input rate value!");
 	}
 
+	add.vertexAttributes = vertexAttributeIDs;
+
 	return _vertexBindingInfo.AddUniqueObject(std::move(add), addOnReserve);
 }
 
-IDObject<VertexAttributeDescriptionData> SharedPipelineDataInternal::AddVertexAttributeData(std::uint32_t binding, std::uint32_t offset,
-	DataFormatSetIndependentID format, size_t addOnReserve)
+IDObject<VertexAttributeDescriptionData> SharedPipelineDataInternal::AddVertexAttributeData(std::uint32_t offset, DataFormatSetIndependentID format, size_t addOnReserve)
 {
 	VertexAttributeDescriptionData add;
-	add.binding = binding;
 	add.format = TranslateDataFormatToVkFormat(format);
 	add.offset = offset;
 
@@ -69,11 +70,10 @@ IDObject<VertexAttributeDescriptionData> SharedPipelineDataInternal::AddVertexAt
 }
 
 IDObject<VertexInputSharedPipelineData> SharedPipelineDataInternal::AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
-	const std::vector<IDObject<VertexAttributeDescriptionData>>& attributes, size_t addOnReserve)
+	size_t addOnReserve)
 {
 	VertexInputSharedPipelineData add;
-	add.vectorBindings = bindings;
-	add.vectorAttributes = attributes;
+	add.vertexBindings = bindings;
 
 	return _vertexPipelineInfo.AddUniqueObject(std::move(add), addOnReserve);
 }

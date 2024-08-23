@@ -19,22 +19,21 @@ IDObject<ShaderSharedPipelineData> SharedPipelineDataSimplifier::AddShaderShared
 	return _internal.AddShaderSharedPipelineData(entryPointName, specializations, addOnReserve);
 }
 
-IDObject<VertexBindingDescriptionData> SharedPipelineDataSimplifier::AddVertexBindingData(std::uint32_t binding, std::uint32_t stride, VertexBindingInputRate inputRate,
-	size_t addOnReserve)
+IDObject<VertexBindingDescriptionData> SharedPipelineDataSimplifier::AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate,
+	const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserve)
 {
-	return _internal.AddVertexBindingData(binding, stride, inputRate, addOnReserve);
+	return _internal.AddVertexBindingData(stride, inputRate, vertexAttributeIDs, addOnReserve);
 }
 
-IDObject<VertexAttributeDescriptionData> SharedPipelineDataSimplifier::AddVertexAttributeData(std::uint32_t location, std::uint32_t binding, std::uint32_t offset,
-	DataFormatSetIndependentID format, size_t addOnReserve)
+IDObject<VertexAttributeDescriptionData> SharedPipelineDataSimplifier::AddVertexAttributeData(std::uint32_t offset, DataFormatSetIndependentID format, size_t addOnReserve)
 {
-	return _internal.AddVertexAttributeData(location, binding, offset, format, addOnReserve);
+	return _internal.AddVertexAttributeData(offset, format, addOnReserve);
 }
 
 IDObject<VertexInputSharedPipelineData> SharedPipelineDataSimplifier::AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings,
-	const std::vector<IDObject<VertexAttributeDescriptionData>>& attributes, size_t addOnReserve)
+	size_t addOnReserve)
 {
-	return _internal.AddVertexInputSharedPipelineData(bindings, attributes, addOnReserve);
+	return _internal.AddVertexInputSharedPipelineData(bindings, addOnReserve);
 }
 
 IDObject<PipelineInputAssemblyData> SharedPipelineDataSimplifier::AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve)

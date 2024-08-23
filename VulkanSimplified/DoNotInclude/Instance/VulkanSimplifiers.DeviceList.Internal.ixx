@@ -15,11 +15,13 @@ import VulkanSimplifiers.PhysicalDevice.Internal;
 import VulkanSimplifiers.LogicalDeviceCore.CreationData;
 
 import VulkanSimplifiers.WindowList.Internal;
+import VulkanSimplifiers.SharedDataList.Internal;
 
 export class DeviceListInternal
 {
 public:
-	DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity, std::uint32_t instanceVulkanVersion, WindowListInternal& windowList);
+	DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity, std::uint32_t instanceVulkanVersion, WindowListInternal& windowList,
+		const SharedDataListInternal& sharedDataList);
 	~DeviceListInternal();
 
 	DeviceListInternal(const DeviceListInternal&) noexcept = delete;
@@ -47,4 +49,5 @@ private:
 	std::uint32_t _padding;
 
 	WindowListInternal& _windowList;
+	const SharedDataListInternal& _sharedDataList;
 };

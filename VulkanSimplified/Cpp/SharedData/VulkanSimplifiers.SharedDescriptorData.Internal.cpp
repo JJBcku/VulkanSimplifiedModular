@@ -68,3 +68,33 @@ IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataInternal::AddDescri
 
 	return _descriptorSetLayoutBindings.AddUniqueObject(std::move(add), addOnReserve);
 }
+
+std::vector<VkDescriptorSetLayoutBinding> SharedDescriptorDataInternal::GetDescriptorSetLayoutBindings(std::uint32_t firstBinding,
+	const std::vector<IDObject<DescriptorSetLayoutBindingData>>& bindingIDs) const
+{
+	assert(!bindingIDs.empty());
+
+	std::vector<VkDescriptorSetLayoutBinding> ret;
+	ret.reserve(bindingIDs.size());
+
+	std::uint32_t currentBinding = firstBinding;
+
+	if ((std::numeric_limits<std::uint32_t>::max() - static_cast<unsigned long long>(firstBinding)) < (bindingIDs.size() - 1))
+		throw std::runtime_error("SharedDescriptorDataInternal::GetDescriptorSetLayoutBindings Error: Program was given too high first binding value to fit all bindings in the list!");
+
+	for (size_t i = 0; i < bindingIDs.size(); i++)
+	{
+		auto& binding = _descriptorSetLayoutBindings.GetConstObject(bindingIDs[i]);
+
+		VkDescriptorSetLayoutBinding add{};
+		add.binding = currentBinding++;
+		add.descriptorType = binding.descriptorType;
+		add.descriptorCount = binding.descriptorCount;
+		add.stageFlags = binding.shaderStages;
+		add.pImmutableSamplers = nullptr;
+
+		ret.push_back(add);
+	}
+
+	return ret;
+}

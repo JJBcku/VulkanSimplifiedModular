@@ -1,3 +1,7 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 export module VulkanSimplifiers.SharedDescriptorData.Internal;
 
 import std;
@@ -17,6 +21,8 @@ public:
 
 	IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(DescriptorTypeFlags descriptorType, std::uint32_t descriptorAmount,
 		ShaderTypeFlags shaderStageFlags, size_t addOnReserve);
+
+	std::vector<VkDescriptorSetLayoutBinding> GetDescriptorSetLayoutBindings(std::uint32_t firstBinding, const std::vector<IDObject<DescriptorSetLayoutBindingData>>& bindingIDs) const;
 
 private:
 	UnsortedList<DescriptorSetLayoutBindingData> _descriptorSetLayoutBindings;

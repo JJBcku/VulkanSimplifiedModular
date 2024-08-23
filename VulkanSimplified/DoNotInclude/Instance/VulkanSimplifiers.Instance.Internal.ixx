@@ -11,11 +11,12 @@ import VulkanSimplifiers.DebugCallback;
 import VulkanSimplifiers.DeviceList.Internal;
 
 import VulkanSimplifiers.WindowList.Internal;
+import VulkanSimplifiers.SharedDataList.Internal;
 
 export class InstanceInternal
 {
 public:
-	InstanceInternal(const InstanceInitInfo& initInfo, WindowListInternal& windowList);
+	InstanceInternal(const InstanceInitInfo& initInfo, WindowListInternal& windowList, const SharedDataListInternal& sharedDataList);
 	~InstanceInternal();
 
 	InstanceInternal(const InstanceInternal&) noexcept = delete;
@@ -32,5 +33,4 @@ private:
 	VkInstance _instance;
 	VkDebugUtilsMessengerEXT _debugMessenger;
 	std::optional<DeviceListInternal> _deviceList;
-	WindowListInternal& _windowList;
 };

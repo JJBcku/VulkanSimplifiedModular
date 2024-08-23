@@ -6,7 +6,7 @@ export import VulkanSimplifiers.DeviceDescriptorData.CreationData;
 export struct DeviceMainCreationData
 {
 	ShaderListCreationData shaderList;
-	DeviceDesriptorDataCreationData deviceDescriptors;
+	DeviceDescriptorDataCreationData deviceDescriptors;
 
 	DeviceMainCreationData() = default;
 };

@@ -10,10 +10,14 @@ import VulkanSimplifiers.DeviceDescriptorData.Internal;
 
 import VulkanSimplifiers.WindowList.Internal;
 
+import VulkanSimplifiers.SharedDataList.Internal;
+import VulkanSimplifiers.SharedDescriptorData.Internal;
+
 export class LogicalDeviceMainInternal
 {
 public:
-	LogicalDeviceMainInternal(const LogicalDeviceInitData& initData, const DeviceMainCreationData& mainCreationData, WindowListInternal& windowList);
+	LogicalDeviceMainInternal(const LogicalDeviceInitData& initData, const DeviceMainCreationData& mainCreationData, WindowListInternal& windowList,
+		const SharedDataListInternal& sharedDataList);
 	~LogicalDeviceMainInternal();
 
 	LogicalDeviceMainInternal(const LogicalDeviceMainInternal&) noexcept = delete;
@@ -29,8 +33,6 @@ public:
 	const DeviceDescriptorDataInternal& GetDeviceDescriptorDataSimplifier() const;
 
 private:
-	WindowListInternal& _windowList;
-
 	LogicalDeviceCoreInternal _core;
 	ShaderListInternal _shaderList;
 	DeviceDescriptorDataInternal _descriptorList;

@@ -1,6 +1,6 @@
 module VulkanSimplifiers.DeviceDescriptorData.CreationData;
 
-DeviceDesriptorDataCreationData::DeviceDesriptorDataCreationData()
+DeviceDescriptorDataCreationData::DeviceDescriptorDataCreationData()
 {
-	stump = 0;
+	descriptorSetLayoutListInitialCapacity = 0;
 }

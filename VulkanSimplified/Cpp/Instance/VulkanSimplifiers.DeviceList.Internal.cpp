@@ -5,7 +5,8 @@ module;
 module VulkanSimplifiers.DeviceList.Internal;
 
 DeviceListInternal::DeviceListInternal(VkInstance instance, size_t logicalDeviceListInitialCapacity, std::uint32_t instanceVulkanVersion,
-	WindowListInternal& windowList) : _instance(instance), _logicalDeviceList(logicalDeviceListInitialCapacity), _instanceVulkanVersion(instanceVulkanVersion), _windowList(windowList)
+	WindowListInternal& windowList, const SharedDataListInternal& sharedDataList) : _instance(instance), _logicalDeviceList(logicalDeviceListInitialCapacity),
+	_instanceVulkanVersion(instanceVulkanVersion), _windowList(windowList), _sharedDataList(sharedDataList)
 {
 }
 
@@ -85,5 +86,5 @@ IDObject<LogicalDevicePointer> DeviceListInternal::AddLogicalDevice(const Logica
 	initData.physicalDevice = physicalDevice.GetPhysicalDevice();
 	initData.physicalDeviceName = physicalDeviceData.deviceName;
 
-	return _logicalDeviceList.AddObject(std::make_unique<LogicalDeviceMainInternal>(initData, mainCreationData, _windowList), addOnReserve);
+	return _logicalDeviceList.AddObject(std::make_unique<LogicalDeviceMainInternal>(initData, mainCreationData, _windowList, _sharedDataList), addOnReserve);
 }

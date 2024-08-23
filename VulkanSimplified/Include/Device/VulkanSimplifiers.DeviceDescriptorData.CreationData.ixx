@@ -2,9 +2,9 @@ export module VulkanSimplifiers.DeviceDescriptorData.CreationData;
 
 import std;
 
-export struct DeviceDesriptorDataCreationData
+export struct DeviceDescriptorDataCreationData
 {
-	std::uint64_t stump;
+	size_t descriptorSetLayoutListInitialCapacity;
 
-	DeviceDesriptorDataCreationData();
+	DeviceDescriptorDataCreationData();
 };

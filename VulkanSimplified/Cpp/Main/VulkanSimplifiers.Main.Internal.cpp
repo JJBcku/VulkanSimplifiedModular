@@ -154,7 +154,7 @@ void MainInternal::CreateIntance(const InstanceCreationInfo& instanceInfo)
 	initInfo.requestedLayers = CompileRequestedLayersList();
 	initInfo.logicalDeviceListInitialCapacity = instanceInfo.logicalDeviceListInitialCapacity;
 
-	_instance.emplace(initInfo, _windowList);
+	_instance.emplace(initInfo, _windowList, _sharedData);
 	_windowList.SetInstance(_instance->GetInstance());
 }
 

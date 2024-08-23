@@ -3,32 +3,29 @@ export module VulkanSimplifiers.ShaderList.Data;
 import std;
 import ListTemplates.IDObject;
 
+export import VulkanSimplifiers.Common.ShaderTypeFlags;
+
 export class AutoCleanUpFragmentShader;
 export class AutoCleanUpVertexShader;
-
-export enum class ShaderIDType : std::uint64_t
-{
-	UNKNOWN = 0,
-	FRAGMENT = 1,
-	VERTEX = 2,
-};
 
 export union ArbitraryShaderID
 {
 public:
-	ShaderIDType type;
+	ShaderTypeFlagBit type;
 
 	struct
 	{
-		ShaderIDType type;
+		ShaderTypeFlagBit type;
 		IDObject<AutoCleanUpFragmentShader> fragmentShaderID;
 	} fragmentShader;
 
 	struct
 	{
-		ShaderIDType type;
+		ShaderTypeFlagBit type;
 		IDObject<AutoCleanUpVertexShader> vertexShaderID;
 	} vertexShader;
 
 	ArbitraryShaderID();
+	ArbitraryShaderID(IDObject<AutoCleanUpFragmentShader> fragmentShaderID);
+	ArbitraryShaderID(IDObject<AutoCleanUpVertexShader> vertexShaderID);
 };

@@ -1,8 +1,8 @@
-export module VulkanSimplifiers.Common.CompareOperation;
+export module VulkanSimplifiers.Common.CompareOperationsType;
 
 import std;
 
-export enum class CompareOperationType : std::uint64_t
+export enum class CompareOperationsType : std::uint64_t
 {
 	COMPARE_OPERATION_NEVER = 1,
 	COMPARE_OPERATION_ALWAYS = 2,

@@ -8,7 +8,7 @@ import VulkanSimplifiers.SharedPipelineData.Data;
 
 import VulkanSimplifiers.Common.DataFormatFlags;
 import VulkanSimplifiers.Common.ImageSampleFlags;
-import VulkanSimplifiers.Common.CompareOperation;
+import VulkanSimplifiers.Common.CompareOperationsType;
 
 export class SharedPipelineDataSimplifier
 {
@@ -31,7 +31,7 @@ public:
 	IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve = 0);
 	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise, size_t addOnReserve = 0);
 	IDObject<PipelineMultisampleData> AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting, std::optional<std::uint32_t> minSampleShading, size_t addOnReserve = 0);
-	IDObject<PipelineDepthStencilStateData> AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationType compareOp, float minDepth, float maxDepth, size_t addOnReserve = 0);
+	IDObject<PipelineDepthStencilStateData> AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserve = 0);
 	IDObject<PipelineColorBlendAttachment> AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents, ColorBlendingPreset blendingPreset, size_t addOnReserve = 0);
 
 private:

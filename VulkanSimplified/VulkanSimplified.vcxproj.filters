@@ -453,7 +453,10 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.CompareOperation.ixx">
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.CompareOperationsType.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

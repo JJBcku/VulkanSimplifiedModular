@@ -209,7 +209,7 @@ IDObject<PipelineMultisampleData> SharedPipelineDataInternal::AddPipelineMultisa
 	return _pipelineMultisampleInfo.AddUniqueObject(std::move(add), addOnReserve);
 }
 
-IDObject<PipelineDepthStencilStateData> SharedPipelineDataInternal::AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationType compareOp,
+IDObject<PipelineDepthStencilStateData> SharedPipelineDataInternal::AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationsType compareOp,
 	float minDepth, float maxDepth, size_t addOnReserve)
 {
 	PipelineDepthStencilStateData add;
@@ -234,28 +234,28 @@ IDObject<PipelineDepthStencilStateData> SharedPipelineDataInternal::AddPipelineD
 
 	switch (compareOp)
 	{
-	case CompareOperationType::COMPARE_OPERATION_NOT_EQUAL:
+	case CompareOperationsType::COMPARE_OPERATION_NOT_EQUAL:
 		add.compareOp = VK_COMPARE_OP_NOT_EQUAL;
 		break;
-	case CompareOperationType::COMPARE_OPERATION_GREATER_OR_EQUAL:
+	case CompareOperationsType::COMPARE_OPERATION_GREATER_OR_EQUAL:
 		add.compareOp = VK_COMPARE_OP_GREATER_OR_EQUAL;
 		break;
-	case CompareOperationType::COMPARE_OPERATION_GREATER:
+	case CompareOperationsType::COMPARE_OPERATION_GREATER:
 		add.compareOp = VK_COMPARE_OP_GREATER;
 		break;
-	case CompareOperationType::COMPARE_OPERATION_LESS_OR_EQUAL:
+	case CompareOperationsType::COMPARE_OPERATION_LESS_OR_EQUAL:
 		add.compareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
 		break;
-	case CompareOperationType::COMPARE_OPERATION_LESS:
+	case CompareOperationsType::COMPARE_OPERATION_LESS:
 		add.compareOp = VK_COMPARE_OP_LESS;
 		break;
-	case CompareOperationType::COMPARE_OPERATION_EQUAL:
+	case CompareOperationsType::COMPARE_OPERATION_EQUAL:
 		add.compareOp = VK_COMPARE_OP_EQUAL;
 		break;
-	case CompareOperationType::COMPARE_OPERATION_ALWAYS:
+	case CompareOperationsType::COMPARE_OPERATION_ALWAYS:
 		add.compareOp = VK_COMPARE_OP_ALWAYS;
 		break;
-	case CompareOperationType::COMPARE_OPERATION_NEVER:
+	case CompareOperationsType::COMPARE_OPERATION_NEVER:
 		add.compareOp = VK_COMPARE_OP_NEVER;
 		break;
 	default:

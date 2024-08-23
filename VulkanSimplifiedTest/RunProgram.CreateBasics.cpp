@@ -24,6 +24,7 @@ void CreateBasics(VulkanData& data, MainSettings& settings)
 	initData.sharedDataListInitData.sharedPipelineData.initialPipelineInputAssemblyInfoCapacity = 1;
 	initData.sharedDataListInitData.sharedPipelineData.initialPipelineRasterizationInfoCapacity = 1;
 	initData.sharedDataListInitData.sharedPipelineData.initialPipelineMultisampleInfoCapacity = 1;
+	initData.sharedDataListInitData.sharedPipelineData.initialPipelineColorBlendAttachmentInfoCapacity = 1;
 
 	basic.main.emplace(initData);
 

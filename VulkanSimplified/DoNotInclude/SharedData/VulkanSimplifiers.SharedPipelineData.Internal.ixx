@@ -14,7 +14,7 @@ import VulkanSimplifiers.Common.CompareOperationsType;
 export class SharedPipelineDataInternal
 {
 public:
-	SharedPipelineDataInternal(SharedPipelineDataCreationInfo initInfo);
+	SharedPipelineDataInternal(const SharedPipelineDataCreationInfo& initInfo);
 	~SharedPipelineDataInternal();
 
 	IDObject<ShaderSpecializationElement> AddShaderSpecializationElement(std::uint32_t constantID, std::uint32_t dataOffset, size_t dataSize, size_t addOnReserve);

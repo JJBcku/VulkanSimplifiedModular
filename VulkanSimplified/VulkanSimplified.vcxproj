@@ -168,6 +168,9 @@
     <ClCompile Include="Cpp\Main\VulkanSimplifiers.WindowList.Internal.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.Internal.cpp" />
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.cpp" />
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.CreationData.cpp" />
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.cpp" />
@@ -175,9 +178,11 @@
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.CompareOperationsType.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DescriptorTypeFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.CreationData.ixx" />
@@ -241,6 +246,8 @@
     <ClCompile Include="Cpp\Instance\VulkanSimplifiers.DebugCallback.cpp" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.CreationData.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.ixx" />
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.CreationData.ixx" />
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.Data.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.ixx" />

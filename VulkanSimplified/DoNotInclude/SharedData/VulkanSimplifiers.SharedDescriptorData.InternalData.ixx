@@ -8,10 +8,10 @@ import std;
 
 export struct DescriptorSetLayoutBindingData
 {
-	std::uint32_t binding;
 	VkDescriptorType descriptorType;
 	std::uint32_t descriptorCount;
 	VkShaderStageFlags shaderStages;
+	std::uint32_t padding;
 
 	DescriptorSetLayoutBindingData();
 

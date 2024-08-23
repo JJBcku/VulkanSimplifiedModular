@@ -13,12 +13,10 @@ SharedDescriptorDataInternal::~SharedDescriptorDataInternal()
 {
 }
 
-IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataInternal::AddDescriptorSetLayoutBindingsData(std::uint32_t bindings, DescriptorTypeFlags descriptorType,
+IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataInternal::AddDescriptorSetLayoutBindingsData(DescriptorTypeFlags descriptorType,
 	std::uint32_t descriptorAmount, ShaderTypeFlags shaderStageFlags, size_t addOnReserve)
 {
 	DescriptorSetLayoutBindingData add;
-
-	add.binding = bindings;
 
 	switch (descriptorType)
 	{

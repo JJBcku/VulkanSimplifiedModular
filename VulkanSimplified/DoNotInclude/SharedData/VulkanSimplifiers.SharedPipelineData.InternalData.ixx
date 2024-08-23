@@ -32,10 +32,8 @@ export struct ShaderSharedPipelineData
 
 export struct VertexBindingDescriptionData
 {
-	std::uint32_t binding;
 	std::uint32_t stride;
 	VkVertexInputRate inputRate;
-	std::uint32_t padding;
 
 	VertexBindingDescriptionData();
 
@@ -45,10 +43,10 @@ export struct VertexBindingDescriptionData
 
 export struct VertexAttributeDescriptionData
 {
-	std::uint32_t location;
 	std::uint32_t binding;
 	VkFormat format;
 	std::uint32_t offset;
+	std::uint32_t padding;
 
 	VertexAttributeDescriptionData();
 

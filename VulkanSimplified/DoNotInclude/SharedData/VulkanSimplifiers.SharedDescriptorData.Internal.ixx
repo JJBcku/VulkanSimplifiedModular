@@ -15,7 +15,7 @@ public:
 	SharedDescriptorDataInternal(const SharedDescriptorDataCreationInfo& creationInfo);
 	~SharedDescriptorDataInternal();
 
-	IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(std::uint32_t bindings, DescriptorTypeFlags descriptorType, std::uint32_t descriptorAmount,
+	IDObject<DescriptorSetLayoutBindingData> AddDescriptorSetLayoutBindingsData(DescriptorTypeFlags descriptorType, std::uint32_t descriptorAmount,
 		ShaderTypeFlags shaderStageFlags, size_t addOnReserve);
 
 private:

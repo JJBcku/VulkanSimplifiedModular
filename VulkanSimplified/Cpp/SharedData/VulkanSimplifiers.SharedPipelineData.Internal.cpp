@@ -37,10 +37,9 @@ IDObject<ShaderSharedPipelineData> SharedPipelineDataInternal::AddShaderSharedPi
 	return _shaderPipelineInfo.AddUniqueObject(std::move(add), addOnReserve);
 }
 
-IDObject<VertexBindingDescriptionData> SharedPipelineDataInternal::AddVertexBindingData(std::uint32_t binding, std::uint32_t stride, VertexBindingInputRate inputRate, size_t addOnReserve)
+IDObject<VertexBindingDescriptionData> SharedPipelineDataInternal::AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate, size_t addOnReserve)
 {
 	VertexBindingDescriptionData add;
-	add.binding = binding;
 	add.stride = stride;
 
 	switch (inputRate)
@@ -58,11 +57,10 @@ IDObject<VertexBindingDescriptionData> SharedPipelineDataInternal::AddVertexBind
 	return _vertexBindingInfo.AddUniqueObject(std::move(add), addOnReserve);
 }
 
-IDObject<VertexAttributeDescriptionData> SharedPipelineDataInternal::AddVertexAttributeData(std::uint32_t location, std::uint32_t binding, std::uint32_t offset,
+IDObject<VertexAttributeDescriptionData> SharedPipelineDataInternal::AddVertexAttributeData(std::uint32_t binding, std::uint32_t offset,
 	DataFormatSetIndependentID format, size_t addOnReserve)
 {
 	VertexAttributeDescriptionData add;
-	add.location = location;
 	add.binding = binding;
 	add.format = TranslateDataFormatToVkFormat(format);
 	add.offset = offset;

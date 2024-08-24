@@ -1,26 +1,45 @@
 ; SPIR-V
 ; Version: 1.0
 ; Generator: Google Shaderc over Glslang; 11
-; Bound: 13
+; Bound: 40
 ; Schema: 0
                OpCapability Shader
           %1 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %4 "main" %9 %11
+               OpEntryPoint Fragment %4 "main" %12 %26
                OpExecutionMode %4 OriginUpperLeft
-               OpDecorate %9 Location 0
-               OpDecorate %11 Location 0
+               OpDecorate %12 Location 0
+               OpDecorate %26 Location 0
        %void = OpTypeVoid
           %3 = OpTypeFunction %void
       %float = OpTypeFloat 32
+    %v3float = OpTypeVector %float 3
     %v4float = OpTypeVector %float 4
-%_ptr_Output_v4float = OpTypePointer Output %v4float
-          %9 = OpVariable %_ptr_Output_v4float Output
 %_ptr_Input_v4float = OpTypePointer Input %v4float
-         %11 = OpVariable %_ptr_Input_v4float Input
+         %12 = OpVariable %_ptr_Input_v4float Input
+%float_1_05499995 = OpConstant %float 1.05499995
+         %16 = OpConstantComposite %v3float %float_1_05499995 %float_1_05499995 %float_1_05499995
+%float_0_416666657 = OpConstant %float 0.416666657
+         %19 = OpConstantComposite %v3float %float_0_416666657 %float_0_416666657 %float_0_416666657
+%_ptr_Output_v4float = OpTypePointer Output %v4float
+         %26 = OpVariable %_ptr_Output_v4float Output
+       %uint = OpTypeInt 32 0
+     %uint_3 = OpConstant %uint 3
+%_ptr_Input_float = OpTypePointer Input %float
+%float_n0_550000012 = OpConstant %float -0.550000012
+         %39 = OpConstantComposite %v3float %float_n0_550000012 %float_n0_550000012 %float_n0_550000012
           %4 = OpFunction %void None %3
           %5 = OpLabel
-         %12 = OpLoad %v4float %11
-               OpStore %9 %12
+         %13 = OpLoad %v4float %12
+         %14 = OpVectorShuffle %v3float %13 %13 0 1 2
+         %20 = OpExtInst %v3float %1 Pow %14 %19
+         %24 = OpExtInst %v3float %1 Fma %16 %20 %39
+         %31 = OpAccessChain %_ptr_Input_float %12 %uint_3
+         %32 = OpLoad %float %31
+         %33 = OpCompositeExtract %float %24 0
+         %34 = OpCompositeExtract %float %24 1
+         %35 = OpCompositeExtract %float %24 2
+         %36 = OpCompositeConstruct %v4float %33 %34 %35 %32
+               OpStore %26 %36
                OpReturn
                OpFunctionEnd

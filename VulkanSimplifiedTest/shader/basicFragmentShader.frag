@@ -6,5 +6,8 @@ layout(location = 0) out vec4 outColor;
 
 void main()
 {
-	outColor = inColor;
+	vec3 transitionColor = inColor.rgb;
+	transitionColor = (vec3(1.055) * pow(transitionColor, vec3(1.0/2.4))) - vec3(0.55);
+
+	outColor = vec4(transitionColor, inColor.a);
 }

@@ -1,12 +1,12 @@
 ; SPIR-V
 ; Version: 1.0
 ; Generator: Google Shaderc over Glslang; 11
-; Bound: 14
+; Bound: 38
 ; Schema: 0
                OpCapability Shader
           %2 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Fragment %main "main" %outColor %inColor
+               OpEntryPoint Fragment %main "main" %inColor %outColor
                OpExecutionMode %main OriginUpperLeft
           %1 = OpString "basicFragmentShader.frag"
                OpSource GLSL 450 %1 "// OpModuleProcessed entry-point main
@@ -22,28 +22,60 @@ layout(location = 0) out vec4 outColor;
 
 void main()
 {
-	outColor = inColor;
+	vec3 transitionColor = inColor.rgb;
+	transitionColor = (vec3(1.055) * pow(transitionColor, vec3(1.0/2.4))) - vec3(0.55);
+
+	outColor = vec4(transitionColor, inColor.a);
 }"
                OpSourceExtension "GL_GOOGLE_cpp_style_line_directive"
                OpSourceExtension "GL_GOOGLE_include_directive"
                OpName %main "main"
-               OpName %outColor "outColor"
+               OpName %transitionColor "transitionColor"
                OpName %inColor "inColor"
-               OpDecorate %outColor Location 0
+               OpName %outColor "outColor"
                OpDecorate %inColor Location 0
+               OpDecorate %outColor Location 0
        %void = OpTypeVoid
           %4 = OpTypeFunction %void
       %float = OpTypeFloat 32
+    %v3float = OpTypeVector %float 3
+%_ptr_Function_v3float = OpTypePointer Function %v3float
     %v4float = OpTypeVector %float 4
-%_ptr_Output_v4float = OpTypePointer Output %v4float
-   %outColor = OpVariable %_ptr_Output_v4float Output
 %_ptr_Input_v4float = OpTypePointer Input %v4float
     %inColor = OpVariable %_ptr_Input_v4float Input
+%float_1_05499995 = OpConstant %float 1.05499995
+         %17 = OpConstantComposite %v3float %float_1_05499995 %float_1_05499995 %float_1_05499995
+%float_0_416666657 = OpConstant %float 0.416666657
+         %20 = OpConstantComposite %v3float %float_0_416666657 %float_0_416666657 %float_0_416666657
+%float_0_550000012 = OpConstant %float 0.550000012
+         %24 = OpConstantComposite %v3float %float_0_550000012 %float_0_550000012 %float_0_550000012
+%_ptr_Output_v4float = OpTypePointer Output %v4float
+   %outColor = OpVariable %_ptr_Output_v4float Output
+       %uint = OpTypeInt 32 0
+     %uint_3 = OpConstant %uint 3
+%_ptr_Input_float = OpTypePointer Input %float
                OpLine %1 7 11
        %main = OpFunction %void None %4
           %6 = OpLabel
+%transitionColor = OpVariable %_ptr_Function_v3float Function
                OpLine %1 9 0
-         %13 = OpLoad %v4float %inColor
-               OpStore %outColor %13
+         %14 = OpLoad %v4float %inColor
+         %15 = OpVectorShuffle %v3float %14 %14 0 1 2
+               OpStore %transitionColor %15
+               OpLine %1 10 0
+         %18 = OpLoad %v3float %transitionColor
+         %21 = OpExtInst %v3float %2 Pow %18 %20
+         %22 = OpFMul %v3float %17 %21
+         %25 = OpFSub %v3float %22 %24
+               OpStore %transitionColor %25
+               OpLine %1 12 0
+         %28 = OpLoad %v3float %transitionColor
+         %32 = OpAccessChain %_ptr_Input_float %inColor %uint_3
+         %33 = OpLoad %float %32
+         %34 = OpCompositeExtract %float %28 0
+         %35 = OpCompositeExtract %float %28 1
+         %36 = OpCompositeExtract %float %28 2
+         %37 = OpCompositeConstruct %v4float %34 %35 %36 %33
+               OpStore %outColor %37
                OpReturn
                OpFunctionEnd

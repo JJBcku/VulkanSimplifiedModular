@@ -37,9 +37,14 @@ static size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer
 			continue;
 
 		auto& srgb = deviceSurfaceSupport.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
-		auto& blitDst = deviceProperties.deviceFormatsSupport.formatFeaturesOptimalImageSupport.blitDst;
+		auto& imageSupport = deviceProperties.deviceFormatsSupport.formatFeaturesOptimalImageSupport;
 
-		if (!CheckFormatSupport(blitDst.secondSet, srgb.secondSet, DATA_FORMAT_BGRA8_SRGB) && !CheckFormatSupport(blitDst.seventhSet, srgb.seventhSet, DATA_FORMAT_RGBA8_SRGB))
+		if (!CheckFormatSupport(imageSupport.blitDst.thirdSet, srgb.thirdSet, DATA_FORMAT_BGRA8_UNORM) &&
+			!CheckFormatSupport(imageSupport.blitDst.seventhSet, srgb.seventhSet, DATA_FORMAT_RGBA8_UNORM))
+			continue;
+
+		if ((imageSupport.colorAttachment.thirdSet & DATA_FORMAT_BGRA8_UNORM) != DATA_FORMAT_BGRA8_UNORM &&
+			(imageSupport.colorAttachment.seventhSet & DATA_FORMAT_RGBA8_UNORM) != DATA_FORMAT_RGBA8_UNORM)
 			continue;
 
 		if ((deviceProperties.deviceFormatsSupport.formatFeaturesBufferSupport.vertexBuffer.sixthSet & DATA_FORMAT_RGBA32_SFLOAT) != DATA_FORMAT_RGBA32_SFLOAT)

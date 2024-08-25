@@ -31,6 +31,9 @@ public:
 	IDObject<VertexAttributeDescriptionData> AddVertexAttributeData(std::uint32_t offset, DataFormatSetIndependentID format, size_t addOnReserve);
 	IDObject<VertexInputSharedPipelineData> AddVertexInputSharedPipelineData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindings, size_t addOnReserve);
 
+	IDObject<PipelineViewportData> AddPipelineViewportData(std::uint32_t startX, std::uint32_t startY, std::uint32_t width, std::uint32_t height, float minDepth, float maxDepth,
+		size_t addOnReserve);
+
 	IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve);
 	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise, size_t addOnReserve);
 	IDObject<PipelineMultisampleData> AddPipelineMultisampleData(ImageSampleFlagBits samplingSetting, std::optional<std::uint32_t> minSampleShading, size_t addOnReserve);
@@ -48,6 +51,8 @@ private:
 	UnsortedList<VertexBindingDescriptionData> _vertexBindingInfo;
 	UnsortedList<VertexAttributeDescriptionData> _vertexAttributeInfo;
 	UnsortedList<VertexInputSharedPipelineData> _vertexPipelineInfo;
+
+	UnsortedList<PipelineViewportData> _pipelineViewportData;
 
 	UnsortedList<PipelineInputAssemblyData> _pipelineInputAssemblyInfo;
 	UnsortedList<PipelineRasterizationData> _pipelineRasterizationInfo;

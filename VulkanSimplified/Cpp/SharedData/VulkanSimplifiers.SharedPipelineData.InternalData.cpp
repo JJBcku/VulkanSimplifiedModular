@@ -23,6 +23,16 @@ VertexAttributeDescriptionData::VertexAttributeDescriptionData()
 	offset = std::numeric_limits<std::uint32_t>::max();
 }
 
+PipelineViewportData::PipelineViewportData()
+{
+	startX = std::numeric_limits<float>::max();
+	startY = std::numeric_limits<float>::max();
+	width = 0.0f;
+	height = 0.0f;
+	minDepth = std::numeric_limits<float>::max();
+	maxDepth = std::numeric_limits<float>::lowest();
+}
+
 PipelineInputAssemblyData::PipelineInputAssemblyData()
 {
 	topology = static_cast<VkPrimitiveTopology>(std::numeric_limits<std::uint32_t>::max());

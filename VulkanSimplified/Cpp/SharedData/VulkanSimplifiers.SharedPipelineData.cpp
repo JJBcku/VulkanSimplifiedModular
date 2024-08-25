@@ -36,6 +36,11 @@ IDObject<VertexInputSharedPipelineData> SharedPipelineDataSimplifier::AddVertexI
 	return _internal.AddVertexInputSharedPipelineData(bindings, addOnReserve);
 }
 
+IDObject<PipelineViewportData> SharedPipelineDataSimplifier::AddPipelineViewportData(std::uint32_t startX, std::uint32_t startY, std::uint32_t width, std::uint32_t height, float minDepth, float maxDepth, size_t addOnReserve)
+{
+	return _internal.AddPipelineViewportData(startX, startY, width, height, minDepth, maxDepth, addOnReserve);
+}
+
 IDObject<PipelineInputAssemblyData> SharedPipelineDataSimplifier::AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve)
 {
 	return _internal.AddPipelineInputAssemblyData(topology, primitiveRestartEnable, addOnReserve);

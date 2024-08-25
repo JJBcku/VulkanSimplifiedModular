@@ -7,9 +7,10 @@ module VulkanSimplifiers.SharedPipelineData.Internal;
 SharedPipelineDataInternal::SharedPipelineDataInternal(const SharedPipelineDataCreationInfo& initInfo) : _shaderSpecializationElements(initInfo.initialSpecializationElementsCapacity),
 _shaderPipelineInfo(initInfo.initialShaderPipelineInfoCapacity), _vertexBindingInfo(initInfo.initialVertexBindingInfoCapacity),
 _vertexAttributeInfo(initInfo.initialVertexAttributeInfoCapacity), _vertexPipelineInfo(initInfo.initialVertexInputPipelineInfoCapacity),
-_pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity), _pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity),
-_pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity), _pipelineDepthStencilInfo(initInfo.initialPipelineDepthStencilInfoCapacity),
-_pipelineColorBlendAttachmentInfo(initInfo.initialPipelineColorBlendAttachmentInfoCapacity), _pushContantData(initInfo.initialPushConstantDataCapacity)
+_pipelineViewportData(initInfo.initialPipelineViewportDataCapacity), _pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity),
+_pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity), _pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity),
+_pipelineDepthStencilInfo(initInfo.initialPipelineDepthStencilInfoCapacity), _pipelineColorBlendAttachmentInfo(initInfo.initialPipelineColorBlendAttachmentInfoCapacity),
+_pushContantData(initInfo.initialPushConstantDataCapacity)
 {
 }
 
@@ -76,6 +77,20 @@ IDObject<VertexInputSharedPipelineData> SharedPipelineDataInternal::AddVertexInp
 	add.vertexBindings = bindings;
 
 	return _vertexPipelineInfo.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+IDObject<PipelineViewportData> SharedPipelineDataInternal::AddPipelineViewportData(std::uint32_t startX, std::uint32_t startY, std::uint32_t width, std::uint32_t height,
+	float minDepth, float maxDepth, size_t addOnReserve)
+{
+	PipelineViewportData add;
+	add.startX = static_cast<float>(startX);
+	add.startY = static_cast<float>(startY);
+	add.width = static_cast<float>(width);
+	add.height = static_cast<float>(height);
+	add.minDepth = minDepth;
+	add.maxDepth = maxDepth;
+
+	return _pipelineViewportData.AddUniqueObject(std::move(add), addOnReserve);
 }
 
 IDObject<PipelineInputAssemblyData> SharedPipelineDataInternal::AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve)

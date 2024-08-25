@@ -9,6 +9,8 @@ export struct SharedPipelineDataCreationInfo
 	size_t initialVertexAttributeInfoCapacity;
 	size_t initialVertexInputPipelineInfoCapacity;
 
+	size_t initialPipelineViewportDataCapacity;
+
 	size_t initialPipelineInputAssemblyInfoCapacity;
 	size_t initialPipelineRasterizationInfoCapacity;
 	size_t initialPipelineMultisampleInfoCapacity;

@@ -117,6 +117,7 @@
     <ClCompile Include="VulkanData.InstanceDependent.ixx" />
     <ClCompile Include="VulkanData.ixx" />
     <ClCompile Include="VulkanData.PipelineLayoutData.ixx" />
+    <ClCompile Include="VulkanData.PipelinesList.cpp" />
     <ClCompile Include="VulkanData.PipelinesList.ixx" />
     <ClCompile Include="VulkanData.SharedData.ixx" />
     <ClCompile Include="VulkanSimplifiersTest.cpp" />

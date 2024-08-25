@@ -9,6 +9,8 @@ export struct VertexBindingDescriptionData;
 export struct VertexAttributeDescriptionData;
 export struct VertexInputSharedPipelineData;
 
+export struct PipelineViewportData;
+
 export struct PipelineInputAssemblyData;
 export struct PipelineRasterizationData;
 export struct PipelineMultisampleData;

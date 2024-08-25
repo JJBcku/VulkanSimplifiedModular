@@ -132,3 +132,16 @@ export struct PipelineColorBlendAttachment
 	bool operator==(const PipelineColorBlendAttachment& rhs) const noexcept = default;
 	std::strong_ordering operator<=>(const PipelineColorBlendAttachment& rhs) const noexcept = default;
 };
+
+export struct PushConstantData
+{
+	VkShaderStageFlags shaderStages;
+	std::uint32_t offset;
+	std::uint32_t size;
+	std::uint32_t padding;
+
+	PushConstantData();
+
+	bool operator==(const PushConstantData& rhs) const noexcept = default;
+	std::strong_ordering operator<=>(const PushConstantData& rhs) const noexcept = default;
+};

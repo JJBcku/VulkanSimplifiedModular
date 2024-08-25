@@ -15,5 +15,7 @@ export struct SharedPipelineDataCreationInfo
 	size_t initialPipelineDepthStencilInfoCapacity;
 	size_t initialPipelineColorBlendAttachmentInfoCapacity;
 
+	size_t initialPushConstantDataCapacity;
+
 	SharedPipelineDataCreationInfo();
 };

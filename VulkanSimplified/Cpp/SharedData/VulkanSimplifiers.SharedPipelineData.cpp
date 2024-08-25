@@ -64,3 +64,8 @@ IDObject<PipelineColorBlendAttachment> SharedPipelineDataSimplifier::AddPipeline
 {
 	return _internal.AddPipelineColorBlendAttachment(blendingComponents, blendingPreset, addOnReserve);
 }
+
+IDObject<PushConstantData> SharedPipelineDataSimplifier::AddPushConstantData(ShaderTypeFlagBit shaderType, std::uint32_t offset, std::uint32_t size, size_t addOnReserve)
+{
+	return _internal.AddPushConstantData(shaderType, offset, size, addOnReserve);
+}

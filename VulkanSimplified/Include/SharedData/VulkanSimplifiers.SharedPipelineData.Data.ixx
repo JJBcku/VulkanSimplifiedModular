@@ -15,6 +15,8 @@ export struct PipelineMultisampleData;
 export struct PipelineDepthStencilStateData;
 export struct PipelineColorBlendAttachment;
 
+export struct PushConstantData;
+
 export enum class VertexBindingInputRate : std::uint64_t
 {
 	VERTEX = 1,

@@ -9,7 +9,7 @@ _shaderPipelineInfo(initInfo.initialShaderPipelineInfoCapacity), _vertexBindingI
 _vertexAttributeInfo(initInfo.initialVertexAttributeInfoCapacity), _vertexPipelineInfo(initInfo.initialVertexInputPipelineInfoCapacity),
 _pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity), _pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity),
 _pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity), _pipelineDepthStencilInfo(initInfo.initialPipelineDepthStencilInfoCapacity),
-_pipelineColorBlendAttachmentInfo(initInfo.initialPipelineColorBlendAttachmentInfoCapacity)
+_pipelineColorBlendAttachmentInfo(initInfo.initialPipelineColorBlendAttachmentInfoCapacity), _pushContantData(initInfo.initialPushConstantDataCapacity)
 {
 }
 
@@ -316,4 +316,26 @@ IDObject<PipelineColorBlendAttachment> SharedPipelineDataInternal::AddPipelineCo
 		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineColorBlendAttachment Error: Program was given an erroneous blending components value!");
 
 	return _pipelineColorBlendAttachmentInfo.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+IDObject<PushConstantData> SharedPipelineDataInternal::AddPushConstantData(ShaderTypeFlagBit shaderType, std::uint32_t offset, std::uint32_t size, size_t addOnReserve)
+{
+	PushConstantData add;
+	
+	switch (shaderType)
+	{
+	case SHADER_TYPE_VERTEX:
+		add.shaderStages = VK_SHADER_STAGE_VERTEX_BIT;
+		break;
+	case SHADER_TYPE_FRAGMENT:
+		add.shaderStages = VK_SHADER_STAGE_FRAGMENT_BIT;
+		break;
+	default:
+		throw std::runtime_error("SharedPipelineDataInternal::AddPushConstantData Error: Program was given an erroneous shader type value!");
+	}
+
+	add.offset = offset;
+	add.size = size;
+
+	return _pushContantData.AddUniqueObject(std::move(add), addOnReserve);
 }

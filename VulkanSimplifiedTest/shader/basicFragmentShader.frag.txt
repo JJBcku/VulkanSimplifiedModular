@@ -26,8 +26,8 @@
        %uint = OpTypeInt 32 0
      %uint_3 = OpConstant %uint 3
 %_ptr_Input_float = OpTypePointer Input %float
-%float_n0_550000012 = OpConstant %float -0.550000012
-         %39 = OpConstantComposite %v3float %float_n0_550000012 %float_n0_550000012 %float_n0_550000012
+%float_n0_0549999997 = OpConstant %float -0.0549999997
+         %39 = OpConstantComposite %v3float %float_n0_0549999997 %float_n0_0549999997 %float_n0_0549999997
           %4 = OpFunction %void None %3
           %5 = OpLabel
          %13 = OpLoad %v4float %12

@@ -10,6 +10,7 @@ import VulkanSimplifiers.SharedPipelineData.Data;
 import VulkanSimplifiers.Common.DataFormatFlags;
 import VulkanSimplifiers.Common.ImageSampleFlags;
 import VulkanSimplifiers.Common.CompareOperationsType;
+import VulkanSimplifiers.Common.ShaderTypeFlags;
 
 export class SharedPipelineDataInternal
 {
@@ -32,6 +33,8 @@ public:
 	IDObject<PipelineDepthStencilStateData> AddPipelineDepthStencilStateData(DepthUsage depthUsage, CompareOperationsType compareOp, float minDepth, float maxDepth, size_t addOnReserve);
 	IDObject<PipelineColorBlendAttachment> AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents, ColorBlendingPreset blendingPreset, size_t addOnReserve);
 
+	IDObject<PushConstantData> AddPushConstantData(ShaderTypeFlagBit shaderType, std::uint32_t offset, std::uint32_t size, size_t addOnReserve);
+
 private:
 	UnsortedList<ShaderSpecializationElement> _shaderSpecializationElements;
 	UnsortedList<ShaderSharedPipelineData> _shaderPipelineInfo;
@@ -45,4 +48,6 @@ private:
 	UnsortedList<PipelineMultisampleData> _pipelineMultisampleInfo;
 	UnsortedList<PipelineDepthStencilStateData> _pipelineDepthStencilInfo;
 	UnsortedList<PipelineColorBlendAttachment> _pipelineColorBlendAttachmentInfo;
+
+	UnsortedList<PushConstantData> _pushContantData;
 };

@@ -1,8 +1,13 @@
 export module VulkanData.PipelineLayoutData;
 
+import std;
+export import ListTemplates.IDObject;
+
+import VulkanSimplifiers.DevicePipelineData.Data;
+
 export struct VulkanPipelineLayoutData
 {
-	long long int stump;
+	IDObject<AutoCleanupPipelineLayout> pipelineLayout;
 
 	VulkanPipelineLayoutData() = default;
 };

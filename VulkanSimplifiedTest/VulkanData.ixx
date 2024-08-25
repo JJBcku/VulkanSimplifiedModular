@@ -13,7 +13,7 @@ export struct VulkanData
 	std::unique_ptr<VulkanDataInstanceDependent> instanceDependent;
 	std::unique_ptr<VulkanDataDeviceDependent> deviceDependent;
 	std::unique_ptr<VulkanSharedData> sharedData;
-	std::unique_ptr<VulkanPipelineLayoutData> pipelineLayout;
+	std::unique_ptr<VulkanPipelineLayoutData> pipelineLayoutData;
 
 	VulkanData() = default;
 

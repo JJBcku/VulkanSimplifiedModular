@@ -7,3 +7,8 @@ DevicePipelineDataSimplifier::DevicePipelineDataSimplifier(DevicePipelineDataInt
 DevicePipelineDataSimplifier::~DevicePipelineDataSimplifier()
 {
 }
+
+IDObject<AutoCleanupPipelineLayout> DevicePipelineDataSimplifier::AddPipelineLayout(const PipelineLayoutCreationData& creationData, size_t addOnReserve)
+{
+	return _internal.AddPipelineLayout(creationData, addOnReserve);
+}

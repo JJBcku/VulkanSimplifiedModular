@@ -127,6 +127,7 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.Internal.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceCore.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.cpp" />
@@ -186,6 +187,7 @@
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.cpp" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.ixx" />
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.InternalData.ixx" />
@@ -202,7 +204,9 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.CreationData.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.LayoutCreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.CreationData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ShaderList.Internal.ixx" />

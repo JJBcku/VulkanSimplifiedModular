@@ -1,3 +1,7 @@
+module;
+
+#include <vulkan/vulkan.hpp>
+
 export module VulkanSimplifiers.SharedPipelineData.Internal;
 
 import std;
@@ -34,6 +38,8 @@ public:
 	IDObject<PipelineColorBlendAttachment> AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents, ColorBlendingPreset blendingPreset, size_t addOnReserve);
 
 	IDObject<PushConstantData> AddPushConstantData(ShaderTypeFlagBit shaderType, std::uint32_t offset, std::uint32_t size, size_t addOnReserve);
+
+	std::vector<VkPushConstantRange> GetPushConstantData(std::vector<IDObject<PushConstantData>> pushConstantIDs) const;
 
 private:
 	UnsortedList<ShaderSpecializationElement> _shaderSpecializationElements;

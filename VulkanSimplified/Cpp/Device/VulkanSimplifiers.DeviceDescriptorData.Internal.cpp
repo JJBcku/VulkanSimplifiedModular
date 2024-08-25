@@ -37,3 +37,18 @@ IDObject<AutoCleanupDescriptorSetLayout> DeviceDescriptorDataInternal::AddDescri
 
 	return _descriptorSetLayouts.AddObject(AutoCleanupDescriptorSetLayout(_device, add), addOnReserve);
 }
+
+std::vector<VkDescriptorSetLayout> DeviceDescriptorDataInternal::GetDescriptorSetLayouts(const std::vector<IDObject<AutoCleanupDescriptorSetLayout>>& layoutIDs) const
+{
+	std::vector<VkDescriptorSetLayout> ret;
+
+	ret.reserve(layoutIDs.size());
+
+	for (auto& ID : layoutIDs)
+	{
+		auto& descriptor = _descriptorSetLayouts.GetConstObject(ID);
+		ret.push_back(descriptor.GetDescriptorSetLayout());
+	}
+
+	return ret;
+}

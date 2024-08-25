@@ -6,4 +6,9 @@ void CreatePipelineLayout(VulkanData& data)
 	auto deviceList = instance.GetDeviceListSimplifier();
 	auto deviceMain = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
 	auto devicePipelineDataList = deviceMain.GetDevicePipelineDataSimplifier();
+
+	data.pipelineLayoutData = std::make_unique<VulkanPipelineLayoutData>();
+
+	PipelineLayoutCreationData layoutCreationData;
+	data.pipelineLayoutData->pipelineLayout = devicePipelineDataList.AddPipelineLayout(layoutCreationData);
 }

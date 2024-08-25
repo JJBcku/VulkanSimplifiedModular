@@ -2,7 +2,8 @@ module VulkanSimplifiers.LogicalDeviceMain.Internal;
 
 LogicalDeviceMainInternal::LogicalDeviceMainInternal(const LogicalDeviceInitData& initData, const DeviceMainCreationData& mainCreationData, WindowListInternal& windowList, 
 	const SharedDataListInternal& sharedDataList) : _core(initData, windowList), _shaderList(mainCreationData.shaderList, _core.GetDevice()),
-	_descriptorList(mainCreationData.deviceDescriptors, _core.GetDevice(), sharedDataList.GetSharedDescriptorDataSimplifier()), _pipelineDataList(mainCreationData.devicePipelines)
+	_descriptorList(mainCreationData.deviceDescriptors, _core.GetDevice(), sharedDataList.GetSharedDescriptorDataSimplifier()),
+	_pipelineDataList(mainCreationData.devicePipelines, sharedDataList.GetSharedPipelineDataSimplifier(), _descriptorList, _core.GetDevice())
 {
 }
 

@@ -339,3 +339,24 @@ IDObject<PushConstantData> SharedPipelineDataInternal::AddPushConstantData(Shade
 
 	return _pushContantData.AddUniqueObject(std::move(add), addOnReserve);
 }
+
+std::vector<VkPushConstantRange> SharedPipelineDataInternal::GetPushConstantData(std::vector<IDObject<PushConstantData>> pushConstantIDs) const
+{
+	std::vector<VkPushConstantRange> ret;
+
+	auto pushDataList = _pushContantData.GetObjectList(pushConstantIDs);
+
+	ret.reserve(pushDataList.size());
+
+	for (auto& pushData : pushDataList)
+	{
+		VkPushConstantRange add{};
+		add.stageFlags = pushData.shaderStages;
+		add.offset = pushData.offset;
+		add.size = pushData.size;
+
+		ret.push_back(add);
+	}
+
+	return ret;
+}

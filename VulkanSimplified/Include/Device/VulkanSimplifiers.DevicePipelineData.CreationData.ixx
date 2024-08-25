@@ -4,7 +4,7 @@ import std;
 
 export struct DevicePipelineDataCreationData
 {
-	long long int stump;
+	size_t pipelineLayoutListInitialCapacity;
 
 	DevicePipelineDataCreationData();
 };

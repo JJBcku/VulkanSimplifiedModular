@@ -537,5 +537,17 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.InternalData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.InternalData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.LayoutCreationData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

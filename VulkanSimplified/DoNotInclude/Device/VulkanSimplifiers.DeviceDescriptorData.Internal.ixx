@@ -24,6 +24,8 @@ public:
 	IDObject<AutoCleanupDescriptorSetLayout> AddDescriptorSetLayout(std::uint32_t firstBinding, const std::vector<IDObject<DescriptorSetLayoutBindingData>>& descriptorSetLayoutBindings,
 		size_t addOnReserve);
 
+	std::vector<VkDescriptorSetLayout> GetDescriptorSetLayouts(const std::vector<IDObject<AutoCleanupDescriptorSetLayout>>& layoutIDs) const;
+
 private:
 	const VkDevice _device;
 	const SharedDescriptorDataInternal& _sharedDescriptorData;

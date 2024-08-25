@@ -7,11 +7,12 @@ export import VulkanSimplifiers.SharedPipelineData.Data;
 
 export struct VulkanPipelineData
 {
-	IDObject<PipelineViewportData> _pipelineViewport;
+	IDObject<PipelineViewportData> pipelineViewport;
+	IDObject<PipelineScissorData> pipelineScissor;
 
 	VulkanPipelineData() = default;
 
-	bool operator==(const IDObject<PipelineViewportData>& pipelineViewport);
+	bool operator==(const IDObject<PipelineViewportData>& rhsPipelineViewport);
 };
 
 export struct VulkanDataPipelinesList

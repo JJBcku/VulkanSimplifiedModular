@@ -33,6 +33,14 @@ PipelineViewportData::PipelineViewportData()
 	maxDepth = std::numeric_limits<float>::lowest();
 }
 
+PipelineScissorData::PipelineScissorData()
+{
+	offsetX = std::numeric_limits<std::int32_t>::max();
+	offsetY = std::numeric_limits<std::int32_t>::max();
+	width = std::numeric_limits<std::uint32_t>::max();
+	height = std::numeric_limits<std::uint32_t>::max();
+}
+
 PipelineInputAssemblyData::PipelineInputAssemblyData()
 {
 	topology = static_cast<VkPrimitiveTopology>(std::numeric_limits<std::uint32_t>::max());

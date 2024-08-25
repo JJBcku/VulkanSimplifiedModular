@@ -33,6 +33,7 @@ public:
 
 	IDObject<PipelineViewportData> AddPipelineViewportData(std::uint32_t startX, std::uint32_t startY, std::uint32_t width, std::uint32_t height, float minDepth, float maxDepth,
 		size_t addOnReserve);
+	IDObject<PipelineScissorData> AddPipelineScissorData(std::int32_t offsetX, std::int32_t offsetY, std::uint32_t width, std::uint32_t height, size_t addOnReserve);
 
 	IDObject<PipelineInputAssemblyData> AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve);
 	IDObject<PipelineRasterizationData> AddPipelineRasterizationData(PipelinePolygonMode polygonMode, bool cullPolygonBacks, bool frontClockwise, size_t addOnReserve);
@@ -53,6 +54,7 @@ private:
 	UnsortedList<VertexInputSharedPipelineData> _vertexPipelineInfo;
 
 	UnsortedList<PipelineViewportData> _pipelineViewportData;
+	UnsortedList<PipelineScissorData> _pipelineScissorData;
 
 	UnsortedList<PipelineInputAssemblyData> _pipelineInputAssemblyInfo;
 	UnsortedList<PipelineRasterizationData> _pipelineRasterizationInfo;

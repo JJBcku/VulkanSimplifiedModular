@@ -7,10 +7,10 @@ module VulkanSimplifiers.SharedPipelineData.Internal;
 SharedPipelineDataInternal::SharedPipelineDataInternal(const SharedPipelineDataCreationInfo& initInfo) : _shaderSpecializationElements(initInfo.initialSpecializationElementsCapacity),
 _shaderPipelineInfo(initInfo.initialShaderPipelineInfoCapacity), _vertexBindingInfo(initInfo.initialVertexBindingInfoCapacity),
 _vertexAttributeInfo(initInfo.initialVertexAttributeInfoCapacity), _vertexPipelineInfo(initInfo.initialVertexInputPipelineInfoCapacity),
-_pipelineViewportData(initInfo.initialPipelineViewportDataCapacity), _pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity),
-_pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity), _pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity),
-_pipelineDepthStencilInfo(initInfo.initialPipelineDepthStencilInfoCapacity), _pipelineColorBlendAttachmentInfo(initInfo.initialPipelineColorBlendAttachmentInfoCapacity),
-_pushContantData(initInfo.initialPushConstantDataCapacity)
+_pipelineViewportData(initInfo.initialPipelineViewportDataCapacity), _pipelineScissorData(initInfo.initialPipelineScissorDataCapacity),
+_pipelineInputAssemblyInfo(initInfo.initialPipelineInputAssemblyInfoCapacity), _pipelineRasterizationInfo(initInfo.initialPipelineRasterizationInfoCapacity),
+_pipelineMultisampleInfo(initInfo.initialPipelineMultisampleInfoCapacity), _pipelineDepthStencilInfo(initInfo.initialPipelineDepthStencilInfoCapacity),
+_pipelineColorBlendAttachmentInfo(initInfo.initialPipelineColorBlendAttachmentInfoCapacity), _pushContantData(initInfo.initialPushConstantDataCapacity)
 {
 }
 
@@ -91,6 +91,18 @@ IDObject<PipelineViewportData> SharedPipelineDataInternal::AddPipelineViewportDa
 	add.maxDepth = maxDepth;
 
 	return _pipelineViewportData.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+IDObject<PipelineScissorData> SharedPipelineDataInternal::AddPipelineScissorData(std::int32_t offsetX, std::int32_t offsetY, std::uint32_t width, std::uint32_t height,
+	size_t addOnReserve)
+{
+	PipelineScissorData add;
+	add.offsetX = offsetX;
+	add.offsetY = offsetY;
+	add.width = width;
+	add.height = height;
+
+	return _pipelineScissorData.AddUniqueObject(std::move(add), addOnReserve);
 }
 
 IDObject<PipelineInputAssemblyData> SharedPipelineDataInternal::AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve)

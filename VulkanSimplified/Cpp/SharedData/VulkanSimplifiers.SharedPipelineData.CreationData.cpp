@@ -10,6 +10,7 @@ SharedPipelineDataCreationInfo::SharedPipelineDataCreationInfo()
 	initialVertexInputPipelineInfoCapacity = 0;
 
 	initialPipelineViewportDataCapacity = 0;
+	initialPipelineScissorDataCapacity = 0;
 
 	initialPipelineInputAssemblyInfoCapacity = 0;
 	initialPipelineRasterizationInfoCapacity = 0;

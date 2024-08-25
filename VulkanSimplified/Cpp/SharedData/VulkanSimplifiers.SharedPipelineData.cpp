@@ -41,6 +41,12 @@ IDObject<PipelineViewportData> SharedPipelineDataSimplifier::AddPipelineViewport
 	return _internal.AddPipelineViewportData(startX, startY, width, height, minDepth, maxDepth, addOnReserve);
 }
 
+IDObject<PipelineScissorData> SharedPipelineDataSimplifier::AddPipelineScissorData(std::int32_t offsetX, std::int32_t offsetY, std::uint32_t width, std::uint32_t height,
+	size_t addOnReserve)
+{
+	return _internal.AddPipelineScissorData(offsetX, offsetY, width, height, addOnReserve);
+}
+
 IDObject<PipelineInputAssemblyData> SharedPipelineDataSimplifier::AddPipelineInputAssemblyData(PipelinePrimitiveTopology topology, bool primitiveRestartEnable, size_t addOnReserve)
 {
 	return _internal.AddPipelineInputAssemblyData(topology, primitiveRestartEnable, addOnReserve);

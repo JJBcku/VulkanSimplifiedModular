@@ -1,6 +1,6 @@
 module VulkanData.PipelinesList;
 
-bool VulkanPipelineData::operator==(const IDObject<PipelineViewportData>& pipelineViewport)
+bool VulkanPipelineData::operator==(const IDObject<PipelineViewportData>& rhsPipelineViewport)
 {
-	return _pipelineViewport == pipelineViewport;
+	return pipelineViewport == rhsPipelineViewport;
 }

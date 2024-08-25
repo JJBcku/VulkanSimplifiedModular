@@ -10,6 +10,7 @@ export struct VertexAttributeDescriptionData;
 export struct VertexInputSharedPipelineData;
 
 export struct PipelineViewportData;
+export struct PipelineScissorData;
 
 export struct PipelineInputAssemblyData;
 export struct PipelineRasterizationData;

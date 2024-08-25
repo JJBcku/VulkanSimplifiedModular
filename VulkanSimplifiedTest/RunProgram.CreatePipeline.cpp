@@ -12,5 +12,7 @@ void CreatePipeline(VulkanData& data)
 	auto pipelineSharedData = sharedDataList.GetSharedPipelineDataSimplifier();
 
 	VulkanPipelineData add;
-	add._pipelineViewport = pipelineSharedData.AddPipelineViewportData(0, 0, width, heigth, 0.0f, 1.0f);
+	add.pipelineViewport = pipelineSharedData.AddPipelineViewportData(0, 0, width, heigth, 0.0f, 1.0f);
+
+	add.pipelineScissor = pipelineSharedData.AddPipelineScissorData(0, 0, width, heigth);
 }

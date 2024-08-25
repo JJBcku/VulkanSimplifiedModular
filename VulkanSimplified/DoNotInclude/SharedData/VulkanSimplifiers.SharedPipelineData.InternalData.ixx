@@ -79,6 +79,19 @@ export struct PipelineViewportData
 	std::partial_ordering operator<=>(const PipelineViewportData& rhs) const noexcept = default;
 };
 
+export struct PipelineScissorData
+{
+	std::int32_t offsetX;
+	std::int32_t offsetY;
+	std::uint32_t width;
+	std::uint32_t height;
+
+	PipelineScissorData();
+
+	bool operator==(const PipelineScissorData& rhs) const noexcept = default;
+	std::strong_ordering operator<=>(const PipelineScissorData& rhs) const noexcept = default;
+};
+
 export struct PipelineInputAssemblyData
 {
 	VkPrimitiveTopology topology;

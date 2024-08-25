@@ -11,13 +11,13 @@ public:
 	SharedDataListInternal(const SharedDataListCreationData& creationData);
 	~SharedDataListInternal();
 
-	SharedPipelineDataInternal& GetSharedPipelineDataSimplifier();
 	SharedDescriptorDataInternal& GetSharedDescriptorDataSimplifier();
+	SharedPipelineDataInternal& GetSharedPipelineDataSimplifier();
 
-	const SharedPipelineDataInternal& GetSharedPipelineDataSimplifier() const;
 	const SharedDescriptorDataInternal& GetSharedDescriptorDataSimplifier() const;
+	const SharedPipelineDataInternal& GetSharedPipelineDataSimplifier() const;
 
 private:
-	SharedPipelineDataInternal _pipelineData;
 	SharedDescriptorDataInternal _descriptorData;
+	SharedPipelineDataInternal _pipelineData;
 };

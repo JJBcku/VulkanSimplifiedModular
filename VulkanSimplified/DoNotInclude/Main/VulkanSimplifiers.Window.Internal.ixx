@@ -25,7 +25,10 @@ public:
 
 	bool GetQuit() const;
 	bool GetPaused() const;
-	bool GetResized();
+	bool GetResized() const;
+
+	std::uint32_t GetWidth() const;
+	std::uint32_t GetHeight() const;
 
 	SDL_Window* GetWindow() const;
 	VkSurfaceKHR GetSurface() const;

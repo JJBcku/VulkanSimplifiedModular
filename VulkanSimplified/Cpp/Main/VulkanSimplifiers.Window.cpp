@@ -22,3 +22,13 @@ bool WindowSimplifier::GetResized()
 {
 	return _internal.GetResized();
 }
+
+std::uint32_t WindowSimplifier::GetWidth() const
+{
+	return _internal.GetWidth();
+}
+
+std::uint32_t WindowSimplifier::GetHeight() const
+{
+	return _internal.GetHeight();
+}

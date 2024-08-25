@@ -134,12 +134,19 @@ bool WindowInternal::GetPaused() const
 	return _minimized || _hidden;
 }
 
-bool WindowInternal::GetResized()
+bool WindowInternal::GetResized() const
 {
-	bool ret = _resized;
-	_resized = false;
+	return _resized;
+}
 
-	return ret;
+std::uint32_t WindowInternal::GetWidth() const
+{
+	return _width;
+}
+
+std::uint32_t WindowInternal::GetHeight() const
+{
+	return _height;
 }
 
 SDL_Window* WindowInternal::GetWindow() const

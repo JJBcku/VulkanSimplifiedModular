@@ -103,6 +103,8 @@
     <ClCompile Include="RunProgram.CreateDeviceDependent.ixx" />
     <ClCompile Include="RunProgram.CreateInstanceDependent.cpp" />
     <ClCompile Include="RunProgram.CreateInstanceDependent.ixx" />
+    <ClCompile Include="RunProgram.CreatePipeline.cpp" />
+    <ClCompile Include="RunProgram.CreatePipeline.ixx" />
     <ClCompile Include="RunProgram.CreatePipelineLayout.cpp" />
     <ClCompile Include="RunProgram.CreatePipelineLayout.ixx" />
     <ClCompile Include="RunProgram.CreateSharedData.cpp" />
@@ -115,6 +117,7 @@
     <ClCompile Include="VulkanData.InstanceDependent.ixx" />
     <ClCompile Include="VulkanData.ixx" />
     <ClCompile Include="VulkanData.PipelineLayoutData.ixx" />
+    <ClCompile Include="VulkanData.PipelinesList.ixx" />
     <ClCompile Include="VulkanData.SharedData.ixx" />
     <ClCompile Include="VulkanSimplifiersTest.cpp" />
   </ItemGroup>

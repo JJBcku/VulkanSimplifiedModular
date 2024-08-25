@@ -11,5 +11,6 @@ import RunProgram.CreateInstanceDependent;
 import RunProgram.CreateDeviceDependent;
 import RunProgram.CreateSharedData;
 import RunProgram.CreatePipelineLayout;
+import RunProgram.CreatePipeline;
 
 export void RunProgram();

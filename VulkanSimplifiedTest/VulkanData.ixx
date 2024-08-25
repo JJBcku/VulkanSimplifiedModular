@@ -6,6 +6,7 @@ import VulkanData.InstanceDependent;
 import VulkanData.DeviceDependent;
 import VulkanData.SharedData;
 import VulkanData.PipelineLayoutData;
+import VulkanData.PipelinesList;
 
 export struct VulkanData
 {
@@ -14,6 +15,7 @@ export struct VulkanData
 	std::unique_ptr<VulkanDataDeviceDependent> deviceDependent;
 	std::unique_ptr<VulkanSharedData> sharedData;
 	std::unique_ptr<VulkanPipelineLayoutData> pipelineLayoutData;
+	std::unique_ptr<VulkanDataPipelinesList> pipelinesList;
 
 	VulkanData() = default;
 

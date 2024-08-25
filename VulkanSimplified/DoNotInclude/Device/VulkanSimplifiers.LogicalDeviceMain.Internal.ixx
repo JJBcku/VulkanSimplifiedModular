@@ -3,10 +3,11 @@ export module VulkanSimplifiers.LogicalDeviceMain.Internal;
 import std;
 import VulkanSimplifiers.LogicalDeviceMain.CreationData;
 import VulkanSimplifiers.LogicalDeviceCore.InternalData;
-
 import VulkanSimplifiers.LogicalDeviceCore.Internal;
+
 import VulkanSimplifiers.ShaderList.Internal;
 import VulkanSimplifiers.DeviceDescriptorData.Internal;
+import VulkanSimplifiers.DevicePipelineData.Internal;
 
 import VulkanSimplifiers.WindowList.Internal;
 
@@ -27,13 +28,16 @@ public:
 	LogicalDeviceCoreInternal& GetLogicalDeviceCoreSimplifier();
 	ShaderListInternal& GetShaderListSimplifier();
 	DeviceDescriptorDataInternal& GetDeviceDescriptorDataSimplifier();
+	DevicePipelineDataInternal& GetDevicePipelineDataSimplifier();
 
 	const LogicalDeviceCoreInternal& GetLogicalDeviceCoreSimplifier() const;
 	const ShaderListInternal& GetShaderListSimplifier() const;
 	const DeviceDescriptorDataInternal& GetDeviceDescriptorDataSimplifier() const;
+	const DevicePipelineDataInternal& GetDevicePipelineDataSimplifier() const;
 
 private:
 	LogicalDeviceCoreInternal _core;
 	ShaderListInternal _shaderList;
 	DeviceDescriptorDataInternal _descriptorList;
+	DevicePipelineDataInternal _pipelineDataList;
 };

@@ -10,6 +10,7 @@ void RunProgram()
     CreateInstanceDependent(data);
     CreateDeviceDependent(data);
     CreateSharedData(data);
+    CreatePipelineLayout(data);
 
     while (!settings.GetQuit())
     {

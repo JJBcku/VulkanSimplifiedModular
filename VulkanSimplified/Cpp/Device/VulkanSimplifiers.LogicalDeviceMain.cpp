@@ -23,6 +23,11 @@ DeviceDescriptorDataSimpifier LogicalDeviceMainSimplifier::GetDeviceDescriptorDa
 	return _internal.GetDeviceDescriptorDataSimplifier();
 }
 
+DevicePipelineDataSimplifier LogicalDeviceMainSimplifier::GetDevicePipelineDataSimplifier()
+{
+	return _internal.GetDevicePipelineDataSimplifier();
+}
+
 const LogicalDeviceCoreSimplifier LogicalDeviceMainSimplifier::GetLogicalDeviceCoreSimplifier() const
 {
 	return _internal.GetLogicalDeviceCoreSimplifier();
@@ -36,4 +41,9 @@ const ShaderListSimplifier LogicalDeviceMainSimplifier::GetShaderListSimplifier(
 const DeviceDescriptorDataSimpifier LogicalDeviceMainSimplifier::GetDeviceDescriptorDataSimplifier() const
 {
 	return _internal.GetDeviceDescriptorDataSimplifier();
+}
+
+const DevicePipelineDataSimplifier LogicalDeviceMainSimplifier::GetDevicePipelineDataSimplifier() const
+{
+	return _internal.GetDevicePipelineDataSimplifier();
 }

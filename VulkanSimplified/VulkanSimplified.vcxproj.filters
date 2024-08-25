@@ -519,5 +519,23 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.CreationData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.CreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

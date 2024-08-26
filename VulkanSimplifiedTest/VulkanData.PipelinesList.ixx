@@ -12,12 +12,14 @@ export struct VulkanPipelineData
 
 	VulkanPipelineData() = default;
 
-	bool operator==(const IDObject<PipelineViewportData>& rhsPipelineViewport);
+	bool operator==(const IDObject<PipelineViewportData>& rhsPipelineViewport) const;
 };
 
 export struct VulkanDataPipelinesList
 {
-	std::vector<VulkanPipelineData> stump;
+	std::vector<VulkanPipelineData> pipelines;
+
+	std::optional<VulkanPipelineData> currentPipeline;
 
 	VulkanDataPipelinesList() = default;
 };

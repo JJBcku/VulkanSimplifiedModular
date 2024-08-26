@@ -1,12 +1,14 @@
 export module VulkanSimplifiers.SharedDataList.CreationData;
 
-export import VulkanSimplifiers.SharedPipelineData.CreationData;
 export import VulkanSimplifiers.SharedDescriptorData.CreationData;
+export import VulkanSimplifiers.SharedPipelineData.CreationData;
+export import VulkanSimplifiers.SharedRenderPassData.CreationData;
 
 export struct SharedDataListCreationData
 {
-	SharedPipelineDataCreationInfo sharedPipelineData;
 	SharedDescriptorDataCreationInfo sharedDescriptorData;
+	SharedPipelineDataCreationInfo sharedPipelineData;
+	SharedRenderPassDataCreationInfo sharedRenderPassData;
 
 	SharedDataListCreationData() = default;
 };

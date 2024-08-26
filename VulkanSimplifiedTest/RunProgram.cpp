@@ -10,6 +10,7 @@ void RunProgram()
     CreateInstanceDependent(data);
     CreateDeviceDependent(data);
     CreateSharedData(data);
+    CreateRenderPassData(data);
     CreatePipelineLayout(data);
     CreatePipeline(data, 800U, 600U);
 

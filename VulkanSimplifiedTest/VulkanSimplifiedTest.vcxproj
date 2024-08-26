@@ -107,6 +107,8 @@
     <ClCompile Include="RunProgram.CreatePipeline.ixx" />
     <ClCompile Include="RunProgram.CreatePipelineLayout.cpp" />
     <ClCompile Include="RunProgram.CreatePipelineLayout.ixx" />
+    <ClCompile Include="RunProgram.CreateRenderPassData.cpp" />
+    <ClCompile Include="RunProgram.CreateRenderPassData.ixx" />
     <ClCompile Include="RunProgram.CreateSharedData.cpp" />
     <ClCompile Include="RunProgram.CreateSharedData.ixx" />
     <ClCompile Include="RunProgram.EventHandling.cpp" />
@@ -119,6 +121,7 @@
     <ClCompile Include="VulkanData.PipelineLayoutData.ixx" />
     <ClCompile Include="VulkanData.PipelinesList.cpp" />
     <ClCompile Include="VulkanData.PipelinesList.ixx" />
+    <ClCompile Include="VulkanData.RenderPassData.ixx" />
     <ClCompile Include="VulkanData.SharedData.ixx" />
     <ClCompile Include="VulkanSimplifiersTest.cpp" />
   </ItemGroup>

@@ -1,7 +1,7 @@
 module VulkanSimplifiers.SharedDataList.Internal;
 
 SharedDataListInternal::SharedDataListInternal(const SharedDataListCreationData& creationData) : _descriptorData(creationData.sharedDescriptorData),
-_pipelineData(creationData.sharedPipelineData)
+_pipelineData(creationData.sharedPipelineData), _renderPassData(creationData.sharedRenderPassData)
 {
 }
 
@@ -19,6 +19,11 @@ SharedPipelineDataInternal& SharedDataListInternal::GetSharedPipelineDataSimplif
 	return _pipelineData;
 }
 
+SharedRenderPassDataInternal& SharedDataListInternal::GetSharedRenderPassDataSimplifier()
+{
+	return _renderPassData;
+}
+
 const SharedDescriptorDataInternal& SharedDataListInternal::GetSharedDescriptorDataSimplifier() const
 {
 	return _descriptorData;
@@ -27,4 +32,9 @@ const SharedDescriptorDataInternal& SharedDataListInternal::GetSharedDescriptorD
 const SharedPipelineDataInternal& SharedDataListInternal::GetSharedPipelineDataSimplifier() const
 {
 	return _pipelineData;
+}
+
+const SharedRenderPassDataInternal& SharedDataListInternal::GetSharedRenderPassDataSimplifier() const
+{
+	return _renderPassData;
 }

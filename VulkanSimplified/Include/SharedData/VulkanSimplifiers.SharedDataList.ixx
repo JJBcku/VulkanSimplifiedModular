@@ -4,6 +4,7 @@ import VulkanSimplifiers.SharedDataList.Internal;
 
 import VulkanSimplifiers.SharedPipelineData;
 import VulkanSimplifiers.SharedDescriptorData;
+import VulkanSimplifiers.SharedRenderPassData;
 
 export class SharedDataListSimplifier
 {
@@ -13,9 +14,11 @@ public:
 
 	SharedPipelineDataSimplifier GetSharedPipelineDataSimplifier();
 	SharedDescriptorDataSimplifier GetSharedDescriptorDataSimplifier();
+	SharedRenderPassDataSimplifier GetSharedRenderPassDataSimplifier();
 
 	const SharedPipelineDataSimplifier GetSharedPipelineDataSimplifier() const;
 	const SharedDescriptorDataSimplifier GetSharedDescriptorDataSimplifier() const;
+	const SharedRenderPassDataSimplifier GetSharedRenderPassDataSimplifier() const;
 
 	SharedDataListSimplifier& operator=(const SharedDataListSimplifier&) noexcept = delete;
 

@@ -18,6 +18,11 @@ SharedDescriptorDataSimplifier SharedDataListSimplifier::GetSharedDescriptorData
 	return _internal.GetSharedDescriptorDataSimplifier();
 }
 
+SharedRenderPassDataSimplifier SharedDataListSimplifier::GetSharedRenderPassDataSimplifier()
+{
+	return _internal.GetSharedRenderPassDataSimplifier();
+}
+
 const SharedPipelineDataSimplifier SharedDataListSimplifier::GetSharedPipelineDataSimplifier() const
 {
 	return _internal.GetSharedPipelineDataSimplifier();
@@ -26,4 +31,9 @@ const SharedPipelineDataSimplifier SharedDataListSimplifier::GetSharedPipelineDa
 const SharedDescriptorDataSimplifier SharedDataListSimplifier::GetSharedDescriptorDataSimplifier() const
 {
 	return _internal.GetSharedDescriptorDataSimplifier();
+}
+
+const SharedRenderPassDataSimplifier SharedDataListSimplifier::GetSharedRenderPassDataSimplifier() const
+{
+	return _internal.GetSharedRenderPassDataSimplifier();
 }

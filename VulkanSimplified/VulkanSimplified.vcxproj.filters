@@ -549,5 +549,23 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

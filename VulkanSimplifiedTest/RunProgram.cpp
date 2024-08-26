@@ -11,7 +11,7 @@ void RunProgram()
     CreateDeviceDependent(data);
     CreateSharedData(data);
     CreatePipelineLayout(data);
-    CreatePipeline(data);
+    CreatePipeline(data, 800U, 600U);
 
     while (!settings.GetQuit())
     {

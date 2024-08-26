@@ -10,6 +10,7 @@ import VulkanSimplifiers.Main;
 import VulkanSimplifiers.Instance;
 import VulkanSimplifiers.DeviceList;
 import VulkanSimplifiers.PhysicalDevice;
+import VulkanSimplifiers.PhysicalDevice.Data;
 import VulkanSimplifiers.LogicalDeviceCore.CreationData;
 import VulkanSimplifiers.LogicalDeviceMain.CreationData;
 import VulkanSimplifiers.WindowList.Data;

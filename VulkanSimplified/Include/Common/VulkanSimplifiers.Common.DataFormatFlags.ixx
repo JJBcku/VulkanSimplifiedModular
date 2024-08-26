@@ -281,6 +281,9 @@ export struct DataFormatSetIndependentID
 	DataFormatFlags dataFormat;
 
 	DataFormatSetIndependentID();
+	DataFormatSetIndependentID(DataFormatSetEnum set, DataFormatFlags format);
 };
 
 export VkFormat TranslateDataFormatToVkFormat(DataFormatSetIndependentID formatID);
+
+export bool CheckFormatSupport(const DataFormatFullSet& checkedSet, const DataFormatSetIndependentID& formatID);

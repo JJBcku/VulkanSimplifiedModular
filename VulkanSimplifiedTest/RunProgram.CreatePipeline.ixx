@@ -15,4 +15,4 @@ import VulkanSimplifiers.SharedDataList;
 import VulkanSimplifiers.SharedPipelineData;
 import VulkanSimplifiers.SharedPipelineData.Data;
 
-export void CreatePipeline(VulkanData& data);
+export void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height);

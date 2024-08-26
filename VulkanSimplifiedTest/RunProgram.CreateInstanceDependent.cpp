@@ -1,8 +1,9 @@
 module RunProgram.CreateInstanceDependent;
 
-static bool CheckFormatSupport(const DataFormatFlags& deviceBlitDSTUsage, const DataFormatFlags& surfaceColorspace, DataFormatFlags format)
+static bool CheckFormatSupport(const FormatsSupportedImageFeaturesList& supportedImageFormats, const SurfaceSupportedColorspaceFormatsLists& surfaceColorspace,
+	const DataFormatSetIndependentID& formatID)
 {
-	return (deviceBlitDSTUsage & format) == format && (surfaceColorspace & format) == format;
+	return CheckFormatSupport(supportedImageFormats.blitDst, formatID) && CheckFormatSupport(surfaceColorspace.srgbNonlinearColorspace, formatID);
 }
 
 static size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer> windowID)
@@ -36,15 +37,15 @@ static size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer
 		if ((deviceSurfaceSupport.surfacePresentModes & PRESENT_MODE_FIFO_STRICT) != PRESENT_MODE_FIFO_STRICT)
 			continue;
 
-		auto& srgb = deviceSurfaceSupport.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
+		auto& surfaceSupport = deviceSurfaceSupport.surfaceSupportedSwapchainFormats;
 		auto& imageSupport = deviceProperties.deviceFormatsSupport.formatFeaturesOptimalImageSupport;
 
-		if (!CheckFormatSupport(imageSupport.blitDst.thirdSet, srgb.thirdSet, DATA_FORMAT_BGRA8_UNORM) &&
-			!CheckFormatSupport(imageSupport.blitDst.seventhSet, srgb.seventhSet, DATA_FORMAT_RGBA8_UNORM))
+		if (!CheckFormatSupport(imageSupport, surfaceSupport, { DataFormatSetEnum::DATA_SET_THREE, DATA_FORMAT_BGRA8_UNORM }) &&
+			!CheckFormatSupport(imageSupport, surfaceSupport, { DataFormatSetEnum::DATA_SET_SEVEN, DATA_FORMAT_RGBA8_UNORM }))
 			continue;
 
-		if ((imageSupport.colorAttachment.thirdSet & DATA_FORMAT_BGRA8_UNORM) != DATA_FORMAT_BGRA8_UNORM &&
-			(imageSupport.colorAttachment.seventhSet & DATA_FORMAT_RGBA8_UNORM) != DATA_FORMAT_RGBA8_UNORM)
+		if (!CheckFormatSupport(imageSupport.colorAttachment, { DataFormatSetEnum::DATA_SET_THREE, DATA_FORMAT_BGRA8_UNORM }) &&
+			!CheckFormatSupport(imageSupport.colorAttachment, { DataFormatSetEnum::DATA_SET_SEVEN, DATA_FORMAT_RGBA8_UNORM }))
 			continue;
 
 		if ((deviceProperties.deviceFormatsSupport.formatFeaturesBufferSupport.vertexBuffer.sixthSet & DATA_FORMAT_RGBA32_SFLOAT) != DATA_FORMAT_RGBA32_SFLOAT)

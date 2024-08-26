@@ -730,6 +730,12 @@ DataFormatSetIndependentID::DataFormatSetIndependentID()
 	dataFormat = 0;
 }
 
+DataFormatSetIndependentID::DataFormatSetIndependentID(DataFormatSetEnum set, DataFormatFlags format)
+{
+	dataSet = set;
+	dataFormat = format;
+}
+
 VkFormat TranslateDataFormatToVkFormat(DataFormatSetIndependentID formatID)
 {
 	VkFormat ret = VK_FORMAT_UNDEFINED;
@@ -764,4 +770,34 @@ VkFormat TranslateDataFormatToVkFormat(DataFormatSetIndependentID formatID)
 	}
 
 	return ret;
+}
+
+bool CheckFormatSupport(const DataFormatFullSet& checkedSet, const DataFormatSetIndependentID& formatID)
+{
+	switch (formatID.dataSet)
+	{
+	case DataFormatSetEnum::DATA_SET_ONE:
+		return (checkedSet.firstSet & formatID.dataFormat) == formatID.dataFormat;
+		break;
+	case DataFormatSetEnum::DATA_SET_TWO:
+		return (checkedSet.secondSet & formatID.dataFormat) == formatID.dataFormat;
+		break;
+	case DataFormatSetEnum::DATA_SET_THREE:
+		return (checkedSet.thirdSet & formatID.dataFormat) == formatID.dataFormat;
+		break;
+	case DataFormatSetEnum::DATA_SET_FOUR:
+		return (checkedSet.fourthSet & formatID.dataFormat) == formatID.dataFormat;
+		break;
+	case DataFormatSetEnum::DATA_SET_FIVE:
+		return (checkedSet.fifthSet & formatID.dataFormat) == formatID.dataFormat;
+		break;
+	case DataFormatSetEnum::DATA_SET_SIX:
+		return (checkedSet.sixthSet & formatID.dataFormat) == formatID.dataFormat;
+		break;
+	case DataFormatSetEnum::DATA_SET_SEVEN:
+		return (checkedSet.seventhSet & formatID.dataFormat) == formatID.dataFormat;
+	case DataFormatSetEnum::DATA_SET_UNKNOWN:
+	default:
+		throw std::runtime_error("CheckFormatSupport Error: Program was given an erroneous used data format set value!");
+	}
 }

@@ -567,5 +567,17 @@
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageLayouts.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

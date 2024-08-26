@@ -2,7 +2,6 @@ module RunProgram.CreatePipeline;
 
 void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 {
-
 	if (!(data.pipelinesList))
 	{
 		data.pipelinesList = std::make_unique<VulkanDataPipelinesList>();

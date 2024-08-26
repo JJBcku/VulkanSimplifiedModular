@@ -188,6 +188,7 @@
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.cpp" />
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.cpp" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.InternalData.ixx" />
@@ -200,8 +201,10 @@
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.CompareOperationsType.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DescriptorTypeFlags.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageLayouts.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.ixx" />
@@ -279,6 +282,7 @@
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.Data.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.ixx" />
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.Data.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

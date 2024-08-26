@@ -1,8 +1,13 @@
 export module VulkanData.RenderPassData;
 
+import std;
+export import ListTemplates.IDObject;
+
+export import VulkanSimplifiers.SharedRenderPassData.Data;
+
 export struct VulkanRenderPassData
 {
-	long long int stump;
+	std::vector<IDObject<RenderPassAttachmentData>> renderPassAttachments;
 
 	VulkanRenderPassData() = default;
 };

@@ -67,6 +67,15 @@
     <Filter Include="Source Files\Cpp Files\Device">
       <UniqueIdentifier>{9a150e50-b7f0-4151-b882-9e055d688b30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Cpp Files\SharedData">
+      <UniqueIdentifier>{b758a68a-d18c-4512-a936-f0d86ede8e95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DoNotInclude\SharedData">
+      <UniqueIdentifier>{11076bc9-d976-4862-af21-abc2369d97ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Include\SharedData">
+      <UniqueIdentifier>{ef7de496-c4f0-4e53-96bd-76e1808e862a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.cpp">
@@ -345,239 +354,239 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceCore.Internal.cpp">
       <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ShaderList.Internal.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ShaderList.InternalData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.InternalData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.ShaderList.Data.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.ShaderList.CreationData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.CreationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.Internal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.CreationData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.ShaderList.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.InternalData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceCore.CreationData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DeviceFeatureFlags.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DeviceExtensionsFlags.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceCore.CreationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.DeviceExtensionsFlags.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.CreationData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.Internal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.Data.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.Data.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.CompareOperationsType.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DescriptorTypeFlags.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.CreationData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.CreationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.Data.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Cpp Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.Data.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.Data.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.Internal.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.CreationData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.CreationData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.Internal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.InternalData.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.CreationData.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.Internal.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.InternalData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.LayoutCreationData.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.Data.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceCore.CreationData.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.CreationData.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.Data.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.Internal.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.InternalData.cpp">
+      <Filter>Source Files\Cpp Files\Device</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.CompareOperationsType.ixx">
+      <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DescriptorTypeFlags.ixx">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DeviceExtensionsFlags.ixx">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DeviceFeatureFlags.ixx">
+      <Filter>Source Files\Include\Common</Filter>
     </ClCompile>
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageLayouts.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx">
+      <Filter>Source Files\Include\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.Data.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.CreationData.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.Data.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.LayoutCreationData.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.InternalData.ixx">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.ixx">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.InternalData.ixx">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceCore.CreationData.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.CreationData.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ShaderList.CreationData.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ShaderList.Data.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ShaderList.ixx">
+      <Filter>Source Files\Include\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ShaderList.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ShaderList.InternalData.ixx">
+      <Filter>Source Files\DoNotInclude\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDataList.Internal.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.CreationData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.ixx">
+      <Filter>Source Files\DoNotInclude\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.ixx">
+      <Filter>Source Files\DoNotInclude\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.ixx">
+      <Filter>Source Files\DoNotInclude\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.CreationData.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDataList.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.CreationData.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.Data.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedDescriptorData.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.CreationData.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.Data.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedPipelineData.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
     </ClCompile>
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.Data.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Include\SharedData</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.ixx">
+      <Filter>Source Files\Include\SharedData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

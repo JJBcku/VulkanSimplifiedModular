@@ -8,6 +8,7 @@ export import VulkanSimplifiers.SharedRenderPassData.Data;
 export struct VulkanRenderPassData
 {
 	std::vector<IDObject<RenderPassAttachmentData>> renderPassAttachments;
+	IDObject<RenderPassAttachmentReference> colorAttachmentReference;
 
 	VulkanRenderPassData() = default;
 };

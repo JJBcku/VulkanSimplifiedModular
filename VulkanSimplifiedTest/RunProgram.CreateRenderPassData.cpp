@@ -23,6 +23,10 @@ void CreateRenderPassData(VulkanData& data)
 	auto sharedDataList = data.basicData->main->GetSharedDataListSimplifier();
 	auto renderPassSharedDataList = sharedDataList.GetSharedRenderPassDataSimplifier();
 
-	data.renderPassData->renderPassAttachments.push_back(renderPassSharedDataList.AddRenderPassAttachment(format, SAMPLE_1, RenderPassAttachmentLoadOP::CLEAR,
+	auto& renderPassData = *data.renderPassData;
+
+	renderPassData.renderPassAttachments.push_back(renderPassSharedDataList.AddRenderPassAttachment(format, SAMPLE_1, RenderPassAttachmentLoadOP::CLEAR,
 		RenderPassAttachmentStoreOP::STORE, ImageLayoutFlags::UNDEFINED, ImageLayoutFlags::PRESENT));
+
+	renderPassData.colorAttachmentReference = renderPassSharedDataList.AddRenderPassAttachmentReference(0, ImageLayoutFlags::COLOR_ATTACHMENT);
 }

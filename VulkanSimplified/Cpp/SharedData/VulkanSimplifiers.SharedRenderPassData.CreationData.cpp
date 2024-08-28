@@ -2,5 +2,6 @@ module VulkanSimplifiers.SharedRenderPassData.CreationData;
 
 SharedRenderPassDataCreationInfo::SharedRenderPassDataCreationInfo()
 {
-	sharedRenderPassAttachmentInitialCapacity = 0;
+	sharedRenderPassAttachmentsInitialCapacity = 0;
+	sharedRenderPassReferencesInitialCapacity = 0;
 }

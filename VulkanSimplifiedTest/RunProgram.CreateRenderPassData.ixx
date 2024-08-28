@@ -9,8 +9,4 @@ import VulkanSimplifiers.Main;
 import VulkanSimplifiers.SharedDataList;
 import VulkanSimplifiers.SharedRenderPassData;
 
-import VulkanSimplifiers.Common.DataFormatFlags;
-import VulkanSimplifiers.Common.ImageSampleFlags;
-import VulkanSimplifiers.Common.ImageLayouts;
-
 export void CreateRenderPassData(VulkanData& data);

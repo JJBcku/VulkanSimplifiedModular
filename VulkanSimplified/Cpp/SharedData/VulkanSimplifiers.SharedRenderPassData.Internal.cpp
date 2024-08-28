@@ -1,7 +1,7 @@
 module VulkanSimplifiers.SharedRenderPassData.Internal;
 
 SharedRenderPassDataInternal::SharedRenderPassDataInternal(const SharedRenderPassDataCreationInfo& creationData) :
-	_attachmentData(creationData.sharedRenderPassAttachmentInitialCapacity)
+	_attachmentData(creationData.sharedRenderPassAttachmentsInitialCapacity), _attachmentReferenceData(creationData.sharedRenderPassReferencesInitialCapacity)
 {
 }
 
@@ -90,7 +90,7 @@ IDObject<RenderPassAttachmentData> SharedRenderPassDataInternal::AddRenderPassAt
 	case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
 		add.initialLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 		break;
-	case ImageLayoutFlags::COLOR_ATTACMENT:
+	case ImageLayoutFlags::COLOR_ATTACHMENT:
 		add.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 		break;
 	case ImageLayoutFlags::GENERAL:
@@ -123,7 +123,7 @@ IDObject<RenderPassAttachmentData> SharedRenderPassDataInternal::AddRenderPassAt
 	case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
 		add.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 		break;
-	case ImageLayoutFlags::COLOR_ATTACMENT:
+	case ImageLayoutFlags::COLOR_ATTACHMENT:
 		add.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 		break;
 	case ImageLayoutFlags::GENERAL:
@@ -137,4 +137,46 @@ IDObject<RenderPassAttachmentData> SharedRenderPassDataInternal::AddRenderPassAt
 	}
 
 	return _attachmentData.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+IDObject<RenderPassAttachmentReference> SharedRenderPassDataInternal::AddRenderPassAttachmentReference(std::uint32_t attachmentIndex, ImageLayoutFlags subpassUsedAttachmentLayout,
+	size_t addOnReserve)
+{
+	RenderPassAttachmentReference add;
+	add.attachmentIndex = attachmentIndex;
+
+	switch (subpassUsedAttachmentLayout)
+	{
+	case ImageLayoutFlags::PRESENT:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+		break;
+	case ImageLayoutFlags::TRANSFER_DESTINATION:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+		break;
+	case ImageLayoutFlags::TRANSFER_SOURCE:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+		break;
+	case ImageLayoutFlags::SHADER_READ_ONLY:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+		break;
+	case ImageLayoutFlags::DEPTH_STENCIL_READ_ONLY:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+		break;
+	case ImageLayoutFlags::DEPTH_STENCIL_READ_WRITE:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+		break;
+	case ImageLayoutFlags::COLOR_ATTACHMENT:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+		break;
+	case ImageLayoutFlags::GENERAL:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_GENERAL;
+		break;
+	case ImageLayoutFlags::UNDEFINED:
+		add.attachmentLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+		break;
+	default:
+		throw std::runtime_error("SharedRenderPassDataInternal::AddRenderPassAttachment Error: Program was given an erroneous subpasses used attachment layout value!");
+	}
+
+	return _attachmentReferenceData.AddUniqueObject(std::move(add), addOnReserve);
 }

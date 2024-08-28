@@ -13,3 +13,9 @@ IDObject<RenderPassAttachmentData> SharedRenderPassDataSimplifier::AddRenderPass
 {
 	return _internal.AddRenderPassAttachment(format, samples, loadOP, storeOP, initialLayout, finalLayout, addOnReserve);
 }
+
+IDObject<RenderPassAttachmentReference> SharedRenderPassDataSimplifier::AddRenderPassAttachmentReference(std::uint32_t attachmentIndex, ImageLayoutFlags subpassUsedAttachmentLayout,
+	size_t addOnReserve)
+{
+	return _internal.AddRenderPassAttachmentReference(attachmentIndex, subpassUsedAttachmentLayout, addOnReserve);
+}

@@ -13,3 +13,9 @@ RenderPassAttachmentData::RenderPassAttachmentData()
 	initialLayout = static_cast<VkImageLayout>(std::numeric_limits<std::uint32_t>::max());
 	finalLayout = static_cast<VkImageLayout>(std::numeric_limits<std::uint32_t>::max());
 }
+
+RenderPassAttachmentReference::RenderPassAttachmentReference()
+{
+	attachmentIndex = std::numeric_limits<std::uint32_t>::max();
+	attachmentLayout = VK_IMAGE_LAYOUT_MAX_ENUM;
+}

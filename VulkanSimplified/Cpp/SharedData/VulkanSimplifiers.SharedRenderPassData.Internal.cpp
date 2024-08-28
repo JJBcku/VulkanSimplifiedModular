@@ -45,7 +45,7 @@ IDObject<RenderPassAttachmentData> SharedRenderPassDataInternal::AddRenderPassAt
 
 	switch (loadOP)
 	{
-	case RenderPassAttachmentLoadOP::DISCARD:
+	case RenderPassAttachmentLoadOP::IGNORE:
 		add.loadOP = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
 		break;
 	case RenderPassAttachmentLoadOP::CLEAR:
@@ -60,7 +60,7 @@ IDObject<RenderPassAttachmentData> SharedRenderPassDataInternal::AddRenderPassAt
 
 	switch (storeOP)
 	{
-	case RenderPassAttachmentStoreOP::DISCARD:
+	case RenderPassAttachmentStoreOP::IGNORE:
 		add.storeOP = VK_ATTACHMENT_STORE_OP_DONT_CARE;
 		break;
 	case RenderPassAttachmentStoreOP::STORE:

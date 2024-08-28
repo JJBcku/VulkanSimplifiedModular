@@ -29,4 +29,7 @@ void CreateRenderPassData(VulkanData& data)
 		RenderPassAttachmentStoreOP::STORE, ImageLayoutFlags::UNDEFINED, ImageLayoutFlags::PRESENT));
 
 	renderPassData.colorAttachmentReference = renderPassSharedDataList.AddRenderPassAttachmentReference(0, ImageLayoutFlags::COLOR_ATTACHMENT);
+
+	renderPassData.subpassDependency = renderPassSharedDataList.AddSubpassDependency(externalSubpass, 0, PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT,
+		PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, 0, AccessFlagBits::ACCESS_COLOR_WRITE);
 }

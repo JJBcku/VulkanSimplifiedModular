@@ -19,3 +19,8 @@ IDObject<RenderPassAttachmentReference> SharedRenderPassDataSimplifier::AddRende
 {
 	return _internal.AddRenderPassAttachmentReference(attachmentIndex, subpassUsedAttachmentLayout, addOnReserve);
 }
+
+IDObject<SubpassDependencyData> SharedRenderPassDataSimplifier::AddSubpassDependency(std::uint32_t srcSubpass, std::uint32_t dstSubpass, PipelineStageFlags srcStageFlags, PipelineStageFlags dstStageFlags, AccessFlags srcAccessFlags, AccessFlags dstAccessFlags, size_t addOnReserve)
+{
+	return _internal.AddSubpassDependency(srcSubpass, dstSubpass, srcStageFlags, dstStageFlags, srcAccessFlags, dstAccessFlags, addOnReserve);
+}

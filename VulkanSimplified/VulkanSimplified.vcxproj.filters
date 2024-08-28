@@ -588,5 +588,11 @@
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.ixx">
       <Filter>Source Files\Include\SharedData</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.PipelineStageFlags.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.AccessFlags.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

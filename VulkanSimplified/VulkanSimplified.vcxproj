@@ -202,10 +202,12 @@
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedPipelineData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.AccessFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.CompareOperationsType.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DescriptorTypeFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageLayouts.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.PipelineStageFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.Data.ixx" />

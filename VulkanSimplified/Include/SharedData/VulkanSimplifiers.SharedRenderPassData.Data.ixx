@@ -1,11 +1,12 @@
 export module VulkanSimplifiers.SharedRenderPassData.Data;
 
-export import VulkanSimplifiers.Common.ImageLayouts;
-export import VulkanSimplifiers.Common.DataFormatFlags;
-export import VulkanSimplifiers.Common.ImageSampleFlags;
+import std;
 
 export struct RenderPassAttachmentData;
 export struct RenderPassAttachmentReference;
+export struct SubpassDependencyData;
+
+export constexpr std::uint32_t externalSubpass = std::numeric_limits<std::uint32_t>::max();
 
 export enum class RenderPassAttachmentLoadOP
 {

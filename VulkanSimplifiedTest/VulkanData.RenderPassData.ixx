@@ -9,6 +9,7 @@ export struct VulkanRenderPassData
 {
 	std::vector<IDObject<RenderPassAttachmentData>> renderPassAttachments;
 	IDObject<RenderPassAttachmentReference> colorAttachmentReference;
+	IDObject<SubpassDependencyData> subpassDependency;
 
 	VulkanRenderPassData() = default;
 };

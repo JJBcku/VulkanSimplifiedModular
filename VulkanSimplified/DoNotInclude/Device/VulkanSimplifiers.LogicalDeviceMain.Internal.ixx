@@ -8,6 +8,7 @@ import VulkanSimplifiers.LogicalDeviceCore.Internal;
 import VulkanSimplifiers.ShaderList.Internal;
 import VulkanSimplifiers.DeviceDescriptorData.Internal;
 import VulkanSimplifiers.DevicePipelineData.Internal;
+import VulkanSimplifiers.DeviceRenderPassData.Internal;
 
 import VulkanSimplifiers.WindowList.Internal;
 
@@ -28,16 +29,19 @@ public:
 	LogicalDeviceCoreInternal& GetLogicalDeviceCoreSimplifier();
 	ShaderListInternal& GetShaderListSimplifier();
 	DeviceDescriptorDataInternal& GetDeviceDescriptorDataSimplifier();
+	DeviceRenderPassDataInternal& GetRenderPassListSimplifier();
 	DevicePipelineDataInternal& GetDevicePipelineDataSimplifier();
 
 	const LogicalDeviceCoreInternal& GetLogicalDeviceCoreSimplifier() const;
 	const ShaderListInternal& GetShaderListSimplifier() const;
 	const DeviceDescriptorDataInternal& GetDeviceDescriptorDataSimplifier() const;
+	const DeviceRenderPassDataInternal& GetRenderPassListSimplifier() const;
 	const DevicePipelineDataInternal& GetDevicePipelineDataSimplifier() const;
 
 private:
 	LogicalDeviceCoreInternal _core;
 	ShaderListInternal _shaderList;
 	DeviceDescriptorDataInternal _descriptorList;
+	DeviceRenderPassDataInternal _renderPassList;
 	DevicePipelineDataInternal _pipelineDataList;
 };

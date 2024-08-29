@@ -32,4 +32,9 @@ void CreateRenderPassData(VulkanData& data)
 
 	renderPassData.subpassDependency = renderPassSharedDataList.AddSubpassDependency(externalSubpass, 0, PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT,
 		PipelineStageFlagBits::PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT, 0, AccessFlagBits::ACCESS_COLOR_WRITE);
+
+	auto instance = data.basicData->main->GetInstanceSimplifier();
+	auto deviceList = instance.GetDeviceListSimplifier();
+	auto device = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
+	auto deviceRenderPassData = device.GetRenderPassListSimplifier();
 }

@@ -2,12 +2,14 @@ export module VulkanSimplifiers.LogicalDeviceMain.CreationData;
 
 export import VulkanSimplifiers.ShaderList.CreationData;
 export import VulkanSimplifiers.DeviceDescriptorData.CreationData;
+export import VulkanSimplifiers.DeviceRenderPassData.CreationData;
 export import VulkanSimplifiers.DevicePipelineData.CreationData;
 
 export struct DeviceMainCreationData
 {
 	ShaderListCreationData shaderList;
 	DeviceDescriptorDataCreationData deviceDescriptors;
+	DeviceRenderPassCreationData renderPass;
 	DevicePipelineDataCreationData devicePipelines;
 
 	DeviceMainCreationData() = default;

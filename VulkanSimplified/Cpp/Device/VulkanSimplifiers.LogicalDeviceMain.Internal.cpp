@@ -2,7 +2,7 @@ module VulkanSimplifiers.LogicalDeviceMain.Internal;
 
 LogicalDeviceMainInternal::LogicalDeviceMainInternal(const LogicalDeviceInitData& initData, const DeviceMainCreationData& mainCreationData, WindowListInternal& windowList, 
 	const SharedDataListInternal& sharedDataList) : _core(initData, windowList), _shaderList(mainCreationData.shaderList, _core.GetDevice()),
-	_descriptorList(mainCreationData.deviceDescriptors, _core.GetDevice(), sharedDataList.GetSharedDescriptorDataSimplifier()),
+	_descriptorList(mainCreationData.deviceDescriptors, _core.GetDevice(), sharedDataList.GetSharedDescriptorDataSimplifier()), _renderPassList(mainCreationData.renderPass),
 	_pipelineDataList(mainCreationData.devicePipelines, sharedDataList.GetSharedPipelineDataSimplifier(), _descriptorList, _core.GetDevice())
 {
 }
@@ -26,6 +26,11 @@ DeviceDescriptorDataInternal& LogicalDeviceMainInternal::GetDeviceDescriptorData
 	return _descriptorList;
 }
 
+DeviceRenderPassDataInternal& LogicalDeviceMainInternal::GetRenderPassListSimplifier()
+{
+	return _renderPassList;
+}
+
 DevicePipelineDataInternal& LogicalDeviceMainInternal::GetDevicePipelineDataSimplifier()
 {
 	return _pipelineDataList;
@@ -44,6 +49,11 @@ const ShaderListInternal& LogicalDeviceMainInternal::GetShaderListSimplifier() c
 const DeviceDescriptorDataInternal& LogicalDeviceMainInternal::GetDeviceDescriptorDataSimplifier() const
 {
 	return _descriptorList;
+}
+
+const DeviceRenderPassDataInternal& LogicalDeviceMainInternal::GetRenderPassListSimplifier() const
+{
+	return _renderPassList;
 }
 
 const DevicePipelineDataInternal& LogicalDeviceMainInternal::GetDevicePipelineDataSimplifier() const

@@ -9,6 +9,12 @@ import VulkanSimplifiers.Main;
 import VulkanSimplifiers.SharedDataList;
 import VulkanSimplifiers.SharedRenderPassData;
 
+import VulkanSimplifiers.Instance;
+import VulkanSimplifiers.DeviceList;
+import VulkanSimplifiers.LogicalDeviceMain;
+import VulkanSimplifiers.LogicalDeviceMain;
+import VulkanSimplifiers.DeviceRenderPassData;
+
 import VulkanSimplifiers.Common.ImageLayouts;
 import VulkanSimplifiers.Common.DataFormatFlags;
 import VulkanSimplifiers.Common.ImageSampleFlags;

@@ -31,6 +31,13 @@ public:
 	IDObject<SubpassDependencyData> AddSubpassDependency(std::uint32_t srcSubpass, std::uint32_t dstSubpass, PipelineStageFlags srcStageFlags, PipelineStageFlags dstStageFlags,
 		AccessFlags srcAccessFlags, AccessFlags dstAccessFlags, size_t addOnReserve);
 
+	std::vector<VkAttachmentDescription> GetRenderPassAttachmentDescriptors(const std::vector<IDObject<RenderPassAttachmentData>> attachmentIDs) const;
+
+	std::vector<VkAttachmentReference> GetRenderPassAttachmentReferences(const std::vector<std::optional<IDObject<RenderPassAttachmentReference>>>& referenceIDs) const;
+	VkAttachmentReference GetRenderPassAttachmentReference(const std::optional<IDObject<RenderPassAttachmentReference>>& referenceID) const;
+
+	std::vector<VkSubpassDependency> GetSubpassDependencies(const std::vector<IDObject<SubpassDependencyData>>& dependencyIDs) const;
+
 private:
 	UnsortedList<RenderPassAttachmentData> _attachmentData;
 	UnsortedList<RenderPassAttachmentReference> _attachmentReferenceData;

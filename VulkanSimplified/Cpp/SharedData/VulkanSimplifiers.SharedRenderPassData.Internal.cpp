@@ -203,6 +203,105 @@ IDObject<SubpassDependencyData> SharedRenderPassDataInternal::AddSubpassDependen
 	return _subpassDependencies.AddUniqueObject(std::move(add), addOnReserve);
 }
 
+std::vector<VkAttachmentDescription> SharedRenderPassDataInternal::GetRenderPassAttachmentDescriptors(const std::vector<IDObject<RenderPassAttachmentData>> attachmentIDs) const
+{
+	assert(!attachmentIDs.empty());
+
+	std::vector<VkAttachmentDescription> ret;
+	ret.reserve(attachmentIDs.size());
+
+	auto attachmentData = _attachmentData.GetObjectList(attachmentIDs);
+
+	for (auto& data : attachmentData)
+	{
+		VkAttachmentDescription add{};
+
+		add.format = data.format;
+		add.samples = data.samples;
+		add.loadOp = data.loadOP;
+		add.storeOp = data.storeOP;
+		add.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+		add.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+		add.initialLayout = data.initialLayout;
+		add.finalLayout = data.finalLayout;
+
+		ret.push_back(add);
+	}
+
+	return ret;
+}
+
+std::vector<VkAttachmentReference> SharedRenderPassDataInternal::GetRenderPassAttachmentReferences(const std::vector<std::optional<IDObject<RenderPassAttachmentReference>>>& referenceIDs) const
+{
+	std::vector<VkAttachmentReference> ret;
+	ret.reserve(referenceIDs.size());
+
+	for (auto& ID : referenceIDs)
+	{
+		VkAttachmentReference add{};
+
+		if (ID.has_value())
+		{
+			auto& reference = _attachmentReferenceData.GetConstObject(ID.value());
+
+			add.attachment = reference.attachmentIndex;
+			add.layout = reference.attachmentLayout;
+		}
+		else
+		{
+			add.attachment = VK_ATTACHMENT_UNUSED;
+			add.layout = VK_IMAGE_LAYOUT_UNDEFINED;
+		}
+
+		ret.push_back(add);
+	}
+
+	return ret;
+}
+
+VkAttachmentReference SharedRenderPassDataInternal::GetRenderPassAttachmentReference(const std::optional<IDObject<RenderPassAttachmentReference>>& referenceID) const
+{
+	VkAttachmentReference ret{};
+
+	if (referenceID.has_value())
+	{
+		auto& reference = _attachmentReferenceData.GetConstObject(referenceID.value());
+
+		ret.attachment = reference.attachmentIndex;
+		ret.layout = reference.attachmentLayout;
+	}
+	else
+	{
+		ret.attachment = VK_ATTACHMENT_UNUSED;
+		ret.layout = VK_IMAGE_LAYOUT_UNDEFINED;
+	}
+
+	return ret;
+}
+
+std::vector<VkSubpassDependency> SharedRenderPassDataInternal::GetSubpassDependencies(const std::vector<IDObject<SubpassDependencyData>>& dependencyIDs) const
+{
+	std::vector<VkSubpassDependency> ret;
+	ret.reserve(dependencyIDs.size());
+
+	auto dependencyData = _subpassDependencies.GetObjectList(dependencyIDs);
+
+	for (auto& data : dependencyData)
+	{
+		VkSubpassDependency add{};
+		add.srcSubpass = data.srcSubpass;
+		add.dstSubpass = data.dstSubpass;
+		add.srcStageMask = data.srcStageFlags;
+		add.dstStageMask = data.dstStageFlags;
+		add.srcAccessMask = data.srcAccessFlags;
+		add.dstAccessMask = data.dstAccessFlags;
+
+		ret.push_back(add);
+	}
+
+	return ret;
+}
+
 VkPipelineStageFlags SharedRenderPassDataInternal::CompileStageFlags(PipelineStageFlags stageFlags)
 {
 	VkPipelineStageFlags ret = 0;

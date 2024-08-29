@@ -4,7 +4,7 @@ import std;
 
 export struct DeviceRenderPassCreationData
 {
-	std::uint64_t stump;
+	size_t renderPassesInitialCapacity;
 
 	DeviceRenderPassCreationData();
 };

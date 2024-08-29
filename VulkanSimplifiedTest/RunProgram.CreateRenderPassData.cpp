@@ -37,4 +37,9 @@ void CreateRenderPassData(VulkanData& data)
 	auto deviceList = instance.GetDeviceListSimplifier();
 	auto device = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
 	auto deviceRenderPassData = device.GetRenderPassListSimplifier();
+
+	SubpassCreationDataNoResolve subpassData;
+	subpassData.colorAttachments.push_back(renderPassData.colorAttachmentReference);
+
+	renderPassData.renderPass = deviceRenderPassData.AddRenderPassWithoutResolveAttachments(renderPassData.renderPassAttachments, { subpassData }, { renderPassData.subpassDependency });
 }

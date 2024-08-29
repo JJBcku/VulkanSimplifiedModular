@@ -8,6 +8,7 @@ import VulkanData.RenderPassData;
 import VulkanSimplifiers.Main;
 import VulkanSimplifiers.SharedDataList;
 import VulkanSimplifiers.SharedRenderPassData;
+import VulkanSimplifiers.SharedRenderPassData.Data;
 
 import VulkanSimplifiers.Instance;
 import VulkanSimplifiers.DeviceList;

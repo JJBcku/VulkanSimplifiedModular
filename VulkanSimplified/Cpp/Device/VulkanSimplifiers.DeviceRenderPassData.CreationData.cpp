@@ -2,5 +2,5 @@ module VulkanSimplifiers.DeviceRenderPassData.CreationData;
 
 DeviceRenderPassCreationData::DeviceRenderPassCreationData()
 {
-	stump = 0;
+	renderPassesInitialCapacity = 0;
 }

@@ -11,6 +11,12 @@ ShaderSpecializationElement::ShaderSpecializationElement()
 	size  = std::numeric_limits<size_t>::max();
 }
 
+ShaderSharedPipelineData::ShaderSharedPipelineData()
+{
+	shaderStages = static_cast<VkShaderStageFlagBits>(0);
+	padding = 0;
+}
+
 VertexBindingDescriptionData::VertexBindingDescriptionData()
 {
 	stride = std::numeric_limits<std::uint32_t>::max();

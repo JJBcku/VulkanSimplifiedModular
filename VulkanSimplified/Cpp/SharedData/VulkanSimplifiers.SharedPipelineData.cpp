@@ -13,10 +13,9 @@ IDObject<ShaderSpecializationElement> SharedPipelineDataSimplifier::AddShaderSpe
 	return _internal.AddShaderSpecializationElement(constantID, dataOffset, dataSize, addOnReserve);
 }
 
-IDObject<ShaderSharedPipelineData> SharedPipelineDataSimplifier::AddShaderSharedPipelineData(const std::string& entryPointName,
-	const std::vector<IDObject<ShaderSpecializationElement>>& specializations, size_t addOnReserve)
+IDObject<ShaderSharedPipelineData> SharedPipelineDataSimplifier::AddShaderSharedPipelineData(std::string entryPointName, ShaderTypeFlagBit shaderType, size_t addOnReserve)
 {
-	return _internal.AddShaderSharedPipelineData(entryPointName, specializations, addOnReserve);
+	return _internal.AddShaderSharedPipelineData(entryPointName, shaderType, addOnReserve);
 }
 
 IDObject<VertexBindingDescriptionData> SharedPipelineDataSimplifier::AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate,

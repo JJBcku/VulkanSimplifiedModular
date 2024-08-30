@@ -4,11 +4,13 @@ import std;
 export import ListTemplates.IDObject;
 
 export import VulkanSimplifiers.SharedPipelineData.Data;
+export import VulkanSimplifiers.DevicePipelineData.Data;
 
 export struct VulkanPipelineData
 {
 	IDObject<PipelineViewportData> pipelineViewport;
 	IDObject<PipelineScissorData> pipelineScissor;
+	IDObject<AutoCleanupGraphicsPipeline> pipeline;
 
 	VulkanPipelineData() = default;
 

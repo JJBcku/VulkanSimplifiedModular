@@ -28,6 +28,8 @@ public:
 	IDObject<AutoCleanupRenderPass> AddRenderPassWithResolveAttachments(const std::vector<IDObject<RenderPassAttachmentData>>& attachments,
 		const std::vector<SubpassCreationDataResolve>& subpasses, const std::vector<IDObject<SubpassDependencyData>>& subpassDependencies, size_t addOnReserve);
 
+	VkRenderPass GetRenderPass(IDObject<AutoCleanupRenderPass> renderPassID) const;
+
 private:
 	const SharedRenderPassDataInternal& _sharedData;
 	VkDevice _device;

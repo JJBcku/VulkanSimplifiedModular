@@ -20,8 +20,7 @@ public:
 	SharedPipelineDataSimplifier& operator=(const SharedPipelineDataSimplifier&) noexcept = delete;
 
 	IDObject<ShaderSpecializationElement> AddShaderSpecializationElement(std::uint32_t constantID, std::uint32_t dataOffset, size_t dataSize, size_t addOnReserve = 0);
-	IDObject<ShaderSharedPipelineData> AddShaderSharedPipelineData(const std::string& entryPointName,
-		const std::vector<IDObject<ShaderSpecializationElement>>& specializations, size_t addOnReserve = 0);
+	IDObject<ShaderSharedPipelineData> AddShaderSharedPipelineData(std::string entryPointName, ShaderTypeFlagBit shaderType, size_t addOnReserve = 0);
 
 	IDObject<VertexBindingDescriptionData> AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserve = 0);

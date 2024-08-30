@@ -28,12 +28,23 @@ IDObject<ShaderSpecializationElement> SharedPipelineDataInternal::AddShaderSpeci
 	return _shaderSpecializationElements.AddUniqueObject(std::move(add), addOnReserve);
 }
 
-IDObject<ShaderSharedPipelineData> SharedPipelineDataInternal::AddShaderSharedPipelineData(const std::string& entryPointName,
-	const std::vector<IDObject<ShaderSpecializationElement>>& specializations, size_t addOnReserve)
+IDObject<ShaderSharedPipelineData> SharedPipelineDataInternal::AddShaderSharedPipelineData(std::string& entryPointName, ShaderTypeFlagBit shaderType, size_t addOnReserve)
 {
 	ShaderSharedPipelineData add;
-	add.entryPointName = entryPointName;
-	add.specializationElements = specializations;
+
+	switch (shaderType)
+	{
+	case SHADER_TYPE_VERTEX:
+		add.shaderStages = VK_SHADER_STAGE_VERTEX_BIT;
+		break;
+	case SHADER_TYPE_FRAGMENT:
+		add.shaderStages = VK_SHADER_STAGE_FRAGMENT_BIT;
+		break;
+	default:
+		throw std::runtime_error("SharedPipelineDataInternal::AddShaderSharedPipelineData Error: Program was given an erroneous shader type value!");
+	}
+
+	add.entryPointName = std::move(entryPointName);
 
 	return _shaderPipelineInfo.AddUniqueObject(std::move(add), addOnReserve);
 }
@@ -365,6 +376,166 @@ IDObject<PushConstantData> SharedPipelineDataInternal::AddPushConstantData(Shade
 	add.size = size;
 
 	return _pushContantData.AddUniqueObject(std::move(add), addOnReserve);
+}
+
+std::vector<VkSpecializationMapEntry> SharedPipelineDataInternal::GetShaderSpecializationData(const std::vector<IDObject<ShaderSpecializationElement>>& specializationIDs) const
+{
+	std::vector<VkSpecializationMapEntry> ret;
+	ret.reserve(specializationIDs.size());
+
+	auto dataList = _shaderSpecializationElements.GetObjectList(specializationIDs);
+
+	for (auto& data : dataList)
+	{
+		VkSpecializationMapEntry add{};
+
+		add.constantID = data.ID;
+		add.offset = data.offset;
+		add.size = data.size;
+
+		ret.push_back(add);
+	}
+
+	return ret;
+}
+
+ShaderSharedPipelineData SharedPipelineDataInternal::GetShaderSharedPipelineData(const IDObject<ShaderSharedPipelineData>& shaderID) const
+{
+	return _shaderPipelineInfo.GetObjectCopy(shaderID);
+}
+
+std::vector<VertexBindingDescriptionData> SharedPipelineDataInternal::GetVertexBindingDescriptionData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindingIDs) const
+{
+	return _vertexBindingInfo.GetObjectList(bindingIDs);
+}
+
+std::vector<VertexAttributeDescriptionData> SharedPipelineDataInternal::GetVertexAttributeDescriptionData(const std::vector<IDObject<VertexAttributeDescriptionData>>& attributeIDs) const
+{
+	return _vertexAttributeInfo.GetObjectList(attributeIDs);
+}
+
+VertexInputSharedPipelineData SharedPipelineDataInternal::GetVertexInputSharedPipelineData(IDObject<VertexInputSharedPipelineData> vertexDataIDs) const
+{
+	return _vertexPipelineInfo.GetConstObject(vertexDataIDs);
+}
+
+VkViewport SharedPipelineDataInternal::GetViewports(const IDObject<PipelineViewportData>& viewportID) const
+{
+	VkViewport ret{};
+
+	auto& data = _pipelineViewportData.GetConstObject(viewportID);
+
+	ret.x = data.startX;
+	ret.y = data.startY;
+	ret.width = data.width;
+	ret.height = data.height;
+	ret.minDepth = data.minDepth;
+	ret.maxDepth = data.maxDepth;
+
+	return ret;
+}
+
+VkRect2D SharedPipelineDataInternal::GetScissors(const IDObject<PipelineScissorData>& scissorID) const
+{
+	VkRect2D ret{};
+
+	auto& data = _pipelineScissorData.GetConstObject(scissorID);
+
+	ret.extent.width = data.width;
+	ret.extent.height = data.height;
+	ret.offset.x = data.offsetX;
+	ret.offset.y = data.offsetY;
+
+	return ret;
+}
+
+VkPipelineInputAssemblyStateCreateInfo SharedPipelineDataInternal::GetInputAssembly(IDObject<PipelineInputAssemblyData> assemblyID) const
+{
+	VkPipelineInputAssemblyStateCreateInfo ret{};
+
+	ret.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
+
+	auto& data = _pipelineInputAssemblyInfo.GetConstObject(assemblyID);
+
+	ret.topology = data.topology;
+	ret.primitiveRestartEnable = data.primitiveRestartEnable;
+
+	return ret;
+}
+
+VkPipelineRasterizationStateCreateInfo SharedPipelineDataInternal::GetRasterizationState(IDObject<PipelineRasterizationData> rasterizationID) const
+{
+	VkPipelineRasterizationStateCreateInfo ret{};
+	ret.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
+	ret.depthClampEnable = VK_FALSE;
+	ret.rasterizerDiscardEnable = VK_FALSE;
+	ret.lineWidth = 1.0f;
+
+	auto& data = _pipelineRasterizationInfo.GetConstObject(rasterizationID);
+
+	ret.polygonMode = data.polygonMode;
+	ret.cullMode = data.cullMode;
+	ret.frontFace = data.frontFace;
+	ret.depthBiasEnable = VK_FALSE;
+
+	return ret;
+}
+
+VkPipelineMultisampleStateCreateInfo SharedPipelineDataInternal::GetMultisamplingState(IDObject<PipelineMultisampleData> multisamplingID) const
+{
+	VkPipelineMultisampleStateCreateInfo ret{};
+	ret.sType = VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO;
+
+	auto& data = _pipelineMultisampleInfo.GetConstObject(multisamplingID);
+
+	ret.rasterizationSamples = data.sampleCount;
+	ret.sampleShadingEnable = data.sampleShadingEnable;
+	ret.minSampleShading = data.minSampleShading;
+
+	return ret;
+}
+
+VkPipelineDepthStencilStateCreateInfo SharedPipelineDataInternal::GetDepthStencilState(IDObject<PipelineDepthStencilStateData> depthStencilID) const
+{
+	VkPipelineDepthStencilStateCreateInfo ret;
+	ret.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+
+	auto& data = _pipelineDepthStencilInfo.GetConstObject(depthStencilID);
+
+	ret.depthTestEnable = data.depthTestEnable;
+	ret.depthWriteEnable = data.depthWriteEnable;
+	ret.depthCompareOp = data.compareOp;
+	ret.depthBoundsTestEnable = VK_FALSE;
+	ret.stencilTestEnable = VK_FALSE;
+	ret.minDepthBounds = data.minDepth;
+	ret.maxDepthBounds = data.maxDepth;
+
+	return ret;
+}
+
+std::vector<VkPipelineColorBlendAttachmentState> SharedPipelineDataInternal::GetColorBlendAttachments(const std::vector<IDObject<PipelineColorBlendAttachment>>& attachmentIDs) const
+{
+	std::vector<VkPipelineColorBlendAttachmentState> ret;
+	ret.reserve(attachmentIDs.size());
+
+	auto dataList = _pipelineColorBlendAttachmentInfo.GetObjectList(attachmentIDs);
+
+	for (auto& data : dataList)
+	{
+		VkPipelineColorBlendAttachmentState add{};
+		add.blendEnable = data.blendEnable;
+		add.srcColorBlendFactor = data.srcColorBlend;
+		add.dstColorBlendFactor = data.dstColorBlend;
+		add.colorBlendOp = data.colorBlendOp;
+		add.srcAlphaBlendFactor = data.srcAlphaBlend;
+		add.dstAlphaBlendFactor = data.dstAlphaBlend;
+		add.alphaBlendOp = data.alphaBlendOp;
+		add.colorWriteMask = data.colorWriteMask;
+
+		ret.push_back(add);
+	}
+
+	return ret;
 }
 
 std::vector<VkPushConstantRange> SharedPipelineDataInternal::GetPushConstantData(std::vector<IDObject<PushConstantData>> pushConstantIDs) const

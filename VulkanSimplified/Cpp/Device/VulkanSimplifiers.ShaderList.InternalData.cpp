@@ -33,6 +33,11 @@ AutoCleanUpShader& AutoCleanUpShader::operator=(AutoCleanUpShader&& rhs) noexcep
 	return *this;
 }
 
+VkShaderModule AutoCleanUpShader::GetShaderModule() const
+{
+	return _shader;
+}
+
 AutoCleanUpFragmentShader::AutoCleanUpFragmentShader(VkDevice device, VkShaderModule shader) : AutoCleanUpShader(device, shader)
 {
 }

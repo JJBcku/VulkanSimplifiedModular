@@ -23,8 +23,7 @@ public:
 	~SharedPipelineDataInternal();
 
 	IDObject<ShaderSpecializationElement> AddShaderSpecializationElement(std::uint32_t constantID, std::uint32_t dataOffset, size_t dataSize, size_t addOnReserve);
-	IDObject<ShaderSharedPipelineData> AddShaderSharedPipelineData(const std::string& entryPointName,
-		const std::vector<IDObject<ShaderSpecializationElement>>& specializations, size_t addOnReserve);
+	IDObject<ShaderSharedPipelineData> AddShaderSharedPipelineData(std::string& entryPointName, ShaderTypeFlagBit shaderType, size_t addOnReserve);
 
 	IDObject<VertexBindingDescriptionData> AddVertexBindingData(std::uint32_t stride, VertexBindingInputRate inputRate,
 		const std::vector<IDObject<VertexAttributeDescriptionData>>& vertexAttributeIDs, size_t addOnReserve);
@@ -42,6 +41,22 @@ public:
 	IDObject<PipelineColorBlendAttachment> AddPipelineColorBlendAttachment(ColorBlendingComponentFlags blendingComponents, ColorBlendingPreset blendingPreset, size_t addOnReserve);
 
 	IDObject<PushConstantData> AddPushConstantData(ShaderTypeFlagBit shaderType, std::uint32_t offset, std::uint32_t size, size_t addOnReserve);
+
+	std::vector<VkSpecializationMapEntry> GetShaderSpecializationData(const std::vector<IDObject<ShaderSpecializationElement>>& specializationIDs) const;
+	ShaderSharedPipelineData GetShaderSharedPipelineData(const IDObject<ShaderSharedPipelineData>& shaderID) const;
+
+	std::vector<VertexBindingDescriptionData> GetVertexBindingDescriptionData(const std::vector<IDObject<VertexBindingDescriptionData>>& bindingIDs) const;
+	std::vector<VertexAttributeDescriptionData> GetVertexAttributeDescriptionData(const std::vector<IDObject<VertexAttributeDescriptionData>>& attributeIDs) const;
+	VertexInputSharedPipelineData GetVertexInputSharedPipelineData(IDObject<VertexInputSharedPipelineData> vertexDataIDs) const;
+
+	VkViewport GetViewports(const IDObject<PipelineViewportData>& viewportID) const;
+	VkRect2D GetScissors(const IDObject<PipelineScissorData>& scissorID) const;
+
+	VkPipelineInputAssemblyStateCreateInfo GetInputAssembly(IDObject<PipelineInputAssemblyData> assemblyID) const;
+	VkPipelineRasterizationStateCreateInfo GetRasterizationState(IDObject<PipelineRasterizationData> rasterizationID) const;
+	VkPipelineMultisampleStateCreateInfo GetMultisamplingState(IDObject<PipelineMultisampleData> multisamplingID) const;
+	VkPipelineDepthStencilStateCreateInfo GetDepthStencilState(IDObject<PipelineDepthStencilStateData> depthStencilID) const;
+	std::vector<VkPipelineColorBlendAttachmentState> GetColorBlendAttachments(const std::vector<IDObject<PipelineColorBlendAttachment>>& attachmentIDs) const;
 
 	std::vector<VkPushConstantRange> GetPushConstantData(std::vector<IDObject<PushConstantData>> pushConstantIDs) const;
 

@@ -16,6 +16,8 @@ public:
 	AutoCleanUpShader& operator=(const AutoCleanUpShader&) noexcept = delete;
 	AutoCleanUpShader& operator=(AutoCleanUpShader&& rhs) noexcept;
 
+	VkShaderModule GetShaderModule() const;
+
 private:
 	VkDevice _device;
 	VkShaderModule _shader;

@@ -184,3 +184,8 @@ IDObject<AutoCleanupRenderPass> DeviceRenderPassDataInternal::AddRenderPassWithR
 
 	return _renderPasses.AddObject(AutoCleanupRenderPass(_device, add), addOnReserve);
 }
+
+VkRenderPass DeviceRenderPassDataInternal::GetRenderPass(IDObject<AutoCleanupRenderPass> renderPassID) const
+{
+	return _renderPasses.GetConstObject(renderPassID).GetRenderPass();
+}

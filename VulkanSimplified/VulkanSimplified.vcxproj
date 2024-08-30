@@ -126,6 +126,7 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.CreationData.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.GraphicPipelineCreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceRenderPassData.cpp" />
@@ -220,6 +221,7 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.Data.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.GraphicPipelineCreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DevicePipelineData.LayoutCreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceRenderPassData.CreationData.ixx" />

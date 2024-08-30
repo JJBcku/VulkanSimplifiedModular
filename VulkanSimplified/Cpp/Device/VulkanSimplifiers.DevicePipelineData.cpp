@@ -12,3 +12,9 @@ IDObject<AutoCleanupPipelineLayout> DevicePipelineDataSimplifier::AddPipelineLay
 {
 	return _internal.AddPipelineLayout(creationData, addOnReserve);
 }
+
+std::vector<IDObject<AutoCleanupGraphicsPipeline>> DevicePipelineDataSimplifier::AddGraphicPipelines(const std::vector<GraphicPipelineCreationData>& creationDataList,
+	size_t addOnReserve)
+{
+	return _internal.AddGraphicPipelines(creationDataList, addOnReserve);
+}

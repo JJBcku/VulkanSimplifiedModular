@@ -54,3 +54,32 @@ IDObject<AutoCleanUpVertexShader> ShaderListInternal::AddVertexShader(const std:
 
 	return _vertexShaders.AddObject(AutoCleanUpVertexShader(_device, add), addOnResize);
 }
+
+VkShaderModule ShaderListInternal::GetShaderModule(ArbitraryShaderID shaderID) const
+{
+	VkShaderModule ret = VK_NULL_HANDLE;
+
+	switch (shaderID.type)
+	{
+	case SHADER_TYPE_FRAGMENT:
+		ret = GetFragmentShader(shaderID.fragmentShader.fragmentShaderID);
+		break;
+	case SHADER_TYPE_VERTEX:
+		ret = GetVertexShader(shaderID.vertexShader.vertexShaderID);
+		break;
+	default:
+		throw std::runtime_error("ShaderListInternal::GetShaderModule Error: Program was given an erroneous shader id type!");
+	}
+
+	return ret;
+}
+
+VkShaderModule ShaderListInternal::GetFragmentShader(IDObject<AutoCleanUpFragmentShader> shaderID) const
+{
+	return _fragmentShaders.GetConstObject(shaderID).GetShaderModule();
+}
+
+VkShaderModule ShaderListInternal::GetVertexShader(IDObject<AutoCleanUpVertexShader> shaderID) const
+{
+	return _vertexShaders.GetConstObject(shaderID).GetShaderModule();
+}

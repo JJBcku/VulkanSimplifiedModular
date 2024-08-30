@@ -7,7 +7,8 @@ export import VulkanSimplifiers.SharedPipelineData.Data;
 
 export struct VulkanSharedData
 {
-	IDObject<ShaderSharedPipelineData> _pipelineShaderData;
+	IDObject<ShaderSharedPipelineData> _pipelineVertexShaderData;
+	IDObject<ShaderSharedPipelineData> _pipelineFragmentShaderData;
 
 	IDObject<VertexInputSharedPipelineData> _vertexInputData;
 	IDObject<PipelineInputAssemblyData> _pipelineInputAssembly;

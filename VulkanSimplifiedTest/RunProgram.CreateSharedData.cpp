@@ -8,7 +8,8 @@ void CreateSharedData(VulkanData& data)
 
 	auto sharedPipelineData = sharedDataList.GetSharedPipelineDataSimplifier();
 
-	data.sharedData->_pipelineShaderData = sharedPipelineData.AddShaderSharedPipelineData("main", {});
+	data.sharedData->_pipelineVertexShaderData = sharedPipelineData.AddShaderSharedPipelineData("main", SHADER_TYPE_VERTEX);
+	data.sharedData->_pipelineFragmentShaderData = sharedPipelineData.AddShaderSharedPipelineData("main", SHADER_TYPE_FRAGMENT);
 	data.sharedData->_vertexInputData = sharedPipelineData.AddVertexInputSharedPipelineData({}, {});
 	data.sharedData->_pipelineInputAssembly = sharedPipelineData.AddPipelineInputAssemblyData(PipelinePrimitiveTopology::TRIANGLE_LIST, false);
 	data.sharedData->_pipelineRasterizationAssembly = sharedPipelineData.AddPipelineRasterizationData(PipelinePolygonMode::FILL, true, true);

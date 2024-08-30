@@ -14,6 +14,11 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 	auto sharedDataList = data.basicData->main->GetSharedDataListSimplifier();
 	auto pipelineSharedData = sharedDataList.GetSharedPipelineDataSimplifier();
 
+	auto instance = data.basicData->main->GetInstanceSimplifier();
+	auto deviceList = instance.GetDeviceListSimplifier();
+	auto device = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
+	auto devicePipelineList = device.GetDevicePipelineDataSimplifier();
+
 	VulkanPipelineData add;
 	add.pipelineViewport = pipelineSharedData.AddPipelineViewportData(0, 0, width, height, 0.0f, 1.0f);
 
@@ -29,6 +34,41 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 
 		if (pipelines.size() == pipelines.capacity())
 			pipelines.reserve(pipelines.capacity() << 1);
+
+		GraphicPipelineCreationData creationData;
+
+		creationData.shaderStages.reserve(2);
+		ShaderStageData stageData;
+
+		stageData.sharedData = data.sharedData->_pipelineFragmentShaderData;
+		stageData.shaderDeviceID.type = SHADER_TYPE_FRAGMENT;
+		stageData.shaderDeviceID.fragmentShader.fragmentShaderID = data.deviceDependent->fragmentShader;
+		creationData.shaderStages.push_back(stageData);
+
+		stageData.sharedData = data.sharedData->_pipelineVertexShaderData;
+		stageData.shaderDeviceID.type = SHADER_TYPE_VERTEX;
+		stageData.shaderDeviceID.vertexShader.vertexShaderID = data.deviceDependent->vertexShader;
+		creationData.shaderStages.push_back(stageData);
+
+		creationData.vertexInputData = data.sharedData->_vertexInputData;
+		creationData.inputAssemblyData = data.sharedData->_pipelineInputAssembly;
+
+		ViewportStatePipelineDataPoint viewportData;
+		viewportData.viewport = add.pipelineViewport;
+		viewportData.scissor = add.pipelineScissor;
+		creationData.viewportData.push_back(viewportData);
+
+		creationData.rasterizationData = data.sharedData->_pipelineRasterizationAssembly;
+		creationData.samplingData = data.sharedData->_pipelineMultisampling;
+		creationData.colorBlendingData.push_back(data.sharedData->_pipelineColorBlendAttachment);
+
+		creationData.pipelineLayout = data.pipelineLayoutData->pipelineLayout;
+		creationData.renderPass = data.renderPassData->renderPass;
+		creationData.subpassIndex = 0;
+		creationData.pipelineDerrivationData.settings = PipelineDerrivationSettings::DO_NOT_DERRIVE;
+
+		auto pipelineID = devicePipelineList.AddGraphicPipelines({ creationData });
+		add.pipeline = pipelineID[0];
 
 		pipelines.push_back(add);
 		currentPipeline = add;

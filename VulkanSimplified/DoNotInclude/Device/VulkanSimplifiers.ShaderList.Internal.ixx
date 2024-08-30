@@ -8,6 +8,7 @@ import std;
 import ListTemplates.UnsortedList;
 
 import VulkanSimplifiers.ShaderList.InternalData;
+import VulkanSimplifiers.ShaderList.Data;
 import VulkanSimplifiers.ShaderList.CreationData;
 
 export class ShaderListInternal
@@ -19,9 +20,14 @@ public:
 	IDObject<AutoCleanUpFragmentShader> AddFragmentShader(const std::vector<char>& shaderCode, size_t addOnResize);
 	IDObject<AutoCleanUpVertexShader> AddVertexShader(const std::vector<char>& shaderCode, size_t addOnResize);
 
+	VkShaderModule GetShaderModule(ArbitraryShaderID shaderID) const;
+
 private:
 	VkDevice _device;
 
 	UnsortedList<AutoCleanUpFragmentShader> _fragmentShaders;
 	UnsortedList<AutoCleanUpVertexShader> _vertexShaders;
+
+	VkShaderModule GetFragmentShader(IDObject<AutoCleanUpFragmentShader> shaderID) const;
+	VkShaderModule GetVertexShader(IDObject<AutoCleanUpVertexShader> shaderID) const;
 };

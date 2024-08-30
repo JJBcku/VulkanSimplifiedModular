@@ -21,10 +21,11 @@ export struct ShaderSpecializationElement
 
 export struct ShaderSharedPipelineData
 {
+	VkShaderStageFlagBits shaderStages;
+	std::uint32_t padding;
 	std::string entryPointName;
-	std::vector<IDObject<ShaderSpecializationElement>> specializationElements;
 
-	ShaderSharedPipelineData() = default;
+	ShaderSharedPipelineData();
 
 	bool operator==(const ShaderSharedPipelineData& rhs) const noexcept = default;
 	std::strong_ordering operator<=>(const ShaderSharedPipelineData& rhs) const noexcept = default;

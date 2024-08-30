@@ -5,6 +5,8 @@ import std;
 export import VulkanSimplifiers.Common.ImageUsageFlags;
 export import VulkanSimplifiers.Common.DataFormatFlags;
 
+export import VulkanSimplifiers.Window.Data;
+
 export typedef std::uint64_t SurfacePresentModes;
 
 export enum SurfacePresentModeBits : SurfacePresentModes
@@ -38,6 +40,7 @@ export struct SurfaceSupportData
 
 export struct SwapchainCreationData
 {
+	SwapchainUsage swapchainUsage;
 	SurfacePresentModeBits surfacePresentMode;
 	DataFormatSetIndependentID format;
 

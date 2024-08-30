@@ -52,6 +52,8 @@ void CreateDeviceDependent(VulkanData& data)
 	if (swapchainCreation.imageAmount > data.instanceDependent->surfaceSupport.maxImageCount)
 		swapchainCreation.imageAmount = data.instanceDependent->surfaceSupport.maxImageCount;
 
+	swapchainCreation.swapchainUsage = SwapchainUsage::RENDERING_TARGET;
+
 	auto instance = data.basicData->main.value().GetInstanceSimplifier();
 	auto deviceList = instance.GetDeviceListSimplifier();
 	auto deviceMain = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);

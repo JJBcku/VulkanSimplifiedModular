@@ -15,6 +15,7 @@ SurfaceSupportData::SurfaceSupportData()
 
 SwapchainCreationData::SwapchainCreationData()
 {
+	swapchainUsage = static_cast<SwapchainUsage>(0);
 	surfacePresentMode = static_cast<SurfacePresentModeBits>(0);
 
 	imageAmount = 0;

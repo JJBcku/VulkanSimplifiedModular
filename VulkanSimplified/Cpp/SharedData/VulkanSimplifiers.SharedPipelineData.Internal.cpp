@@ -320,6 +320,24 @@ IDObject<PipelineColorBlendAttachment> SharedPipelineDataInternal::AddPipelineCo
 		add.dstAlphaBlend = VK_BLEND_FACTOR_ZERO;
 		add.alphaBlendOp = VK_BLEND_OP_ADD;
 		break;
+	case ColorBlendingPreset::ALPHA_BLENDING:
+		add.blendEnable = VK_TRUE;
+		add.srcColorBlend = VK_BLEND_FACTOR_SRC_ALPHA;
+		add.dstColorBlend = VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+		add.colorBlendOp = VK_BLEND_OP_ADD;
+		add.srcAlphaBlend = VK_BLEND_FACTOR_ONE;
+		add.dstAlphaBlend = VK_BLEND_FACTOR_ZERO;
+		add.alphaBlendOp = VK_BLEND_OP_ADD;
+		break;
+	case ColorBlendingPreset::ADDITIVE_BLENDING:
+		add.blendEnable = VK_TRUE;
+		add.srcColorBlend = VK_BLEND_FACTOR_SRC_ALPHA;
+		add.dstColorBlend = VK_BLEND_FACTOR_ONE;
+		add.colorBlendOp = VK_BLEND_OP_ADD;
+		add.srcAlphaBlend = VK_BLEND_FACTOR_ONE;
+		add.dstAlphaBlend = VK_BLEND_FACTOR_ZERO;
+		add.alphaBlendOp = VK_BLEND_OP_ADD;
+		break;
 	default:
 		throw std::runtime_error("SharedPipelineDataInternal::AddPipelineColorBlendAttachment Error: Program was given an erroneous blending preset value!");
 	}

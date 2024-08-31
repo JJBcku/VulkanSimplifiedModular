@@ -47,9 +47,7 @@ private:
 	VkSwapchainKHR _swapchain;
 
 	std::vector<VkImage> _swapchainImages;
-	std::vector<VkImageView> _swapchainImageViews;
 
-	SwapchainUsage _swapchainUsage;
 	VkPresentModeKHR _surfacePresentMode;
 	VkFormat _format;
 	VkSwapchainCreateFlagsKHR _swapchainFlags;

@@ -6,10 +6,9 @@ void CreateRenderPassData(VulkanData& data)
 
 	DataFormatSetIndependentID format;
 
-	auto& srgb = data.instanceDependent->surfaceSupport.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
-	auto& blitDst = data.instanceDependent->deviceFormatsSupport.formatFeaturesOptimalImageSupport.blitDst;
+	auto& colorAttachment = data.instanceDependent->deviceFormatsSupport.formatFeaturesOptimalImageSupport.colorAttachment;
 
-	if ((srgb.thirdSet & DATA_FORMAT_BGRA8_UNORM) == DATA_FORMAT_BGRA8_UNORM && (blitDst.thirdSet & DATA_FORMAT_BGRA8_UNORM) == DATA_FORMAT_BGRA8_UNORM)
+	if (CheckFormatSupport(colorAttachment, { DataFormatSetEnum::DATA_SET_THREE, DATA_FORMAT_BGRA8_UNORM}))
 	{
 		format.dataSet = DataFormatSetEnum::DATA_SET_THREE;
 		format.dataFormat = DATA_FORMAT_BGRA8_UNORM;

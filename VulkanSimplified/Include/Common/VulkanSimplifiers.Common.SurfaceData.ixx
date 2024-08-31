@@ -40,7 +40,6 @@ export struct SurfaceSupportData
 
 export struct SwapchainCreationData
 {
-	SwapchainUsage swapchainUsage;
 	SurfacePresentModeBits surfacePresentMode;
 	DataFormatSetIndependentID format;
 

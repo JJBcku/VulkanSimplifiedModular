@@ -7,7 +7,6 @@ module VulkanSimplifiers.Window.InternalData;
 SwapchainInitData::SwapchainInitData()
 {
 	device = VK_NULL_HANDLE;
-	swapchainUsage = static_cast<SwapchainUsage>(0);
 	surfacePresentMode = VK_PRESENT_MODE_IMMEDIATE_KHR;
 	format = VK_FORMAT_UNDEFINED;
 	flags = 0;

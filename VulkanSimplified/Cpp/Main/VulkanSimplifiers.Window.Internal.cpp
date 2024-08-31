@@ -21,7 +21,6 @@ WindowInternal::WindowInternal(WindowCreationData data, VkInstance instance)
 	_device = VK_NULL_HANDLE;
 	_swapchain = VK_NULL_HANDLE;
 
-	_swapchainUsage = static_cast<SwapchainUsage>(0);
 	_surfacePresentMode = VK_PRESENT_MODE_IMMEDIATE_KHR;
 	_format = VK_FORMAT_UNDEFINED;
 	_swapchainFlags = 0;
@@ -44,8 +43,8 @@ WindowInternal::~WindowInternal()
 }
 
 WindowInternal::WindowInternal(WindowInternal&& other) : _width(other._width), _height(other._height), _window(other._window), _instance(other._instance), _surface(other._surface),
-_device(other._device), _swapchain(other._swapchain), _swapchainImages(std::move(other._swapchainImages)), _swapchainImageViews(std::move(other._swapchainImageViews)),
-_swapchainUsage(other._swapchainUsage), _surfacePresentMode(other._surfacePresentMode), _format(other._format), _swapchainFlags(other._swapchainFlags),
+_device(other._device), _swapchain(other._swapchain), _swapchainImages(std::move(other._swapchainImages)),
+_surfacePresentMode(other._surfacePresentMode), _format(other._format), _swapchainFlags(other._swapchainFlags),
 _imageAmount(other._imageAmount), _queueFamilies(std::move(other._queueFamilies)), _minimized(other._minimized), _hidden(other._hidden), _quit(other._quit), _resized(other._resized)
 {
 	_cpadding[0] = 0;
@@ -60,7 +59,6 @@ _imageAmount(other._imageAmount), _queueFamilies(std::move(other._queueFamilies)
 	other._surface = VK_NULL_HANDLE;
 	other._device = VK_NULL_HANDLE;
 	other._swapchain = VK_NULL_HANDLE;
-	other._swapchainUsage = static_cast<SwapchainUsage>(0);
 	other._surfacePresentMode = VK_PRESENT_MODE_IMMEDIATE_KHR;
 	other._format = VK_FORMAT_UNDEFINED;
 	other._swapchainFlags = 0;
@@ -87,8 +85,6 @@ WindowInternal& WindowInternal::operator=(WindowInternal&& other)
 	_swapchainFlags = other._swapchainFlags;
 	_imageAmount = other._imageAmount;
 	_swapchainImages = std::move(other._swapchainImages);
-	_swapchainImageViews = std::move(other._swapchainImageViews);
-	_swapchainUsage = other._swapchainUsage;
 	_queueFamilies = std::move(other._queueFamilies);
 	_minimized = other._minimized;
 	_hidden = other._hidden;
@@ -106,7 +102,6 @@ WindowInternal& WindowInternal::operator=(WindowInternal&& other)
 	other._surface = VK_NULL_HANDLE;
 	other._device = VK_NULL_HANDLE;
 	other._swapchain = VK_NULL_HANDLE;
-	other._swapchainUsage = static_cast<SwapchainUsage>(0);
 	other._surfacePresentMode = VK_PRESENT_MODE_IMMEDIATE_KHR;
 	other._format = VK_FORMAT_UNDEFINED;
 	other._swapchainFlags = 0;
@@ -177,7 +172,6 @@ void WindowInternal::CreateSwapchain(SwapchainInitData swapchainInit, bool throw
 		throw std::runtime_error("WindowInternal::CreateSwapchain Error: Program tried to create a swapchain using different device!");
 
 	_device = swapchainInit.device;
-	_swapchainUsage = swapchainInit.swapchainUsage;
 	_surfacePresentMode = swapchainInit.surfacePresentMode;
 	_format = swapchainInit.format;
 	_swapchainFlags = swapchainInit.flags;
@@ -251,18 +245,7 @@ void WindowInternal::ReCreateSwapchain()
 	createInfo.imageExtent.width = _width;
 	createInfo.imageExtent.height = _height;
 	createInfo.imageArrayLayers = 1;
-	
-	switch (_swapchainUsage)
-	{
-	case SwapchainUsage::RENDERING_TARGET:
-		createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
-		break;
-	case SwapchainUsage::TRANSFER_DESTINATION:
-		createInfo.imageUsage = VK_IMAGE_USAGE_TRANSFER_DST_BIT;
-		break;
-	default:
-		throw std::runtime_error("WindowInternal::ReCreateSwapchain Error: Program was given an erroneous swapchain usage value!");
-	}
+	createInfo.imageUsage = VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
 	if (_queueFamilies.size() > 1)
 	{
@@ -283,46 +266,12 @@ void WindowInternal::ReCreateSwapchain()
 	vkGetSwapchainImagesKHR(_device, _swapchain, &imageCreated, nullptr);
 	_swapchainImages.resize(imageCreated);
 	vkGetSwapchainImagesKHR(_device, _swapchain, &imageCreated, _swapchainImages.data());
-
-	if (_swapchainUsage == SwapchainUsage::RENDERING_TARGET)
-	{
-		_swapchainImageViews.resize(imageCreated, VK_NULL_HANDLE);
-
-		VkImageViewCreateInfo imageViewCreateInfo{};
-		imageViewCreateInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-
-		imageViewCreateInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
-		imageViewCreateInfo.format = _format;
-
-		imageViewCreateInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
-		imageViewCreateInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
-		imageViewCreateInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
-		imageViewCreateInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
-
-		imageViewCreateInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-		imageViewCreateInfo.subresourceRange.baseMipLevel = 0;
-		imageViewCreateInfo.subresourceRange.levelCount = 1;
-		imageViewCreateInfo.subresourceRange.baseArrayLayer = 0;
-		imageViewCreateInfo.subresourceRange.layerCount = 1;
-
-		for (size_t i = 0; i < _swapchainImages.size(); i++)
-		{
-			imageViewCreateInfo.image = _swapchainImages[i];
-
-			if (vkCreateImageView(_device, &imageViewCreateInfo, nullptr, &_swapchainImageViews[i]) != VK_SUCCESS)
-				throw std::runtime_error("WindowInternal::ReCreateSwapchain Error: Program failed to create an image view!");
-		}
-	}
 }
 
 void WindowInternal::DestroySwapchain()
 {
 	if (_swapchain != VK_NULL_HANDLE)
 	{
-		for (auto& imageView : _swapchainImageViews)
-			vkDestroyImageView(_device, imageView, nullptr);
-
-		_swapchainImageViews.clear();
 		_swapchainImages.clear();
 
 		vkDestroySwapchainKHR(_device, _swapchain, nullptr);

@@ -19,9 +19,3 @@ export struct WindowCreationData
 
 	WindowProperties properties = WindowProperties::NONE;
 };
-
-export enum class SwapchainUsage : std::uint64_t
-{
-	TRANSFER_DESTINATION = 1,
-	RENDERING_TARGET = 2,
-};

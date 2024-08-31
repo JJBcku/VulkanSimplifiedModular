@@ -627,5 +627,23 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.GraphicPipelineCreationData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ImageData.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ImageData.CreationData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageData.CreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageData.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ImageDataList.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

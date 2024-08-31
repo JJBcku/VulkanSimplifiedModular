@@ -33,6 +33,11 @@ DevicePipelineDataSimplifier LogicalDeviceMainSimplifier::GetDevicePipelineDataS
 	return _internal.GetDevicePipelineDataSimplifier();
 }
 
+ImageDataListSimplifier LogicalDeviceMainSimplifier::GetImageDataListSimplifier()
+{
+	return _internal.GetImageDataListSimplifier();
+}
+
 const LogicalDeviceCoreSimplifier LogicalDeviceMainSimplifier::GetLogicalDeviceCoreSimplifier() const
 {
 	return _internal.GetLogicalDeviceCoreSimplifier();
@@ -56,4 +61,9 @@ const DeviceRenderPassDataSimplifier LogicalDeviceMainSimplifier::GetRenderPassL
 const DevicePipelineDataSimplifier LogicalDeviceMainSimplifier::GetDevicePipelineDataSimplifier() const
 {
 	return _internal.GetDevicePipelineDataSimplifier();
+}
+
+const ImageDataListSimplifier LogicalDeviceMainSimplifier::GetImageDataListSimplifier() const
+{
+	return _internal.GetImageDataListSimplifier();
 }

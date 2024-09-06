@@ -1,7 +1,3 @@
-module;
-
-#include <vulkan\vulkan.hpp>
-
 export module VulkanSimplifiers.Common.DataFormatFlags;
 
 import std;
@@ -255,14 +251,6 @@ export struct DataFormatFullSet
 	DataFormatFullSet();
 };
 
-export VkFormat TranslateDataFormatFirstSetToVKFormat(DataFormatFirstFlagSetBits format);
-export VkFormat TranslateDataFormatSecondSetToVKFormat(DataFormatSecondFlagSetBits format);
-export VkFormat TranslateDataFormatThirdSetToVKFormat(DataFormatThirdFlagSetBits format);
-export VkFormat TranslateDataFormatFourthSetToVKFormat(DataFormatFourthFlagSetBits format);
-export VkFormat TranslateDataFormatFifthSetToVKFormat(DataFormatFifthFlagSetBits format);
-export VkFormat TranslateDataFormatSixthSetToVKFormat(DataFormatSixthFlagSetBits format);
-export VkFormat TranslateDataFormatSeventhSetToVKFormat(DataFormatSeventhFlagSetBits format);
-
 export enum class DataFormatSetEnum : DataFormatFlags
 {
 	DATA_SET_UNKNOWN = 0x0,
@@ -282,8 +270,14 @@ export struct DataFormatSetIndependentID
 
 	DataFormatSetIndependentID();
 	DataFormatSetIndependentID(DataFormatSetEnum set, DataFormatFlags format);
-};
 
-export VkFormat TranslateDataFormatToVkFormat(DataFormatSetIndependentID formatID);
+	DataFormatSetIndependentID(DataFormatFirstFlagSetBits format);
+	DataFormatSetIndependentID(DataFormatSecondFlagSetBits format);
+	DataFormatSetIndependentID(DataFormatThirdFlagSetBits format);
+	DataFormatSetIndependentID(DataFormatFourthFlagSetBits format);
+	DataFormatSetIndependentID(DataFormatFifthFlagSetBits format);
+	DataFormatSetIndependentID(DataFormatSixthFlagSetBits format);
+	DataFormatSetIndependentID(DataFormatSeventhFlagSetBits format);
+};
 
 export bool CheckFormatSupport(const DataFormatFullSet& checkedSet, const DataFormatSetIndependentID& formatID);

@@ -23,4 +23,7 @@ import VulkanSimplifiers.DevicePipelineData;
 
 import VulkanSimplifiers.DevicePipelineData.GraphicPipelineCreationData;
 
+import VulkanSimplifiers.Common.DataFormatFlags;
+import VulkanSimplifiers.Common.ImageUsageFlags;
+
 export void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height);

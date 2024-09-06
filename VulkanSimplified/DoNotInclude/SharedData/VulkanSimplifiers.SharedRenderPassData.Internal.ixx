@@ -11,7 +11,7 @@ import VulkanSimplifiers.SharedRenderPassData.CreationData;
 import VulkanSimplifiers.SharedRenderPassData.InternalData;
 import VulkanSimplifiers.SharedRenderPassData.Data;
 
-import VulkanSimplifiers.Common.DataFormatFlags;
+import VulkanSimplifiers.Common.DataFormatFlags.Internal;
 import VulkanSimplifiers.Common.ImageSampleFlags;
 import VulkanSimplifiers.Common.ImageLayouts;
 import VulkanSimplifiers.Common.PipelineStageFlags;

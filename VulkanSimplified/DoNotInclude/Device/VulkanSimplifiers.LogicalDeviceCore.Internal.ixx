@@ -16,6 +16,8 @@ import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.ShaderList.Internal;
 import VulkanSimplifiers.LogicalDeviceCore.InternalData;
 
+import VulkanSimplifiers.Common.DataFormatFlags.Internal;
+
 export class LogicalDeviceCoreInternal
 {
 public:
@@ -27,6 +29,7 @@ public:
 	LogicalDeviceCoreInternal& operator=(const LogicalDeviceCoreInternal&) noexcept = delete;
 
 	VkDevice GetDevice() const;
+	std::vector<std::uint32_t> GetQueueFamilies(const std::vector<size_t>& queueIDs) const;
 
 	void CreateSwapchain(IDObject<WindowPointer> windowID, const SwapchainCreationData& surfaceCreateInfo, bool createProtected, bool throwOnSwapchainExist, bool throwOnDeviceChange);
 

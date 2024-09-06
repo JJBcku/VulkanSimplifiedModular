@@ -115,7 +115,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.DataFormatFlags.cpp" />
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.DataFormatFlags.Internal.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.DeviceExtensionsFlags.cpp" />
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.ImageLayouts.Internal.cpp" />
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.ImageUsageFlags.Internal.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.SurfaceData.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
@@ -134,8 +137,10 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceRenderPassData.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceRenderPassData.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageData.CreationData.cpp" />
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageData.Internal.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.Data.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceCore.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.cpp" />
@@ -197,13 +202,17 @@
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.Internal.cpp" />
     <ClCompile Include="Cpp\SharedData\VulkanSimplifiers.SharedRenderPassData.InternalData.cpp" />
+    <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.DataFormatFlags.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.ImageLayouts.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.ImageUsageFlags.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.ixx" />
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ImageData.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ImageDataList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DevicePipelineData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceRenderPassData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceRenderPassData.InternalData.ixx" />
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ImageDataList.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceCore.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx" />
@@ -231,7 +240,8 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceRenderPassData.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceRenderPassData.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceRenderPassData.ixx" />
-    <ClCompile Include="Include\Device\VulkanSimplifiers.ImageData.CreationData.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ImageDataList.CreationData.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ImageDataList.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.ImageDataList.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceMain.CreationData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.ixx" />

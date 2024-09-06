@@ -4,7 +4,8 @@ import std;
 
 export struct ImageDataCreationData
 {
-	std::uint64_t stump;
+	size_t singleSampled2DImageListInitialCapacity;
+	size_t singleSampledMipMapped2DListInitialCapacity;
 
 	ImageDataCreationData();
 };

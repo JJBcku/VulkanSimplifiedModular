@@ -627,22 +627,52 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DevicePipelineData.GraphicPipelineCreationData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ImageData.Internal.ixx">
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ImageDataList.Internal.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Device\VulkanSimplifiers.ImageData.CreationData.ixx">
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ImageDataList.CreationData.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageData.CreationData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageData.Internal.cpp">
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.Internal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Include\Device\VulkanSimplifiers.ImageDataList.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ImageDataList.InternalData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.InternalData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.ImageDataList.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.Data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.ImageUsageFlags.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.ImageUsageFlags.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.DataFormatFlags.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.DataFormatFlags.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.ImageLayouts.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.ImageLayouts.Internal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -12,6 +12,7 @@ import VulkanSimplifiers.WindowList.Internal;
 import VulkanSimplifiers.WindowList.Data;
 
 import VulkanSimplifiers.Common.DeviceFeatureFlags;
+import VulkanSimplifiers.Common.DataFormatFlags.Internal;
 
 struct QueueSupportSavedData
 {

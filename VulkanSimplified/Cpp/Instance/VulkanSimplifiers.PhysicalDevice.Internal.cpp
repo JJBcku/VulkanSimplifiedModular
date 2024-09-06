@@ -749,7 +749,7 @@ FormatsSupportedFullFeatures PhysicalDeviceInternal::CompileFormatsSupportedFeat
 void PhysicalDeviceInternal::GetFirstSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& formatsSupportedFeatures, DataFormatFirstFlagSetBits flagSetBit) const
 {
 	VkFormatProperties formatProperties{};
-	VkFormat format = TranslateDataFormatFirstSetToVKFormat(flagSetBit);
+	VkFormat format = TranslateDataFormatToVkFormat(flagSetBit);
 
 	vkGetPhysicalDeviceFormatProperties(_physicalDevice, format, &formatProperties);
 
@@ -829,7 +829,7 @@ void PhysicalDeviceInternal::GetFirstSetsFormatsSupportedFeatures(FormatsSupport
 void PhysicalDeviceInternal::GetSecondSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& formatsSupportedFeatures, DataFormatSecondFlagSetBits flagSetBit) const
 {
 	VkFormatProperties formatProperties{};
-	VkFormat format = TranslateDataFormatSecondSetToVKFormat(flagSetBit);
+	VkFormat format = TranslateDataFormatToVkFormat(flagSetBit);
 
 	vkGetPhysicalDeviceFormatProperties(_physicalDevice, format, &formatProperties);
 
@@ -909,7 +909,7 @@ void PhysicalDeviceInternal::GetSecondSetsFormatsSupportedFeatures(FormatsSuppor
 void PhysicalDeviceInternal::GetThirdSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& formatsSupportedFeatures, DataFormatThirdFlagSetBits flagSetBit) const
 {
 	VkFormatProperties formatProperties{};
-	VkFormat format = TranslateDataFormatThirdSetToVKFormat(flagSetBit);
+	VkFormat format = TranslateDataFormatToVkFormat(flagSetBit);
 
 	vkGetPhysicalDeviceFormatProperties(_physicalDevice, format, &formatProperties);
 
@@ -989,7 +989,7 @@ void PhysicalDeviceInternal::GetThirdSetsFormatsSupportedFeatures(FormatsSupport
 void PhysicalDeviceInternal::GetFourthSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& formatsSupportedFeatures, DataFormatFourthFlagSetBits flagSetBit) const
 {
 	VkFormatProperties formatProperties{};
-	VkFormat format = TranslateDataFormatFourthSetToVKFormat(flagSetBit);
+	VkFormat format = TranslateDataFormatToVkFormat(flagSetBit);
 
 	vkGetPhysicalDeviceFormatProperties(_physicalDevice, format, &formatProperties);
 
@@ -1069,7 +1069,7 @@ void PhysicalDeviceInternal::GetFourthSetsFormatsSupportedFeatures(FormatsSuppor
 void PhysicalDeviceInternal::GetFifthSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& formatsSupportedFeatures, DataFormatFifthFlagSetBits flagSetBit) const
 {
 	VkFormatProperties formatProperties{};
-	VkFormat format = TranslateDataFormatFifthSetToVKFormat(flagSetBit);
+	VkFormat format = TranslateDataFormatToVkFormat(flagSetBit);
 
 	vkGetPhysicalDeviceFormatProperties(_physicalDevice, format, &formatProperties);
 
@@ -1149,7 +1149,7 @@ void PhysicalDeviceInternal::GetFifthSetsFormatsSupportedFeatures(FormatsSupport
 void PhysicalDeviceInternal::GetSixthSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& formatsSupportedFeatures, DataFormatSixthFlagSetBits flagSetBit) const
 {
 	VkFormatProperties formatProperties{};
-	VkFormat format = TranslateDataFormatSixthSetToVKFormat(flagSetBit);
+	VkFormat format = TranslateDataFormatToVkFormat(flagSetBit);
 
 	vkGetPhysicalDeviceFormatProperties(_physicalDevice, format, &formatProperties);
 
@@ -1229,7 +1229,7 @@ void PhysicalDeviceInternal::GetSixthSetsFormatsSupportedFeatures(FormatsSupport
 void PhysicalDeviceInternal::GetSeventhSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& formatsSupportedFeatures, DataFormatSeventhFlagSetBits flagSetBit) const
 {
 	VkFormatProperties formatProperties{};
-	VkFormat format = TranslateDataFormatSeventhSetToVKFormat(flagSetBit);
+	VkFormat format = TranslateDataFormatToVkFormat(flagSetBit);
 
 	vkGetPhysicalDeviceFormatProperties(_physicalDevice, format, &formatProperties);
 

@@ -4,3 +4,9 @@ bool VulkanPipelineData::operator==(const IDObject<PipelineViewportData>& rhsPip
 {
 	return pipelineViewport == rhsPipelineViewport;
 }
+
+VulkanAttachmentData::VulkanAttachmentData()
+{
+	width = 0;
+	height = 0;
+}

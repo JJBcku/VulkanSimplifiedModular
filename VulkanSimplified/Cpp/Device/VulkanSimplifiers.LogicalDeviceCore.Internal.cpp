@@ -150,6 +150,31 @@ VkDevice LogicalDeviceCoreInternal::GetDevice() const
 	return _logicalDevice;
 }
 
+std::vector<std::uint32_t> LogicalDeviceCoreInternal::GetQueueFamilies(const std::vector<size_t>& queueIDs) const
+{
+	std::vector<std::uint32_t> ret;
+	ret.reserve(queueIDs.size());
+
+	for (auto& ID : queueIDs)
+	{
+		if (ID >= _queues.size())
+			throw std::runtime_error("LogicalDeviceCoreInternal::GetQueueFamilies Error: Program tried to read past the queues list!");
+
+		std::uint32_t add = _queues[ID].second;
+
+		auto it = std::find(ret.cbegin(), ret.cend(), add);
+
+		if (it == ret.cend())
+		{
+			ret.push_back(add);
+		}
+	}
+
+	ret.shrink_to_fit();
+
+	return ret;
+}
+
 void LogicalDeviceCoreInternal::CreateSwapchain(IDObject<WindowPointer> windowID, const SwapchainCreationData& surfaceCreateInfo, bool createProtected,
 	bool throwOnSwapchainExist, bool throwOnDeviceChange)
 {

@@ -10,6 +10,7 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 
 	auto& pipelines = data.pipelinesList->pipelines;
 	auto& currentPipeline = data.pipelinesList->currentPipeline;
+	auto& attachments = data.pipelinesList->attachmentData;
 
 	auto sharedDataList = data.basicData->main->GetSharedDataListSimplifier();
 	auto pipelineSharedData = sharedDataList.GetSharedPipelineDataSimplifier();
@@ -18,6 +19,7 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 	auto deviceList = instance.GetDeviceListSimplifier();
 	auto device = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
 	auto devicePipelineList = device.GetDevicePipelineDataSimplifier();
+	auto deviceImageList = device.GetImageDataListSimplifier();
 
 	VulkanPipelineData add;
 	add.pipelineViewport = pipelineSharedData.AddPipelineViewportData(0, 0, width, height, 0.0f, 1.0f);
@@ -72,5 +74,25 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 
 		pipelines.push_back(add);
 		currentPipeline = add;
+	}
+
+	if (!attachments.has_value() || attachments.value().width != width || attachments.value().height != height)
+	{
+		if (attachments.has_value())
+		{
+			deviceImageList.RemoveSingleSampled2DImage(attachments.value().colorAttachmentImage);
+		}
+		else
+		{
+			attachments.emplace();
+		}
+
+		auto& attachmentData = attachments.value();
+
+		ImageUsageFlags usageFlags = ImageUsageFlagBits::IMAGE_USAGE_COLOR_ATTACHMENT || ImageUsageFlagBits::IMAGE_USAGE_TRANSFER_SRC;
+
+		attachmentData.colorAttachmentImage = deviceImageList.AddSingleSampled2DImage(width, height, data.deviceDependent->surfaceFormat, usageFlags, {}, false);
+		attachmentData.width = width;
+		attachmentData.height = height;
 	}
 }

@@ -11,7 +11,7 @@ import VulkanSimplifiers.SharedPipelineData.InternalData;
 import VulkanSimplifiers.SharedPipelineData.CreationData;
 import VulkanSimplifiers.SharedPipelineData.Data;
 
-import VulkanSimplifiers.Common.DataFormatFlags;
+import VulkanSimplifiers.Common.DataFormatFlags.Internal;
 import VulkanSimplifiers.Common.ImageSampleFlags;
 import VulkanSimplifiers.Common.CompareOperationsType;
 import VulkanSimplifiers.Common.ShaderTypeFlags;

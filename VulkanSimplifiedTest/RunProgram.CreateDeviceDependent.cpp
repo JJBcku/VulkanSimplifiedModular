@@ -37,16 +37,18 @@ void CreateDeviceDependent(VulkanData& data)
 	auto& srgb = data.instanceDependent->surfaceSupport.surfaceSupportedSwapchainFormats.srgbNonlinearColorspace;
 	auto& blitDst = data.instanceDependent->deviceFormatsSupport.formatFeaturesOptimalImageSupport.blitDst;
 
-	if ((srgb.thirdSet & DATA_FORMAT_BGRA8_UNORM) == DATA_FORMAT_BGRA8_UNORM && (blitDst.thirdSet & DATA_FORMAT_BGRA8_UNORM) == DATA_FORMAT_BGRA8_UNORM)
+	DataFormatSetIndependentID checkID(DATA_FORMAT_BGRA8_UNORM);
+
+	if (CheckFormatSupport(srgb, checkID) && CheckFormatSupport(blitDst, checkID))
 	{
-		swapchainCreation.format.dataSet = DataFormatSetEnum::DATA_SET_THREE;
-		swapchainCreation.format.dataFormat = DATA_FORMAT_BGRA8_UNORM;
+		swapchainCreation.format = checkID;
 	}
 	else
 	{
-		swapchainCreation.format.dataSet = DataFormatSetEnum::DATA_SET_SEVEN;
-		swapchainCreation.format.dataFormat = DATA_FORMAT_RGBA8_UNORM;
+		swapchainCreation.format = DataFormatSetIndependentID(DATA_FORMAT_RGBA8_UNORM);
 	}
+
+	data.deviceDependent->surfaceFormat = swapchainCreation.format;
 
 	swapchainCreation.imageAmount = data.instanceDependent->surfaceSupport.minImageCount + 1;
 	if (swapchainCreation.imageAmount > data.instanceDependent->surfaceSupport.maxImageCount)

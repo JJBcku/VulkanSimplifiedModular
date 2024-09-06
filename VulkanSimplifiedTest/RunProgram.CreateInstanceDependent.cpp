@@ -40,15 +40,15 @@ static size_t ChooseGPU(DeviceListSimplifier& deviceList, IDObject<WindowPointer
 		auto& surfaceSupport = deviceSurfaceSupport.surfaceSupportedSwapchainFormats;
 		auto& imageSupport = deviceProperties.deviceFormatsSupport.formatFeaturesOptimalImageSupport;
 
-		if (!CheckFormatSupport(imageSupport, surfaceSupport, { DataFormatSetEnum::DATA_SET_THREE, DATA_FORMAT_BGRA8_UNORM }) &&
-			!CheckFormatSupport(imageSupport, surfaceSupport, { DataFormatSetEnum::DATA_SET_SEVEN, DATA_FORMAT_RGBA8_UNORM }))
+		if (!CheckFormatSupport(imageSupport, surfaceSupport, DATA_FORMAT_BGRA8_UNORM) &&
+			!CheckFormatSupport(imageSupport, surfaceSupport, DATA_FORMAT_RGBA8_UNORM))
 			continue;
 
-		if (!CheckFormatSupport(imageSupport.colorAttachment, { DataFormatSetEnum::DATA_SET_THREE, DATA_FORMAT_BGRA8_UNORM }) &&
-			!CheckFormatSupport(imageSupport.colorAttachment, { DataFormatSetEnum::DATA_SET_SEVEN, DATA_FORMAT_RGBA8_UNORM }))
+		if (!CheckFormatSupport(imageSupport.colorAttachment, DATA_FORMAT_BGRA8_UNORM) &&
+			!CheckFormatSupport(imageSupport.colorAttachment, DATA_FORMAT_RGBA8_UNORM))
 			continue;
 
-		if ((deviceProperties.deviceFormatsSupport.formatFeaturesBufferSupport.vertexBuffer.sixthSet & DATA_FORMAT_RGBA32_SFLOAT) != DATA_FORMAT_RGBA32_SFLOAT)
+		if (!CheckFormatSupport(deviceProperties.deviceFormatsSupport.formatFeaturesBufferSupport.vertexBuffer, DATA_FORMAT_RGBA32_SFLOAT))
 			continue;
 
 		switch (deviceProperties.deviceType)

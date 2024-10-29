@@ -108,6 +108,32 @@ _windowList(windowList)
 	}
 
 	_vulkanProperties.deviceFormatsSupport = CompileFormatsSupportedFeatures();
+
+	VkPhysicalDeviceMemoryProperties memoryProperties{};
+
+	vkGetPhysicalDeviceMemoryProperties(_physicalDevice, &memoryProperties);
+
+	_memoryData.heapAmount = memoryProperties.memoryHeapCount;
+
+	for (size_t i = 0; i < _memoryData.heapAmount; i++)
+	{
+		auto& heap = _memoryData.memoryHeaps[i];
+
+		heap.size = memoryProperties.memoryHeaps[i].size;
+		heap.properties = GetMemoryHeapProperties(memoryProperties.memoryHeaps[i].flags);
+		heap.memoryTypeAmount = 0;
+	}
+
+	for (std::uint32_t j = 0; j < memoryProperties.memoryTypeCount; j++)
+	{
+		auto& heap = _memoryData.memoryHeaps[memoryProperties.memoryTypes[j].heapIndex];
+		auto& type = heap.memoryTypes[heap.memoryTypeAmount];
+
+		type.index = j;
+		type.properties = GetMemoryTypeProperties(memoryProperties.memoryTypes[j].propertyFlags);
+
+		heap.memoryTypeAmount++;
+	}
 }
 
 PhysicalDeviceInternal::~PhysicalDeviceInternal()
@@ -298,6 +324,11 @@ SurfaceSupportData PhysicalDeviceInternal::GetSurfaceSupport(IDObject<WindowPoin
 	}
 
 	return ret;
+}
+
+MemoryHeapList PhysicalDeviceInternal::GetDeviceMemoryData() const
+{
+	return _memoryData;
 }
 
 DeviceType PhysicalDeviceInternal::GetDeviceType(const VkPhysicalDeviceType& deviceType) const
@@ -1304,4 +1335,42 @@ void PhysicalDeviceInternal::GetSeventhSetsFormatsSupportedFeatures(FormatsSuppo
 		if ((formatProperties.optimalTilingFeatures & VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT) == VK_FORMAT_FEATURE_SAMPLED_IMAGE_FILTER_LINEAR_BIT)
 			formatsSupportedFeatures.formatFeaturesOptimalImageSupport.sampledImageFilterLinear.seventhSet |= flagSetBit;
 	}
+}
+
+MemoryTypeProperties PhysicalDeviceInternal::GetMemoryTypeProperties(VkMemoryPropertyFlags propertyFlags) const
+{
+	MemoryTypeProperties ret = 0;
+
+	if ((propertyFlags & VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT) == VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT)
+		ret |= DEVICE_LOCAL;
+
+	if ((propertyFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) == VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT)
+		ret |= HOST_VISIBLE;
+
+	if ((propertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) == VK_MEMORY_PROPERTY_HOST_COHERENT_BIT)
+		ret |= HOST_COHERENT;
+
+	if ((propertyFlags & VK_MEMORY_PROPERTY_HOST_CACHED_BIT) == VK_MEMORY_PROPERTY_HOST_CACHED_BIT)
+		ret |= HOST_UNCACHED;
+
+	if ((propertyFlags & VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT) == VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT)
+		ret |= LAZYLY_ALLOCATED;
+
+	if ((propertyFlags & VK_MEMORY_PROPERTY_PROTECTED_BIT) == VK_MEMORY_PROPERTY_PROTECTED_BIT)
+		ret |= PROTECTED;
+
+	return ret;
+}
+
+MemoryHeapProperties PhysicalDeviceInternal::GetMemoryHeapProperties(VkMemoryHeapFlags propertyFlags) const
+{
+	MemoryHeapProperties ret = 0;
+
+	if ((propertyFlags & VK_MEMORY_HEAP_DEVICE_LOCAL_BIT) == VK_MEMORY_HEAP_DEVICE_LOCAL_BIT)
+		ret |= DEVICE_LOCAL_HEAP;
+
+	if ((propertyFlags & VK_MEMORY_HEAP_MULTI_INSTANCE_BIT) == VK_MEMORY_HEAP_MULTI_INSTANCE_BIT)
+		ret |= MULTI_INSTANCE_HEAP;
+
+	return ret;
 }

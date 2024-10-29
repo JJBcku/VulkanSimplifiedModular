@@ -119,6 +119,7 @@
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.DeviceExtensionsFlags.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.ImageLayouts.Internal.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.ImageUsageFlags.Internal.cpp" />
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.MemoryData.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.SurfaceData.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
@@ -227,6 +228,7 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.DescriptorTypeFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageLayouts.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ImageSampleFlags.ixx" />
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.MemoryData.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.PipelineStageFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.ixx" />

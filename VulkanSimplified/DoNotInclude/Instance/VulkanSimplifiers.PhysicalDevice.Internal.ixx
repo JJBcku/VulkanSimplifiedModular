@@ -13,6 +13,7 @@ import VulkanSimplifiers.WindowList.Data;
 
 import VulkanSimplifiers.Common.DeviceFeatureFlags;
 import VulkanSimplifiers.Common.DataFormatFlags.Internal;
+import VulkanSimplifiers.Common.MemoryData;
 
 struct QueueSupportSavedData
 {
@@ -41,9 +42,12 @@ public:
 
 	SurfaceSupportData GetSurfaceSupport(IDObject<WindowPointer> windowID);
 
+	MemoryHeapList GetDeviceMemoryData() const;
+
 private:
 	VkPhysicalDevice _physicalDevice;
 	DeviceVulkanPropertiesSimplified _vulkanProperties;
+	MemoryHeapList _memoryData;
 
 	VulkanDeviceFeatureFlags _device10features;
 
@@ -66,4 +70,7 @@ private:
 	void GetFifthSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatFifthFlagSetBits flagSetBit) const;
 	void GetSixthSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatSixthFlagSetBits flagSetBit) const;
 	void GetSeventhSetsFormatsSupportedFeatures(FormatsSupportedFullFeatures& optimalImageFeatureList, DataFormatSeventhFlagSetBits flagSetBit) const;
+
+	MemoryTypeProperties GetMemoryTypeProperties(VkMemoryPropertyFlags propertyFlags) const;
+	MemoryHeapProperties GetMemoryHeapProperties(VkMemoryHeapFlags propertyFlags) const;
 };

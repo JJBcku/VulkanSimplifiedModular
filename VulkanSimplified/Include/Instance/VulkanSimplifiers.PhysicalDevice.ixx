@@ -8,6 +8,7 @@ import VulkanSimplifiers.PhysicalDevice.Data;
 import VulkanSimplifiers.WindowList.Data;
 
 import VulkanSimplifiers.Common.DeviceFeatureFlags;
+import VulkanSimplifiers.Common.MemoryData;
 
 export class PhysicalDeviceSimplifier
 {
@@ -22,6 +23,8 @@ public:
 	VulkanDeviceFeatureFlags GetVulkan10Features() const;
 
 	SurfaceSupportData GetSurfaceSupport(IDObject<WindowPointer> windowID) const;
+
+	MemoryHeapList GetDeviceMemoryData() const;
 
 private:
 	PhysicalDeviceInternal& _internal;

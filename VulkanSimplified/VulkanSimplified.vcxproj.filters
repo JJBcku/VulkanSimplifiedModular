@@ -675,5 +675,11 @@
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.ImageLayouts.Internal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Common\VulkanSimplifiers.Common.MemoryData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.MemoryData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

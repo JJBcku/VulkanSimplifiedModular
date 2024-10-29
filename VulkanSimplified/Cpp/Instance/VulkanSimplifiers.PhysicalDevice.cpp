@@ -22,3 +22,8 @@ SurfaceSupportData PhysicalDeviceSimplifier::GetSurfaceSupport(IDObject<WindowPo
 {
 	return _internal.GetSurfaceSupport(windowID);
 }
+
+MemoryHeapList PhysicalDeviceSimplifier::GetDeviceMemoryData() const
+{
+	return _internal.GetDeviceMemoryData();
+}

@@ -86,5 +86,5 @@ IDObject<LogicalDevicePointer> DeviceListInternal::AddLogicalDevice(const Logica
 	initData.physicalDevice = physicalDevice.GetPhysicalDevice();
 	initData.physicalDeviceName = physicalDeviceData.deviceName;
 
-	return _logicalDeviceList.AddObject(std::make_unique<LogicalDeviceMainInternal>(initData, mainCreationData, _windowList, _sharedDataList), addOnReserve);
+	return _logicalDeviceList.AddObject(std::make_unique<LogicalDeviceMainInternal>(initData, physicalDevice, mainCreationData, _windowList, _sharedDataList), addOnReserve);
 }

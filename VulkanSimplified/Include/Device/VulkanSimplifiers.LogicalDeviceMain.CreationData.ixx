@@ -5,6 +5,7 @@ export import VulkanSimplifiers.DeviceDescriptorData.CreationData;
 export import VulkanSimplifiers.DeviceRenderPassData.CreationData;
 export import VulkanSimplifiers.DevicePipelineData.CreationData;
 export import VulkanSimplifiers.ImageDataList.CreationData;
+export import VulkanSimplifiers.MemoryObjectsList.CreationData;
 
 export struct DeviceMainCreationData
 {
@@ -13,6 +14,7 @@ export struct DeviceMainCreationData
 	DeviceRenderPassCreationData renderPass;
 	DevicePipelineDataCreationData devicePipelines;
 	ImageDataCreationData imageList;
+	MemoryListCreationData memoryList;
 
 	DeviceMainCreationData() = default;
 };

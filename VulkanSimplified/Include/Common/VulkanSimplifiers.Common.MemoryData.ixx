@@ -20,7 +20,7 @@ export enum MemoryTypePropertyFlags : MemoryTypeProperties
 
 export struct MemoryTypeData
 {
-	size_t index;
+	size_t heapIndex;
 	MemoryTypeProperties properties;
 
 	MemoryTypeData();
@@ -40,16 +40,17 @@ export struct MemoryHeapData
 {
 	MemorySize size;
 	MemoryHeapProperties properties;
-	size_t memoryTypeAmount;
-	std::array<MemoryTypeData, VK_MAX_MEMORY_TYPES> memoryTypes;
 
 	MemoryHeapData();
 };
 
-export struct MemoryHeapList
+export struct MemoryDataList
 {
 	size_t heapAmount;
 	std::array<MemoryHeapData, VK_MAX_MEMORY_HEAPS> memoryHeaps;
 
-	MemoryHeapList();
+	size_t memoryTypeAmount;
+	std::array<MemoryTypeData, VK_MAX_MEMORY_TYPES> memoryTypes;
+
+	MemoryDataList();
 };

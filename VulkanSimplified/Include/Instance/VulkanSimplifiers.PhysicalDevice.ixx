@@ -24,7 +24,7 @@ public:
 
 	SurfaceSupportData GetSurfaceSupport(IDObject<WindowPointer> windowID) const;
 
-	MemoryHeapList GetDeviceMemoryData() const;
+	MemoryDataList GetDeviceMemoryData() const;
 
 private:
 	PhysicalDeviceInternal& _internal;

@@ -117,22 +117,22 @@ _windowList(windowList)
 
 	for (size_t i = 0; i < _memoryData.heapAmount; i++)
 	{
+		const auto& data = memoryProperties.memoryHeaps[i];
 		auto& heap = _memoryData.memoryHeaps[i];
 
-		heap.size = memoryProperties.memoryHeaps[i].size;
-		heap.properties = GetMemoryHeapProperties(memoryProperties.memoryHeaps[i].flags);
-		heap.memoryTypeAmount = 0;
+		heap.size = data.size;
+		heap.properties = GetMemoryHeapProperties(data.flags);
 	}
+
+	_memoryData.memoryTypeAmount = memoryProperties.memoryTypeCount;
 
 	for (std::uint32_t j = 0; j < memoryProperties.memoryTypeCount; j++)
 	{
-		auto& heap = _memoryData.memoryHeaps[memoryProperties.memoryTypes[j].heapIndex];
-		auto& type = heap.memoryTypes[heap.memoryTypeAmount];
+		const auto& data = memoryProperties.memoryTypes[j];
+		auto& type = _memoryData.memoryTypes[j];
 
-		type.index = j;
-		type.properties = GetMemoryTypeProperties(memoryProperties.memoryTypes[j].propertyFlags);
-
-		heap.memoryTypeAmount++;
+		type.heapIndex = data.heapIndex;
+		type.properties = GetMemoryTypeProperties(data.propertyFlags);
 	}
 }
 
@@ -326,7 +326,7 @@ SurfaceSupportData PhysicalDeviceInternal::GetSurfaceSupport(IDObject<WindowPoin
 	return ret;
 }
 
-MemoryHeapList PhysicalDeviceInternal::GetDeviceMemoryData() const
+MemoryDataList PhysicalDeviceInternal::GetDeviceMemoryData() const
 {
 	return _memoryData;
 }

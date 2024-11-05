@@ -1,11 +1,12 @@
 module VulkanSimplifiers.LogicalDeviceMain.Internal;
 
-LogicalDeviceMainInternal::LogicalDeviceMainInternal(const LogicalDeviceInitData& initData, const DeviceMainCreationData& mainCreationData, WindowListInternal& windowList, 
-	const SharedDataListInternal& sharedDataList) : _core(initData, windowList), _shaderList(mainCreationData.shaderList, _core.GetDevice()),
+LogicalDeviceMainInternal::LogicalDeviceMainInternal(const LogicalDeviceInitData& initData, const PhysicalDeviceInternal& physicalDevice,
+	const DeviceMainCreationData& mainCreationData, WindowListInternal& windowList, const SharedDataListInternal& sharedDataList) : _core(initData, windowList),
+	_shaderList(mainCreationData.shaderList, _core.GetDevice()),
 	_descriptorList(mainCreationData.deviceDescriptors, _core.GetDevice(), sharedDataList.GetSharedDescriptorDataSimplifier()),
 	_renderPassList(mainCreationData.renderPass, sharedDataList.GetSharedRenderPassDataSimplifier(), _core.GetDevice()),
 	_pipelineDataList(mainCreationData.devicePipelines, sharedDataList.GetSharedPipelineDataSimplifier(), _descriptorList, _shaderList, _renderPassList, _core.GetDevice()),
-	_imageList(mainCreationData.imageList, _core, _core.GetDevice())
+	_memoryList(physicalDevice.GetDeviceMemoryData(), mainCreationData.memoryList), _imageList(mainCreationData.imageList, _core, _core.GetDevice())
 {
 }
 
@@ -38,6 +39,11 @@ DevicePipelineDataInternal& LogicalDeviceMainInternal::GetDevicePipelineDataSimp
 	return _pipelineDataList;
 }
 
+MemoryObjectsListInternal& LogicalDeviceMainInternal::GetMemoryObjectsListSimplifier()
+{
+	return _memoryList;
+}
+
 ImageDataListInternal& LogicalDeviceMainInternal::GetImageDataListSimplifier()
 {
 	return _imageList;
@@ -66,6 +72,11 @@ const DeviceRenderPassDataInternal& LogicalDeviceMainInternal::GetRenderPassList
 const DevicePipelineDataInternal& LogicalDeviceMainInternal::GetDevicePipelineDataSimplifier() const
 {
 	return _pipelineDataList;
+}
+
+const MemoryObjectsListInternal& LogicalDeviceMainInternal::GetMemoryObjectsListSimplifier() const
+{
+	return _memoryList;
 }
 
 const ImageDataListInternal& LogicalDeviceMainInternal::GetImageDataListSimplifier() const

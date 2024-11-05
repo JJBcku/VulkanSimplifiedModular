@@ -42,12 +42,12 @@ public:
 
 	SurfaceSupportData GetSurfaceSupport(IDObject<WindowPointer> windowID);
 
-	MemoryHeapList GetDeviceMemoryData() const;
+	MemoryDataList GetDeviceMemoryData() const;
 
 private:
 	VkPhysicalDevice _physicalDevice;
 	DeviceVulkanPropertiesSimplified _vulkanProperties;
-	MemoryHeapList _memoryData;
+	MemoryDataList _memoryData;
 
 	VulkanDeviceFeatureFlags _device10features;
 

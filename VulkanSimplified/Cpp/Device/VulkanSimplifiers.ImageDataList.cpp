@@ -31,3 +31,43 @@ bool ImageDataListSimplifier::RemoveMipMappedSingleSampled2DImage(IDObject<AutoC
 {
 	return _internal.RemoveMipMappedSingleSampled2DImage(imageID, throwOnIDNotFound);
 }
+
+std::uint64_t ImageDataListSimplifier::GetImageRequiredAligment(IDObject<AutoCleanup2DImage> imageID) const
+{
+	return _internal.GetImageRequiredAligment(imageID);
+}
+
+std::uint64_t ImageDataListSimplifier::GetImageSize(IDObject<AutoCleanup2DImage> imageID) const
+{
+	return _internal.GetImageSize(imageID);
+}
+
+std::uint32_t ImageDataListSimplifier::GetImageMemoryTypeMask(IDObject<AutoCleanup2DImage> imageID) const
+{
+	return _internal.GetImageMemoryTypeMask(imageID);
+}
+
+std::pair<std::uint64_t, std::uint64_t> ImageDataListSimplifier::GetSizeAndAligment(IDObject<AutoCleanup2DImage> imageID) const
+{
+	return _internal.GetSizeAndAligment(imageID);
+}
+
+std::uint64_t ImageDataListSimplifier::GetImageRequiredAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _internal.GetImageRequiredAligment(imageID);
+}
+
+std::uint64_t ImageDataListSimplifier::GetImageSize(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _internal.GetImageSize(imageID);
+}
+
+std::uint32_t ImageDataListSimplifier::GetImageMemoryTypeMask(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _internal.GetImageMemoryTypeMask(imageID);
+}
+
+std::pair<std::uint64_t, std::uint64_t> ImageDataListSimplifier::GetSizeAndAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _internal.GetSizeAndAligment(imageID);
+}

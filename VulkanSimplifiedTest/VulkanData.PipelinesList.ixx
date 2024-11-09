@@ -6,6 +6,7 @@ export import ListTemplates.IDObject;
 export import VulkanSimplifiers.SharedPipelineData.Data;
 export import VulkanSimplifiers.DevicePipelineData.Data;
 export import VulkanSimplifiers.ImageDataList.Data;
+export import VulkanSimplifiers.MemoryObjectsList.Data;
 
 export struct VulkanPipelineData
 {
@@ -24,6 +25,8 @@ export struct VulkanAttachmentData
 	std::uint32_t height;
 
 	IDObject<AutoCleanup2DImage> colorAttachmentImage;
+
+	std::pair<IDObject<MemoryAllocationData>, size_t> imageMemory;
 
 	VulkanAttachmentData();
 };

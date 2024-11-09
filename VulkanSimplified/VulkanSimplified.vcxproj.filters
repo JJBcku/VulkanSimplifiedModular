@@ -705,5 +705,8 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.MemoryObjectsList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.MemoryObjectsList.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

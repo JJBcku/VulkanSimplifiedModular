@@ -16,6 +16,8 @@ export struct HeapInternalData
 	MemoryHeapProperties properties;
 
 	HeapInternalData();
+
+	size_t GetFreeSize() const;
 };
 
 export struct SuballocationInternalData
@@ -26,13 +28,19 @@ export struct SuballocationInternalData
 	SuballocationInternalData();
 };
 
-export class AllocationInternalData
+export class MemoryAllocationData
 {
 public:
-	AllocationInternalData(VkDevice device, VkDeviceMemory memory, size_t totalSize, size_t reservedSuballocations, bool mapMemory);
-	~AllocationInternalData();
+	MemoryAllocationData(VkDevice device, VkDeviceMemory memory, size_t totalSize, size_t reservedSuballocations, bool mapMemory);
+	~MemoryAllocationData();
 
-	VkDeviceMemory GetDeviceMemory() const;
+	MemoryAllocationData(const MemoryAllocationData&) noexcept = delete;
+	MemoryAllocationData(MemoryAllocationData&& rhs) noexcept;
+
+	MemoryAllocationData& operator=(const MemoryAllocationData&) noexcept = delete;
+	MemoryAllocationData& operator=(MemoryAllocationData&& rhs) noexcept;
+
+	size_t GetTotalSize() const;
 
 private:
 	VkDevice _device;
@@ -48,12 +56,31 @@ private:
 export class MemoryTypeInternalData
 {
 public:
-	MemoryTypeInternalData(const MemoryTypeData& typeData, size_t reservedAllocation);
+	MemoryTypeInternalData(VkDevice device, const MemoryTypeData& typeData, std::uint32_t typeIndex, size_t reservedAllocation);
 	~MemoryTypeInternalData();
 
+	MemoryTypeInternalData(const MemoryTypeInternalData&) noexcept = delete;
+	MemoryTypeInternalData(MemoryTypeInternalData&& rhs) noexcept;
+
+	MemoryTypeInternalData& operator=(const MemoryTypeInternalData&) noexcept = delete;
+	MemoryTypeInternalData& operator=(MemoryTypeInternalData&& rhs) noexcept;
+
+	IDObject<MemoryAllocationData> AddMemoryAllocation(size_t dataSize, size_t initialSuballocationsReserved, size_t addOnReserve);
+
+	bool FreeMemory(IDObject<MemoryAllocationData> memoryId, bool throwOnNotFound);
+
+	std::uint32_t GetHeapIndex() const;
+	std::uint32_t GetTypeIndex() const;
+	MemoryTypeProperties GetProperties() const;
+
+	size_t GetMemoryAllocationsSize(IDObject<MemoryAllocationData> allocationID) const;
+
 private:
-	size_t _heapIndex;
+	VkDevice _device;
+
+	std::uint32_t _heapIndex;
+	std::uint32_t _typeIndex;
 	MemoryTypeProperties _properties;
 
-	UnsortedList<AllocationInternalData> _allocationsList;
+	UnsortedList<MemoryAllocationData> _allocationsList;
 };

@@ -37,6 +37,12 @@ public:
 	bool DeleteImageView(IDObject<AutoCleanupImageView> imageViewID, bool throwOnIDNotFound);
 	void ResetImageViewList(size_t newImageViewListCapacity);
 
+	std::uint64_t GetImageRequiredAligment() const;
+	std::uint64_t GetImageSize() const;
+	std::uint32_t GetImageMemoryTypeMask() const;
+
+	std::pair<std::uint64_t, std::uint64_t> GetSizeAndAligment() const;
+
 protected:
 	AutoCleanupImage(VkDevice device, VkImage image, VkFormat format, size_t initialImageViewListCapacity);
 	~AutoCleanupImage();
@@ -51,7 +57,10 @@ private:
 	VkDevice _device;
 	VkImage _image;
 	VkFormat _format;
-	std::uint32_t _padding;
+	std::uint32_t _memoryTypeMask;
+
+	std::uint64_t _size;
+	std::uint64_t _aligment;
 
 	UnsortedList<AutoCleanupImageView> _imageViews;
 

@@ -20,6 +20,7 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 	auto device = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
 	auto devicePipelineList = device.GetDevicePipelineDataSimplifier();
 	auto deviceImageList = device.GetImageDataListSimplifier();
+	auto memoryList = device.GetMemoryObjectsListSimplifier();
 
 	VulkanPipelineData add;
 	add.pipelineViewport = pipelineSharedData.AddPipelineViewportData(0, 0, width, height, 0.0f, 1.0f);
@@ -81,6 +82,7 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 		if (attachments.has_value())
 		{
 			deviceImageList.RemoveSingleSampled2DImage(attachments.value().colorAttachmentImage);
+			memoryList.FreeMemory(attachments.value().imageMemory, true);
 		}
 		else
 		{
@@ -94,5 +96,16 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 		attachmentData.colorAttachmentImage = deviceImageList.AddSingleSampled2DImage(width, height, data.deviceDependent->surfaceFormat, usageFlags, {}, false);
 		attachmentData.width = width;
 		attachmentData.height = height;
+
+		size_t allocationSize = deviceImageList.GetImageSize(attachmentData.colorAttachmentImage);
+		allocationSize *= 4;
+
+		std::uint32_t memoryTypeMask = deviceImageList.GetImageMemoryTypeMask(attachmentData.colorAttachmentImage);
+
+		std::vector<MemoryTypeProperties> acceptableMemoryTypes;
+		acceptableMemoryTypes.reserve(1);
+		acceptableMemoryTypes.push_back(DEVICE_LOCAL);
+
+		attachmentData.imageMemory = memoryList.AllocateMemory(allocationSize, 4, acceptableMemoryTypes, memoryTypeMask);
 	}
 }

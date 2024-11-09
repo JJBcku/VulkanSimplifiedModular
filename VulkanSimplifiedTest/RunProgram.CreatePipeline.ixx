@@ -20,6 +20,7 @@ import VulkanSimplifiers.DeviceList;
 import VulkanSimplifiers.LogicalDeviceMain;
 import VulkanSimplifiers.LogicalDeviceMain;
 import VulkanSimplifiers.DevicePipelineData;
+import VulkanSimplifiers.MemoryObjectsList;
 
 import VulkanSimplifiers.DevicePipelineData.GraphicPipelineCreationData;
 

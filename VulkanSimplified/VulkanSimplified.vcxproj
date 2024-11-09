@@ -272,6 +272,7 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.VulkanVersionData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceCore.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.MemoryObjectsList.CreationData.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.MemoryObjectsList.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.MemoryObjectsList.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.ShaderList.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceCore.Data.ixx" />

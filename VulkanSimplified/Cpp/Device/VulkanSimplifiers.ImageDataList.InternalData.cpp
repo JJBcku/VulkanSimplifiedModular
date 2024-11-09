@@ -47,6 +47,13 @@ void AutoCleanupImageView::DestroyImageView()
 AutoCleanupImage::AutoCleanupImage(VkDevice device, VkImage image, VkFormat format, size_t initialImageViewListCapacity) : _device(device),
 _image(image), _format(format), _imageViews(initialImageViewListCapacity)
 {
+	VkMemoryRequirements req{};
+
+	vkGetImageMemoryRequirements(_device, image, &req);
+
+	_memoryTypeMask = req.memoryTypeBits;
+	_size = req.size;
+	_aligment = req.alignment;
 }
 
 AutoCleanupImage::~AutoCleanupImage()
@@ -54,10 +61,15 @@ AutoCleanupImage::~AutoCleanupImage()
 	DestroyImage();
 }
 
-AutoCleanupImage::AutoCleanupImage(AutoCleanupImage&& rhs) noexcept : _device(rhs._device), _image(rhs._image), _imageViews(std::move(rhs._imageViews))
+AutoCleanupImage::AutoCleanupImage(AutoCleanupImage&& rhs) noexcept : _device(rhs._device), _image(rhs._image), _format(rhs._format), _memoryTypeMask(rhs._memoryTypeMask),
+	_size(rhs._size), _aligment(rhs._aligment), _imageViews(std::move(rhs._imageViews))
 {
 	rhs._device = VK_NULL_HANDLE;
 	rhs._image = VK_NULL_HANDLE;
+	rhs._format = VK_FORMAT_UNDEFINED;
+	rhs._memoryTypeMask = 0;
+	rhs._size = 0;
+	rhs._aligment = std::numeric_limits<std::uint64_t>::max();
 }
 
 AutoCleanupImage& AutoCleanupImage::operator=(AutoCleanupImage&& rhs) noexcept
@@ -65,10 +77,18 @@ AutoCleanupImage& AutoCleanupImage::operator=(AutoCleanupImage&& rhs) noexcept
 	DestroyImage();
 	_device = rhs._device;
 	_image = rhs._image;
+	_format = rhs._format;
+	_memoryTypeMask = rhs._memoryTypeMask;
+	_size = rhs._size;
+	_aligment = rhs._aligment;
 	_imageViews = std::move(rhs._imageViews);
 
 	rhs._device = VK_NULL_HANDLE;
 	rhs._image = VK_NULL_HANDLE;
+	rhs._format = VK_FORMAT_UNDEFINED;
+	rhs._memoryTypeMask = 0;
+	rhs._size = 0;
+	rhs._aligment = std::numeric_limits<std::uint64_t>::max();
 	return *this;
 }
 
@@ -90,6 +110,26 @@ bool AutoCleanupImage::DeleteImageView(IDObject<AutoCleanupImageView> imageViewI
 void AutoCleanupImage::ResetImageViewList(size_t newImageViewListCapacity)
 {
 	_imageViews.Reset(newImageViewListCapacity);
+}
+
+std::uint64_t AutoCleanupImage::GetImageRequiredAligment() const
+{
+	return _aligment;
+}
+
+std::uint64_t AutoCleanupImage::GetImageSize() const
+{
+	return _size;
+}
+
+std::uint32_t AutoCleanupImage::GetImageMemoryTypeMask() const
+{
+	return _memoryTypeMask;
+}
+
+std::pair<std::uint64_t, std::uint64_t> AutoCleanupImage::GetSizeAndAligment() const
+{
+	return std::pair<std::uint64_t, std::uint64_t>(_size, _aligment);
 }
 
 void AutoCleanupImage::DestroyImage()

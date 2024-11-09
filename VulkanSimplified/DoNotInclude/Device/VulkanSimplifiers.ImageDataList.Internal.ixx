@@ -31,6 +31,18 @@ public:
 	bool RemoveSingleSampled2DImage(IDObject<AutoCleanup2DImage> imageID, bool throwOnIDNotFound);
 	bool RemoveMipMappedSingleSampled2DImage(IDObject<AutoCleanupMipMapped2DImage> imageID, bool throwOnIDNotFound);
 
+	std::uint64_t GetImageRequiredAligment(IDObject<AutoCleanup2DImage> imageID) const;
+	std::uint64_t GetImageSize(IDObject<AutoCleanup2DImage> imageID) const;
+	std::uint32_t GetImageMemoryTypeMask(IDObject<AutoCleanup2DImage> imageID) const;
+
+	std::pair<std::uint64_t, std::uint64_t> GetSizeAndAligment(IDObject<AutoCleanup2DImage> imageID) const;
+
+	std::uint64_t GetImageRequiredAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
+	std::uint64_t GetImageSize(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
+	std::uint32_t GetImageMemoryTypeMask(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
+
+	std::pair<std::uint64_t, std::uint64_t> GetSizeAndAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
+
 private:
 	const LogicalDeviceCoreInternal& _deviceCore;
 	VkDevice _device;

@@ -124,6 +124,46 @@ bool ImageDataListInternal::RemoveMipMappedSingleSampled2DImage(IDObject<AutoCle
 	return _singleSampledMipMapped2DImage.RemoveObject(imageID, throwOnIDNotFound);
 }
 
+std::uint64_t ImageDataListInternal::GetImageRequiredAligment(IDObject<AutoCleanup2DImage> imageID) const
+{
+	return _singleSampled2DImage.GetConstObject(imageID).GetImageRequiredAligment();
+}
+
+std::uint64_t ImageDataListInternal::GetImageSize(IDObject<AutoCleanup2DImage> imageID) const
+{
+	return _singleSampled2DImage.GetConstObject(imageID).GetImageSize();
+}
+
+std::uint32_t ImageDataListInternal::GetImageMemoryTypeMask(IDObject<AutoCleanup2DImage> imageID) const
+{
+	return _singleSampled2DImage.GetConstObject(imageID).GetImageMemoryTypeMask();
+}
+
+std::pair<std::uint64_t, std::uint64_t> ImageDataListInternal::GetSizeAndAligment(IDObject<AutoCleanup2DImage> imageID) const
+{
+	return _singleSampled2DImage.GetConstObject(imageID).GetSizeAndAligment();
+}
+
+std::uint64_t ImageDataListInternal::GetImageRequiredAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetImageRequiredAligment();
+}
+
+std::uint64_t ImageDataListInternal::GetImageSize(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetImageSize();
+}
+
+std::uint32_t ImageDataListInternal::GetImageMemoryTypeMask(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetImageMemoryTypeMask();
+}
+
+std::pair<std::uint64_t, std::uint64_t> ImageDataListInternal::GetSizeAndAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetSizeAndAligment();
+}
+
 std::uint32_t ImageDataListInternal::CalculateMipmapLevelsFromBiggest3D(std::uint32_t width, std::uint32_t height, std::uint32_t depth) const
 {
 	std::uint32_t ret = 0;

@@ -7,6 +7,8 @@ export module VulkanSimplifiers.ImageDataList.InternalData;
 import std;
 export import ListTemplates.UnsortedList;
 
+export import VulkanSimplifiers.MemoryObjectsList.Data;
+
 export class AutoCleanupImageView
 {
 public:
@@ -28,6 +30,8 @@ private:
 	void DestroyImageView();
 };
 
+export typedef std::pair<AllocationFullID, size_t> ImageBindingData;
+
 export class AutoCleanupImage
 {
 public:
@@ -42,6 +46,8 @@ public:
 	std::uint32_t GetImageMemoryTypeMask() const;
 
 	std::pair<std::uint64_t, std::uint64_t> GetSizeAndAligment() const;
+
+	void BindImage(AllocationFullID allocationID, size_t bindingBeggining);
 
 protected:
 	AutoCleanupImage(VkDevice device, VkImage image, VkFormat format, size_t initialImageViewListCapacity);
@@ -61,6 +67,8 @@ private:
 
 	std::uint64_t _size;
 	std::uint64_t _aligment;
+
+	std::optional<ImageBindingData> _bindingData;
 
 	UnsortedList<AutoCleanupImageView> _imageViews;
 

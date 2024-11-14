@@ -14,11 +14,12 @@ import VulkanSimplifiers.Common.DataFormatFlags.Internal;
 import VulkanSimplifiers.Common.ImageUsageFlags.Internal;
 
 import VulkanSimplifiers.LogicalDeviceCore.Internal;
+import VulkanSimplifiers.MemoryObjectsList.Internal;
 
 export class ImageDataListInternal
 {
 public:
-	ImageDataListInternal(const ImageDataCreationData& creationData, const LogicalDeviceCoreInternal& deviceCore, VkDevice device);
+	ImageDataListInternal(const ImageDataCreationData& creationData, const LogicalDeviceCoreInternal& deviceCore, MemoryObjectsListInternal& memoryList, VkDevice device);
 	~ImageDataListInternal();
 
 	ImageDataListInternal& operator=(const ImageDataListInternal&) noexcept = delete;
@@ -43,8 +44,12 @@ public:
 
 	std::pair<std::uint64_t, std::uint64_t> GetSizeAndAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
 
+	void BindImage(IDObject<AutoCleanup2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve);
+	void BindImage(IDObject<AutoCleanupMipMapped2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve);
+
 private:
 	const LogicalDeviceCoreInternal& _deviceCore;
+	MemoryObjectsListInternal& _memoryList;
 	VkDevice _device;
 
 	UnsortedList<AutoCleanup2DImage> _singleSampled2DImage;

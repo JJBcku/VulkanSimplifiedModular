@@ -10,6 +10,7 @@ import ListTemplates.UnsortedList;
 import VulkanSimplifiers.Common.MemoryData;
 import VulkanSimplifiers.MemoryObjectsList.InternalData;
 import VulkanSimplifiers.MemoryObjectsList.CreationData;
+import VulkanSimplifiers.MemoryObjectsList.Data;
 
 export class MemoryObjectsListInternal
 {
@@ -23,13 +24,15 @@ public:
 	MemoryObjectsListInternal& operator=(const MemoryObjectsListInternal&) noexcept = delete;
 	MemoryObjectsListInternal& operator=(MemoryObjectsListInternal&&) noexcept = delete;
 
-	std::pair<IDObject<MemoryAllocationData>, size_t> AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+	AllocationFullID AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
 		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserve);
 
-	std::optional<std::pair<IDObject<MemoryAllocationData>, size_t>> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+	std::optional<AllocationFullID> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
 		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserve);
 
 	bool FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound);
+
+	size_t BindImage(AllocationFullID allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve);
 
 private:
 	size_t heapCount;

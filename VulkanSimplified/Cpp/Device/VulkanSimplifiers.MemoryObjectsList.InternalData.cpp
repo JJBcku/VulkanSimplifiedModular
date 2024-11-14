@@ -52,8 +52,8 @@ MemoryAllocationData::MemoryAllocationData(MemoryAllocationData&& rhs) noexcept 
 	rhs._memory = VK_NULL_HANDLE;
 
 	rhs._data = nullptr;
-	_totalSize = 0;
-	_usedSize = 0;
+	rhs._totalSize = 0;
+	rhs._usedSize = 0;
 }
 
 MemoryAllocationData& MemoryAllocationData::operator=(MemoryAllocationData&& rhs) noexcept
@@ -68,14 +68,116 @@ MemoryAllocationData& MemoryAllocationData::operator=(MemoryAllocationData&& rhs
 	rhs._memory = VK_NULL_HANDLE;
 
 	rhs._data = nullptr;
-	_totalSize = 0;
-	_usedSize = 0;
+	rhs._totalSize = 0;
+	rhs._usedSize = 0;
 	return *this;
 }
 
 size_t MemoryAllocationData::GetTotalSize() const
 {
 	return _totalSize;
+}
+
+size_t MemoryAllocationData::GetFreeSize() const
+{
+	assert(_totalSize >= _usedSize);
+	return _totalSize - _usedSize;
+}
+
+size_t MemoryAllocationData::BindImage(VkImage image, size_t size, size_t aligment, size_t addOnReserve)
+{
+	CheckSuballocationVectorSize(addOnReserve);
+
+	auto memoryAddresses = FindMemoryAdressAndVectorIndexForSuballocation(size, aligment);
+
+	if (vkBindImageMemory(_device, image, _memory, memoryAddresses.first) != VK_SUCCESS)
+		throw std::runtime_error("MemoryAllocationData::BindImage Error: Program failed to bind image to memory!");
+
+	SuballocationInternalData add;
+	add.beggining = memoryAddresses.first;
+	add.size = size;
+
+	_suballocationData.insert(_suballocationData.begin() + static_cast<std::int64_t>(memoryAddresses.second), add);
+
+	return memoryAddresses.first;
+}
+
+void MemoryAllocationData::CheckSuballocationVectorSize(size_t addOnReserve)
+{
+	if (_suballocationData.size() == _suballocationData.capacity())
+	{
+		if (addOnReserve == 0)
+		{
+			if (_suballocationData.capacity() == 0)
+				_suballocationData.reserve(1);
+			else
+				_suballocationData.reserve(_suballocationData.capacity() << 1);
+		}
+		else
+		{
+			_suballocationData.reserve(_suballocationData.capacity() + addOnReserve);
+		}
+	}
+}
+
+std::pair<size_t, size_t> MemoryAllocationData::FindMemoryAdressAndVectorIndexForSuballocation(size_t size, size_t aligment)
+{
+	std::pair<size_t, size_t> ret;
+
+	std::optional<size_t> beggining;
+	size_t currentPoint = 0;
+	size_t i;
+
+	if (_totalSize >= size)
+	{
+		if (_suballocationData.empty())
+		{
+			beggining = 0;
+			i = 0;
+		}
+		else
+		{
+			for (i = 0; i < _suballocationData.size(); ++i)
+			{
+				if (currentPoint < _suballocationData[i].beggining)
+				{
+					size_t gapSize = _suballocationData[i].beggining - currentPoint;
+					if (gapSize >= size)
+					{
+						beggining = currentPoint;
+						break;
+					}
+				}
+
+				currentPoint = _suballocationData[i].beggining + _suballocationData[i].size;
+				if (currentPoint % aligment != 0)
+				{
+					currentPoint = (currentPoint / aligment) + 1;
+					currentPoint *= aligment;
+				}
+			}
+
+			if (!beggining.has_value() && _totalSize > currentPoint)
+			{
+				size_t endSize = _totalSize - currentPoint;
+				if (endSize >= size)
+				{
+					beggining = currentPoint;
+					i++;
+				}
+			}
+		}
+	}
+	else
+		throw std::runtime_error("MemoryAllocationData::FindMemoryAdressAndVectorIndexForSuballocation Error: Program tried to suballocate memory chunk bigger than the whole memory allocation!");
+
+	if (!beggining.has_value())
+		throw std::runtime_error("MemoryAllocationData::FindMemoryAdressAndVectorIndexForSuballocation Error: Program failed to find a proper beggining point for a suballocation!");
+
+	ret.first = beggining.value();
+	ret.second = i;
+
+	return ret;
 }
 
 MemoryTypeInternalData::MemoryTypeInternalData(VkDevice device, const MemoryTypeData& typeData, std::uint32_t typeIndex, size_t reservedAllocation) : _device(device),
@@ -153,4 +255,9 @@ MemoryTypeProperties MemoryTypeInternalData::GetProperties() const
 size_t MemoryTypeInternalData::GetMemoryAllocationsSize(IDObject<MemoryAllocationData> allocationID) const
 {
 	return _allocationsList.GetConstObject(allocationID).GetTotalSize();
+}
+
+size_t MemoryTypeInternalData::BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve)
+{
+	return _allocationsList.GetObject(allocationID).BindImage(image, size, aligment, addOnReserve);
 }

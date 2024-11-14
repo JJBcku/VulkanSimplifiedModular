@@ -107,5 +107,6 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 		acceptableMemoryTypes.push_back(DEVICE_LOCAL);
 
 		attachmentData.imageMemory = memoryList.AllocateMemory(allocationSize, 4, acceptableMemoryTypes, memoryTypeMask);
+		deviceImageList.BindImage(attachmentData.colorAttachmentImage, attachmentData.imageMemory);
 	}
 }

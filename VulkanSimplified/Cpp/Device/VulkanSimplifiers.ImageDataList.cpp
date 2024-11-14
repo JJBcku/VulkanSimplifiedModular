@@ -71,3 +71,13 @@ std::pair<std::uint64_t, std::uint64_t> ImageDataListSimplifier::GetSizeAndAligm
 {
 	return _internal.GetSizeAndAligment(imageID);
 }
+
+void ImageDataListSimplifier::BindImage(IDObject<AutoCleanup2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve)
+{
+	_internal.BindImage(imageID, allocationID, addOnReserve);
+}
+
+void ImageDataListSimplifier::BindImage(IDObject<AutoCleanupMipMapped2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve)
+{
+	_internal.BindImage(imageID, allocationID, addOnReserve);
+}

@@ -26,7 +26,7 @@ MemoryObjectsListInternal::~MemoryObjectsListInternal()
 {
 }
 
-std::pair<IDObject<MemoryAllocationData>, size_t> MemoryObjectsListInternal::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+AllocationFullID MemoryObjectsListInternal::AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
 	const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserve)
 {
 	std::optional<std::pair<IDObject<MemoryAllocationData>, size_t>> ret;
@@ -63,10 +63,10 @@ std::pair<IDObject<MemoryAllocationData>, size_t> MemoryObjectsListInternal::All
 	throw std::runtime_error("MemoryObjectsListInternal::AddMemoryAllocation Error: Program failed to allocate memory!");
 }
 
-std::optional<std::pair<IDObject<MemoryAllocationData>, size_t>> MemoryObjectsListInternal::TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+std::optional<AllocationFullID> MemoryObjectsListInternal::TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
 	const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask, size_t addOnReserve)
 {
-	std::optional<std::pair<IDObject<MemoryAllocationData>, size_t>> ret;
+	std::optional<AllocationFullID> ret;
 
 	assert(memorySize > 0);
 	assert(memoryTypeMask > 0);
@@ -95,6 +95,14 @@ std::optional<std::pair<IDObject<MemoryAllocationData>, size_t>> MemoryObjectsLi
 	}
 
 	return ret;
+}
+
+size_t MemoryObjectsListInternal::BindImage(AllocationFullID allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve)
+{
+	if (allocationID.second >= typeCount)
+		throw std::runtime_error("MemoryObjectsListInternal::BindImage Error: Program tried to access a non-existent memory type!");
+
+	return memoryTypeData[allocationID.second].value().BindImage(allocationID.first, image, size, aligment, addOnReserve);
 }
 
 bool MemoryObjectsListInternal::FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound)

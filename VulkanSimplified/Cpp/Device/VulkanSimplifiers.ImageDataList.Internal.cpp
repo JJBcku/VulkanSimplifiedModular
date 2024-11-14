@@ -4,8 +4,8 @@ module;
 
 module VulkanSimplifiers.ImageDataList.Internal;
 
-ImageDataListInternal::ImageDataListInternal(const ImageDataCreationData& creationData, const LogicalDeviceCoreInternal& deviceCore, VkDevice device) : _deviceCore(deviceCore),
-	_device(device), _singleSampled2DImage(creationData.singleSampled2DImageListInitialCapacity),
+ImageDataListInternal::ImageDataListInternal(const ImageDataCreationData& creationData, const LogicalDeviceCoreInternal& deviceCore, MemoryObjectsListInternal& memoryList,
+	VkDevice device) : _deviceCore(deviceCore), _memoryList(memoryList), _device(device), _singleSampled2DImage(creationData.singleSampled2DImageListInitialCapacity),
 	_singleSampledMipMapped2DImage(creationData.singleSampledMipMapped2DListInitialCapacity)
 {
 }
@@ -162,6 +162,32 @@ std::uint32_t ImageDataListInternal::GetImageMemoryTypeMask(IDObject<AutoCleanup
 std::pair<std::uint64_t, std::uint64_t> ImageDataListInternal::GetSizeAndAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const
 {
 	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetSizeAndAligment();
+}
+
+void ImageDataListInternal::BindImage(IDObject<AutoCleanup2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve)
+{
+	auto& imageData = _singleSampled2DImage.GetObject(imageID);
+
+	VkImage image = imageData.GetImage();
+	size_t size = imageData.GetImageSize();
+	size_t aligment = imageData.GetImageRequiredAligment();
+
+	auto beggining = _memoryList.BindImage(allocationID, image, size, aligment, addOnReserve);
+
+	imageData.BindImage(allocationID, beggining);
+}
+
+void ImageDataListInternal::BindImage(IDObject<AutoCleanupMipMapped2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve)
+{
+	auto& imageData = _singleSampledMipMapped2DImage.GetObject(imageID);
+
+	VkImage image = imageData.GetImage();
+	size_t size = imageData.GetImageSize();
+	size_t aligment = imageData.GetImageRequiredAligment();
+
+	auto beggining = _memoryList.BindImage(allocationID, image, size, aligment, addOnReserve);
+
+	imageData.BindImage(allocationID, beggining);
 }
 
 std::uint32_t ImageDataListInternal::CalculateMipmapLevelsFromBiggest3D(std::uint32_t width, std::uint32_t height, std::uint32_t depth) const

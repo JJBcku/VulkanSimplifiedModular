@@ -41,6 +41,9 @@ public:
 	MemoryAllocationData& operator=(MemoryAllocationData&& rhs) noexcept;
 
 	size_t GetTotalSize() const;
+	size_t GetFreeSize() const;
+
+	size_t BindImage(VkImage image, size_t size, size_t aligment, size_t addOnReserve);
 
 private:
 	VkDevice _device;
@@ -51,6 +54,9 @@ private:
 	size_t _totalSize;
 	size_t _usedSize;
 	std::vector<SuballocationInternalData> _suballocationData;
+
+	void CheckSuballocationVectorSize(size_t addOnReserve);
+	std::pair<size_t, size_t> FindMemoryAdressAndVectorIndexForSuballocation(size_t size, size_t aligment);
 };
 
 export class MemoryTypeInternalData
@@ -74,6 +80,8 @@ public:
 	MemoryTypeProperties GetProperties() const;
 
 	size_t GetMemoryAllocationsSize(IDObject<MemoryAllocationData> allocationID) const;
+
+	size_t BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve);
 
 private:
 	VkDevice _device;

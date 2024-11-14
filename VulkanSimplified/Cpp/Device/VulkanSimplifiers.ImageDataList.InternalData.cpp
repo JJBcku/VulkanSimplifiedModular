@@ -62,7 +62,7 @@ AutoCleanupImage::~AutoCleanupImage()
 }
 
 AutoCleanupImage::AutoCleanupImage(AutoCleanupImage&& rhs) noexcept : _device(rhs._device), _image(rhs._image), _format(rhs._format), _memoryTypeMask(rhs._memoryTypeMask),
-	_size(rhs._size), _aligment(rhs._aligment), _imageViews(std::move(rhs._imageViews))
+	_size(rhs._size), _aligment(rhs._aligment), _bindingData(std::move(rhs._bindingData)), _imageViews(std::move(rhs._imageViews))
 {
 	rhs._device = VK_NULL_HANDLE;
 	rhs._image = VK_NULL_HANDLE;
@@ -81,6 +81,7 @@ AutoCleanupImage& AutoCleanupImage::operator=(AutoCleanupImage&& rhs) noexcept
 	_memoryTypeMask = rhs._memoryTypeMask;
 	_size = rhs._size;
 	_aligment = rhs._aligment;
+	_bindingData = std::move(rhs._bindingData);
 	_imageViews = std::move(rhs._imageViews);
 
 	rhs._device = VK_NULL_HANDLE;
@@ -130,6 +131,14 @@ std::uint32_t AutoCleanupImage::GetImageMemoryTypeMask() const
 std::pair<std::uint64_t, std::uint64_t> AutoCleanupImage::GetSizeAndAligment() const
 {
 	return std::pair<std::uint64_t, std::uint64_t>(_size, _aligment);
+}
+
+void AutoCleanupImage::BindImage(AllocationFullID allocationID, size_t bindingBeggining)
+{
+	if (_bindingData.has_value())
+		throw std::runtime_error("AutoCleanupImage::BindImage Error: Program tried to bind an already bound image!");
+
+	_bindingData.emplace(allocationID, bindingBeggining);
 }
 
 void AutoCleanupImage::DestroyImage()

@@ -26,7 +26,7 @@ export struct VulkanAttachmentData
 
 	IDObject<AutoCleanup2DImage> colorAttachmentImage;
 
-	std::pair<IDObject<MemoryAllocationData>, size_t> imageMemory;
+	AllocationFullID imageMemory;
 
 	VulkanAttachmentData();
 };

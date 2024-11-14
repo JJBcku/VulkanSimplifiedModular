@@ -8,6 +8,7 @@ import VulkanSimplifiers.ImageDataList.Data;
 
 import VulkanSimplifiers.Common.DataFormatFlags;
 import VulkanSimplifiers.Common.ImageUsageFlags;
+import VulkanSimplifiers.MemoryObjectsList.Data;
 
 export class ImageDataListSimplifier
 {
@@ -37,6 +38,9 @@ public:
 	std::uint32_t GetImageMemoryTypeMask(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
 
 	std::pair<std::uint64_t, std::uint64_t> GetSizeAndAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
+
+	void BindImage(IDObject<AutoCleanup2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve = 0);
+	void BindImage(IDObject<AutoCleanupMipMapped2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve = 0);
 
 private:
 	ImageDataListInternal& _internal;

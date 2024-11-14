@@ -14,10 +14,10 @@ public:
 
 	MemoryObjectsListSimplifier& operator=(const MemoryObjectsListSimplifier&) noexcept = delete;
 
-	std::pair<IDObject<MemoryAllocationData>, size_t> AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved, const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties,
+	AllocationFullID AllocateMemory(size_t memorySize, size_t initialSuballocationsReserved, const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties,
 		std::uint32_t memoryTypeMask = std::numeric_limits<std::uint32_t>::max(), size_t addOnReserve = 0);
 
-	std::optional<std::pair<IDObject<MemoryAllocationData>, size_t>> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
+	std::optional<AllocationFullID> TryToAllocateMemory(size_t memorySize, size_t initialSuballocationsReserved,
 		const std::vector<MemoryTypeProperties>& acceptableMemoryTypesProperties, std::uint32_t memoryTypeMask = std::numeric_limits<std::uint32_t>::max(), size_t addOnReserve = 0);
 
 	bool FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound);

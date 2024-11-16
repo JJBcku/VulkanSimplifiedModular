@@ -19,7 +19,8 @@ export struct VulkanData
 	std::unique_ptr<VulkanPipelineLayoutData> pipelineLayoutData;
 	std::unique_ptr<VulkanDataPipelinesList> pipelinesList;
 
-	VulkanData() = default;
+	VulkanData();
+	~VulkanData();
 
 	VulkanData(const VulkanData&) noexcept = delete;
 

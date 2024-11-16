@@ -103,6 +103,11 @@ VkImageView AutoCleanupImage::GetImageView(IDObject<AutoCleanupImageView> imageV
 	return _imageViews.GetConstObject(imageViewID).GetImageView();
 }
 
+std::optional<ImageBindingData> AutoCleanupImage::GetBindingData() const
+{
+	return _bindingData;
+}
+
 bool AutoCleanupImage::DeleteImageView(IDObject<AutoCleanupImageView> imageViewID, bool throwOnIDNotFound)
 {
 	return _imageViews.RemoveObject(imageViewID, throwOnIDNotFound);

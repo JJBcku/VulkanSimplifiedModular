@@ -58,7 +58,7 @@ PhysicalDeviceInternal& DeviceListInternal::GetPhysicalDeviceSimplifier(size_t d
 
 LogicalDeviceMainInternal& DeviceListInternal::GetLogicalDeviceMainSimplifier(IDObject<LogicalDevicePointer> deviceID)
 {
-	return *_logicalDeviceList.GetObject(deviceID);
+	return *_logicalDeviceList.GetObject(deviceID).pointer;
 }
 
 const PhysicalDeviceInternal& DeviceListInternal::GetPhysicalDeviceSimplifier(size_t deviceIndex) const
@@ -71,7 +71,7 @@ const PhysicalDeviceInternal& DeviceListInternal::GetPhysicalDeviceSimplifier(si
 
 const LogicalDeviceMainInternal& DeviceListInternal::GetLogicalDeviceMainSimplifier(IDObject<LogicalDevicePointer> deviceID) const
 {
-	return *_logicalDeviceList.GetConstObject(deviceID);
+	return *_logicalDeviceList.GetConstObject(deviceID).pointer;
 }
 
 IDObject<LogicalDevicePointer> DeviceListInternal::AddLogicalDevice(const LogicalDeviceCreationInfo& createInfo, const DeviceMainCreationData& mainCreationData, size_t addOnReserve)

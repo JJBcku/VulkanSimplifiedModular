@@ -50,14 +50,16 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <EnableModules>true</EnableModules>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <EnableModules>false</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4514;4582;4710;4711;5045</DisableSpecificWarnings>
-      <AdditionalModuleDependencies>$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.IDObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
+      <AdditionalModuleDependencies>$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.UnsortedList.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.IterativeUnsortedList.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.IDObject.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.OrderIndependentDeletionStack.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.CommonVectorObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -75,14 +77,15 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <EnableModules>true</EnableModules>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <EnableModules>false</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4514;4582;4710;4711;5045</DisableSpecificWarnings>
       <AdditionalModuleDependencies>$(SolutionDir)ExternalModules\x64 Release\ListTemplates.IDObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -115,6 +118,7 @@
     <ClCompile Include="RunProgram.EventHandling.ixx" />
     <ClCompile Include="RunProgram.ixx" />
     <ClCompile Include="VulkanData.Basic.ixx" />
+    <ClCompile Include="VulkanData.cpp" />
     <ClCompile Include="VulkanData.DeviceDependent.ixx" />
     <ClCompile Include="VulkanData.InstanceDependent.ixx" />
     <ClCompile Include="VulkanData.ixx" />

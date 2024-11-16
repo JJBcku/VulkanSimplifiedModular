@@ -38,6 +38,8 @@ public:
 	VkImage GetImage() const;
 	VkImageView GetImageView(IDObject<AutoCleanupImageView> imageViewID) const;
 
+	std::optional<ImageBindingData> GetBindingData() const;
+
 	bool DeleteImageView(IDObject<AutoCleanupImageView> imageViewID, bool throwOnIDNotFound);
 	void ResetImageViewList(size_t newImageViewListCapacity);
 

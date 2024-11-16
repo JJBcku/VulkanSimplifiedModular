@@ -105,5 +105,8 @@
     <ClCompile Include="RunProgram.CreateRenderPassData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VulkanData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

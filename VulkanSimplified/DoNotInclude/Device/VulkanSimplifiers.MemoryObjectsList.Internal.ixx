@@ -34,6 +34,8 @@ public:
 
 	size_t BindImage(AllocationFullID allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve);
 
+	bool RemoveSuballocation(AllocationFullID allocationID, size_t beggining, bool throwOnNotFound);
+
 private:
 	size_t heapCount;
 	std::array<HeapInternalData, VK_MAX_MEMORY_HEAPS> memoryHeapData;

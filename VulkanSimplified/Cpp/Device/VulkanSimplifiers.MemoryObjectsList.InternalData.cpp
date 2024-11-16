@@ -97,9 +97,30 @@ size_t MemoryAllocationData::BindImage(VkImage image, size_t size, size_t aligme
 	add.beggining = memoryAddresses.first;
 	add.size = size;
 
+	_usedSize += size;
+
 	_suballocationData.insert(_suballocationData.begin() + static_cast<std::int64_t>(memoryAddresses.second), add);
 
 	return memoryAddresses.first;
+}
+
+bool MemoryAllocationData::RemoveSuballocation(size_t beggining, bool throwOnNotFound)
+{
+	for (auto it = _suballocationData.begin(); it < _suballocationData.end(); ++it)
+	{
+		if (it->beggining == beggining)
+		{
+			assert(it->size <= _usedSize);
+			_usedSize -= it->size;
+			_suballocationData.erase(it);
+			return true;
+		}
+	}
+
+	if (throwOnNotFound)
+		throw std::runtime_error("MemoryAllocationData::RemoveSuballocation Error: Program tried to remove non-existent suballocation!");
+
+	return false;
 }
 
 void MemoryAllocationData::CheckSuballocationVectorSize(size_t addOnReserve)
@@ -260,4 +281,9 @@ size_t MemoryTypeInternalData::GetMemoryAllocationsSize(IDObject<MemoryAllocatio
 size_t MemoryTypeInternalData::BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve)
 {
 	return _allocationsList.GetObject(allocationID).BindImage(image, size, aligment, addOnReserve);
+}
+
+bool MemoryTypeInternalData::RemoveSuballocation(IDObject<MemoryAllocationData> allocationID, size_t beggining, bool throwOnNotFound)
+{
+	return _allocationsList.GetObject(allocationID).RemoveSuballocation(beggining, throwOnNotFound);
 }

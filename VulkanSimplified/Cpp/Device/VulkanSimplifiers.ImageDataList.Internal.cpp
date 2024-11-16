@@ -116,12 +116,46 @@ IDObject<AutoCleanupMipMapped2DImage> ImageDataListInternal::AddMipMappedSingleS
 
 bool ImageDataListInternal::RemoveSingleSampled2DImage(IDObject<AutoCleanup2DImage> imageID, bool throwOnIDNotFound)
 {
-	return _singleSampled2DImage.RemoveObject(imageID, throwOnIDNotFound);
+	bool ret = _singleSampled2DImage.CheckForID(imageID);
+
+	if (!ret && throwOnIDNotFound)
+		throw std::runtime_error("ImageDataListInternal::RemoveSingleSampled2DImage Error: Program tried to delete a non-existent image!");
+
+	if (ret)
+	{
+		auto& imageData = _singleSampled2DImage.GetObject(imageID);
+
+		auto bindingData = imageData.GetBindingData();
+
+		ret = _singleSampled2DImage.RemoveObject(imageID, true);
+
+		if (bindingData.has_value())
+			_memoryList.RemoveSuballocation(bindingData.value().first, bindingData.value().second, true);
+	}
+
+	return ret;
 }
 
 bool ImageDataListInternal::RemoveMipMappedSingleSampled2DImage(IDObject<AutoCleanupMipMapped2DImage> imageID, bool throwOnIDNotFound)
 {
-	return _singleSampledMipMapped2DImage.RemoveObject(imageID, throwOnIDNotFound);
+	bool ret = _singleSampledMipMapped2DImage.CheckForID(imageID);
+
+	if (!ret && throwOnIDNotFound)
+		throw std::runtime_error("ImageDataListInternal::RemoveMipMappedSingleSampled2DImage Error: Program tried to delete a non-existent image!");
+
+	if (ret)
+	{
+		auto& imageData = _singleSampledMipMapped2DImage.GetObject(imageID);
+
+		auto bindingData = imageData.GetBindingData();
+
+		ret = _singleSampledMipMapped2DImage.RemoveObject(imageID, true);
+
+		if (bindingData.has_value())
+			_memoryList.RemoveSuballocation(bindingData.value().first, bindingData.value().second, true);
+	}
+
+	return ret;
 }
 
 std::uint64_t ImageDataListInternal::GetImageRequiredAligment(IDObject<AutoCleanup2DImage> imageID) const

@@ -81,7 +81,7 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 	{
 		if (attachments.has_value())
 		{
-			deviceImageList.RemoveSingleSampled2DImage(attachments.value().colorAttachmentImage);
+			deviceImageList.RemoveSingleSampled2DImage(attachments.value().colorAttachmentImage, true);
 			memoryList.FreeMemory(attachments.value().imageMemory, true);
 		}
 		else

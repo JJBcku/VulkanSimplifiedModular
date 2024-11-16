@@ -11,6 +11,7 @@ import VulkanData.PipelineLayoutData;
 import VulkanSimplifiers.Main;
 import VulkanSimplifiers.Instance;
 import VulkanSimplifiers.DeviceList;
+import VulkanSimplifiers.DeviceList.Data;
 import VulkanSimplifiers.LogicalDeviceMain;
 import VulkanSimplifiers.SharedPipelineData;
 import VulkanSimplifiers.DevicePipelineData;

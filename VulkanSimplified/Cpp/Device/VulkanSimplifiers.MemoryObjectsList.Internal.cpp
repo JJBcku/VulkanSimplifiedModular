@@ -105,6 +105,14 @@ size_t MemoryObjectsListInternal::BindImage(AllocationFullID allocationID, VkIma
 	return memoryTypeData[allocationID.second].value().BindImage(allocationID.first, image, size, aligment, addOnReserve);
 }
 
+bool MemoryObjectsListInternal::RemoveSuballocation(AllocationFullID allocationID, size_t beggining, bool throwOnNotFound)
+{
+	if (allocationID.second >= typeCount)
+		throw std::runtime_error("MemoryObjectsListInternal::RemoveSuballocation Error: Program tried to access a non-existent memory type!");
+
+	return memoryTypeData[allocationID.second].value().RemoveSuballocation(allocationID.first, beggining, throwOnNotFound);
+}
+
 bool MemoryObjectsListInternal::FreeMemory(std::pair<IDObject<MemoryAllocationData>, size_t> memoryID, bool throwOnNotFound)
 {
 	if (memoryID.second >= typeCount)

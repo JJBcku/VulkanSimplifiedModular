@@ -58,8 +58,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <EnableModules>true</EnableModules>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <EnableModules>false</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
@@ -67,6 +67,8 @@
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalModuleDependencies>$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.UnsortedList.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.IterativeUnsortedList.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.IDObject.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.OrderIndependentDeletionStack.ixx.ifc;$(SolutionDir)\ExternalModules\x64 Debug\ListTemplates.CommonVectorObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
       <AdditionalBMIDirectories>%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,6 +100,7 @@
       <AdditionalIncludeDirectories>$(VULKAN_SDK)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalModuleDependencies>$(SolutionDir)ExternalModules\x64 Release\ListTemplates.UnsortedList.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.IterativeUnsortedList.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.IDObject.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.OrderIndependentDeletionStack.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.CommonVectorObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
       <AdditionalBMIDirectories>%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
+      <DebugInformationFormat>OldStyle</DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

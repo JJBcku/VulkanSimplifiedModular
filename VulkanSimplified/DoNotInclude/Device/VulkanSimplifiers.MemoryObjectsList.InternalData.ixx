@@ -45,6 +45,8 @@ public:
 
 	size_t BindImage(VkImage image, size_t size, size_t aligment, size_t addOnReserve);
 
+	bool RemoveSuballocation(size_t beggining, bool throwOnNotFound);
+
 private:
 	VkDevice _device;
 	VkDeviceMemory _memory;
@@ -82,6 +84,8 @@ public:
 	size_t GetMemoryAllocationsSize(IDObject<MemoryAllocationData> allocationID) const;
 
 	size_t BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve);
+
+	bool RemoveSuballocation(IDObject<MemoryAllocationData> allocationID, size_t beggining, bool throwOnNotFound);
 
 private:
 	VkDevice _device;

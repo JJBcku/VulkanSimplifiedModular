@@ -15,6 +15,8 @@ import VulkanSimplifiers.DeviceDescriptorData;
 import VulkanSimplifiers.DeviceRenderPassData;
 import VulkanSimplifiers.DevicePipelineData;
 
+import VulkanSimplifiers.CommandPoolList;
+
 import VulkanSimplifiers.MemoryObjectsList;
 import VulkanSimplifiers.ImageDataList;
 
@@ -35,6 +37,8 @@ public:
 	MemoryObjectsListSimplifier GetMemoryObjectsListSimplifier();
 	ImageDataListSimplifier GetImageDataListSimplifier();
 
+	CommandPoolListSimplifier GetCommandPoolListSimplifier();
+
 	const LogicalDeviceCoreSimplifier GetLogicalDeviceCoreSimplifier() const;
 	const ShaderListSimplifier GetShaderListSimplifier() const;
 	const DeviceDescriptorDataSimpifier GetDeviceDescriptorDataSimplifier() const;
@@ -43,6 +47,8 @@ public:
 
 	const MemoryObjectsListSimplifier GetMemoryObjectsListSimplifier() const;
 	const ImageDataListSimplifier GetImageDataListSimplifier() const;
+
+	const CommandPoolListSimplifier GetCommandPoolListSimplifier() const;
 
 private:
 	LogicalDeviceMainInternal& _internal;

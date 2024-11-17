@@ -708,5 +708,23 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.MemoryObjectsList.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPoolList.CreationData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.CreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.CommandPoolList.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPoolList.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

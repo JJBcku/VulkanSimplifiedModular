@@ -121,7 +121,10 @@ bool MemoryObjectsListInternal::FreeMemory(std::pair<IDObject<MemoryAllocationDa
 	auto& memType = memoryTypeData[memoryID.second];
 	assert(memType.has_value());
 
-	bool ret = memType.value().FreeMemory(memoryID.first, throwOnNotFound);
+	bool ret = memType.value().CheckForAllocationsExistence(memoryID.first);
+
+	if (!ret && throwOnNotFound)
+		throw std::runtime_error("MemoryObjectsListInternal::FreeMemory Error: Program tried to free non-existent memory allocation!");
 
 	if (ret)
 	{
@@ -129,6 +132,7 @@ bool MemoryObjectsListInternal::FreeMemory(std::pair<IDObject<MemoryAllocationDa
 		size_t memorySize = memType.value().GetMemoryAllocationsSize(memoryID.first);
 		assert(memHeap.usedSize >= memorySize);
 		memHeap.usedSize -= memorySize;
+		memType.value().FreeMemory(memoryID.first, true);
 	}
 
 	return ret;

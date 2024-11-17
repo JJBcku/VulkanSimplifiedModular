@@ -85,6 +85,7 @@ public:
 
 	size_t BindImage(IDObject<MemoryAllocationData> allocationID, VkImage image, size_t size, size_t aligment, size_t addOnReserve);
 
+	bool CheckForAllocationsExistence(IDObject<MemoryAllocationData> allocationID);
 	bool RemoveSuballocation(IDObject<MemoryAllocationData> allocationID, size_t beggining, bool throwOnNotFound);
 
 private:

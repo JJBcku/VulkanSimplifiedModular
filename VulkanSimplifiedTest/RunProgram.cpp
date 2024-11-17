@@ -13,6 +13,7 @@ void RunProgram()
     CreateRenderPassData(data);
     CreatePipelineLayout(data);
     CreatePipeline(data, 800U, 600U);
+    CreatePipeline(data, 1200U, 800U);
 
     while (!settings.GetQuit())
     {

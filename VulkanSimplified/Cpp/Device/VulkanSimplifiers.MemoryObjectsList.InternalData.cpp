@@ -283,6 +283,11 @@ size_t MemoryTypeInternalData::BindImage(IDObject<MemoryAllocationData> allocati
 	return _allocationsList.GetObject(allocationID).BindImage(image, size, aligment, addOnReserve);
 }
 
+bool MemoryTypeInternalData::CheckForAllocationsExistence(IDObject<MemoryAllocationData> allocationID)
+{
+	return _allocationsList.CheckForID(allocationID);
+}
+
 bool MemoryTypeInternalData::RemoveSuballocation(IDObject<MemoryAllocationData> allocationID, size_t beggining, bool throwOnNotFound)
 {
 	return _allocationsList.GetObject(allocationID).RemoveSuballocation(beggining, throwOnNotFound);

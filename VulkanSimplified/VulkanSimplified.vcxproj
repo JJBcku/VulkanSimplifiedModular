@@ -58,7 +58,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
       <EnableModules>false</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
@@ -92,7 +92,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <EnableModules>true</EnableModules>
+      <EnableModules>false</EnableModules>
       <BuildStlModules>true</BuildStlModules>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
@@ -101,6 +101,7 @@
       <AdditionalModuleDependencies>$(SolutionDir)ExternalModules\x64 Release\ListTemplates.UnsortedList.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.IterativeUnsortedList.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.IDObject.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.OrderIndependentDeletionStack.ixx.ifc;$(SolutionDir)ExternalModules\x64 Release\ListTemplates.CommonVectorObject.ixx.ifc;%(AdditionalModuleDependencies)</AdditionalModuleDependencies>
       <AdditionalBMIDirectories>%(AdditionalBMIDirectories)</AdditionalBMIDirectories>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+      <ScanSourceForModuleDependencies>true</ScanSourceForModuleDependencies>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

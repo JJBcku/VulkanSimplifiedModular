@@ -12,6 +12,7 @@ import VulkanSimplifiers.Instance;
 import VulkanSimplifiers.DeviceList;
 import VulkanSimplifiers.LogicalDeviceMain;
 import VulkanSimplifiers.LogicalDeviceCore;
+import VulkanSimplifiers.CommandPoolList;
 
 import VulkanSimplifiers.Common.SurfaceData;
 

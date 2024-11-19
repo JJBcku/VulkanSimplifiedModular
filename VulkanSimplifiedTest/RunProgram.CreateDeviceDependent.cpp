@@ -89,4 +89,14 @@ void CreateDeviceDependent(VulkanData& data)
 
 	data.deviceDependent->fragmentShader = shaderList.AddFragmentShader(fragmentData);
 	data.deviceDependent->vertexShader = shaderList.AddVertexShader(vertexData);
+
+	auto commandPoolList = deviceMain.GetCommandPoolListSimplifier();
+
+	data.deviceDependent->graphicsCommandPool = commandPoolList.AddCommandPoolWithoutIndividualReset(true, data.instanceDependent->graphicsQueue, 1, 1, 4);
+
+	if (data.instanceDependent->transferQueue.has_value())
+		data.deviceDependent->transferCommandPool = commandPoolList.AddCommandPoolWithoutIndividualReset(true, data.instanceDependent->transferQueue.value(), 1, 1, 4);
+
+	if (data.instanceDependent->graphicsQueue != data.instanceDependent->presentQueue)
+		data.deviceDependent->presentCommandPool = commandPoolList.AddCommandPoolWithoutIndividualReset(true, data.instanceDependent->presentQueue, 1, 1, 4);
 }

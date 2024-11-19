@@ -130,6 +130,7 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.Internal.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPool.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceDescriptorData.Data.cpp" />
@@ -149,11 +150,13 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.InternalData.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.IRCommandPool.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceCore.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.MemoryObjectsList.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.MemoryObjectsList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.MemoryObjectsList.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.MemoryObjectsList.InternalData.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.NIRCommandPool.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.cpp" />
@@ -218,6 +221,7 @@
     <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.ImageLayouts.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.ImageUsageFlags.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.CommandPoolList.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.CommandPool.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.ImageDataList.Internal.ixx" />
@@ -245,6 +249,9 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.MemoryData.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.PipelineStageFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPool.Data.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.IRCommandPool.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.NIRCommandPool.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPoolList.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPoolList.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.DeviceDescriptorData.CreationData.ixx" />

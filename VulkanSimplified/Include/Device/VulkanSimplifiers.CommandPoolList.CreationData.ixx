@@ -4,7 +4,8 @@ import std;
 
 export struct CommandPoolListCreationData
 {
-	std::int64_t stump;
+	size_t noIndividualResetCommandPoolListInitialReservation;
+	size_t individualResetCommandPoolListInitialReservation;
 
 	CommandPoolListCreationData();
 };

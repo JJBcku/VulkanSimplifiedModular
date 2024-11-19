@@ -2,5 +2,6 @@ module VulkanSimplifiers.CommandPoolList.CreationData;
 
 CommandPoolListCreationData::CommandPoolListCreationData()
 {
-	stump = 0;
+	noIndividualResetCommandPoolListInitialReservation = 0;
+	individualResetCommandPoolListInitialReservation = 0;
 }

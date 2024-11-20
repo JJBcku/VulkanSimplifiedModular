@@ -32,6 +32,8 @@ public:
 	std::vector<std::uint32_t> GetQueueFamilies(const std::vector<size_t>& queueIDs) const;
 	std::uint32_t GetQueueFamily(size_t queueID) const;
 
+	VkQueue GetQueue(size_t queueID) const;
+
 	void CreateSwapchain(IDObject<WindowPointer> windowID, const SwapchainCreationData& surfaceCreateInfo, bool createProtected, bool throwOnSwapchainExist, bool throwOnDeviceChange);
 
 private:

@@ -127,6 +127,7 @@
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.StandardNonVulkanVersion.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.SurfaceData.cpp" />
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.VulkanVersionData.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandBuffer.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommandPoolList.Internal.cpp" />
@@ -220,6 +221,7 @@
     <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.DataFormatFlags.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.ImageLayouts.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Common\VulkanSimplifiers.Common.ImageUsageFlags.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.CommandBuffer.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.CommandPoolList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.CommandPool.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\VulkanSimplifiers.DeviceDescriptorData.Internal.ixx" />
@@ -250,7 +252,9 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.PipelineStageFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPool.Data.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.IRCommandPool.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.IRCommandPool.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.NIRCommandPool.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.NIRCommandPool.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPoolList.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPoolList.ixx" />

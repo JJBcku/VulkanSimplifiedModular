@@ -1,6 +1,6 @@
 export module RunProgram.CreateDeviceDependent;
 
-import std.compat;
+import std;
 
 import VulkanData;
 import VulkanData.Basic;
@@ -13,6 +13,8 @@ import VulkanSimplifiers.DeviceList;
 import VulkanSimplifiers.LogicalDeviceMain;
 import VulkanSimplifiers.LogicalDeviceCore;
 import VulkanSimplifiers.CommandPoolList;
+import VulkanSimplifiers.NIRCommandPool;
+import VulkanSimplifiers.IRCommandPool;
 
 import VulkanSimplifiers.Common.SurfaceData;
 

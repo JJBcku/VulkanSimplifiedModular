@@ -183,6 +183,14 @@ std::uint32_t LogicalDeviceCoreInternal::GetQueueFamily(size_t queueID) const
 	return _queues[queueID].second;
 }
 
+VkQueue LogicalDeviceCoreInternal::GetQueue(size_t queueID) const
+{
+	if (_queues.size() <= queueID)
+		throw std::runtime_error("LogicalDeviceCoreInternal::GetQueue Error: Program tried to read past the queues list!");
+
+	return _queues[queueID].first;
+}
+
 void LogicalDeviceCoreInternal::CreateSwapchain(IDObject<WindowPointer> windowID, const SwapchainCreationData& surfaceCreateInfo, bool createProtected,
 	bool throwOnSwapchainExist, bool throwOnDeviceChange)
 {

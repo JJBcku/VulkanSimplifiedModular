@@ -29,8 +29,8 @@ IDObject<NIRCommandPoolInternal> CommandPoolListInternal::AddCommandPoolWithoutI
 	if (vkCreateCommandPool(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 		throw std::runtime_error("CommandPoolListInternal::AddCommandPoolWithoutIndividualReset Error: Program failed to create a command pool!");
 
-	return _noIndividualResetCommandPoolList.AddObject(NIRCommandPoolInternal(_device, add, primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity),
-		addOnReserve);
+	return _noIndividualResetCommandPoolList.AddObject(NIRCommandPoolInternal(_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity,
+		secondaryBufferListInitialCapacity), addOnReserve);
 }
 
 IDObject<IRCommandPoolInternal> CommandPoolListInternal::AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
@@ -49,8 +49,8 @@ IDObject<IRCommandPoolInternal> CommandPoolListInternal::AddCommandPoolWithIndiv
 	if (vkCreateCommandPool(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 		throw std::runtime_error("CommandPoolListInternal::AddCommandPoolWithIndividualReset Error: Program failed to create a command pool!");
 
-	return _individualResetCommandPoolList.AddObject(IRCommandPoolInternal(_device, add, primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity),
-		addOnReserve);
+	return _individualResetCommandPoolList.AddObject(IRCommandPoolInternal(_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity,
+		secondaryBufferListInitialCapacity), addOnReserve);
 }
 
 NIRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithoutIndividualResetSimplifier(IDObject<NIRCommandPoolInternal> poolID)

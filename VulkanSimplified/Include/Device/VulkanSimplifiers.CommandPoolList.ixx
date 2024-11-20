@@ -9,6 +9,8 @@ import VulkanSimplifiers.CommandPool.Data;
 import VulkanSimplifiers.NIRCommandPool;
 import VulkanSimplifiers.IRCommandPool;
 
+import VulkanSimplifiers.CommandPool.Internal;
+
 export class CommandPoolListSimplifier
 {
 public:

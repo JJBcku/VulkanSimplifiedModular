@@ -759,5 +759,35 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.NIRCommandPool.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.PrimaryNIRCommandBuffer.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.CommonCommandBuffer.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommonCommandBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.PrimaryNIRCommandBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.SecondaryNIRCommandBuffer.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.SecondaryNIRCommandBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.PrimaryIRCommandBuffer.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.PrimaryIRCommandBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\VulkanSimplifiers.SecondaryIRCommandBuffer.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.SecondaryIRCommandBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

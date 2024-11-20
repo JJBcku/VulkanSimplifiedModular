@@ -24,6 +24,12 @@ public:
 	std::vector<IDObject<PrimaryNIRCommandBufferInternal>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
 	std::vector<IDObject<SecondaryNIRCommandBufferInternal>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
 
+	PrimaryNIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID);
+	SecondaryNIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID);
+
+	const PrimaryNIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID) const;
+	const SecondaryNIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID) const;
+
 private:
 	VkDevice _device;
 	VkCommandPool _commandPool;
@@ -48,6 +54,12 @@ public:
 
 	std::vector<IDObject<PrimaryIRCommandBufferInternal>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
 	std::vector<IDObject<SecondaryIRCommandBufferInternal>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
+
+	PrimaryIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID);
+	SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID);
+
+	const PrimaryIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID) const;
+	const SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID) const;
 
 private:
 	VkDevice _device;

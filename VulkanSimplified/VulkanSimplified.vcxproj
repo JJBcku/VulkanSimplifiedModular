@@ -158,6 +158,11 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.MemoryObjectsList.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.MemoryObjectsList.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.NIRCommandPool.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.CommonCommandBuffer.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.PrimaryIRCommandBuffer.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.PrimaryNIRCommandBuffer.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.SecondaryIRCommandBuffer.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.SecondaryNIRCommandBuffer.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ShaderList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.LogicalDeviceMain.Internal.cpp" />
@@ -295,6 +300,11 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.MemoryObjectsList.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.MemoryObjectsList.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.MemoryObjectsList.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.CommonCommandBuffer.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.PrimaryIRCommandBuffer.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.PrimaryNIRCommandBuffer.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.SecondaryIRCommandBuffer.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.SecondaryNIRCommandBuffer.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.ShaderList.CreationData.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceCore.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.LogicalDeviceCore.ixx" />

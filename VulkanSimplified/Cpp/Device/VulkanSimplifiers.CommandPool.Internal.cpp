@@ -96,6 +96,26 @@ std::vector<IDObject<SecondaryNIRCommandBufferInternal>> NIRCommandPoolInternal:
 	return ret;
 }
 
+PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID)
+{
+	return _primaryBufferList.GetObject(bufferID);
+}
+
+SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID)
+{
+	return _secondaryBufferList.GetObject(bufferID);
+}
+
+const PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID) const
+{
+	return _primaryBufferList.GetConstObject(bufferID);
+}
+
+const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID) const
+{
+	return _secondaryBufferList.GetConstObject(bufferID);
+}
+
 IRCommandPoolInternal::IRCommandPoolInternal(VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity,
 	size_t secondaryBufferListInitialCapacity) : _device(device), _commandPool(commandPool), _queue(queue),
 	_primaryBufferList(primaryBufferListInitialCapacity), _secondaryBufferList(secondaryBufferListInitialCapacity)
@@ -186,4 +206,24 @@ std::vector<IDObject<SecondaryIRCommandBufferInternal>> IRCommandPoolInternal::A
 	}
 
 	return ret;
+}
+
+PrimaryIRCommandBufferInternal& IRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID)
+{
+	return _primaryBufferList.GetObject(bufferID);
+}
+
+SecondaryIRCommandBufferInternal& IRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID)
+{
+	return _secondaryBufferList.GetObject(bufferID);
+}
+
+const PrimaryIRCommandBufferInternal& IRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID) const
+{
+	return _primaryBufferList.GetConstObject(bufferID);
+}
+
+const SecondaryIRCommandBufferInternal& IRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID) const
+{
+	return _secondaryBufferList.GetConstObject(bufferID);
 }

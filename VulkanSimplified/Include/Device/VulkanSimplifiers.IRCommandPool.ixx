@@ -6,6 +6,9 @@ import ListTemplates.IDObject;
 import VulkanSimplifiers.CommandPool.Internal;
 import VulkanSimplifiers.IRCommandPool.Data;
 
+import VulkanSimplifiers.PrimaryIRCommandBuffer;
+import VulkanSimplifiers.SecondaryIRCommandBuffer;
+
 export class IRCommandPoolSimplifier
 {
 public:
@@ -16,6 +19,12 @@ public:
 
 	std::vector<IDObject<PrimaryIRCommandBufferInternal>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve = 0);
 	std::vector<IDObject<SecondaryIRCommandBufferInternal>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve = 0);
+
+	PrimaryIRCommandBufferSimplifier GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID);
+	SecondaryIRCommandBufferSimplifier GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID);
+
+	const PrimaryIRCommandBufferSimplifier GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID) const;
+	const SecondaryIRCommandBufferSimplifier GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID) const;
 
 private:
 	IRCommandPoolInternal& _internal;

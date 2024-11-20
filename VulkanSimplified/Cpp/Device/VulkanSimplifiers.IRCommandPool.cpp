@@ -17,3 +17,23 @@ std::vector<IDObject<SecondaryIRCommandBufferInternal>> IRCommandPoolSimplifier:
 {
 	return _internal.AllocateSecondaryCommandBuffers(buffersToAllocate, addOnReserve);
 }
+
+PrimaryIRCommandBufferSimplifier IRCommandPoolSimplifier::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID)
+{
+	return _internal.GetPrimaryCommandBufferSimplifier(bufferID);
+}
+
+SecondaryIRCommandBufferSimplifier IRCommandPoolSimplifier::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID)
+{
+	return _internal.GetSecondaryCommandBufferSimplifier(bufferID);
+}
+
+const PrimaryIRCommandBufferSimplifier IRCommandPoolSimplifier::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID) const
+{
+	return _internal.GetPrimaryCommandBufferSimplifier(bufferID);
+}
+
+const SecondaryIRCommandBufferSimplifier IRCommandPoolSimplifier::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID) const
+{
+	return _internal.GetSecondaryCommandBufferSimplifier(bufferID);
+}

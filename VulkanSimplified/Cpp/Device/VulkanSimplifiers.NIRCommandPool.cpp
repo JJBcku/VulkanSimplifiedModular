@@ -17,3 +17,23 @@ std::vector<IDObject<SecondaryNIRCommandBufferInternal>> NIRCommandPoolSimplifie
 {
 	return _internal.AllocateSecondaryCommandBuffers(buffersToAllocate, addOnReserve);
 }
+
+PrimaryNIRCommandBufferSimplifier NIRCommandPoolSimplifier::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID)
+{
+	return _internal.GetPrimaryCommandBufferSimplifier(bufferID);
+}
+
+SecondaryNIRCommandBufferSimplifier NIRCommandPoolSimplifier::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID)
+{
+	return _internal.GetSecondaryCommandBufferSimplifier(bufferID);
+}
+
+const PrimaryNIRCommandBufferSimplifier NIRCommandPoolSimplifier::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID) const
+{
+	return _internal.GetPrimaryCommandBufferSimplifier(bufferID);
+}
+
+const SecondaryNIRCommandBufferSimplifier NIRCommandPoolSimplifier::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID) const
+{
+	return _internal.GetSecondaryCommandBufferSimplifier(bufferID);
+}

@@ -94,19 +94,19 @@ void CreateDeviceDependent(VulkanData& data)
 
 	data.deviceDependent->graphicsCommandPool = commandPoolList.AddCommandPoolWithoutIndividualReset(true, data.instanceDependent->graphicsQueue, 1, 1, 4);
 	auto graphicsPool = commandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
-	//data.deviceDependent->graphicsCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
+	data.deviceDependent->graphicsCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
 
 	if (data.instanceDependent->transferQueue.has_value())
 	{
 		data.deviceDependent->transferCommandPool = commandPoolList.AddCommandPoolWithoutIndividualReset(true, data.instanceDependent->transferQueue.value(), 1, 1, 4);
-		//auto transferPool = commandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->transferCommandPool.value());
-		//data.deviceDependent->transferCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
+		auto transferPool = commandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->transferCommandPool.value());
+		data.deviceDependent->transferCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
 	}
 
 	if (data.instanceDependent->graphicsQueue != data.instanceDependent->presentQueue)
 	{
 		data.deviceDependent->presentCommandPool = commandPoolList.AddCommandPoolWithoutIndividualReset(true, data.instanceDependent->presentQueue, 1, 1, 4);
-		//auto presentPool = commandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->presentCommandPool.value());
-		//data.deviceDependent->presentCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
+		auto presentPool = commandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->presentCommandPool.value());
+		data.deviceDependent->presentCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
 	}
 }

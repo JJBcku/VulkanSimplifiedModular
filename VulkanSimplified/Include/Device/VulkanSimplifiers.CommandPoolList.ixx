@@ -21,16 +21,16 @@ public:
 
 	CommandPoolListSimplifier& operator= (const CommandPoolListSimplifier&) noexcept = delete;
 
-	IDObject<NIRCommandPoolInternal> AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
+	IDObject<std::unique_ptr<NIRCommandPoolInternal>> AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
 		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve);
-	IDObject<IRCommandPoolInternal> AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
+	IDObject<std::unique_ptr<IRCommandPoolInternal>> AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
 		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve);
 
-	NIRCommandPoolSimplifier GetCommandPoolWithoutIndividualResetSimplifier(IDObject<NIRCommandPoolInternal> poolID);
-	IRCommandPoolSimplifier GetCommandPoolWithIndividualResetSimplifier(IDObject<IRCommandPoolInternal> poolID);
+	NIRCommandPoolSimplifier GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID);
+	IRCommandPoolSimplifier GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID);
 
-	const NIRCommandPoolSimplifier GetCommandPoolWithoutIndividualResetSimplifier(IDObject<NIRCommandPoolInternal> poolID) const;
-	const IRCommandPoolSimplifier GetCommandPoolWithIndividualResetSimplifier(IDObject<IRCommandPoolInternal> poolID) const;
+	const NIRCommandPoolSimplifier GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID) const;
+	const IRCommandPoolSimplifier GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID) const;
 
 private:
 	CommandPoolListInternal& _internal;

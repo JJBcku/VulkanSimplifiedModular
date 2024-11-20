@@ -15,14 +15,14 @@ export struct VulkanDataDeviceDependent
 
 	DataFormatSetIndependentID surfaceFormat;
 
-	IDObject<NIRCommandPoolInternal> graphicsCommandPool;
-	std::vector<IDObject<PrimaryNIRCommandBufferInternal>> graphicsCommandBuffers;
+	IDObject<std::unique_ptr<NIRCommandPoolInternal>> graphicsCommandPool;
+	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> graphicsCommandBuffers;
 
-	std::optional<IDObject<NIRCommandPoolInternal>> transferCommandPool;
-	std::vector<IDObject<PrimaryNIRCommandBufferInternal>> transferCommandBuffers;
+	std::optional<IDObject<std::unique_ptr<NIRCommandPoolInternal>>> transferCommandPool;
+	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> transferCommandBuffers;
 
-	std::optional<IDObject<NIRCommandPoolInternal>> presentCommandPool;
-	std::vector<IDObject<PrimaryNIRCommandBufferInternal>> presentCommandBuffers;
+	std::optional<IDObject<std::unique_ptr<NIRCommandPoolInternal>>> presentCommandPool;
+	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> presentCommandBuffers;
 
 	VulkanDataDeviceDependent() = default;
 };

@@ -21,14 +21,14 @@ public:
 	NIRCommandPoolInternal& operator=(const NIRCommandPoolInternal&) noexcept = delete;
 	NIRCommandPoolInternal& operator=(NIRCommandPoolInternal&& rhs) noexcept;
 
-	std::vector<IDObject<PrimaryNIRCommandBufferInternal>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
-	std::vector<IDObject<SecondaryNIRCommandBufferInternal>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
+	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
+	std::vector<IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
 
-	PrimaryNIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID);
-	SecondaryNIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID);
+	PrimaryNIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> bufferID);
+	SecondaryNIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> bufferID);
 
-	const PrimaryNIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID) const;
-	const SecondaryNIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID) const;
+	const PrimaryNIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> bufferID) const;
+	const SecondaryNIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> bufferID) const;
 
 private:
 	VkDevice _device;
@@ -36,8 +36,8 @@ private:
 
 	VkQueue _queue;
 
-	UnsortedList<PrimaryNIRCommandBufferInternal> _primaryBufferList;
-	UnsortedList<SecondaryNIRCommandBufferInternal> _secondaryBufferList;
+	UnsortedList<std::unique_ptr<PrimaryNIRCommandBufferInternal>> _primaryBufferList;
+	UnsortedList<std::unique_ptr<SecondaryNIRCommandBufferInternal>> _secondaryBufferList;
 };
 
 export class IRCommandPoolInternal
@@ -52,14 +52,14 @@ public:
 	IRCommandPoolInternal& operator=(const IRCommandPoolInternal&) noexcept = delete;
 	IRCommandPoolInternal& operator=(IRCommandPoolInternal&& rhs) noexcept;
 
-	std::vector<IDObject<PrimaryIRCommandBufferInternal>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
-	std::vector<IDObject<SecondaryIRCommandBufferInternal>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
+	std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
+	std::vector<IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
 
-	PrimaryIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID);
-	SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID);
+	PrimaryIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> bufferID);
+	SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID);
 
-	const PrimaryIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID) const;
-	const SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID) const;
+	const PrimaryIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> bufferID) const;
+	const SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID) const;
 
 private:
 	VkDevice _device;
@@ -67,6 +67,6 @@ private:
 
 	VkQueue _queue;
 
-	UnsortedList<PrimaryIRCommandBufferInternal> _primaryBufferList;
-	UnsortedList<SecondaryIRCommandBufferInternal> _secondaryBufferList;
+	UnsortedList<std::unique_ptr<PrimaryIRCommandBufferInternal>> _primaryBufferList;
+	UnsortedList<std::unique_ptr<SecondaryIRCommandBufferInternal>> _secondaryBufferList;
 };

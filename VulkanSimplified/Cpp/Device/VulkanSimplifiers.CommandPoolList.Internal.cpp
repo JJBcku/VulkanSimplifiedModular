@@ -14,7 +14,7 @@ CommandPoolListInternal::~CommandPoolListInternal()
 {
 }
 
-IDObject<NIRCommandPoolInternal> CommandPoolListInternal::AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
+IDObject<std::unique_ptr<NIRCommandPoolInternal>> CommandPoolListInternal::AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
 	size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve)
 {
 	VkCommandPoolCreateInfo createInfo{};
@@ -29,11 +29,11 @@ IDObject<NIRCommandPoolInternal> CommandPoolListInternal::AddCommandPoolWithoutI
 	if (vkCreateCommandPool(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 		throw std::runtime_error("CommandPoolListInternal::AddCommandPoolWithoutIndividualReset Error: Program failed to create a command pool!");
 
-	return _noIndividualResetCommandPoolList.AddObject(NIRCommandPoolInternal(_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity,
+	return _noIndividualResetCommandPoolList.AddObject(std::make_unique<NIRCommandPoolInternal>(_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity,
 		secondaryBufferListInitialCapacity), addOnReserve);
 }
 
-IDObject<IRCommandPoolInternal> CommandPoolListInternal::AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
+IDObject<std::unique_ptr<IRCommandPoolInternal>> CommandPoolListInternal::AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
 	size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve)
 {
 	VkCommandPoolCreateInfo createInfo{};
@@ -49,26 +49,26 @@ IDObject<IRCommandPoolInternal> CommandPoolListInternal::AddCommandPoolWithIndiv
 	if (vkCreateCommandPool(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 		throw std::runtime_error("CommandPoolListInternal::AddCommandPoolWithIndividualReset Error: Program failed to create a command pool!");
 
-	return _individualResetCommandPoolList.AddObject(IRCommandPoolInternal(_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity,
+	return _individualResetCommandPoolList.AddObject(std::make_unique<IRCommandPoolInternal>(_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity,
 		secondaryBufferListInitialCapacity), addOnReserve);
 }
 
-NIRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithoutIndividualResetSimplifier(IDObject<NIRCommandPoolInternal> poolID)
+NIRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID)
 {
-	return _noIndividualResetCommandPoolList.GetObject(poolID);
+	return *_noIndividualResetCommandPoolList.GetObject(poolID);
 }
 
-IRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithIndividualResetSimplifier(IDObject<IRCommandPoolInternal> poolID)
+IRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID)
 {
-	return _individualResetCommandPoolList.GetObject(poolID);
+	return *_individualResetCommandPoolList.GetObject(poolID);
 }
 
-const NIRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithoutIndividualResetSimplifier(IDObject<NIRCommandPoolInternal> poolID) const
+const NIRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID) const
 {
-	return _noIndividualResetCommandPoolList.GetConstObject(poolID);
+	return *_noIndividualResetCommandPoolList.GetConstObject(poolID);
 }
 
-const IRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithIndividualResetSimplifier(IDObject<IRCommandPoolInternal> poolID) const
+const IRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID) const
 {
-	return _individualResetCommandPoolList.GetConstObject(poolID);
+	return *_individualResetCommandPoolList.GetConstObject(poolID);
 }

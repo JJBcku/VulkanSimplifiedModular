@@ -40,9 +40,9 @@ NIRCommandPoolInternal& NIRCommandPoolInternal::operator=(NIRCommandPoolInternal
 	return *this;
 }
 
-std::vector<IDObject<PrimaryNIRCommandBufferInternal>> NIRCommandPoolInternal::AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
+std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> NIRCommandPoolInternal::AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
 {
-	std::vector<IDObject<PrimaryNIRCommandBufferInternal>> ret;
+	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> ret;
 
 	if (buffersToAllocate == 0)
 		throw std::runtime_error("NIRCommandPoolInternal::AllocatePrimaryCommandBuffers Error: Program tried to allocate zero buffers!");
@@ -62,15 +62,15 @@ std::vector<IDObject<PrimaryNIRCommandBufferInternal>> NIRCommandPoolInternal::A
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_primaryBufferList.AddObject(PrimaryNIRCommandBufferInternal(_device, buffer, _queue), addOnReserve));
+		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryNIRCommandBufferInternal>(_device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
 }
 
-std::vector<IDObject<SecondaryNIRCommandBufferInternal>> NIRCommandPoolInternal::AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
+std::vector<IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>>> NIRCommandPoolInternal::AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
 {
-	std::vector<IDObject<SecondaryNIRCommandBufferInternal>> ret;
+	std::vector<IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>>> ret;
 
 	if (buffersToAllocate == 0)
 		throw std::runtime_error("NIRCommandPoolInternal::AllocateSecondaryCommandBuffers Error: Program tried to allocate zero buffers!");
@@ -90,30 +90,30 @@ std::vector<IDObject<SecondaryNIRCommandBufferInternal>> NIRCommandPoolInternal:
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_secondaryBufferList.AddObject(SecondaryNIRCommandBufferInternal(_device, buffer, _queue), addOnReserve));
+		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryNIRCommandBufferInternal>(_device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
 }
 
-PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID)
+PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> bufferID)
 {
-	return _primaryBufferList.GetObject(bufferID);
+	return *_primaryBufferList.GetObject(bufferID);
 }
 
-SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID)
+SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> bufferID)
 {
-	return _secondaryBufferList.GetObject(bufferID);
+	return *_secondaryBufferList.GetObject(bufferID);
 }
 
-const PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryNIRCommandBufferInternal> bufferID) const
+const PrimaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> bufferID) const
 {
-	return _primaryBufferList.GetConstObject(bufferID);
+	return *_primaryBufferList.GetConstObject(bufferID);
 }
 
-const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryNIRCommandBufferInternal> bufferID) const
+const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> bufferID) const
 {
-	return _secondaryBufferList.GetConstObject(bufferID);
+	return *_secondaryBufferList.GetConstObject(bufferID);
 }
 
 IRCommandPoolInternal::IRCommandPoolInternal(VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity,
@@ -152,9 +152,9 @@ IRCommandPoolInternal& IRCommandPoolInternal::operator=(IRCommandPoolInternal&& 
 	return *this;
 }
 
-std::vector<IDObject<PrimaryIRCommandBufferInternal>> IRCommandPoolInternal::AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
+std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> IRCommandPoolInternal::AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
 {
-	std::vector<IDObject<PrimaryIRCommandBufferInternal>> ret;
+	std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> ret;
 
 	if (buffersToAllocate == 0)
 		throw std::runtime_error("IRCommandPoolInternal::AllocatePrimaryCommandBuffers Error: Program tried to allocate zero buffers!");
@@ -174,15 +174,15 @@ std::vector<IDObject<PrimaryIRCommandBufferInternal>> IRCommandPoolInternal::All
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_primaryBufferList.AddObject(PrimaryIRCommandBufferInternal(_device, buffer, _queue), addOnReserve));
+		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryIRCommandBufferInternal>(_device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
 }
 
-std::vector<IDObject<SecondaryIRCommandBufferInternal>> IRCommandPoolInternal::AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
+std::vector<IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>>> IRCommandPoolInternal::AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
 {
-	std::vector<IDObject<SecondaryIRCommandBufferInternal>> ret;
+	std::vector<IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>>> ret;
 
 	if (buffersToAllocate == 0)
 		throw std::runtime_error("IRCommandPoolInternal::AllocateSecondaryCommandBuffers Error: Program tried to allocate zero buffers!");
@@ -202,28 +202,28 @@ std::vector<IDObject<SecondaryIRCommandBufferInternal>> IRCommandPoolInternal::A
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_secondaryBufferList.AddObject(SecondaryIRCommandBufferInternal(_device, buffer, _queue), addOnReserve));
+		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryIRCommandBufferInternal>(_device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
 }
 
-PrimaryIRCommandBufferInternal& IRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID)
+PrimaryIRCommandBufferInternal& IRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> bufferID)
 {
-	return _primaryBufferList.GetObject(bufferID);
+	return *_primaryBufferList.GetObject(bufferID);
 }
 
-SecondaryIRCommandBufferInternal& IRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID)
+SecondaryIRCommandBufferInternal& IRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID)
 {
-	return _secondaryBufferList.GetObject(bufferID);
+	return *_secondaryBufferList.GetObject(bufferID);
 }
 
-const PrimaryIRCommandBufferInternal& IRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<PrimaryIRCommandBufferInternal> bufferID) const
+const PrimaryIRCommandBufferInternal& IRCommandPoolInternal::GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> bufferID) const
 {
-	return _primaryBufferList.GetConstObject(bufferID);
+	return *_primaryBufferList.GetConstObject(bufferID);
 }
 
-const SecondaryIRCommandBufferInternal& IRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<SecondaryIRCommandBufferInternal> bufferID) const
+const SecondaryIRCommandBufferInternal& IRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID) const
 {
-	return _secondaryBufferList.GetConstObject(bufferID);
+	return *_secondaryBufferList.GetConstObject(bufferID);
 }

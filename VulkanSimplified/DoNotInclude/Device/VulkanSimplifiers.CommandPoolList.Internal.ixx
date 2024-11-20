@@ -24,22 +24,22 @@ public:
 	CommandPoolListInternal& operator=(const CommandPoolListInternal&) noexcept = delete;
 	CommandPoolListInternal& operator=(CommandPoolListInternal&&) noexcept = delete;
 
-	IDObject<NIRCommandPoolInternal> AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
+	IDObject<std::unique_ptr<NIRCommandPoolInternal>> AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
 		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve);
-	IDObject<IRCommandPoolInternal> AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
+	IDObject<std::unique_ptr<IRCommandPoolInternal>> AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
 		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve);
 
-	NIRCommandPoolInternal& GetCommandPoolWithoutIndividualResetSimplifier(IDObject<NIRCommandPoolInternal> poolID);
-	IRCommandPoolInternal& GetCommandPoolWithIndividualResetSimplifier(IDObject<IRCommandPoolInternal> poolID);
+	NIRCommandPoolInternal& GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID);
+	IRCommandPoolInternal& GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID);
 
-	const NIRCommandPoolInternal& GetCommandPoolWithoutIndividualResetSimplifier(IDObject<NIRCommandPoolInternal> poolID) const;
-	const IRCommandPoolInternal& GetCommandPoolWithIndividualResetSimplifier(IDObject<IRCommandPoolInternal> poolID) const;
+	const NIRCommandPoolInternal& GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID) const;
+	const IRCommandPoolInternal& GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID) const;
 
 private:
 	const LogicalDeviceCoreInternal& _deviceCore;
 
 	VkDevice _device;
 
-	UnsortedList<NIRCommandPoolInternal> _noIndividualResetCommandPoolList;
-	UnsortedList<IRCommandPoolInternal> _individualResetCommandPoolList;
+	UnsortedList<std::unique_ptr<NIRCommandPoolInternal>> _noIndividualResetCommandPoolList;
+	UnsortedList<std::unique_ptr<IRCommandPoolInternal>> _individualResetCommandPoolList;
 };

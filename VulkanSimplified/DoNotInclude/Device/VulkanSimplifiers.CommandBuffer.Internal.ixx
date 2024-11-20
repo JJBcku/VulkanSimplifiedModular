@@ -4,6 +4,8 @@ module;
 
 export module VulkanSimplifiers.CommandBuffer.Internal;
 
+import VulkanSimplifiers.CommonCommandBuffer.Data;
+
 export class AutoCleanUpCommandBuffer
 {
 public:
@@ -15,6 +17,9 @@ public:
 
 	AutoCleanUpCommandBuffer& operator=(const AutoCleanUpCommandBuffer&) noexcept = default;
 	AutoCleanUpCommandBuffer& operator=(AutoCleanUpCommandBuffer&& rhs) noexcept = default;
+
+	void BeginRecording(CommandBufferUsage usage);
+	void EndRecording();
 
 protected:
 	VkDevice _device;

@@ -257,6 +257,7 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.PipelineStageFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.CommandPool.Data.ixx" />
+    <ClCompile Include="Include\Device\VulkanSimplifiers.CommonCommandBuffer.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.IRCommandPool.Data.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.IRCommandPool.ixx" />
     <ClCompile Include="Include\Device\VulkanSimplifiers.NIRCommandPool.Data.ixx" />

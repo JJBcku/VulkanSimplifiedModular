@@ -15,9 +15,14 @@ void RunProgram()
     CreatePipeline(data, 800U, 600U);
     CreatePipeline(data, 1200U, 900U);
 
+    size_t frameNumber = 0;
+
     while (!settings.GetQuit())
     {
         HandleEvents(data);
-        std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(1));
+        RunFrame(data, frameNumber);
+
+        if (++frameNumber >= data.deviceDependent->imageAmount)
+            frameNumber = 0;
     }
 }

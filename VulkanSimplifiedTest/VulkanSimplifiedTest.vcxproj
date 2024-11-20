@@ -118,6 +118,8 @@
     <ClCompile Include="RunProgram.EventHandling.cpp" />
     <ClCompile Include="RunProgram.EventHandling.ixx" />
     <ClCompile Include="RunProgram.ixx" />
+    <ClCompile Include="RunProgram.RunFrame.cpp" />
+    <ClCompile Include="RunProgram.RunFrame.ixx" />
     <ClCompile Include="VulkanData.Basic.ixx" />
     <ClCompile Include="VulkanData.cpp" />
     <ClCompile Include="VulkanData.DeviceDependent.ixx" />

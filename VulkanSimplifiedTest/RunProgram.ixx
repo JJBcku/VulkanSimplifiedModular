@@ -14,4 +14,6 @@ import RunProgram.CreateRenderPassData;
 import RunProgram.CreatePipelineLayout;
 import RunProgram.CreatePipeline;
 
+import RunProgram.RunFrame;
+
 export void RunProgram();

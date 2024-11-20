@@ -15,6 +15,8 @@ export struct VulkanDataDeviceDependent
 
 	DataFormatSetIndependentID surfaceFormat;
 
+	size_t imageAmount;
+
 	IDObject<std::unique_ptr<NIRCommandPoolInternal>> graphicsCommandPool;
 	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> graphicsCommandBuffers;
 

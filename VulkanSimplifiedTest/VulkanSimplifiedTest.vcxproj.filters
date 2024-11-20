@@ -108,5 +108,11 @@
     <ClCompile Include="VulkanData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RunProgram.RunFrame.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.RunFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

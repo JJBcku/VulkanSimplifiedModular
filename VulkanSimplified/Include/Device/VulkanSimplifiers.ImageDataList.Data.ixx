@@ -3,9 +3,12 @@ export module VulkanSimplifiers.ImageDataList.Data;
 import std;
 export import ListTemplates.IDObject;
 
+export import VulkanSimplifiers.DeviceRenderPassData.Data;
+
 export class AutoCleanupImageView;
 export class AutoCleanup2DSimpleImage;
 export class AutoCleanupMipMapped2DImage;
+export class AutoCleanupFramebuffer;
 
 export enum class ImageIDType : std::uint64_t
 {

@@ -4,9 +4,10 @@ module;
 
 module VulkanSimplifiers.ImageDataList.Internal;
 
-ImageDataListInternal::ImageDataListInternal(const ImageDataCreationData& creationData, const LogicalDeviceCoreInternal& deviceCore, MemoryObjectsListInternal& memoryList,
-	VkDevice device) : _deviceCore(deviceCore), _memoryList(memoryList), _device(device), _singleSampled2DImage(creationData.singleSampled2DImageListInitialCapacity),
-	_singleSampledMipMapped2DImage(creationData.singleSampledMipMapped2DListInitialCapacity)
+ImageDataListInternal::ImageDataListInternal(const ImageDataCreationData& creationData, const LogicalDeviceCoreInternal& deviceCore, const DeviceRenderPassDataInternal& renderPassData,
+	MemoryObjectsListInternal& memoryList, VkDevice device) : _deviceCore(deviceCore), _renderPassData(renderPassData), _memoryList(memoryList), _device(device),
+	_singleSampled2DImage(creationData.singleSampled2DImageListInitialCapacity), _singleSampledMipMapped2DImage(creationData.singleSampledMipMapped2DListInitialCapacity),
+	_framebuffersList(creationData.framebuffersListInitialCapacity)
 {
 }
 
@@ -251,6 +252,54 @@ VkImageView ImageDataListInternal::GetImageView(IDObject<AutoCleanupMipMapped2DI
 	auto& imageData = _singleSampledMipMapped2DImage.GetConstObject(imageID);
 
 	return imageData.GetImageView(viewID);
+}
+
+IDObject<AutoCleanupFramebuffer> ImageDataListInternal::AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
+	const std::vector<std::pair<ImageIDUnion, IDObject<AutoCleanupImageView>>>& attachmentsList, std::uint32_t width, std::uint32_t height, std::uint32_t layers,
+	size_t addOnReserve)
+{
+	VkFramebufferCreateInfo createInfo{};
+	createInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+	createInfo.renderPass = _renderPassData.GetRenderPass(renderPass);
+
+	std::vector<VkImageView> imageViews;
+	imageViews.reserve(attachmentsList.size());
+
+	for (auto& attachmentData : attachmentsList)
+	{
+		auto& imageID = attachmentData.first;
+
+		switch (imageID.type)
+		{
+		case ImageIDType::SIMPLE_2D:
+			imageViews.push_back(GetImageView(imageID.simple2D.ID, attachmentData.second));
+			break;
+		case ImageIDType::MIPMAPPED_2D:
+			imageViews.push_back(GetImageView(imageID.mipMapped2D.ID, attachmentData.second));
+			break;
+		case ImageIDType::UNKNOWN:
+		default:
+			throw std::runtime_error("ImageDataListInternal::AddFramebuffer Error: Program was given an erroneous value for a attachments image ID type!");
+		}
+	}
+
+	createInfo.attachmentCount = static_cast<std::uint32_t>(imageViews.size());
+	createInfo.pAttachments = imageViews.data();
+	createInfo.width = width;
+	createInfo.height = height;
+	createInfo.layers = layers;
+
+	VkFramebuffer add = VK_NULL_HANDLE;
+
+	if (vkCreateFramebuffer(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
+		throw std::runtime_error("ImageDataListInternal::AddFramebuffer Error: Program failed to create a framebuffer!");
+
+	return _framebuffersList.AddObject(AutoCleanupFramebuffer(_device, add), addOnReserve);
+}
+
+bool ImageDataListInternal::RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound)
+{
+	return _framebuffersList.RemoveObject(framebufferID, throwOnIDNotFound);
 }
 
 std::uint32_t ImageDataListInternal::CalculateMipmapLevelsFromBiggest3D(std::uint32_t width, std::uint32_t height, std::uint32_t depth) const

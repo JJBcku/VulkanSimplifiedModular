@@ -9,6 +9,7 @@ import ListTemplates.UnsortedList;
 
 import VulkanSimplifiers.ImageDataList.CreationData;
 import VulkanSimplifiers.ImageDataList.InternalData;
+import VulkanSimplifiers.ImageDataList.Data;
 
 import VulkanSimplifiers.Common.DataFormatFlags.Internal;
 import VulkanSimplifiers.Common.ImageUsageFlags.Internal;
@@ -16,10 +17,13 @@ import VulkanSimplifiers.Common.ImageUsageFlags.Internal;
 import VulkanSimplifiers.LogicalDeviceCore.Internal;
 import VulkanSimplifiers.MemoryObjectsList.Internal;
 
+import VulkanSimplifiers.DeviceRenderPassData.Internal;
+
 export class ImageDataListInternal
 {
 public:
-	ImageDataListInternal(const ImageDataCreationData& creationData, const LogicalDeviceCoreInternal& deviceCore, MemoryObjectsListInternal& memoryList, VkDevice device);
+	ImageDataListInternal(const ImageDataCreationData& creationData, const LogicalDeviceCoreInternal& deviceCore, const DeviceRenderPassDataInternal& renderPassData,
+		MemoryObjectsListInternal& memoryList, VkDevice device);
 	~ImageDataListInternal();
 
 	ImageDataListInternal& operator=(const ImageDataListInternal&) noexcept = delete;
@@ -53,13 +57,22 @@ public:
 	VkImageView GetImageView(IDObject<AutoCleanup2DSimpleImage> imageID, IDObject<AutoCleanupImageView> viewID) const;
 	VkImageView GetImageView(IDObject<AutoCleanupMipMapped2DImage> imageID, IDObject<AutoCleanupImageView> viewID) const;
 
+	IDObject<AutoCleanupFramebuffer> AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
+		const std::vector<std::pair<ImageIDUnion, IDObject<AutoCleanupImageView>>>& attachmentsList, std::uint32_t width, std::uint32_t height, std::uint32_t layers,
+		size_t addOnReserve);
+
+	bool RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound);
+
 private:
 	const LogicalDeviceCoreInternal& _deviceCore;
+	const DeviceRenderPassDataInternal& _renderPassData;
 	MemoryObjectsListInternal& _memoryList;
 	VkDevice _device;
 
 	UnsortedList<AutoCleanup2DSimpleImage> _singleSampled2DImage;
 	UnsortedList<AutoCleanupMipMapped2DImage> _singleSampledMipMapped2DImage;
+
+	UnsortedList<AutoCleanupFramebuffer> _framebuffersList;
 
 	std::uint32_t CalculateMipmapLevelsFromBiggest3D(std::uint32_t width, std::uint32_t height, std::uint32_t depth) const;
 	std::uint32_t CalculateMipmapLevelsFromBiggest2D(std::uint32_t width, std::uint32_t height) const;

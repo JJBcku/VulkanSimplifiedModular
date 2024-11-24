@@ -633,7 +633,7 @@
     <ClCompile Include="Include\Device\VulkanSimplifiers.ImageDataList.CreationData.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageData.CreationData.cpp">
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.CreationData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.Internal.cpp">

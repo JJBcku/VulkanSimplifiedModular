@@ -45,6 +45,12 @@ public:
 	IDObject<AutoCleanupImageView> AddImageView(IDObject<AutoCleanup2DSimpleImage> imageID, size_t addOnReserve = 0);
 	IDObject<AutoCleanupImageView> AddImageView(IDObject<AutoCleanupMipMapped2DImage> imageID, std::uint32_t baseMipLevel, std::uint32_t levelCount, size_t addOnReserve = 0);
 
+	IDObject<AutoCleanupFramebuffer> AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
+		const std::vector<std::pair<ImageIDUnion, IDObject<AutoCleanupImageView>>>& attachmentsList, std::uint32_t width, std::uint32_t height, std::uint32_t layers,
+		size_t addOnReserve = 0);
+
+	bool RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound = true);
+
 private:
 	ImageDataListInternal& _internal;
 };

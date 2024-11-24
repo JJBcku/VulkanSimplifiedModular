@@ -146,7 +146,7 @@
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceRenderPassData.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceRenderPassData.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.DeviceRenderPassData.InternalData.cpp" />
-    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageData.CreationData.cpp" />
+    <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.Data.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.Internal.cpp" />
     <ClCompile Include="Cpp\Device\VulkanSimplifiers.ImageDataList.cpp" />

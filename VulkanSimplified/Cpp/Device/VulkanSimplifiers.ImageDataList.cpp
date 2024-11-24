@@ -92,3 +92,14 @@ IDObject<AutoCleanupImageView> ImageDataListSimplifier::AddImageView(IDObject<Au
 {
 	return _internal.AddImageView(imageID, baseMipLevel, levelCount, addOnReserve);
 }
+
+IDObject<AutoCleanupFramebuffer> ImageDataListSimplifier::AddFramebuffer(IDObject<AutoCleanupRenderPass> renderPass,
+	const std::vector<std::pair<ImageIDUnion, IDObject<AutoCleanupImageView>>>& attachmentsList, std::uint32_t width, std::uint32_t height, std::uint32_t layers, size_t addOnReserve)
+{
+	return _internal.AddFramebuffer(renderPass, attachmentsList, width, height, layers, addOnReserve);
+}
+
+bool ImageDataListSimplifier::RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound)
+{
+	return _internal.RemoveFramebuffer(framebufferID, throwOnIDNotFound);
+}

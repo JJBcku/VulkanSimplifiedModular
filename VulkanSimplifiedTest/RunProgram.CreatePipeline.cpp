@@ -81,6 +81,7 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 	{
 		if (attachments.has_value())
 		{
+			deviceImageList.RemoveFramebuffer(attachments.value().framebuffer, true);
 			deviceImageList.RemoveSimple2DImage(attachments.value().colorAttachmentImage, true);
 			memoryList.FreeMemory(attachments.value().imageMemory, true);
 		}
@@ -110,5 +111,12 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 		deviceImageList.BindImage(attachmentData.colorAttachmentImage, attachmentData.imageMemory);
 
 		attachmentData.colorAttachmentImageView = deviceImageList.AddImageView(attachmentData.colorAttachmentImage);
+
+		std::vector<std::pair<ImageIDUnion, IDObject<AutoCleanupImageView>>> imageViewsIDs(1, {});
+		imageViewsIDs[0].first.type = ImageIDType::SIMPLE_2D;
+		imageViewsIDs[0].first.simple2D.ID = attachmentData.colorAttachmentImage;
+		imageViewsIDs[0].second = attachmentData.colorAttachmentImageView;
+
+		attachmentData.framebuffer = deviceImageList.AddFramebuffer(data.renderPassData->renderPass, imageViewsIDs, width, height, 1U);
 	}
 }

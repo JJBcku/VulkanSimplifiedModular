@@ -27,6 +27,8 @@ export struct VulkanAttachmentData
 	IDObject<AutoCleanup2DSimpleImage> colorAttachmentImage;
 	IDObject<AutoCleanupImageView> colorAttachmentImageView;
 
+	IDObject<AutoCleanupFramebuffer> framebuffer;
+
 	AllocationFullID imageMemory;
 
 	VulkanAttachmentData();

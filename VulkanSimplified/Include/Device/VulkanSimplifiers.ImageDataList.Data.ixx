@@ -4,7 +4,7 @@ import std;
 export import ListTemplates.IDObject;
 
 export class AutoCleanupImageView;
-export class AutoCleanup2DImage;
+export class AutoCleanup2DSimpleImage;
 export class AutoCleanupMipMapped2DImage;
 
 export enum class ImageIDType : std::uint64_t
@@ -21,7 +21,7 @@ export union ImageIDUnion
 	struct
 	{
 		ImageIDType type;
-		IDObject<AutoCleanup2DImage> ID;
+		IDObject<AutoCleanup2DSimpleImage> ID;
 	} simple2D;
 
 	struct

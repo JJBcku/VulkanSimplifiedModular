@@ -81,7 +81,7 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 	{
 		if (attachments.has_value())
 		{
-			deviceImageList.RemoveSingleSampled2DImage(attachments.value().colorAttachmentImage, true);
+			deviceImageList.RemoveSimple2DImage(attachments.value().colorAttachmentImage, true);
 			memoryList.FreeMemory(attachments.value().imageMemory, true);
 		}
 		else
@@ -91,9 +91,9 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 
 		auto& attachmentData = attachments.value();
 
-		ImageUsageFlags usageFlags = ImageUsageFlagBits::IMAGE_USAGE_COLOR_ATTACHMENT || ImageUsageFlagBits::IMAGE_USAGE_TRANSFER_SRC;
+		ImageUsageFlags usageFlags = ImageUsageFlagBits::IMAGE_USAGE_COLOR_ATTACHMENT | ImageUsageFlagBits::IMAGE_USAGE_TRANSFER_SRC;
 
-		attachmentData.colorAttachmentImage = deviceImageList.AddSingleSampled2DImage(width, height, data.deviceDependent->surfaceFormat, usageFlags, {}, false);
+		attachmentData.colorAttachmentImage = deviceImageList.AddSimple2DImage(width, height, data.deviceDependent->surfaceFormat, usageFlags, {}, false);
 		attachmentData.width = width;
 		attachmentData.height = height;
 
@@ -108,5 +108,7 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 
 		attachmentData.imageMemory = memoryList.AllocateMemory(allocationSize, 4, acceptableMemoryTypes, memoryTypeMask);
 		deviceImageList.BindImage(attachmentData.colorAttachmentImage, attachmentData.imageMemory);
+
+		attachmentData.colorAttachmentImageView = deviceImageList.AddImageView(attachmentData.colorAttachmentImage);
 	}
 }

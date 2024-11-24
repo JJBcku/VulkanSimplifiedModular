@@ -61,6 +61,8 @@ protected:
 	AutoCleanupImage& operator=(const AutoCleanupImage&) noexcept = delete;
 	AutoCleanupImage& operator=(AutoCleanupImage&& rhs) noexcept;
 
+	IDObject<AutoCleanupImageView> AddImageView(VkComponentMapping componentMapping, VkImageSubresourceRange subresourceRange, VkImageViewType viewType, size_t addOnReserve);
+
 private:
 	VkDevice _device;
 	VkImage _image;
@@ -89,13 +91,27 @@ public:
 	AutoCleanup2DImage& operator=(const AutoCleanup2DImage&) noexcept = delete;
 	AutoCleanup2DImage& operator=(AutoCleanup2DImage&& rhs) noexcept = default;
 	
-protected:
 	std::uint32_t GetWidth() const;
 	std::uint32_t GetHeight() const;
 
 private:
 	std::uint32_t _width;
 	std::uint32_t _height;
+};
+
+export class AutoCleanup2DSimpleImage : public AutoCleanup2DImage
+{
+public:
+	AutoCleanup2DSimpleImage(std::uint32_t width, std::uint32_t height, VkFormat format, VkDevice device, VkImage image, size_t initialImageViewListCapacity);
+	~AutoCleanup2DSimpleImage();
+
+	AutoCleanup2DSimpleImage(const AutoCleanup2DSimpleImage&) noexcept = delete;
+	AutoCleanup2DSimpleImage(AutoCleanup2DSimpleImage&& rhs) noexcept = default;
+
+	AutoCleanup2DSimpleImage& operator=(const AutoCleanup2DSimpleImage&) noexcept = delete;
+	AutoCleanup2DSimpleImage& operator=(AutoCleanup2DSimpleImage&& rhs) noexcept = default;
+
+	IDObject<AutoCleanupImageView> AddImageView(size_t addOnReserve);
 };
 
 export class AutoCleanupMipMapped2DImage : public AutoCleanup2DImage
@@ -110,6 +126,8 @@ public:
 
 	AutoCleanupMipMapped2DImage& operator=(const AutoCleanupMipMapped2DImage&) noexcept = delete;
 	AutoCleanupMipMapped2DImage& operator=(AutoCleanupMipMapped2DImage&& rhs) noexcept = default;
+
+	IDObject<AutoCleanupImageView> AddImageView(std::uint32_t baseMipLevel, std::uint32_t levelCount, size_t addOnReserve);
 
 private:
 	std::uint32_t _mipmapLevels;

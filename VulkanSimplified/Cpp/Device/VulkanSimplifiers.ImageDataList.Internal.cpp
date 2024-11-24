@@ -14,7 +14,7 @@ ImageDataListInternal::~ImageDataListInternal()
 {
 }
 
-IDObject<AutoCleanup2DImage> ImageDataListInternal::AddSingleSampled2DImage(std::uint32_t width, std::uint32_t height, DataFormatSetIndependentID format, ImageUsageFlags usageFlags,
+IDObject<AutoCleanup2DSimpleImage> ImageDataListInternal::AddSimple2DImage(std::uint32_t width, std::uint32_t height, DataFormatSetIndependentID format, ImageUsageFlags usageFlags,
 	const std::vector<size_t>& queuesUsingImage, bool preInitialized, size_t initialImageViewListCapacity, size_t addOnReserve)
 {
 	VkImage image = VK_NULL_HANDLE;
@@ -58,7 +58,7 @@ IDObject<AutoCleanup2DImage> ImageDataListInternal::AddSingleSampled2DImage(std:
 	if (vkCreateImage(_device, &createInfo, nullptr, &image) != VK_SUCCESS)
 		throw std::runtime_error("ImageDataListInternal::AddSingleSampled2DImage Error: Program failed to create a single sampled, no mip maps, 2D image!");
 
-	return _singleSampled2DImage.AddObject(AutoCleanup2DImage(width, height, createInfo.format, _device, image, initialImageViewListCapacity), addOnReserve);
+	return _singleSampled2DImage.AddObject(AutoCleanup2DSimpleImage(width, height, createInfo.format, _device, image, initialImageViewListCapacity), addOnReserve);
 }
 
 IDObject<AutoCleanupMipMapped2DImage> ImageDataListInternal::AddMipMappedSingleSampled2DImage(std::uint32_t width, std::uint32_t height, DataFormatSetIndependentID format,
@@ -114,7 +114,7 @@ IDObject<AutoCleanupMipMapped2DImage> ImageDataListInternal::AddMipMappedSingleS
 		addOnReserve);
 }
 
-bool ImageDataListInternal::RemoveSingleSampled2DImage(IDObject<AutoCleanup2DImage> imageID, bool throwOnIDNotFound)
+bool ImageDataListInternal::RemoveSimple2DImage(IDObject<AutoCleanup2DSimpleImage> imageID, bool throwOnIDNotFound)
 {
 	bool ret = _singleSampled2DImage.CheckForID(imageID);
 
@@ -158,22 +158,22 @@ bool ImageDataListInternal::RemoveMipMappedSingleSampled2DImage(IDObject<AutoCle
 	return ret;
 }
 
-std::uint64_t ImageDataListInternal::GetImageRequiredAligment(IDObject<AutoCleanup2DImage> imageID) const
+std::uint64_t ImageDataListInternal::GetImageRequiredAligment(IDObject<AutoCleanup2DSimpleImage> imageID) const
 {
 	return _singleSampled2DImage.GetConstObject(imageID).GetImageRequiredAligment();
 }
 
-std::uint64_t ImageDataListInternal::GetImageSize(IDObject<AutoCleanup2DImage> imageID) const
+std::uint64_t ImageDataListInternal::GetImageSize(IDObject<AutoCleanup2DSimpleImage> imageID) const
 {
 	return _singleSampled2DImage.GetConstObject(imageID).GetImageSize();
 }
 
-std::uint32_t ImageDataListInternal::GetImageMemoryTypeMask(IDObject<AutoCleanup2DImage> imageID) const
+std::uint32_t ImageDataListInternal::GetImageMemoryTypeMask(IDObject<AutoCleanup2DSimpleImage> imageID) const
 {
 	return _singleSampled2DImage.GetConstObject(imageID).GetImageMemoryTypeMask();
 }
 
-std::pair<std::uint64_t, std::uint64_t> ImageDataListInternal::GetSizeAndAligment(IDObject<AutoCleanup2DImage> imageID) const
+std::pair<std::uint64_t, std::uint64_t> ImageDataListInternal::GetSizeAndAligment(IDObject<AutoCleanup2DSimpleImage> imageID) const
 {
 	return _singleSampled2DImage.GetConstObject(imageID).GetSizeAndAligment();
 }
@@ -198,7 +198,7 @@ std::pair<std::uint64_t, std::uint64_t> ImageDataListInternal::GetSizeAndAligmen
 	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetSizeAndAligment();
 }
 
-void ImageDataListInternal::BindImage(IDObject<AutoCleanup2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve)
+void ImageDataListInternal::BindImage(IDObject<AutoCleanup2DSimpleImage> imageID, AllocationFullID allocationID, size_t addOnReserve)
 {
 	auto& imageData = _singleSampled2DImage.GetObject(imageID);
 
@@ -222,6 +222,35 @@ void ImageDataListInternal::BindImage(IDObject<AutoCleanupMipMapped2DImage> imag
 	auto beggining = _memoryList.BindImage(allocationID, image, size, aligment, addOnReserve);
 
 	imageData.BindImage(allocationID, beggining);
+}
+
+IDObject<AutoCleanupImageView> ImageDataListInternal::AddImageView(IDObject<AutoCleanup2DSimpleImage> imageID, size_t addOnReserve)
+{
+	auto& imageData = _singleSampled2DImage.GetObject(imageID);
+
+	return imageData.AddImageView(addOnReserve);
+}
+
+IDObject<AutoCleanupImageView> ImageDataListInternal::AddImageView(IDObject<AutoCleanupMipMapped2DImage> imageID, std::uint32_t baseMipLevel, std::uint32_t levelCount,
+	size_t addOnReserve)
+{
+	auto& imageData = _singleSampledMipMapped2DImage.GetObject(imageID);
+
+	return imageData.AddImageView(baseMipLevel, levelCount, addOnReserve);
+}
+
+VkImageView ImageDataListInternal::GetImageView(IDObject<AutoCleanup2DSimpleImage> imageID, IDObject<AutoCleanupImageView> viewID) const
+{
+	auto& imageData = _singleSampled2DImage.GetConstObject(imageID);
+
+	return imageData.GetImageView(viewID);
+}
+
+VkImageView ImageDataListInternal::GetImageView(IDObject<AutoCleanupMipMapped2DImage> imageID, IDObject<AutoCleanupImageView> viewID) const
+{
+	auto& imageData = _singleSampledMipMapped2DImage.GetConstObject(imageID);
+
+	return imageData.GetImageView(viewID);
 }
 
 std::uint32_t ImageDataListInternal::CalculateMipmapLevelsFromBiggest3D(std::uint32_t width, std::uint32_t height, std::uint32_t depth) const

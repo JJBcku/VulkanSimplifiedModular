@@ -93,6 +93,25 @@ AutoCleanupImage& AutoCleanupImage::operator=(AutoCleanupImage&& rhs) noexcept
 	return *this;
 }
 
+IDObject<AutoCleanupImageView> AutoCleanupImage::AddImageView(VkComponentMapping componentMapping, VkImageSubresourceRange subresourceRange, VkImageViewType viewType,
+	size_t addOnReserve)
+{
+	VkImageViewCreateInfo createInfo{};
+	createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+	createInfo.image = _image;
+	createInfo.viewType = viewType;
+	createInfo.format = _format;
+	createInfo.components = componentMapping;
+	createInfo.subresourceRange = subresourceRange;
+
+	VkImageView add = VK_NULL_HANDLE;
+
+	if (vkCreateImageView(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
+		throw std::runtime_error("AutoCleanupImage::AddImageView Error: Program failed to create an image view!");
+
+	return _imageViews.AddObject(AutoCleanupImageView(_device, add), addOnReserve);
+}
+
 VkImage AutoCleanupImage::GetImage() const
 {
 	return _image;
@@ -177,6 +196,27 @@ std::uint32_t AutoCleanup2DImage::GetHeight() const
 	return _height;
 }
 
+AutoCleanup2DSimpleImage::AutoCleanup2DSimpleImage(std::uint32_t width, std::uint32_t height, VkFormat format, VkDevice device, VkImage image, size_t initialImageViewListCapacity) : 
+	AutoCleanup2DImage(width, height, format, device, image, initialImageViewListCapacity)
+{
+}
+
+AutoCleanup2DSimpleImage::~AutoCleanup2DSimpleImage()
+{
+}
+
+IDObject<AutoCleanupImageView> AutoCleanup2DSimpleImage::AddImageView(size_t addOnReserve)
+{
+	VkImageSubresourceRange range{};
+	range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	range.baseMipLevel = 0;
+	range.levelCount = 1;
+	range.baseArrayLayer = 0;
+	range.layerCount = 1;
+
+	return AutoCleanupImage::AddImageView({}, range, VK_IMAGE_VIEW_TYPE_2D, addOnReserve);
+}
+
 AutoCleanupMipMapped2DImage::AutoCleanupMipMapped2DImage(std::uint32_t width, std::uint32_t height, std::uint32_t mipmapLevels, VkFormat format, VkDevice device, VkImage image,
 	size_t initialImageViewListCapacity) : AutoCleanup2DImage(width, height, format, device, image, initialImageViewListCapacity), _mipmapLevels(mipmapLevels), _padding(0)
 {
@@ -184,4 +224,30 @@ AutoCleanupMipMapped2DImage::AutoCleanupMipMapped2DImage(std::uint32_t width, st
 
 AutoCleanupMipMapped2DImage::~AutoCleanupMipMapped2DImage()
 {
+}
+
+IDObject<AutoCleanupImageView> AutoCleanupMipMapped2DImage::AddImageView(std::uint32_t baseMipLevel, std::uint32_t levelCount, size_t addOnReserve)
+{
+	if (baseMipLevel >= _mipmapLevels)
+		throw std::runtime_error("AutoCleanupMipMapped2DImage::AddImageView Error: Program was given a base mipmap level bigger than level amount!");
+
+	if (levelCount >= _mipmapLevels)
+		throw std::runtime_error("AutoCleanupMipMapped2DImage::AddImageView Error: Program was given a viewed mipmap levels count bigger than level amount!");
+
+	std::uint32_t maxLevel = baseMipLevel + levelCount;
+
+	if (maxLevel > levelCount)
+		throw std::runtime_error("AutoCleanupMipMapped2DImage::AddImageView Error: Maximum used level calculations overflowed!");
+
+	if (maxLevel > _mipmapLevels)
+		throw std::runtime_error("AutoCleanupMipMapped2DImage::AddImageView Error: Program was given a maximum mipmap level bigger than level amount!");
+
+	VkImageSubresourceRange range{};
+	range.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	range.baseMipLevel = baseMipLevel;
+	range.levelCount = levelCount;
+	range.baseArrayLayer = 0;
+	range.layerCount = 1;
+
+	return AutoCleanupImage::AddImageView({}, range, VK_IMAGE_VIEW_TYPE_2D, addOnReserve);
 }

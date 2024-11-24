@@ -24,7 +24,8 @@ export struct VulkanAttachmentData
 	std::uint32_t width;
 	std::uint32_t height;
 
-	IDObject<AutoCleanup2DImage> colorAttachmentImage;
+	IDObject<AutoCleanup2DSimpleImage> colorAttachmentImage;
+	IDObject<AutoCleanupImageView> colorAttachmentImageView;
 
 	AllocationFullID imageMemory;
 

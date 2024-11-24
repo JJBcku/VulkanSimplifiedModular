@@ -9,9 +9,9 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 	auto deviceGraphicsCommandPool = deviceCommandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
 	auto deviceGraphicsBuffer = deviceGraphicsCommandPool.GetPrimaryCommandBufferSimplifier(data.deviceDependent->graphicsCommandBuffers[frameNumber]);
 
-	deviceGraphicsBuffer.BeginRecording(CommandBufferUsage::ONE_USE);
+	//deviceGraphicsBuffer.BeginRecording(CommandBufferUsage::ONE_USE);
 	
-	deviceGraphicsBuffer.EndRecording();
+	//deviceGraphicsBuffer.EndRecording();
 
 	std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(1));
 }

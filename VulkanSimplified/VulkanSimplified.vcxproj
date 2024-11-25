@@ -170,6 +170,9 @@
     <ClCompile Include="Cpp\Device\ShaderStructures\VulkanSimplifiers.ShaderList.Data.cpp" />
     <ClCompile Include="Cpp\Device\ShaderStructures\VulkanSimplifiers.ShaderList.Internal.cpp" />
     <ClCompile Include="Cpp\Device\ShaderStructures\VulkanSimplifiers.ShaderList.InternalData.cpp" />
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.cpp" />
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.cpp" />
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.cpp" />
     <ClCompile Include="Cpp\Main\VulkanSimplifiers.Window.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\CoreStructures\VulkanSimplifiers.LogicalDeviceCore.cpp" />
     <ClCompile Include="Cpp\Device\CoreStructures\VulkanSimplifiers.LogicalDeviceCore.Data.cpp" />
@@ -241,6 +244,7 @@
     <ClCompile Include="DoNotInclude\Device\CoreStructures\VulkanSimplifiers.LogicalDeviceCore.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.MemoryObjectsList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.MemoryObjectsList.InternalData.ixx" />
+    <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.ixx" />
@@ -312,6 +316,8 @@
     <ClCompile Include="Include\Device\CoreStructures\VulkanSimplifiers.LogicalDeviceMain.ixx" />
     <ClCompile Include="Include\Device\ShaderStructures\VulkanSimplifiers.ShaderList.Data.ixx" />
     <ClCompile Include="Include\Device\ShaderStructures\VulkanSimplifiers.ShaderList.ixx" />
+    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.ixx" />
+    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.Data.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.PhysicalDevice.Data.ixx" />

@@ -43,6 +43,11 @@ ImageDataListSimplifier LogicalDeviceMainSimplifier::GetImageDataListSimplifier(
 	return _internal.GetImageDataListSimplifier();
 }
 
+SynchronizationListSimplifier LogicalDeviceMainSimplifier::GetSynchronizationListSimplifier()
+{
+	return _internal.GetSynchronizationListSimplifier();
+}
+
 CommandPoolListSimplifier LogicalDeviceMainSimplifier::GetCommandPoolListSimplifier()
 {
 	return _internal.GetCommandPoolListSimplifier();
@@ -81,6 +86,11 @@ const MemoryObjectsListSimplifier LogicalDeviceMainSimplifier::GetMemoryObjectsL
 const ImageDataListSimplifier LogicalDeviceMainSimplifier::GetImageDataListSimplifier() const
 {
 	return _internal.GetImageDataListSimplifier();
+}
+
+const SynchronizationListSimplifier LogicalDeviceMainSimplifier::GetSynchronizationListSimplifier() const
+{
+	return _internal.GetSynchronizationListSimplifier();
 }
 
 const CommandPoolListSimplifier LogicalDeviceMainSimplifier::GetCommandPoolListSimplifier() const

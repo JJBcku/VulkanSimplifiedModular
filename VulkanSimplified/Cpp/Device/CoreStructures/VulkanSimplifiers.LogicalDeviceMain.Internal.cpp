@@ -7,7 +7,7 @@ LogicalDeviceMainInternal::LogicalDeviceMainInternal(const LogicalDeviceInitData
 	_renderPassList(mainCreationData.renderPass, sharedDataList.GetSharedRenderPassDataSimplifier(), _core.GetDevice()),
 	_pipelineDataList(mainCreationData.devicePipelines, sharedDataList.GetSharedPipelineDataSimplifier(), _descriptorList, _shaderList, _renderPassList, _core.GetDevice()),
 	_memoryList(_core.GetDevice(), physicalDevice.GetDeviceMemoryData(), mainCreationData.memoryList),
-	_imageList(mainCreationData.imageList, _core, _renderPassList, _memoryList, _core.GetDevice()),
+	_imageList(mainCreationData.imageList, _core, _renderPassList, _memoryList, _core.GetDevice()), _synchronizationList(mainCreationData.synchronizationList),
 	_commandPoolList(_core, _renderPassList, sharedDataList.GetSharedRenderPassDataSimplifier(), _pipelineDataList, _imageList, mainCreationData.commandPoolList)
 {
 }
@@ -51,6 +51,11 @@ ImageDataListInternal& LogicalDeviceMainInternal::GetImageDataListSimplifier()
 	return _imageList;
 }
 
+SynchronizationListInternal& LogicalDeviceMainInternal::GetSynchronizationListSimplifier()
+{
+	return _synchronizationList;
+}
+
 CommandPoolListInternal& LogicalDeviceMainInternal::GetCommandPoolListSimplifier()
 {
 	return _commandPoolList;
@@ -89,6 +94,11 @@ const MemoryObjectsListInternal& LogicalDeviceMainInternal::GetMemoryObjectsList
 const ImageDataListInternal& LogicalDeviceMainInternal::GetImageDataListSimplifier() const
 {
 	return _imageList;
+}
+
+const SynchronizationListInternal& LogicalDeviceMainInternal::GetSynchronizationListSimplifier() const
+{
+	return _synchronizationList;
 }
 
 const CommandPoolListInternal& LogicalDeviceMainInternal::GetCommandPoolListSimplifier() const

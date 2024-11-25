@@ -858,5 +858,23 @@
     <ClCompile Include="Cpp\Device\RenderPassStructures\VulkanSimplifiers.SharedRenderPassData.Data.cpp">
       <Filter>Source Files\Cpp Files\SharedData</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

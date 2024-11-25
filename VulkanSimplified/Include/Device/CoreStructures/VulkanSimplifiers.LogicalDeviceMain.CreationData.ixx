@@ -6,6 +6,7 @@ export import VulkanSimplifiers.DeviceRenderPassData.CreationData;
 export import VulkanSimplifiers.DevicePipelineData.CreationData;
 export import VulkanSimplifiers.ImageDataList.CreationData;
 export import VulkanSimplifiers.MemoryObjectsList.CreationData;
+export import VulkanSimplifiers.SynchronizationList.CreationData;
 export import VulkanSimplifiers.CommandPoolList.CreationData;
 
 export struct DeviceMainCreationData
@@ -17,6 +18,8 @@ export struct DeviceMainCreationData
 
 	MemoryListCreationData memoryList;
 	ImageDataCreationData imageList;
+
+	SynchronizationListCreationData synchronizationList;
 
 	CommandPoolListCreationData commandPoolList;
 

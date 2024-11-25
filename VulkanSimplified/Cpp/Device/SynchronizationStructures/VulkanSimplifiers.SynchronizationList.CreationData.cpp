@@ -2,5 +2,5 @@ module VulkanSimplifiers.SynchronizationList.CreationData;
 
 SynchronizationListCreationData::SynchronizationListCreationData()
 {
-	stump = 3;
+	fenceListInitialCapacity = 0;
 }

@@ -45,10 +45,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllProjectBMIsArePublic>false</AllProjectBMIsArePublic>
-    <PublicModuleDirectories>Include;Include\Common;Include\Device;Include\Device\CommandStructures;Include\Device\CoreStructures;Include\Device\DescriptorStructures;Include\Device\MemoryStructures;Include\Device\PipelineStructures;Include\Device\RenderPassStructures;Include\Device\ShaderStructures;Include\Instance;Include\Main;Include\Main\EventHandling;Include\SharedData</PublicModuleDirectories>
+    <PublicModuleDirectories>Include;Include\Common;Include\Device;Include\Device\CommandStructures;Include\Device\CoreStructures;Include\Device\DescriptorStructures;Include\Device\MemoryStructures;Include\Device\PipelineStructures;Include\Device\RenderPassStructures;Include\Device\ShaderStructures;Include\Device\SynchronizationStructures;Include\Instance;Include\Main;Include\Main\EventHandling;Include\SharedData</PublicModuleDirectories>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <PublicModuleDirectories>Include;Include\Common;Include\Device;Include\Device\CommandStructures;Include\Device\CoreStructures;Include\Device\DescriptorStructures;Include\Device\MemoryStructures;Include\Device\PipelineStructures;Include\Device\RenderPassStructures;Include\Device\ShaderStructures;Include\Instance;Include\Main;Include\Main\EventHandling;Include\SharedData</PublicModuleDirectories>
+    <PublicModuleDirectories>Include;Include\Common;Include\Device;Include\Device\CommandStructures;Include\Device\CoreStructures;Include\Device\DescriptorStructures;Include\Device\MemoryStructures;Include\Device\PipelineStructures;Include\Device\RenderPassStructures;Include\Device\ShaderStructures;Include\Device\SynchronizationStructures;Include\Instance;Include\Main;Include\Main\EventHandling;Include\SharedData</PublicModuleDirectories>
     <AllProjectBMIsArePublic>false</AllProjectBMIsArePublic>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -173,6 +173,7 @@
     <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.cpp" />
     <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.cpp" />
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.InternalData.cpp" />
     <ClCompile Include="Cpp\Main\VulkanSimplifiers.Window.InternalData.cpp" />
     <ClCompile Include="Cpp\Device\CoreStructures\VulkanSimplifiers.LogicalDeviceCore.cpp" />
     <ClCompile Include="Cpp\Device\CoreStructures\VulkanSimplifiers.LogicalDeviceCore.Data.cpp" />
@@ -245,6 +246,7 @@
     <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.MemoryObjectsList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.MemoryObjectsList.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.ixx" />
@@ -317,6 +319,7 @@
     <ClCompile Include="Include\Device\ShaderStructures\VulkanSimplifiers.ShaderList.Data.ixx" />
     <ClCompile Include="Include\Device\ShaderStructures\VulkanSimplifiers.ShaderList.ixx" />
     <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.ixx" />
+    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Data.ixx" />
     <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.Data.ixx" />
     <ClCompile Include="Include\Instance\VulkanSimplifiers.DeviceList.ixx" />

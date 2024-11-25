@@ -876,5 +876,14 @@
     <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.InternalData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.InternalData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Data.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

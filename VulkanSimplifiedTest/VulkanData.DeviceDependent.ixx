@@ -7,6 +7,7 @@ export import VulkanSimplifiers.ShaderList.Data;
 export import VulkanSimplifiers.Common.DataFormatFlags;
 export import VulkanSimplifiers.CommandPool.Data;
 export import VulkanSimplifiers.NIRCommandPool.Data;
+export import VulkanSimplifiers.SynchronizationList.Data;
 
 export struct VulkanDataDeviceDependent
 {
@@ -25,6 +26,8 @@ export struct VulkanDataDeviceDependent
 
 	std::optional<IDObject<std::unique_ptr<NIRCommandPoolInternal>>> presentCommandPool;
 	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> presentCommandBuffers;
+
+	std::vector<IDObject<AutoCleanupFence>> inFlightFences;
 
 	VulkanDataDeviceDependent() = default;
 };

@@ -109,4 +109,13 @@ void CreateDeviceDependent(VulkanData& data)
 		auto presentPool = commandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->presentCommandPool.value());
 		data.deviceDependent->presentCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
 	}
+
+	auto synchronizationList = deviceMain.GetSynchronizationListSimplifier();
+
+	data.deviceDependent->inFlightFences.reserve(swapchainCreation.imageAmount);
+
+	for (std::uint32_t i = 0; i < swapchainCreation.imageAmount; ++i)
+	{
+		data.deviceDependent->inFlightFences.push_back(synchronizationList.AddFence());
+	}
 }

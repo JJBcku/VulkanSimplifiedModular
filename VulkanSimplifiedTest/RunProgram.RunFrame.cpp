@@ -8,6 +8,11 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 	auto deviceCommandPoolList = deviceMain.GetCommandPoolListSimplifier();
 	auto deviceGraphicsCommandPool = deviceCommandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
 	auto deviceGraphicsBuffer = deviceGraphicsCommandPool.GetPrimaryCommandBufferSimplifier(data.deviceDependent->graphicsCommandBuffers[frameNumber]);
+	auto synchronizationList = deviceMain.GetSynchronizationListSimplifier();
+
+	synchronizationList.WaitOnFences({ data.deviceDependent->inFlightFences[frameNumber] }, false);
+
+	synchronizationList.ResetFences({ data.deviceDependent->inFlightFences[frameNumber] });
 
 	deviceGraphicsBuffer.BeginRecording(CommandBufferUsage::ONE_USE);
 

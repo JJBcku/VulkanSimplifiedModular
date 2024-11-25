@@ -302,6 +302,11 @@ bool ImageDataListInternal::RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> f
 	return _framebuffersList.RemoveObject(framebufferID, throwOnIDNotFound);
 }
 
+VkFramebuffer ImageDataListInternal::GetFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID) const
+{
+	return _framebuffersList.GetConstObject(framebufferID).GetFramebuffer();
+}
+
 std::uint32_t ImageDataListInternal::CalculateMipmapLevelsFromBiggest3D(std::uint32_t width, std::uint32_t height, std::uint32_t depth) const
 {
 	std::uint32_t ret = 0;

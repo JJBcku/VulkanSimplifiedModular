@@ -7,7 +7,8 @@ LogicalDeviceMainInternal::LogicalDeviceMainInternal(const LogicalDeviceInitData
 	_renderPassList(mainCreationData.renderPass, sharedDataList.GetSharedRenderPassDataSimplifier(), _core.GetDevice()),
 	_pipelineDataList(mainCreationData.devicePipelines, sharedDataList.GetSharedPipelineDataSimplifier(), _descriptorList, _shaderList, _renderPassList, _core.GetDevice()),
 	_memoryList(_core.GetDevice(), physicalDevice.GetDeviceMemoryData(), mainCreationData.memoryList),
-	_imageList(mainCreationData.imageList, _core, _renderPassList, _memoryList, _core.GetDevice()), _commandPoolList(_core, mainCreationData.commandPoolList)
+	_imageList(mainCreationData.imageList, _core, _renderPassList, _memoryList, _core.GetDevice()),
+	_commandPoolList(_core, _renderPassList, sharedDataList.GetSharedRenderPassDataSimplifier(), _pipelineDataList, _imageList, mainCreationData.commandPoolList)
 {
 }
 

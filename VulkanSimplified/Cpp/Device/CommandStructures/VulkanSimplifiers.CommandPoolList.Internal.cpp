@@ -4,8 +4,10 @@ module;
 
 module VulkanSimplifiers.CommandPoolList.Internal;
 
-CommandPoolListInternal::CommandPoolListInternal(const LogicalDeviceCoreInternal& deviceCore, const CommandPoolListCreationData& creationData) : _deviceCore(deviceCore),
-	_device(deviceCore.GetDevice()), _noIndividualResetCommandPoolList(creationData.noIndividualResetCommandPoolListInitialReservation),
+CommandPoolListInternal::CommandPoolListInternal(const LogicalDeviceCoreInternal& deviceCore, const DeviceRenderPassDataInternal& deviceRenderPassData,
+	const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, const CommandPoolListCreationData& creationData) : _deviceCore(deviceCore),
+	_deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData),
+	_imageList(imageList), _device(deviceCore.GetDevice()), _noIndividualResetCommandPoolList(creationData.noIndividualResetCommandPoolListInitialReservation),
 	_individualResetCommandPoolList(creationData.individualResetCommandPoolListInitialReservation)
 {
 }
@@ -29,8 +31,8 @@ IDObject<std::unique_ptr<NIRCommandPoolInternal>> CommandPoolListInternal::AddCo
 	if (vkCreateCommandPool(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 		throw std::runtime_error("CommandPoolListInternal::AddCommandPoolWithoutIndividualReset Error: Program failed to create a command pool!");
 
-	return _noIndividualResetCommandPoolList.AddObject(std::make_unique<NIRCommandPoolInternal>(_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity,
-		secondaryBufferListInitialCapacity), addOnReserve);
+	return _noIndividualResetCommandPoolList.AddObject(std::make_unique<NIRCommandPoolInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
+		_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity), addOnReserve);
 }
 
 IDObject<std::unique_ptr<IRCommandPoolInternal>> CommandPoolListInternal::AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
@@ -49,8 +51,8 @@ IDObject<std::unique_ptr<IRCommandPoolInternal>> CommandPoolListInternal::AddCom
 	if (vkCreateCommandPool(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
 		throw std::runtime_error("CommandPoolListInternal::AddCommandPoolWithIndividualReset Error: Program failed to create a command pool!");
 
-	return _individualResetCommandPoolList.AddObject(std::make_unique<IRCommandPoolInternal>(_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity,
-		secondaryBufferListInitialCapacity), addOnReserve);
+	return _individualResetCommandPoolList.AddObject(std::make_unique<IRCommandPoolInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
+		_device, add, _deviceCore.GetQueue(queueID), primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity), addOnReserve);
 }
 
 NIRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID)

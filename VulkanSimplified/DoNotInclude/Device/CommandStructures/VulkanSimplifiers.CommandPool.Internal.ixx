@@ -9,17 +9,35 @@ import ListTemplates.UnsortedList;
 
 import VulkanSimplifiers.CommandBuffer.Internal;
 
+import VulkanSimplifiers.ImageDataList.Internal;
+import VulkanSimplifiers.ImageDataList.InternalData;
+import VulkanSimplifiers.ImageDataList.Data;
+
+import VulkanSimplifiers.DeviceRenderPassData.Internal;
+import VulkanSimplifiers.DeviceRenderPassData.InternalData;
+import VulkanSimplifiers.DeviceRenderPassData.Data;
+
+import VulkanSimplifiers.SharedRenderPassData.Internal;
+import VulkanSimplifiers.SharedRenderPassData.InternalData;
+import VulkanSimplifiers.SharedRenderPassData.Data;
+
+import VulkanSimplifiers.DevicePipelineData.Internal;
+import VulkanSimplifiers.DevicePipelineData.InternalData;
+import VulkanSimplifiers.DevicePipelineData.Data;
+
 export class NIRCommandPoolInternal
 {
 public:
-	NIRCommandPoolInternal(VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
+	NIRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+		const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
+		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
 	~NIRCommandPoolInternal();
 
 	NIRCommandPoolInternal(const NIRCommandPoolInternal&) noexcept = delete;
-	NIRCommandPoolInternal(NIRCommandPoolInternal&& rhs) noexcept;
+	NIRCommandPoolInternal(NIRCommandPoolInternal&& rhs) noexcept = delete;
 
 	NIRCommandPoolInternal& operator=(const NIRCommandPoolInternal&) noexcept = delete;
-	NIRCommandPoolInternal& operator=(NIRCommandPoolInternal&& rhs) noexcept;
+	NIRCommandPoolInternal& operator=(NIRCommandPoolInternal&& rhs) noexcept = delete;
 
 	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
 	std::vector<IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
@@ -31,6 +49,13 @@ public:
 	const SecondaryNIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> bufferID) const;
 
 private:
+	const DeviceRenderPassDataInternal& _deviceRenderPassData;
+	const SharedRenderPassDataInternal& _sharedRenderPassData;
+
+	const DevicePipelineDataInternal& _devicePipelineData;
+
+	const ImageDataListInternal& _imageList;
+
 	VkDevice _device;
 	VkCommandPool _commandPool;
 
@@ -43,14 +68,16 @@ private:
 export class IRCommandPoolInternal
 {
 public:
-	IRCommandPoolInternal(VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
+	IRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+		const DevicePipelineDataInternal& devicePipelineData,const ImageDataListInternal& imageList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
+		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
 	~IRCommandPoolInternal();
 
 	IRCommandPoolInternal(const IRCommandPoolInternal&) noexcept = delete;
-	IRCommandPoolInternal(IRCommandPoolInternal&& rhs) noexcept;
+	IRCommandPoolInternal(IRCommandPoolInternal&& rhs) noexcept = delete;
 
 	IRCommandPoolInternal& operator=(const IRCommandPoolInternal&) noexcept = delete;
-	IRCommandPoolInternal& operator=(IRCommandPoolInternal&& rhs) noexcept;
+	IRCommandPoolInternal& operator=(IRCommandPoolInternal&& rhs) noexcept = delete;
 
 	std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
 	std::vector<IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>>> AllocateSecondaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve);
@@ -62,6 +89,13 @@ public:
 	const SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID) const;
 
 private:
+	const DeviceRenderPassDataInternal& _deviceRenderPassData;
+	const SharedRenderPassDataInternal& _sharedRenderPassData;
+
+	const DevicePipelineDataInternal& _devicePipelineData;
+
+	const ImageDataListInternal& _imageList;
+
 	VkDevice _device;
 	VkCommandPool _commandPool;
 

@@ -690,10 +690,10 @@
     <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.ImageDataList.InternalData.ixx">
       <Filter>Source Files\DoNotInclude\Device\MemoryStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\RenderPassStructures\VulkanSimplifiers.MemoryObjectsList.Internal.ixx">
+    <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.MemoryObjectsList.Internal.ixx">
       <Filter>Source Files\DoNotInclude\Device\MemoryStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\RenderPassStructures\VulkanSimplifiers.MemoryObjectsList.InternalData.ixx">
+    <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.MemoryObjectsList.InternalData.ixx">
       <Filter>Source Files\DoNotInclude\Device\MemoryStructures</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\RenderPassStructures\VulkanSimplifiers.DeviceRenderPassData.cpp">
@@ -735,10 +735,10 @@
     <ClCompile Include="DoNotInclude\Device\PipelineStructures\VulkanSimplifiers.DevicePipelineData.InternalData.ixx">
       <Filter>Source Files\DoNotInclude\Device\PipelineStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\PipelineStructures\VulkanSimplifiers.DeviceRenderPassData.Internal.ixx">
+    <ClCompile Include="DoNotInclude\Device\RenderPassStructures\VulkanSimplifiers.DeviceRenderPassData.Internal.ixx">
       <Filter>Source Files\DoNotInclude\Device\RenderPassStructures</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\PipelineStructures\VulkanSimplifiers.DeviceRenderPassData.InternalData.ixx">
+    <ClCompile Include="DoNotInclude\Device\RenderPassStructures\VulkanSimplifiers.DeviceRenderPassData.InternalData.ixx">
       <Filter>Source Files\DoNotInclude\Device\RenderPassStructures</Filter>
     </ClCompile>
     <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPool.Data.ixx">

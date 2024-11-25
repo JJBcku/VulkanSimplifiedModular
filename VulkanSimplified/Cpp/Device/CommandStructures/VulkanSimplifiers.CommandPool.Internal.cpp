@@ -4,8 +4,10 @@ module;
 
 module VulkanSimplifiers.CommandPool.Internal;
 
-NIRCommandPoolInternal::NIRCommandPoolInternal(VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity,
-	size_t secondaryBufferListInitialCapacity) : _device(device), _commandPool(commandPool), _queue(queue),
+NIRCommandPoolInternal::NIRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
+	size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity) : _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData),
+	_devicePipelineData(devicePipelineData), _imageList(imageList), _device(device), _commandPool(commandPool), _queue(queue),
 	_primaryBufferList(primaryBufferListInitialCapacity), _secondaryBufferList(secondaryBufferListInitialCapacity)
 {
 }
@@ -16,28 +18,6 @@ NIRCommandPoolInternal::~NIRCommandPoolInternal()
 	{
 		vkDestroyCommandPool(_device, _commandPool, nullptr);
 	}
-}
-
-NIRCommandPoolInternal::NIRCommandPoolInternal(NIRCommandPoolInternal&& rhs) noexcept : _device(rhs._device), _commandPool(rhs._commandPool), _queue(rhs._queue),
-_primaryBufferList(std::move(rhs._primaryBufferList)), _secondaryBufferList(std::move(rhs._secondaryBufferList))
-{
-	rhs._device = VK_NULL_HANDLE;
-	rhs._commandPool = VK_NULL_HANDLE;
-	rhs._queue = VK_NULL_HANDLE;
-}
-
-NIRCommandPoolInternal& NIRCommandPoolInternal::operator=(NIRCommandPoolInternal&& rhs) noexcept
-{
-	_device = rhs._device;
-	_commandPool = rhs._commandPool;
-	_queue = rhs._queue;
-	_primaryBufferList = std::move(rhs._primaryBufferList);
-	_secondaryBufferList = std::move(rhs._secondaryBufferList);
-
-	rhs._device = VK_NULL_HANDLE;
-	rhs._commandPool = VK_NULL_HANDLE;
-	rhs._queue = VK_NULL_HANDLE;
-	return *this;
 }
 
 std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> NIRCommandPoolInternal::AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
@@ -62,7 +42,8 @@ std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> NIRComma
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryNIRCommandBufferInternal>(_device, buffer, _queue), addOnReserve));
+		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryNIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
+			_device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
@@ -90,7 +71,8 @@ std::vector<IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>>> NIRCom
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryNIRCommandBufferInternal>(_device, buffer, _queue), addOnReserve));
+		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryNIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
+			_device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
@@ -116,8 +98,10 @@ const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCom
 	return *_secondaryBufferList.GetConstObject(bufferID);
 }
 
-IRCommandPoolInternal::IRCommandPoolInternal(VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity,
-	size_t secondaryBufferListInitialCapacity) : _device(device), _commandPool(commandPool), _queue(queue),
+IRCommandPoolInternal::IRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
+	size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity) : _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData),
+	_devicePipelineData(devicePipelineData), _imageList(imageList), _device(device), _commandPool(commandPool), _queue(queue),
 	_primaryBufferList(primaryBufferListInitialCapacity), _secondaryBufferList(secondaryBufferListInitialCapacity)
 {
 }
@@ -128,28 +112,6 @@ IRCommandPoolInternal::~IRCommandPoolInternal()
 	{
 		vkDestroyCommandPool(_device, _commandPool, nullptr);
 	}
-}
-
-IRCommandPoolInternal::IRCommandPoolInternal(IRCommandPoolInternal&& rhs) noexcept : _device(rhs._device), _commandPool(rhs._commandPool), _queue(rhs._queue),
-_primaryBufferList(std::move(rhs._primaryBufferList)), _secondaryBufferList(std::move(rhs._secondaryBufferList))
-{
-	rhs._device = VK_NULL_HANDLE;
-	rhs._commandPool = VK_NULL_HANDLE;
-	rhs._queue = VK_NULL_HANDLE;
-}
-
-IRCommandPoolInternal& IRCommandPoolInternal::operator=(IRCommandPoolInternal&& rhs) noexcept
-{
-	_device = rhs._device;
-	_commandPool = rhs._commandPool;
-	_queue = rhs._queue;
-	_primaryBufferList = std::move(rhs._primaryBufferList);
-	_secondaryBufferList = std::move(rhs._secondaryBufferList);
-
-	rhs._device = VK_NULL_HANDLE;
-	rhs._commandPool = VK_NULL_HANDLE;
-	rhs._queue = VK_NULL_HANDLE;
-	return *this;
 }
 
 std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> IRCommandPoolInternal::AllocatePrimaryCommandBuffers(std::uint32_t buffersToAllocate, size_t addOnReserve)
@@ -174,7 +136,8 @@ std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> IRCommand
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryIRCommandBufferInternal>(_device, buffer, _queue), addOnReserve));
+		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
+			_device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
@@ -202,7 +165,8 @@ std::vector<IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>>> IRComma
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryIRCommandBufferInternal>(_device, buffer, _queue), addOnReserve));
+		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
+			_device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;

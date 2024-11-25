@@ -63,6 +63,8 @@ public:
 
 	bool RemoveFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID, bool throwOnIDNotFound);
 
+	VkFramebuffer GetFramebuffer(IDObject<AutoCleanupFramebuffer> framebufferID) const;
+
 private:
 	const LogicalDeviceCoreInternal& _deviceCore;
 	const DeviceRenderPassDataInternal& _renderPassData;

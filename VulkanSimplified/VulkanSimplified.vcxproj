@@ -234,13 +234,13 @@
     <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.ImageDataList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\PipelineStructures\VulkanSimplifiers.DevicePipelineData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\PipelineStructures\VulkanSimplifiers.DevicePipelineData.Internal.ixx" />
-    <ClCompile Include="DoNotInclude\Device\PipelineStructures\VulkanSimplifiers.DeviceRenderPassData.Internal.ixx" />
-    <ClCompile Include="DoNotInclude\Device\PipelineStructures\VulkanSimplifiers.DeviceRenderPassData.InternalData.ixx" />
+    <ClCompile Include="DoNotInclude\Device\RenderPassStructures\VulkanSimplifiers.DeviceRenderPassData.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Device\RenderPassStructures\VulkanSimplifiers.DeviceRenderPassData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.ImageDataList.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\CoreStructures\VulkanSimplifiers.LogicalDeviceCore.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\CoreStructures\VulkanSimplifiers.LogicalDeviceCore.InternalData.ixx" />
-    <ClCompile Include="DoNotInclude\Device\RenderPassStructures\VulkanSimplifiers.MemoryObjectsList.Internal.ixx" />
-    <ClCompile Include="DoNotInclude\Device\RenderPassStructures\VulkanSimplifiers.MemoryObjectsList.InternalData.ixx" />
+    <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.MemoryObjectsList.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.MemoryObjectsList.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDataList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\SharedData\VulkanSimplifiers.SharedDescriptorData.InternalData.ixx" />

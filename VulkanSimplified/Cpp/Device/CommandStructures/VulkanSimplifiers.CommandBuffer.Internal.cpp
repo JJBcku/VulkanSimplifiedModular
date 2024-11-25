@@ -4,7 +4,10 @@ module;
 
 module VulkanSimplifiers.CommandBuffer.Internal;
 
-AutoCleanUpCommandBuffer::AutoCleanUpCommandBuffer(VkDevice device, VkCommandBuffer buffer, VkQueue queue) : _device(device), _buffer(buffer), _queue(queue)
+AutoCleanUpCommandBuffer::AutoCleanUpCommandBuffer(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	_deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _imageList(imageList), _device(device),
+	_buffer(buffer), _queue(queue)
 {
 }
 
@@ -41,7 +44,19 @@ void AutoCleanUpCommandBuffer::EndRecording()
 		throw std::runtime_error("AutoCleanUpCommandBuffer::BeginRecording Error: Program failed to end a command buffer's recording session!");
 }
 
-PrimaryNIRCommandBufferInternal::PrimaryNIRCommandBufferInternal(VkDevice device, VkCommandBuffer buffer, VkQueue queue) : AutoCleanUpCommandBuffer(device, buffer, queue)
+void AutoCleanUpCommandBuffer::BindGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID)
+{
+	vkCmdBindPipeline(_buffer, VK_PIPELINE_BIND_POINT_GRAPHICS, _devicePipelineData.GetGraphicsPipeline(pipelineID));
+}
+
+void AutoCleanUpCommandBuffer::Draw(std::uint32_t vertexCount, std::uint32_t instanceCount, std::uint32_t firstVertex, std::uint32_t firstInstance)
+{
+	vkCmdDraw(_buffer, vertexCount, instanceCount, firstVertex, firstInstance);
+}
+
+PrimaryNIRCommandBufferInternal::PrimaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	AutoCleanUpCommandBuffer(deviceRenderPassData, sharedRenderPassData, devicePipelineData, imageList, device, buffer, queue)
 {
 }
 
@@ -49,7 +64,60 @@ PrimaryNIRCommandBufferInternal::~PrimaryNIRCommandBufferInternal()
 {
 }
 
-SecondaryNIRCommandBufferInternal::SecondaryNIRCommandBufferInternal(VkDevice device, VkCommandBuffer buffer, VkQueue queue) : AutoCleanUpCommandBuffer(device, buffer, queue)
+void PrimaryNIRCommandBufferInternal::BeginRenderPass(IDObject<AutoCleanupRenderPass> renderPassID, IDObject<AutoCleanupFramebuffer> framebufferID,
+	std::uint32_t startX, std::uint32_t startY, std::uint32_t width, std::uint32_t height,
+	const std::vector<std::optional<RenderPassClearValuesID>>& clearValues, bool usesSecondaryBuffers)
+{
+	VkRenderPassBeginInfo beginInfo{};
+	beginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+	beginInfo.renderPass = _deviceRenderPassData.GetRenderPass(renderPassID);
+	beginInfo.framebuffer = _imageList.GetFramebuffer(framebufferID);
+
+	beginInfo.renderArea.offset = { static_cast<std::int32_t>(startX), static_cast<std::int32_t>(startY) };
+	beginInfo.renderArea.extent = { width, height };
+
+	size_t maxSize = clearValues.size() << 1;
+	if (maxSize <= clearValues.size())
+		throw std::runtime_error("PrimaryNIRCommandBufferInternal::BeginRenderPass Error: Max size overflowed!");
+
+	std::vector<VkClearValue> clearValuesList;
+	clearValuesList.reserve(maxSize);
+
+	for (auto& clearValue : clearValues)
+	{
+		if (clearValue.has_value())
+		{
+			auto value = _sharedRenderPassData.GetClearValue(clearValue.value());
+
+			clearValuesList.push_back(value.first);
+			if (value.second.has_value())
+				clearValuesList.push_back(value.second.value());
+		}
+		else
+		{
+			clearValuesList.push_back(VkClearValue());
+		}
+	}
+
+	beginInfo.clearValueCount = static_cast<std::uint32_t>(clearValuesList.size());
+	beginInfo.pClearValues = clearValuesList.data();
+
+	VkSubpassContents contents = VK_SUBPASS_CONTENTS_INLINE;
+
+	if (usesSecondaryBuffers)
+		contents = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS;
+
+	vkCmdBeginRenderPass(_buffer, &beginInfo, contents);
+}
+
+void PrimaryNIRCommandBufferInternal::EndRenderPass()
+{
+	vkCmdEndRenderPass(_buffer);
+}
+
+SecondaryNIRCommandBufferInternal::SecondaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	AutoCleanUpCommandBuffer(deviceRenderPassData, sharedRenderPassData, devicePipelineData, imageList, device, buffer, queue)
 {
 }
 
@@ -57,7 +125,9 @@ SecondaryNIRCommandBufferInternal::~SecondaryNIRCommandBufferInternal()
 {
 }
 
-PrimaryIRCommandBufferInternal::PrimaryIRCommandBufferInternal(VkDevice device, VkCommandBuffer buffer, VkQueue queue) : PrimaryNIRCommandBufferInternal(device, buffer, queue)
+PrimaryIRCommandBufferInternal::PrimaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	PrimaryNIRCommandBufferInternal(deviceRenderPassData, sharedRenderPassData, devicePipelineData, imageList, device, buffer, queue)
 {
 }
 
@@ -65,7 +135,60 @@ PrimaryIRCommandBufferInternal::~PrimaryIRCommandBufferInternal()
 {
 }
 
-SecondaryIRCommandBufferInternal::SecondaryIRCommandBufferInternal(VkDevice device, VkCommandBuffer buffer, VkQueue queue) : SecondaryNIRCommandBufferInternal(device, buffer, queue)
+void PrimaryIRCommandBufferInternal::BeginRenderPass(IDObject<AutoCleanupRenderPass> renderPassID, IDObject<AutoCleanupFramebuffer> framebufferID,
+	std::uint32_t startX, std::uint32_t startY, std::uint32_t width, std::uint32_t height,
+	const std::vector<std::optional<RenderPassClearValuesID>>& clearValues, bool usesSecondaryBuffers)
+{
+	VkRenderPassBeginInfo beginInfo{};
+	beginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+	beginInfo.renderPass = _deviceRenderPassData.GetRenderPass(renderPassID);
+	beginInfo.framebuffer = _imageList.GetFramebuffer(framebufferID);
+
+	beginInfo.renderArea.offset = { static_cast<std::int32_t>(startX), static_cast<std::int32_t>(startY) };
+	beginInfo.renderArea.extent = { width, height };
+
+	size_t maxSize = clearValues.size() << 1;
+	if (maxSize <= clearValues.size())
+		throw std::runtime_error("PrimaryNIRCommandBufferInternal::BeginRenderPass Error: Max size overflowed!");
+
+	std::vector<VkClearValue> clearValuesList;
+	clearValuesList.reserve(maxSize);
+
+	for (auto& clearValue : clearValues)
+	{
+		if (clearValue.has_value())
+		{
+			auto value = _sharedRenderPassData.GetClearValue(clearValue.value());
+
+			clearValuesList.push_back(value.first);
+			if (value.second.has_value())
+				clearValuesList.push_back(value.second.value());
+		}
+		else
+		{
+			clearValuesList.push_back(VkClearValue());
+		}
+	}
+
+	beginInfo.clearValueCount = static_cast<std::uint32_t>(clearValuesList.size());
+	beginInfo.pClearValues = clearValuesList.data();
+
+	VkSubpassContents contents = VK_SUBPASS_CONTENTS_INLINE;
+
+	if (usesSecondaryBuffers)
+		contents = VK_SUBPASS_CONTENTS_SECONDARY_COMMAND_BUFFERS;
+
+	vkCmdBeginRenderPass(_buffer, &beginInfo, contents);
+}
+
+void PrimaryIRCommandBufferInternal::EndRenderPass()
+{
+	vkCmdEndRenderPass(_buffer);
+}
+
+SecondaryIRCommandBufferInternal::SecondaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	SecondaryNIRCommandBufferInternal(deviceRenderPassData, sharedRenderPassData, devicePipelineData, imageList, device, buffer, queue)
 {
 }
 

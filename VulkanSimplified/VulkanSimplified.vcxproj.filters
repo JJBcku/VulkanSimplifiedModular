@@ -139,6 +139,15 @@
     <Filter Include="Source Files\Include\Device\DescriptorStructures">
       <UniqueIdentifier>{f0fa2486-5c2a-4c4d-8c8b-9e9ce3e2c7b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Cpp Files\Device\SynchronizationStructures">
+      <UniqueIdentifier>{74d8e524-afde-4466-aedb-7c1c8a7c29d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DoNotInclude\Device\SynchronizationStructures">
+      <UniqueIdentifier>{4ad333d0-2689-4bc4-aa62-0b752565cacd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Include\Device\SynchronizationStructures">
+      <UniqueIdentifier>{7642bc3f-4e05-4724-a2c5-c9a0663394ea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cpp\Main\EventHandling\VulkanSimplifiers.EventHandling.cpp">
@@ -858,32 +867,32 @@
     <ClCompile Include="Cpp\Device\RenderPassStructures\VulkanSimplifiers.SharedRenderPassData.Data.cpp">
       <Filter>Source Files\Cpp Files\SharedData</Filter>
     </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.cpp">
+      <Filter>Source Files\Cpp Files\Device\SynchronizationStructures</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Cpp Files\Device\SynchronizationStructures</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.InternalData.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Cpp Files\Device\SynchronizationStructures</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.InternalData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Cpp Files\Device\SynchronizationStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Internal.ixx">
+      <Filter>Source Files\DoNotInclude\Device\SynchronizationStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.InternalData.ixx">
+      <Filter>Source Files\DoNotInclude\Device\SynchronizationStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.CreationData.ixx">
+      <Filter>Source Files\Include\Device\SynchronizationStructures</Filter>
     </ClCompile>
     <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.Data.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Include\Device\SynchronizationStructures</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.ixx">
+      <Filter>Source Files\Include\Device\SynchronizationStructures</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

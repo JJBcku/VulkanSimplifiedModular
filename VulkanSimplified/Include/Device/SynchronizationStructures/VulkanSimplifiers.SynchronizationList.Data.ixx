@@ -5,3 +5,4 @@ import std;
 import VulkanSimplifiers.SynchronizationList.InternalData;
 
 export class AutoCleanupFence;
+export class AutoCleanupSemaphore;

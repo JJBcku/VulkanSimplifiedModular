@@ -20,6 +20,8 @@ public:
 	bool WaitOnFences(const std::vector<IDObject<AutoCleanupFence>>& fenceIDs, bool waitForAll, std::uint64_t timeout = std::numeric_limits<std::uint64_t>::max());
 	void ResetFences(const std::vector<IDObject<AutoCleanupFence>>& fenceIDs);
 
+	IDObject<AutoCleanupSemaphore> AddSemaphore(size_t addOnReserve = 0);
+
 private:
 	SynchronizationListInternal& _internal;
 };

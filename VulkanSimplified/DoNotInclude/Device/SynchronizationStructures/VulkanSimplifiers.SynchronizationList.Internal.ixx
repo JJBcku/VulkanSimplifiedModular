@@ -22,8 +22,12 @@ public:
 	bool WaitOnFences(const std::vector<IDObject<AutoCleanupFence>>& fenceIDs, bool waitForAll, std::uint64_t timeout);
 	void ResetFences(const std::vector<IDObject<AutoCleanupFence>>& fenceIDs);
 
+	IDObject<AutoCleanupSemaphore> AddSemaphore(size_t addOnReserve);
+	VkSemaphore GetSemaphore(IDObject<AutoCleanupSemaphore> semaphoreID) const;
+
 private:
 	VkDevice _device;
 
 	UnsortedList<AutoCleanupFence> _fenceList;
+	UnsortedList<AutoCleanupSemaphore> _semaphoreList;
 };

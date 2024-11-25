@@ -22,3 +22,8 @@ void SynchronizationListSimplifier::ResetFences(const std::vector<IDObject<AutoC
 {
 	_internal.ResetFences(fenceIDs);
 }
+
+IDObject<AutoCleanupSemaphore> SynchronizationListSimplifier::AddSemaphore(size_t addOnReserve)
+{
+	return _internal.AddSemaphore(addOnReserve);
+}

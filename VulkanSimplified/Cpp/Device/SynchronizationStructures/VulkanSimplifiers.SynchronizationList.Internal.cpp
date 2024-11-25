@@ -5,7 +5,7 @@ module;
 module VulkanSimplifiers.SynchronizationList.Internal;
 
 SynchronizationListInternal::SynchronizationListInternal(VkDevice device, const SynchronizationListCreationData& createInfo) : _device(device),
-	_fenceList(createInfo.fenceListInitialCapacity)
+	_fenceList(createInfo.fenceListInitialCapacity), _semaphoreList(createInfo.semaphoreListInitialCapacity)
 {
 }
 
@@ -77,4 +77,22 @@ void SynchronizationListInternal::ResetFences(const std::vector<IDObject<AutoCle
 
 	if (vkResetFences(_device, static_cast<std::uint32_t>(fences.size()), fences.data()) != VK_SUCCESS)
 		throw std::runtime_error("SynchronizationListInternal::ResetFence Error: Program failed to reset the fences!");
+}
+
+IDObject<AutoCleanupSemaphore> SynchronizationListInternal::AddSemaphore(size_t addOnReserve)
+{
+	VkSemaphoreCreateInfo createInfo{};
+	createInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+
+	VkSemaphore add = VK_NULL_HANDLE;
+
+	if (vkCreateSemaphore(_device, &createInfo, nullptr, &add) != VK_SUCCESS)
+		throw std::runtime_error("SynchronizationListInternal::AddSemaphore Error: Program failed to create a semaphore!");
+
+	return _semaphoreList.AddObject(AutoCleanupSemaphore(_device, add), addOnReserve);
+}
+
+VkSemaphore SynchronizationListInternal::GetSemaphore(IDObject<AutoCleanupSemaphore> semaphoreID) const
+{
+	return _semaphoreList.GetConstObject(semaphoreID).GetSemaphore();
 }

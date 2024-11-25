@@ -113,9 +113,13 @@ void CreateDeviceDependent(VulkanData& data)
 	auto synchronizationList = deviceMain.GetSynchronizationListSimplifier();
 
 	data.deviceDependent->inFlightFences.reserve(swapchainCreation.imageAmount);
+	data.deviceDependent->imageAvailableSemaphores.reserve(swapchainCreation.imageAmount);
+	data.deviceDependent->renderingFinishedSemaphores.reserve(swapchainCreation.imageAmount);
 
 	for (std::uint32_t i = 0; i < swapchainCreation.imageAmount; ++i)
 	{
 		data.deviceDependent->inFlightFences.push_back(synchronizationList.AddFence());
+		data.deviceDependent->imageAvailableSemaphores.push_back(synchronizationList.AddSemaphore());
+		data.deviceDependent->renderingFinishedSemaphores.push_back(synchronizationList.AddSemaphore());
 	}
 }

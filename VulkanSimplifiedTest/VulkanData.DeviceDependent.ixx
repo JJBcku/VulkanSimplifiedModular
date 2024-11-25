@@ -28,6 +28,8 @@ export struct VulkanDataDeviceDependent
 	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> presentCommandBuffers;
 
 	std::vector<IDObject<AutoCleanupFence>> inFlightFences;
+	std::vector<IDObject<AutoCleanupSemaphore>> imageAvailableSemaphores;
+	std::vector<IDObject<AutoCleanupSemaphore>> renderingFinishedSemaphores;
 
 	VulkanDataDeviceDependent() = default;
 };

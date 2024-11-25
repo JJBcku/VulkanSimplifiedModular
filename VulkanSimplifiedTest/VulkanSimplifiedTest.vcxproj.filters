@@ -13,106 +13,121 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\CppFiles">
+      <UniqueIdentifier>{9134d164-9d7e-4ba5-ba6e-8709ef592d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\VulkanData">
+      <UniqueIdentifier>{a625a6a1-91e1-4631-95cc-9b62f3023eb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RunProgram">
+      <UniqueIdentifier>{237bf5df-c07b-4fb6-a0da-a835d3ce9157}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CppFiles\RunProgram">
+      <UniqueIdentifier>{46aad21c-7c46-47f6-8593-4803cdedee47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CppFiles\VulkanData">
+      <UniqueIdentifier>{3e798214-5588-4c3e-bd2e-4157a3aa74c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainSettings.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CppFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanSimplifiersTest.cpp">
+      <Filter>Source Files\CppFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.Basic.ixx">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.DeviceDependent.ixx">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.InstanceDependent.ixx">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.ixx">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.PipelineLayoutData.ixx">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.PipelinesList.ixx">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.RenderPassData.ixx">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.SharedData.ixx">
+      <Filter>Source Files\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateBasics.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateDeviceDependent.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateInstanceDependent.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreatePipeline.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreatePipelineLayout.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateRenderPassData.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.CreateSharedData.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.EventHandling.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.ixx">
+      <Filter>Source Files\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="RunProgram.RunFrame.ixx">
+      <Filter>Source Files\RunProgram</Filter>
     </ClCompile>
     <ClCompile Include="MainSettings.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VulkanSimplifiersTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanData.Basic.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RunProgram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreateBasics.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
     <ClCompile Include="RunProgram.CreateBasics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.EventHandling.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.EventHandling.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreateInstanceDependent.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreateInstanceDependent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanData.InstanceDependent.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreateDeviceDependent.ixx">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
     <ClCompile Include="RunProgram.CreateDeviceDependent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
-    <ClCompile Include="VulkanData.DeviceDependent.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanData.SharedData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreateSharedData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreateSharedData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanData.PipelineLayoutData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreatePipelineLayout.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreatePipelineLayout.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanData.PipelinesList.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreatePipeline.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="RunProgram.CreateInstanceDependent.cpp">
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
     <ClCompile Include="RunProgram.CreatePipeline.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
-    <ClCompile Include="VulkanData.PipelinesList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VulkanData.RenderPassData.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RunProgram.CreateRenderPassData.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="RunProgram.CreatePipelineLayout.cpp">
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
     <ClCompile Include="RunProgram.CreateRenderPassData.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
-    <ClCompile Include="VulkanData.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="RunProgram.CreateSharedData.cpp">
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
-    <ClCompile Include="RunProgram.RunFrame.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="RunProgram.EventHandling.cpp">
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
     </ClCompile>
     <ClCompile Include="RunProgram.RunFrame.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\CppFiles\RunProgram</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.cpp">
+      <Filter>Source Files\CppFiles\VulkanData</Filter>
+    </ClCompile>
+    <ClCompile Include="VulkanData.PipelinesList.cpp">
+      <Filter>Source Files\CppFiles\VulkanData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

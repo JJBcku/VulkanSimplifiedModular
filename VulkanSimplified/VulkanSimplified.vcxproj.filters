@@ -855,5 +855,8 @@
     <ClCompile Include="Include\Device\DescriptorStructures\VulkanSimplifiers.DeviceDescriptorData.ixx">
       <Filter>Source Files\Include\Device\DescriptorStructures</Filter>
     </ClCompile>
+    <ClCompile Include="Cpp\Device\RenderPassStructures\VulkanSimplifiers.SharedRenderPassData.Data.cpp">
+      <Filter>Source Files\Cpp Files\SharedData</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

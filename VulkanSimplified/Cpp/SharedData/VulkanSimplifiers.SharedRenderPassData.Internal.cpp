@@ -6,7 +6,10 @@ module VulkanSimplifiers.SharedRenderPassData.Internal;
 
 SharedRenderPassDataInternal::SharedRenderPassDataInternal(const SharedRenderPassDataCreationInfo& creationData) :
 	_attachmentData(creationData.sharedRenderPassAttachmentsInitialCapacity), _attachmentReferenceData(creationData.sharedRenderPassReferencesInitialCapacity),
-	_subpassDependencies(creationData.sharedSubpassDependenciesInitialCapacity)
+	_subpassDependencies(creationData.sharedSubpassDependenciesInitialCapacity), _doubleClearValues(creationData.doubleColorClearValueInitialCapacity),
+	_int64ClearValues(creationData.int64ColorClearValueInitialCapacity), _uint64ClearValues(creationData.uint64ColorClearValueInitialCapacity),
+	_floatClearValues(creationData.floatColorClearValueInitialCapacity), _intClearValues(creationData.intColorClearValueInitialCapacity),
+	_uintClearValues(creationData.uintColorClearValueInitialCapacity), _depthClearValues(creationData.depthStencilColorClearValueInitialCapacity)
 {
 }
 
@@ -298,6 +301,219 @@ std::vector<VkSubpassDependency> SharedRenderPassDataInternal::GetSubpassDepende
 
 		ret.push_back(add);
 	}
+
+	return ret;
+}
+
+IDObject<RenderPassDoubleColorClearValues> SharedRenderPassDataInternal::AddDoubleColorClearValue(double r, double g, double b, double a, size_t addOnReserve)
+{
+	RenderPassDoubleColorClearValues add{};
+
+	add.r = r;
+	add.g = g;
+	add.b = b;
+	add.a = a;
+
+	return _doubleClearValues.AddUniqueObject(add, addOnReserve);
+}
+
+IDObject<RenderPassInt64ColorClearValues> SharedRenderPassDataInternal::AddInt64ColorClearValue(std::int64_t r, std::int64_t g, std::int64_t b, std::int64_t a, size_t addOnReserve)
+{
+	RenderPassInt64ColorClearValues add{};
+
+	add.r = r;
+	add.g = g;
+	add.b = b;
+	add.a = a;
+
+	return _int64ClearValues.AddUniqueObject(add, addOnReserve);
+}
+
+IDObject<RenderPassUInt64ColorClearValues> SharedRenderPassDataInternal::AddUInt64ColorClearValue(std::uint64_t r, std::uint64_t g, std::uint64_t b, std::uint64_t a, size_t addOnReserve)
+{
+	RenderPassUInt64ColorClearValues add{};
+
+	add.r = r;
+	add.g = g;
+	add.b = b;
+	add.a = a;
+
+	return _uint64ClearValues.AddUniqueObject(add, addOnReserve);
+}
+
+IDObject<RenderPassFloatColorClearValues> SharedRenderPassDataInternal::AddFloatColorClearValue(float r, float g, float b, float a, size_t addOnReserve)
+{
+	RenderPassFloatColorClearValues add{};
+
+	add.r = r;
+	add.g = g;
+	add.b = b;
+	add.a = a;
+
+	return _floatClearValues.AddUniqueObject(add, addOnReserve);
+}
+
+IDObject<RenderPassIntColorClearValues> SharedRenderPassDataInternal::AddIntColorClearValue(std::int32_t r, std::int32_t g, std::int32_t b, std::int32_t a, size_t addOnReserve)
+{
+	RenderPassIntColorClearValues add{};
+
+	add.r = r;
+	add.g = g;
+	add.b = b;
+	add.a = a;
+
+	return _intClearValues.AddUniqueObject(add, addOnReserve);
+}
+
+IDObject<RenderPassUIntColorClearValues> SharedRenderPassDataInternal::AddUIntColorClearValue(std::uint32_t r, std::uint32_t g, std::uint32_t b, std::uint32_t a, size_t addOnReserve)
+{
+	RenderPassUIntColorClearValues add{};
+
+	add.r = r;
+	add.g = g;
+	add.b = b;
+	add.a = a;
+
+	return _uintClearValues.AddUniqueObject(add, addOnReserve);
+}
+
+IDObject<RenderPassDepthStencilClearValues> SharedRenderPassDataInternal::AddDepthStencilClearValue(float depth, std::uint32_t stencil, size_t addOnReserve)
+{
+	RenderPassDepthStencilClearValues add{};
+	add.d = depth;
+	add.s = stencil;
+
+	return _depthClearValues.AddUniqueObject(add, addOnReserve);
+}
+
+std::pair<VkClearValue, std::optional<VkClearValue>> SharedRenderPassDataInternal::GetClearValue(RenderPassClearValuesID valueID) const
+{
+	std::pair<VkClearValue, std::optional<VkClearValue>> ret;
+
+	std::pair<VkClearValue, VkClearValue> data;
+
+	switch (valueID.type)
+	{
+	case RenderPassClearValueIDType::COLOR_DOUBLE:
+		data = GetDoubleColorClearValue(valueID.doubleColorID.ID);
+		ret.first = data.first;
+		ret.second = data.second;
+		break;
+	case RenderPassClearValueIDType::COLOR_INT64:
+		data = GetInt64ColorClearValue(valueID.int64ColorID.ID);
+		ret.first = data.first;
+		ret.second = data.second;
+		break;
+	case RenderPassClearValueIDType::COLOR_UINT64:
+		data = GetUInt64ColorClearValue(valueID.uint64ColorID.ID);
+		ret.first = data.first;
+		ret.second = data.second;
+		break;
+	case RenderPassClearValueIDType::COLOR_FLOAT:
+		ret.first = GetFloatColorClearValue(valueID.floatColorID.ID);
+		break;
+	case RenderPassClearValueIDType::COLOR_INT:
+		ret.first = GetIntColorClearValue(valueID.intColorID.ID);
+		break;
+	case RenderPassClearValueIDType::COLOR_UINT:
+		ret.first = GetUIntColorClearValue(valueID.uintColorID.ID);
+		break;
+	case RenderPassClearValueIDType::DEPTH_STENCIL:
+		ret.first = GetDepthStencilClearValue(valueID.depthStencilID.ID);
+		break;
+	default:
+		throw std::runtime_error("SharedRenderPassDataInternal::GetClearValue Error: Program was given an erroneous type of value's id!");
+	}
+
+	return ret;
+}
+
+std::pair<VkClearValue, VkClearValue> SharedRenderPassDataInternal::GetDoubleColorClearValue(IDObject<RenderPassDoubleColorClearValues> valueID) const
+{
+	std::pair<VkClearValue, VkClearValue> ret;
+
+	auto& data = _doubleClearValues.GetConstObject(valueID);
+
+	std::memcpy(&ret.first.color, &data.r, sizeof(double) << 1);
+	std::memcpy(&ret.second.color, &data.b, sizeof(double) << 1);
+
+	return ret;
+}
+
+std::pair<VkClearValue, VkClearValue> SharedRenderPassDataInternal::GetInt64ColorClearValue(IDObject<RenderPassInt64ColorClearValues> valueID) const
+{
+	std::pair<VkClearValue, VkClearValue> ret;
+
+	auto& data = _int64ClearValues.GetConstObject(valueID);
+
+	std::memcpy(&ret.first.color, &data.r, sizeof(double) << 1);
+	std::memcpy(&ret.second.color, &data.b, sizeof(double) << 1);
+
+	return ret;
+}
+
+std::pair<VkClearValue, VkClearValue> SharedRenderPassDataInternal::GetUInt64ColorClearValue(IDObject<RenderPassUInt64ColorClearValues> valueID) const
+{
+	std::pair<VkClearValue, VkClearValue> ret;
+
+	auto& data = _uint64ClearValues.GetConstObject(valueID);
+
+	std::memcpy(&ret.first.color, &data.r, sizeof(double) << 1);
+	std::memcpy(&ret.second.color, &data.b, sizeof(double) << 1);
+
+	return ret;
+}
+
+VkClearValue SharedRenderPassDataInternal::GetFloatColorClearValue(IDObject<RenderPassFloatColorClearValues> valueID) const
+{
+	VkClearValue ret{};
+
+	auto& data = _floatClearValues.GetConstObject(valueID);
+
+	ret.color.float32[0] = data.r;
+	ret.color.float32[1] = data.g;
+	ret.color.float32[2] = data.b;
+	ret.color.float32[3] = data.a;
+
+	return ret;
+}
+
+VkClearValue SharedRenderPassDataInternal::GetIntColorClearValue(IDObject<RenderPassIntColorClearValues> valueID) const
+{
+	VkClearValue ret{};
+
+	auto& data = _intClearValues.GetConstObject(valueID);
+
+	ret.color.int32[0] = data.r;
+	ret.color.int32[1] = data.g;
+	ret.color.int32[2] = data.b;
+	ret.color.int32[3] = data.a;
+
+	return ret;
+}
+
+VkClearValue SharedRenderPassDataInternal::GetUIntColorClearValue(IDObject<RenderPassUIntColorClearValues> valueID) const
+{
+	VkClearValue ret{};
+
+	auto& data = _uintClearValues.GetConstObject(valueID);
+
+	ret.color.uint32[0] = data.r;
+	ret.color.uint32[1] = data.g;
+	ret.color.uint32[2] = data.b;
+	ret.color.uint32[3] = data.a;
+
+	return ret;
+}
+
+VkClearValue SharedRenderPassDataInternal::GetDepthStencilClearValue(IDObject<RenderPassDepthStencilClearValues> valueID) const
+{
+	VkClearValue ret{};
+
+	auto& data = _depthClearValues.GetConstObject(valueID);
+
+	ret.depthStencil.depth = data.d;
+	ret.depthStencil.stencil = data.s;
 
 	return ret;
 }

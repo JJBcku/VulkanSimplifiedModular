@@ -14,5 +14,7 @@ export struct VulkanRenderPassData
 
 	IDObject<AutoCleanupRenderPass> renderPass;
 
+	std::vector<std::optional<RenderPassClearValuesID>> clearValues;
+
 	VulkanRenderPassData() = default;
 };

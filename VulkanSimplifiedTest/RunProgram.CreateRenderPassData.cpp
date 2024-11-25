@@ -33,4 +33,7 @@ void CreateRenderPassData(VulkanData& data)
 	subpassData.colorAttachments.push_back(renderPassData.colorAttachmentReference);
 
 	renderPassData.renderPass = deviceRenderPassData.AddRenderPassWithoutResolveAttachments(renderPassData.renderPassAttachments, { subpassData }, { renderPassData.subpassDependency });
+
+	renderPassData.clearValues.resize(1);
+	renderPassData.clearValues[0].emplace(renderPassSharedDataList.AddFloatColorClearValue(0.0f, 0.0f, 0.0f, 0.0f));
 }

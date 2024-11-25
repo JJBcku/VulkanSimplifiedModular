@@ -356,6 +356,7 @@
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.CreationData.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.Data.ixx" />
     <ClCompile Include="Include\SharedData\VulkanSimplifiers.SharedRenderPassData.ixx" />
+    <ClCompile Include="Cpp\Device\RenderPassStructures\VulkanSimplifiers.SharedRenderPassData.Data.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

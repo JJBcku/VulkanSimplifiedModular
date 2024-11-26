@@ -27,3 +27,9 @@ void CommonCommandBuffer::Draw(std::uint32_t vertexCount, std::uint32_t instance
 {
 	_internal.Draw(vertexCount, instanceCount, firstVertex, firstInstance);
 }
+
+bool CommonCommandBuffer::AcquireNextImage(std::uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
+	std::uint32_t& returnIndex, IDObject<WindowPointer> windowID)
+{
+	return _internal.AcquireNextImage(timeout, semaphoreID, fenceID, returnIndex, windowID);
+}

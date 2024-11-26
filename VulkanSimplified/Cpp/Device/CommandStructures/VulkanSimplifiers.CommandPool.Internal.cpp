@@ -5,10 +5,11 @@ module;
 module VulkanSimplifiers.CommandPool.Internal;
 
 NIRCommandPoolInternal::NIRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
-	size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity) : _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData),
-	_devicePipelineData(devicePipelineData), _imageList(imageList), _device(device), _commandPool(commandPool), _queue(queue),
-	_primaryBufferList(primaryBufferListInitialCapacity), _secondaryBufferList(secondaryBufferListInitialCapacity)
+	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+	WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity) :
+	_deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList),
+	_imageList(imageList), _windowList(windowList), _device(device), _commandPool(commandPool), _queue(queue), _primaryBufferList(primaryBufferListInitialCapacity),
+	_secondaryBufferList(secondaryBufferListInitialCapacity)
 {
 }
 
@@ -42,8 +43,8 @@ std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> NIRComma
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryNIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
-			_device, buffer, _queue), addOnReserve));
+		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryNIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
+			_synchronizationList, _imageList, _windowList, _device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
@@ -71,8 +72,8 @@ std::vector<IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>>> NIRCom
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryNIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
-			_device, buffer, _queue), addOnReserve));
+		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryNIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
+			_synchronizationList, _imageList, _windowList, _device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
@@ -99,10 +100,11 @@ const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCom
 }
 
 IRCommandPoolInternal::IRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
-	size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity) : _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData),
-	_devicePipelineData(devicePipelineData), _imageList(imageList), _device(device), _commandPool(commandPool), _queue(queue),
-	_primaryBufferList(primaryBufferListInitialCapacity), _secondaryBufferList(secondaryBufferListInitialCapacity)
+	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+	WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity) :
+	_deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList),
+	_imageList(imageList), _windowList(windowList), _device(device), _commandPool(commandPool), _queue(queue), _primaryBufferList(primaryBufferListInitialCapacity),
+	_secondaryBufferList(secondaryBufferListInitialCapacity)
 {
 }
 
@@ -136,8 +138,8 @@ std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> IRCommand
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
-			_device, buffer, _queue), addOnReserve));
+		ret.push_back(_primaryBufferList.AddObject(std::make_unique<PrimaryIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
+			_synchronizationList, _imageList, _windowList, _device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;
@@ -165,8 +167,8 @@ std::vector<IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>>> IRComma
 
 	for (auto& buffer : add)
 	{
-		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData, _imageList,
-			_device, buffer, _queue), addOnReserve));
+		ret.push_back(_secondaryBufferList.AddObject(std::make_unique<SecondaryIRCommandBufferInternal>(_deviceRenderPassData, _sharedRenderPassData, _devicePipelineData,
+			_synchronizationList, _imageList, _windowList, _device, buffer, _queue), addOnReserve));
 	}
 
 	return ret;

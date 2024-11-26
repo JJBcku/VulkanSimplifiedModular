@@ -35,6 +35,8 @@ public:
 
 	void CreateSwapchain(SwapchainInitData swapchainInit, bool throwOnSwapchainExist, bool throwOnDeviceChange);
 
+	bool AcquireNextImage(VkDevice device, std::uint64_t timeout, VkSemaphore semaphore, VkFence fence, std::uint32_t& returnIndex);
+
 private:
 	std::uint32_t _width, _height;
 

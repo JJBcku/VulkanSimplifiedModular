@@ -28,12 +28,23 @@ import VulkanSimplifiers.DevicePipelineData.Internal;
 import VulkanSimplifiers.DevicePipelineData.InternalData;
 import VulkanSimplifiers.DevicePipelineData.Data;
 
+import VulkanSimplifiers.SynchronizationList.Internal;
+import VulkanSimplifiers.SynchronizationList.InternalData;
+import VulkanSimplifiers.SynchronizationList.Data;
+
+import VulkanSimplifiers.WindowList.Internal;
+import VulkanSimplifiers.WindowList.Data;
+
+import VulkanSimplifiers.Window.Internal;
+import VulkanSimplifiers.Window.InternalData;
+import VulkanSimplifiers.Window.Data;
+
 export class CommandPoolListInternal
 {
 public:
-	CommandPoolListInternal(const LogicalDeviceCoreInternal& deviceCore, const DeviceRenderPassDataInternal& deviceRenderPassData,
-		const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList,
-		const CommandPoolListCreationData& creationData);
+	CommandPoolListInternal(const LogicalDeviceCoreInternal& deviceCore, const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+		WindowListInternal& windowList, const CommandPoolListCreationData& creationData);
 	~CommandPoolListInternal();
 
 	CommandPoolListInternal(const CommandPoolListInternal&) noexcept = delete;
@@ -60,8 +71,11 @@ private:
 	const SharedRenderPassDataInternal& _sharedRenderPassData;
 
 	const DevicePipelineDataInternal& _devicePipelineData;
+	const SynchronizationListInternal& _synchronizationList;
 
 	const ImageDataListInternal& _imageList;
+
+	WindowListInternal& _windowList;
 
 	VkDevice _device;
 

@@ -181,6 +181,19 @@ void WindowInternal::CreateSwapchain(SwapchainInitData swapchainInit, bool throw
 	ReCreateSwapchain();
 }
 
+bool WindowInternal::AcquireNextImage(VkDevice device, std::uint64_t timeout, VkSemaphore semaphore, VkFence fence, std::uint32_t& returnIndex)
+{
+	if (device != _device)
+		throw std::runtime_error("WindowInternal::AcquireNextImage Error: Program tried to used different device than swapchain was created with!");
+
+	VkResult result = vkAcquireNextImageKHR(_device, _swapchain, timeout, semaphore, fence, &returnIndex);
+
+	if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+		throw std::runtime_error("WindowInternal::AcquireNextImage Error: Program failed to acquire next image!");
+
+	return result == VK_SUCCESS;
+}
+
 void WindowInternal::CreateWindow(WindowCreationData data)
 {
 	if (_window != nullptr)

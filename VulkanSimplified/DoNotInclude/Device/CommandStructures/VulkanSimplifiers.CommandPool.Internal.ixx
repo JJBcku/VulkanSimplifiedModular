@@ -25,12 +25,23 @@ import VulkanSimplifiers.DevicePipelineData.Internal;
 import VulkanSimplifiers.DevicePipelineData.InternalData;
 import VulkanSimplifiers.DevicePipelineData.Data;
 
+import VulkanSimplifiers.SynchronizationList.Internal;
+import VulkanSimplifiers.SynchronizationList.InternalData;
+import VulkanSimplifiers.SynchronizationList.Data;
+
+import VulkanSimplifiers.WindowList.Internal;
+import VulkanSimplifiers.WindowList.Data;
+
+import VulkanSimplifiers.Window.Internal;
+import VulkanSimplifiers.Window.InternalData;
+import VulkanSimplifiers.Window.Data;
+
 export class NIRCommandPoolInternal
 {
 public:
 	NIRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
-		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
+		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+		WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
 	~NIRCommandPoolInternal();
 
 	NIRCommandPoolInternal(const NIRCommandPoolInternal&) noexcept = delete;
@@ -53,8 +64,11 @@ private:
 	const SharedRenderPassDataInternal& _sharedRenderPassData;
 
 	const DevicePipelineDataInternal& _devicePipelineData;
+	const SynchronizationListInternal& _synchronizationList;
 
 	const ImageDataListInternal& _imageList;
+
+	WindowListInternal& _windowList;
 
 	VkDevice _device;
 	VkCommandPool _commandPool;
@@ -69,8 +83,8 @@ export class IRCommandPoolInternal
 {
 public:
 	IRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData,const ImageDataListInternal& imageList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
-		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
+		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+		WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
 	~IRCommandPoolInternal();
 
 	IRCommandPoolInternal(const IRCommandPoolInternal&) noexcept = delete;
@@ -93,8 +107,11 @@ private:
 	const SharedRenderPassDataInternal& _sharedRenderPassData;
 
 	const DevicePipelineDataInternal& _devicePipelineData;
+	const SynchronizationListInternal& _synchronizationList;
 
 	const ImageDataListInternal& _imageList;
+
+	WindowListInternal& _windowList;
 
 	VkDevice _device;
 	VkCommandPool _commandPool;

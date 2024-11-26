@@ -14,6 +14,10 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 
 	synchronizationList.ResetFences({ data.deviceDependent->inFlightFences[frameNumber] });
 
+	std::uint32_t nextFrame = 0;
+	deviceGraphicsBuffer.AcquireNextImage(std::numeric_limits<std::uint64_t>::max(), data.deviceDependent->imageAvailableSemaphores[frameNumber], {},
+		nextFrame, data.basicData->windowID);
+
 	deviceGraphicsBuffer.BeginRecording(CommandBufferUsage::ONE_USE);
 
 	deviceGraphicsBuffer.BeginRenderPass(data.renderPassData->renderPass, data.pipelinesList->attachmentData->framebuffer, 0U, 0U,

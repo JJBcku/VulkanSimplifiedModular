@@ -7,6 +7,9 @@ import VulkanSimplifiers.CommandBuffer.Internal;
 import VulkanSimplifiers.CommonCommandBuffer.Data;
 import VulkanSimplifiers.DevicePipelineData.Data;
 
+import VulkanSimplifiers.SynchronizationList.Data;
+import VulkanSimplifiers.WindowList.Data;
+
 export class CommonCommandBuffer
 {
 public:
@@ -21,6 +24,9 @@ public:
 	void BindGraphicsPipeline(IDObject<AutoCleanupGraphicsPipeline> pipelineID);
 
 	void Draw(std::uint32_t vertexCount, std::uint32_t instanceCount, std::uint32_t firstVertex, std::uint32_t firstInstance);
+
+	bool AcquireNextImage(std::uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
+		std::uint32_t& returnIndex, IDObject<WindowPointer> windowID);
 
 private:
 	AutoCleanUpCommandBuffer& _internal;

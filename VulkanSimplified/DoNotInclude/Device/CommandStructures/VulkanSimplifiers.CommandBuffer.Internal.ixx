@@ -22,11 +22,23 @@ import VulkanSimplifiers.DevicePipelineData.Internal;
 import VulkanSimplifiers.DevicePipelineData.InternalData;
 import VulkanSimplifiers.DevicePipelineData.Data;
 
+import VulkanSimplifiers.SynchronizationList.Internal;
+import VulkanSimplifiers.SynchronizationList.InternalData;
+import VulkanSimplifiers.SynchronizationList.Data;
+
+import VulkanSimplifiers.WindowList.Internal;
+import VulkanSimplifiers.WindowList.Data;
+
+import VulkanSimplifiers.Window.Internal;
+import VulkanSimplifiers.Window.InternalData;
+import VulkanSimplifiers.Window.Data;
+
 export class AutoCleanUpCommandBuffer
 {
 public:
 	AutoCleanUpCommandBuffer(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~AutoCleanUpCommandBuffer();
 
 	AutoCleanUpCommandBuffer(const AutoCleanUpCommandBuffer&) noexcept = delete;
@@ -42,13 +54,19 @@ public:
 
 	void Draw(std::uint32_t vertexCount, std::uint32_t instanceCount, std::uint32_t firstVertex, std::uint32_t firstInstance);
 
+	bool AcquireNextImage(std::uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
+		std::uint32_t& returnIndex, IDObject<WindowPointer> windowID);
+
 protected:
 	const DeviceRenderPassDataInternal& _deviceRenderPassData;
 	const SharedRenderPassDataInternal& _sharedRenderPassData;
 
 	const DevicePipelineDataInternal& _devicePipelineData;
+	const SynchronizationListInternal& _synchronizationList;
 
 	const ImageDataListInternal& _imageList;
+
+	WindowListInternal& _windowList;
 
 	VkDevice _device;
 	VkCommandBuffer _buffer;
@@ -60,7 +78,8 @@ export class PrimaryNIRCommandBufferInternal : public AutoCleanUpCommandBuffer
 {
 public:
 	PrimaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~PrimaryNIRCommandBufferInternal();
 
 	PrimaryNIRCommandBufferInternal(const PrimaryNIRCommandBufferInternal&) noexcept = delete;
@@ -78,7 +97,8 @@ export class SecondaryNIRCommandBufferInternal : public AutoCleanUpCommandBuffer
 {
 public:
 	SecondaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~SecondaryNIRCommandBufferInternal();
 
 	SecondaryNIRCommandBufferInternal(const SecondaryNIRCommandBufferInternal&) noexcept = delete;
@@ -92,7 +112,8 @@ export class PrimaryIRCommandBufferInternal : public PrimaryNIRCommandBufferInte
 {
 public:
 	PrimaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~PrimaryIRCommandBufferInternal();
 
 	PrimaryIRCommandBufferInternal(const PrimaryIRCommandBufferInternal&) noexcept = delete;
@@ -110,7 +131,8 @@ export class SecondaryIRCommandBufferInternal : public SecondaryNIRCommandBuffer
 {
 public:
 	SecondaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~SecondaryIRCommandBufferInternal();
 
 	SecondaryIRCommandBufferInternal(const SecondaryIRCommandBufferInternal&) noexcept = delete;

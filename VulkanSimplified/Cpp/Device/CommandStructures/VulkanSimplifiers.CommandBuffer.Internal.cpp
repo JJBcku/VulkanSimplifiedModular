@@ -5,8 +5,9 @@ module;
 module VulkanSimplifiers.CommandBuffer.Internal;
 
 AutoCleanUpCommandBuffer::AutoCleanUpCommandBuffer(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	_deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _imageList(imageList), _device(device),
+	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) : _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData),
+	_devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList), _windowList(windowList), _device(device),
 	_buffer(buffer), _queue(queue)
 {
 }
@@ -54,9 +55,27 @@ void AutoCleanUpCommandBuffer::Draw(std::uint32_t vertexCount, std::uint32_t ins
 	vkCmdDraw(_buffer, vertexCount, instanceCount, firstVertex, firstInstance);
 }
 
+bool AutoCleanUpCommandBuffer::AcquireNextImage(std::uint64_t timeout, std::optional<IDObject<AutoCleanupSemaphore>> semaphoreID, std::optional<IDObject<AutoCleanupFence>> fenceID,
+	std::uint32_t& returnIndex, IDObject<WindowPointer> windowID)
+{
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	VkSemaphore semaphore = VK_NULL_HANDLE;
+	VkFence fence = VK_NULL_HANDLE;
+
+	if (semaphoreID.has_value())
+		semaphore = _synchronizationList.GetSemaphore(semaphoreID.value());
+
+	if (fenceID.has_value())
+		fence = _synchronizationList.GetFence(fenceID.value());
+
+	return window.AcquireNextImage(_device, timeout, semaphore, fence, returnIndex);
+}
+
 PrimaryNIRCommandBufferInternal::PrimaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	AutoCleanUpCommandBuffer(deviceRenderPassData, sharedRenderPassData, devicePipelineData, imageList, device, buffer, queue)
+	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	AutoCleanUpCommandBuffer(deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
 {
 }
 
@@ -116,8 +135,9 @@ void PrimaryNIRCommandBufferInternal::EndRenderPass()
 }
 
 SecondaryNIRCommandBufferInternal::SecondaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	AutoCleanUpCommandBuffer(deviceRenderPassData, sharedRenderPassData, devicePipelineData, imageList, device, buffer, queue)
+	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	AutoCleanUpCommandBuffer(deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
 {
 }
 
@@ -126,8 +146,9 @@ SecondaryNIRCommandBufferInternal::~SecondaryNIRCommandBufferInternal()
 }
 
 PrimaryIRCommandBufferInternal::PrimaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	PrimaryNIRCommandBufferInternal(deviceRenderPassData, sharedRenderPassData, devicePipelineData, imageList, device, buffer, queue)
+	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	PrimaryNIRCommandBufferInternal(deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
 {
 }
 
@@ -187,8 +208,9 @@ void PrimaryIRCommandBufferInternal::EndRenderPass()
 }
 
 SecondaryIRCommandBufferInternal::SecondaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const ImageDataListInternal& imageList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	SecondaryNIRCommandBufferInternal(deviceRenderPassData, sharedRenderPassData, devicePipelineData, imageList, device, buffer, queue)
+	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
+	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	SecondaryNIRCommandBufferInternal(deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
 {
 }
 

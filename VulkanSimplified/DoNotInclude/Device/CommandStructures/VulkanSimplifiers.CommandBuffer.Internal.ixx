@@ -125,6 +125,8 @@ public:
 	void BeginRenderPass(IDObject<AutoCleanupRenderPass> renderPassID, IDObject<AutoCleanupFramebuffer> framebufferID, std::uint32_t startX, std::uint32_t startY,
 		std::uint32_t width, std::uint32_t height, const std::vector<std::optional<RenderPassClearValuesID>>& clearValues, bool usesSecondaryBuffers);
 	void EndRenderPass();
+
+	void ResetCommandBuffer(bool freeResources);
 };
 
 export class SecondaryIRCommandBufferInternal : public SecondaryNIRCommandBufferInternal
@@ -140,4 +142,6 @@ public:
 
 	SecondaryIRCommandBufferInternal& operator=(const SecondaryIRCommandBufferInternal&) noexcept = delete;
 	SecondaryIRCommandBufferInternal& operator=(SecondaryIRCommandBufferInternal&& rhs) noexcept = delete;
+
+	void ResetCommandBuffer(bool freeResources);
 };

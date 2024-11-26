@@ -6,7 +6,7 @@ export import ListTemplates.IDObject;
 export import VulkanSimplifiers.ShaderList.Data;
 export import VulkanSimplifiers.Common.DataFormatFlags;
 export import VulkanSimplifiers.CommandPool.Data;
-export import VulkanSimplifiers.NIRCommandPool.Data;
+export import VulkanSimplifiers.IRCommandPool.Data;
 export import VulkanSimplifiers.SynchronizationList.Data;
 
 export struct VulkanDataDeviceDependent
@@ -18,14 +18,14 @@ export struct VulkanDataDeviceDependent
 
 	size_t imageAmount;
 
-	IDObject<std::unique_ptr<NIRCommandPoolInternal>> graphicsCommandPool;
-	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> graphicsCommandBuffers;
+	IDObject<std::unique_ptr<IRCommandPoolInternal>> graphicsCommandPool;
+	std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> graphicsCommandBuffers;
 
-	std::optional<IDObject<std::unique_ptr<NIRCommandPoolInternal>>> transferCommandPool;
-	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> transferCommandBuffers;
+	std::optional<IDObject<std::unique_ptr<IRCommandPoolInternal>>> transferCommandPool;
+	std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> transferCommandBuffers;
 
-	std::optional<IDObject<std::unique_ptr<NIRCommandPoolInternal>>> presentCommandPool;
-	std::vector<IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>>> presentCommandBuffers;
+	std::optional<IDObject<std::unique_ptr<IRCommandPoolInternal>>> presentCommandPool;
+	std::vector<IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>>> presentCommandBuffers;
 
 	std::vector<IDObject<AutoCleanupFence>> inFlightFences;
 	std::vector<IDObject<AutoCleanupSemaphore>> imageAvailableSemaphores;

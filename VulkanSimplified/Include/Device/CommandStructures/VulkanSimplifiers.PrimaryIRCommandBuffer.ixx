@@ -23,6 +23,8 @@ public:
 		std::uint32_t width, std::uint32_t height, const std::vector<std::optional<RenderPassClearValuesID>>& clearValues, bool usesSecondaryBuffers = false);
 	void EndRenderPass();
 
+	void ResetCommandBuffer(bool freeResources);
+
 private:
 	PrimaryIRCommandBufferInternal& _internal;
 };

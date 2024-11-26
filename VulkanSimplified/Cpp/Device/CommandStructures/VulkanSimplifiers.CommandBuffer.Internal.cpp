@@ -207,6 +207,15 @@ void PrimaryIRCommandBufferInternal::EndRenderPass()
 	vkCmdEndRenderPass(_buffer);
 }
 
+void PrimaryIRCommandBufferInternal::ResetCommandBuffer(bool freeResources)
+{
+	VkCommandBufferResetFlags flags = 0;
+	if (freeResources)
+		flags = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT;
+
+	vkResetCommandBuffer(_buffer, flags);
+}
+
 SecondaryIRCommandBufferInternal::SecondaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
 	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
 	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
@@ -216,4 +225,13 @@ SecondaryIRCommandBufferInternal::SecondaryIRCommandBufferInternal(const DeviceR
 
 SecondaryIRCommandBufferInternal::~SecondaryIRCommandBufferInternal()
 {
+}
+
+void SecondaryIRCommandBufferInternal::ResetCommandBuffer(bool freeResources)
+{
+	VkCommandBufferResetFlags flags = 0;
+	if (freeResources)
+		flags = VK_COMMAND_BUFFER_RESET_RELEASE_RESOURCES_BIT;
+
+	vkResetCommandBuffer(_buffer, flags);
 }

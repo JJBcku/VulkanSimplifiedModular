@@ -59,6 +59,8 @@ public:
 	const PrimaryNIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> bufferID) const;
 	const SecondaryNIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> bufferID) const;
 
+	void ResetCommandPool(bool freeResources);
+
 private:
 	const DeviceRenderPassDataInternal& _deviceRenderPassData;
 	const SharedRenderPassDataInternal& _sharedRenderPassData;
@@ -101,6 +103,8 @@ public:
 
 	const PrimaryIRCommandBufferInternal& GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> bufferID) const;
 	const SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID) const;
+
+	void ResetCommandPool(bool freeResources);
 
 private:
 	const DeviceRenderPassDataInternal& _deviceRenderPassData;

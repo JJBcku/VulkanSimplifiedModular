@@ -26,6 +26,8 @@ public:
 	const PrimaryIRCommandBufferSimplifier GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> bufferID) const;
 	const SecondaryIRCommandBufferSimplifier GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID) const;
 
+	void ResetCommandPool(bool freeResources);
+
 private:
 	IRCommandPoolInternal& _internal;
 };

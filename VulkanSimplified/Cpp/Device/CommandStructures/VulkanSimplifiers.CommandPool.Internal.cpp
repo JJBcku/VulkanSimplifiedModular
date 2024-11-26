@@ -99,6 +99,15 @@ const SecondaryNIRCommandBufferInternal& NIRCommandPoolInternal::GetSecondaryCom
 	return *_secondaryBufferList.GetConstObject(bufferID);
 }
 
+void NIRCommandPoolInternal::ResetCommandPool(bool freeResources)
+{
+	VkCommandPoolResetFlags flags = 0;
+	if (freeResources)
+		flags = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT;
+
+	vkResetCommandPool(_device, _commandPool, flags);
+}
+
 IRCommandPoolInternal::IRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
 	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
 	WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity) :
@@ -192,4 +201,13 @@ const PrimaryIRCommandBufferInternal& IRCommandPoolInternal::GetPrimaryCommandBu
 const SecondaryIRCommandBufferInternal& IRCommandPoolInternal::GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID) const
 {
 	return *_secondaryBufferList.GetConstObject(bufferID);
+}
+
+void IRCommandPoolInternal::ResetCommandPool(bool freeResources)
+{
+	VkCommandPoolResetFlags flags = 0;
+	if (freeResources)
+		flags = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT;
+
+	vkResetCommandPool(_device, _commandPool, flags);
 }

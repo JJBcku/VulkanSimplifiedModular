@@ -12,6 +12,8 @@ public:
 
 	SecondaryIRCommandBufferSimplifier& operator=(const SecondaryIRCommandBufferSimplifier&) noexcept = delete;
 
+	void ResetCommandBuffer(bool freeResources);
+
 private:
 	SecondaryIRCommandBufferInternal& _internal;
 };

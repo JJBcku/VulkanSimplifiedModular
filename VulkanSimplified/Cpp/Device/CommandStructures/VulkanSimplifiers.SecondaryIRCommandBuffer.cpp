@@ -7,3 +7,8 @@ SecondaryIRCommandBufferSimplifier::SecondaryIRCommandBufferSimplifier(Secondary
 SecondaryIRCommandBufferSimplifier::~SecondaryIRCommandBufferSimplifier()
 {
 }
+
+void SecondaryIRCommandBufferSimplifier::ResetCommandBuffer(bool freeResources)
+{
+	_internal.ResetCommandBuffer(freeResources);
+}

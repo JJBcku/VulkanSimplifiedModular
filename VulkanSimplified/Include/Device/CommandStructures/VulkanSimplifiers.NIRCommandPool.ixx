@@ -30,6 +30,8 @@ public:
 	const PrimaryNIRCommandBufferSimplifier GetPrimaryCommandBufferSimplifier(IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> bufferID) const;
 	const SecondaryNIRCommandBufferSimplifier GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> bufferID) const;
 
+	void ResetCommandPool(bool freeResources);
+
 private:
 	NIRCommandPoolInternal& _internal;
 };

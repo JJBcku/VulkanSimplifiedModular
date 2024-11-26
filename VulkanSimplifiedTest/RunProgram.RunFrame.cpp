@@ -6,7 +6,7 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 	auto deviceList = instance.GetDeviceListSimplifier();
 	auto deviceMain = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
 	auto deviceCommandPoolList = deviceMain.GetCommandPoolListSimplifier();
-	auto deviceGraphicsCommandPool = deviceCommandPoolList.GetCommandPoolWithoutIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
+	auto deviceGraphicsCommandPool = deviceCommandPoolList.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
 	auto deviceGraphicsBuffer = deviceGraphicsCommandPool.GetPrimaryCommandBufferSimplifier(data.deviceDependent->graphicsCommandBuffers[frameNumber]);
 	auto synchronizationList = deviceMain.GetSynchronizationListSimplifier();
 
@@ -17,6 +17,8 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 	std::uint32_t nextFrame = 0;
 	deviceGraphicsBuffer.AcquireNextImage(std::numeric_limits<std::uint64_t>::max(), data.deviceDependent->imageAvailableSemaphores[frameNumber], {},
 		nextFrame, data.basicData->windowID);
+
+	deviceGraphicsBuffer.ResetCommandBuffer(false);
 
 	deviceGraphicsBuffer.BeginRecording(CommandBufferUsage::ONE_USE);
 

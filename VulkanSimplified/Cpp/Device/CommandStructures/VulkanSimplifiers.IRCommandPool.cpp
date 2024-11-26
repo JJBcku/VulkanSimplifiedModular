@@ -37,3 +37,8 @@ const SecondaryIRCommandBufferSimplifier IRCommandPoolSimplifier::GetSecondaryCo
 {
 	return _internal.GetSecondaryCommandBufferSimplifier(bufferID);
 }
+
+void IRCommandPoolSimplifier::ResetCommandPool(bool freeResources)
+{
+	_internal.ResetCommandPool(freeResources);
+}

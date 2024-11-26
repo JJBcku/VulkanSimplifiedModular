@@ -19,3 +19,8 @@ void PrimaryIRCommandBufferSimplifier::EndRenderPass()
 {
 	_internal.EndRenderPass();
 }
+
+void PrimaryIRCommandBufferSimplifier::ResetCommandBuffer(bool freeResources)
+{
+	_internal.ResetCommandBuffer(freeResources);
+}

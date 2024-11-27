@@ -47,6 +47,8 @@ public:
 	AutoCleanUpCommandBuffer& operator=(const AutoCleanUpCommandBuffer&) noexcept = delete;
 	AutoCleanUpCommandBuffer& operator=(AutoCleanUpCommandBuffer&& rhs) noexcept = delete;
 
+	VkCommandBuffer GetCommandBuffer() const;
+
 	void BeginRecording(CommandBufferUsage usage);
 	void EndRecording();
 

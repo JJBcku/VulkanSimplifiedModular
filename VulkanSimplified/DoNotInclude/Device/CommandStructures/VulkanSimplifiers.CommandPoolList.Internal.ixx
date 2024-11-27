@@ -39,6 +39,9 @@ import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Window.InternalData;
 import VulkanSimplifiers.Window.Data;
 
+import VulkanSimplifiers.CommandPoolList.Data;
+import VulkanSimplifiers.Common.PipelineStageFlags.Internal;
+
 export class CommandPoolListInternal
 {
 public:
@@ -64,6 +67,8 @@ public:
 	const NIRCommandPoolInternal& GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID) const;
 	const IRCommandPoolInternal& GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID) const;
 
+	void SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmitInfo>& submitInfos, std::optional<IDObject<AutoCleanupFence>> fenceID);
+
 private:
 	const LogicalDeviceCoreInternal& _deviceCore;
 
@@ -81,4 +86,15 @@ private:
 
 	UnsortedList<std::unique_ptr<NIRCommandPoolInternal>> _noIndividualResetCommandPoolList;
 	UnsortedList<std::unique_ptr<IRCommandPoolInternal>> _individualResetCommandPoolList;
+
+	VkCommandBuffer GetCommandBuffer(CommandBufferGenericID bufferID) const;
+
+	VkCommandBuffer GetCommandBuffer(IDObject<std::unique_ptr<NIRCommandPoolInternal>> commandPoolID,
+		IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> commandBufferID) const;
+	VkCommandBuffer GetCommandBuffer(IDObject<std::unique_ptr<NIRCommandPoolInternal>> commandPoolID,
+		IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> commandBufferID) const;
+	VkCommandBuffer GetCommandBuffer(IDObject<std::unique_ptr<IRCommandPoolInternal>> commandPoolID,
+		IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> commandBufferID) const;
+	VkCommandBuffer GetCommandBuffer(IDObject<std::unique_ptr<IRCommandPoolInternal>> commandPoolID,
+		IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> commandBufferID) const;
 };

@@ -16,6 +16,11 @@ AutoCleanUpCommandBuffer::~AutoCleanUpCommandBuffer()
 {
 }
 
+VkCommandBuffer AutoCleanUpCommandBuffer::GetCommandBuffer() const
+{
+	return _buffer;
+}
+
 void AutoCleanUpCommandBuffer::BeginRecording(CommandBufferUsage usage)
 {
 	VkCommandBufferBeginInfo beginInfo{};

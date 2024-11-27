@@ -77,3 +77,135 @@ const IRCommandPoolInternal& CommandPoolListInternal::GetCommandPoolWithIndividu
 {
 	return *_individualResetCommandPoolList.GetConstObject(poolID);
 }
+
+void CommandPoolListInternal::SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmitInfo>& submitInfos, std::optional<IDObject<AutoCleanupFence>> fenceID)
+{
+	VkQueue queue = _deviceCore.GetQueue(queueID);
+
+	if (submitInfos.empty())
+		throw std::runtime_error("CommandPoolListInternal::SubmitBuffers Error: Program tried to submit no data!");
+
+	std::vector<VkSubmitInfo> submitInfoList;
+	std::vector<std::vector<VkSemaphore>> waitSemaphores;
+	std::vector<std::vector<VkPipelineStageFlags>> pipelineStageFlags;
+	std::vector<std::vector<VkCommandBuffer>> commandBuffers;
+	std::vector<std::vector<VkSemaphore>> signalSemaphores;
+
+	submitInfoList.reserve(submitInfos.size());
+	waitSemaphores.resize(submitInfos.size());
+	pipelineStageFlags.resize(submitInfos.size());
+	commandBuffers.resize(submitInfos.size());
+	signalSemaphores.resize(submitInfos.size());
+
+	for (size_t i = 0; i < submitInfos.size(); ++i)
+	{
+		auto& submitInfo = submitInfos[i];
+
+		VkSubmitInfo add{};
+		add.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
+
+		if (submitInfos[i].commandBufferIDs.empty())
+			throw std::runtime_error("CommandPoolListInternal::SubmitBuffers Error: Program tried to submit no commands buffer in a batch!");
+
+		waitSemaphores[i].reserve(submitInfo.waitSemaphores.size());
+		pipelineStageFlags[i].reserve(submitInfo.waitSemaphores.size());
+		commandBuffers[i].reserve(submitInfo.commandBufferIDs.size());
+		signalSemaphores[i].reserve(submitInfo.signalSemaphores.size());
+
+		for (auto& waitSemaphoresData : submitInfo.waitSemaphores)
+		{
+			waitSemaphores[i].push_back(_synchronizationList.GetSemaphore(waitSemaphoresData.first));
+			pipelineStageFlags[i].push_back(TranslateStageFlags(waitSemaphoresData.second));
+		}
+
+		add.waitSemaphoreCount = static_cast<std::uint32_t>(waitSemaphores[i].size());
+		add.pWaitSemaphores = waitSemaphores[i].data();
+		add.pWaitDstStageMask = pipelineStageFlags[i].data();
+
+		for (auto& commandBufferID : submitInfo.commandBufferIDs)
+		{
+			commandBuffers[i].push_back(GetCommandBuffer(commandBufferID));
+		}
+
+		add.commandBufferCount = static_cast<std::uint32_t>(commandBuffers[i].size());
+		add.pCommandBuffers = commandBuffers[i].data();
+
+		for (auto& signalSemaphoresData : submitInfo.signalSemaphores)
+		{
+			signalSemaphores[i].push_back(_synchronizationList.GetSemaphore(signalSemaphoresData));
+		}
+
+		add.signalSemaphoreCount = static_cast<std::uint32_t>(signalSemaphores[i].size());
+		add.pSignalSemaphores = signalSemaphores[i].data();
+
+		submitInfoList.push_back(add);
+	}
+
+	VkFence fence = VK_NULL_HANDLE;
+	if (fenceID.has_value())
+		fence = _synchronizationList.GetFence(fenceID.value());
+
+	if (vkQueueSubmit(queue, static_cast<std::uint32_t>(submitInfoList.size()), submitInfoList.data(), fence) != VK_SUCCESS)
+		throw std::runtime_error("CommandPoolListInternal::SubmitBuffers Error: Program failed to submit command buffers to queue!");
+}
+
+VkCommandBuffer CommandPoolListInternal::GetCommandBuffer(CommandBufferGenericID bufferID) const
+{
+	VkCommandBuffer ret = VK_NULL_HANDLE;
+
+	switch (bufferID.type)
+	{
+	case CommandBufferIDType::NIR_PRIMARY:
+		ret = GetCommandBuffer(bufferID.NIRPrimaryID.commandPoolID, bufferID.NIRPrimaryID.commandBufferID);
+		break;
+	case CommandBufferIDType::NIR_SECONDARY:
+		ret = GetCommandBuffer(bufferID.NIRSecondaryID.commandPoolID, bufferID.NIRSecondaryID.commandBufferID);
+		break;
+	case CommandBufferIDType::IR_PRIMARY:
+		ret = GetCommandBuffer(bufferID.IRPrimaryID.commandPoolID, bufferID.IRPrimaryID.commandBufferID);
+		break;
+	case CommandBufferIDType::IR_SECONDARY:
+		ret = GetCommandBuffer(bufferID.IRSecondaryID.commandPoolID, bufferID.IRSecondaryID.commandBufferID);
+		break;
+	default:
+		throw std::runtime_error("CommandPoolListInternal::GetCommandBuffer Error: Program was given an erroneous command buffer ID type!");
+	}
+
+	return ret;
+}
+
+VkCommandBuffer CommandPoolListInternal::GetCommandBuffer(IDObject<std::unique_ptr<NIRCommandPoolInternal>> commandPoolID,
+	IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> commandBufferID) const
+{
+	auto& commandPool = _noIndividualResetCommandPoolList.GetConstObject(commandPoolID);
+	auto& commandBuffer = commandPool->GetPrimaryCommandBufferSimplifier(commandBufferID);
+
+	return commandBuffer.GetCommandBuffer();
+}
+
+VkCommandBuffer CommandPoolListInternal::GetCommandBuffer(IDObject<std::unique_ptr<NIRCommandPoolInternal>> commandPoolID,
+	IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> commandBufferID) const
+{
+	auto& commandPool = _noIndividualResetCommandPoolList.GetConstObject(commandPoolID);
+	auto& commandBuffer = commandPool->GetSecondaryCommandBufferSimplifier(commandBufferID);
+
+	return commandBuffer.GetCommandBuffer();
+}
+
+VkCommandBuffer CommandPoolListInternal::GetCommandBuffer(IDObject<std::unique_ptr<IRCommandPoolInternal>> commandPoolID,
+	IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> commandBufferID) const
+{
+	auto& commandPool = _individualResetCommandPoolList.GetConstObject(commandPoolID);
+	auto& commandBuffer = commandPool->GetPrimaryCommandBufferSimplifier(commandBufferID);
+
+	return commandBuffer.GetCommandBuffer();
+}
+
+VkCommandBuffer CommandPoolListInternal::GetCommandBuffer(IDObject<std::unique_ptr<IRCommandPoolInternal>> commandPoolID,
+	IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> commandBufferID) const
+{
+	auto& commandPool = _individualResetCommandPoolList.GetConstObject(commandPoolID);
+	auto& commandBuffer = commandPool->GetSecondaryCommandBufferSimplifier(commandBufferID);
+
+	return commandBuffer.GetCommandBuffer();
+}

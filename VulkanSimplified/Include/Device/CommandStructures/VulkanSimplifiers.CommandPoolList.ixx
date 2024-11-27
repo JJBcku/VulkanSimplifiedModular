@@ -10,6 +10,7 @@ import VulkanSimplifiers.NIRCommandPool;
 import VulkanSimplifiers.IRCommandPool;
 
 import VulkanSimplifiers.CommandPool.Internal;
+import VulkanSimplifiers.CommandPoolList.Data;
 
 export class CommandPoolListSimplifier
 {
@@ -31,6 +32,8 @@ public:
 
 	const NIRCommandPoolSimplifier GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID) const;
 	const IRCommandPoolSimplifier GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID) const;
+
+	void SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmitInfo>& submitInfos, std::optional<IDObject<AutoCleanupFence>> fenceID);
 
 private:
 	CommandPoolListInternal& _internal;

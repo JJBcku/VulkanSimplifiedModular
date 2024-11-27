@@ -39,3 +39,8 @@ const IRCommandPoolSimplifier CommandPoolListSimplifier::GetCommandPoolWithIndiv
 {
 	return _internal.GetCommandPoolWithIndividualResetSimplifier(poolID);
 }
+
+void CommandPoolListSimplifier::SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmitInfo>& submitInfos, std::optional<IDObject<AutoCleanupFence>> fenceID)
+{
+	_internal.SubmitBuffers(queueID, submitInfos, fenceID);
+}

@@ -16,4 +16,6 @@ import VulkanSimplifiers.LogicalDeviceMain;
 import VulkanSimplifiers.NIRCommandPool;
 import VulkanSimplifiers.PrimaryNIRCommandBuffer;
 
+import VulkanSimplifiers.CommandPoolList.Data;
+
 export void RunFrame(VulkanData& data, size_t frameNumber);

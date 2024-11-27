@@ -32,5 +32,19 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 	
 	deviceGraphicsBuffer.EndRecording();
 
+	std::vector<CommandBufferSubmitInfo> submitInfo(1, {});
+
+	submitInfo[0].waitSemaphores.push_back({data.deviceDependent->imageAvailableSemaphores[frameNumber], PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT });
+
+	CommandBufferGenericID submitedBufferID;
+	submitedBufferID.type = CommandBufferIDType::IR_PRIMARY;
+	submitedBufferID.IRPrimaryID.commandPoolID = data.deviceDependent->graphicsCommandPool;
+	submitedBufferID.IRPrimaryID.commandBufferID = data.deviceDependent->graphicsCommandBuffers[frameNumber];
+	submitInfo[0].commandBufferIDs.push_back(submitedBufferID);
+
+	submitInfo[0].signalSemaphores.push_back(data.deviceDependent->renderingFinishedSemaphores[frameNumber]);
+
+	deviceCommandPoolList.SubmitBuffers(data.instanceDependent->graphicsQueue, submitInfo, data.deviceDependent->inFlightFences[frameNumber]);
+
 	std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(1));
 }

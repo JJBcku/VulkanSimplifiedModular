@@ -14,7 +14,7 @@ import VulkanSimplifiers.SharedRenderPassData.Data;
 import VulkanSimplifiers.Common.DataFormatFlags.Internal;
 import VulkanSimplifiers.Common.ImageSampleFlags;
 import VulkanSimplifiers.Common.ImageLayouts;
-import VulkanSimplifiers.Common.PipelineStageFlags;
+import VulkanSimplifiers.Common.PipelineStageFlags.Internal;
 import VulkanSimplifiers.Common.AccessFlags;
 
 export class SharedRenderPassDataInternal
@@ -75,6 +75,5 @@ private:
 
 	VkClearValue GetDepthStencilClearValue(IDObject<RenderPassDepthStencilClearValues> valueID) const;
 
-	VkPipelineStageFlags CompileStageFlags(PipelineStageFlags stageFlags);
 	VkAccessFlags CompileAccessFlags(AccessFlags accessFlags);
 };

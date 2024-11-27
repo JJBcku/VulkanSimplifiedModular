@@ -19,3 +19,15 @@ void PrimaryNIRCommandBufferSimplifier::EndRenderPass()
 {
 	_internal.EndRenderPass();
 }
+
+void PrimaryNIRCommandBufferSimplifier::TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs,
+	std::uint32_t imagesIndex)
+{
+	_internal.TransitionSwapchainImageToTrasferDestination(windowID, queuesIDs, imagesIndex);
+}
+
+void PrimaryNIRCommandBufferSimplifier::TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs,
+	std::uint32_t imagesIndex)
+{
+	_internal.TransitionSwapchainImageToPresent(windowID, queuesIDs, imagesIndex);
+}

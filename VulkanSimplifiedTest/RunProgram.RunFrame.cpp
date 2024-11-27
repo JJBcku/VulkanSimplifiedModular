@@ -22,6 +22,8 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 
 	deviceGraphicsBuffer.BeginRecording(CommandBufferUsage::ONE_USE);
 
+	deviceGraphicsBuffer.TransitionSwapchainImageToTrasferDestination(data.basicData->windowID, {}, nextFrame);
+
 	deviceGraphicsBuffer.BeginRenderPass(data.renderPassData->renderPass, data.pipelinesList->attachmentData->framebuffer, 0U, 0U,
 		data.pipelinesList->attachmentData->width, data.pipelinesList->attachmentData->height, data.renderPassData->clearValues);
 
@@ -29,6 +31,8 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 	deviceGraphicsBuffer.Draw(3, 1, 0, 0);
 
 	deviceGraphicsBuffer.EndRenderPass();
+
+	deviceGraphicsBuffer.TransitionSwapchainImageToPresent(data.basicData->windowID, {}, nextFrame);
 	
 	deviceGraphicsBuffer.EndRecording();
 

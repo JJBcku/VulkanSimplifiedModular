@@ -24,3 +24,15 @@ void PrimaryIRCommandBufferSimplifier::ResetCommandBuffer(bool freeResources)
 {
 	_internal.ResetCommandBuffer(freeResources);
 }
+
+void PrimaryIRCommandBufferSimplifier::TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs,
+	std::uint32_t imagesIndex)
+{
+	_internal.TransitionSwapchainImageToTrasferDestination(windowID, queuesIDs, imagesIndex);
+}
+
+void PrimaryIRCommandBufferSimplifier::TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs,
+	std::uint32_t imagesIndex)
+{
+	_internal.TransitionSwapchainImageToPresent(windowID, queuesIDs, imagesIndex);
+}

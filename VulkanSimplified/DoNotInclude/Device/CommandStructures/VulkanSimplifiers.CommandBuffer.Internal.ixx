@@ -33,10 +33,14 @@ import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Window.InternalData;
 import VulkanSimplifiers.Window.Data;
 
+import VulkanSimplifiers.LogicalDeviceCore.Internal;
+import VulkanSimplifiers.LogicalDeviceCore.InternalData;
+import VulkanSimplifiers.LogicalDeviceCore.Data;
+
 export class AutoCleanUpCommandBuffer
 {
 public:
-	AutoCleanUpCommandBuffer(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	AutoCleanUpCommandBuffer(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
 		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
 		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~AutoCleanUpCommandBuffer();
@@ -60,6 +64,8 @@ public:
 		std::uint32_t& returnIndex, IDObject<WindowPointer> windowID);
 
 protected:
+	const LogicalDeviceCoreInternal& _core;
+
 	const DeviceRenderPassDataInternal& _deviceRenderPassData;
 	const SharedRenderPassDataInternal& _sharedRenderPassData;
 
@@ -79,9 +85,9 @@ protected:
 export class PrimaryNIRCommandBufferInternal : public AutoCleanUpCommandBuffer
 {
 public:
-	PrimaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+	PrimaryNIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+		const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+		const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~PrimaryNIRCommandBufferInternal();
 
 	PrimaryNIRCommandBufferInternal(const PrimaryNIRCommandBufferInternal&) noexcept = delete;
@@ -93,14 +99,17 @@ public:
 	void BeginRenderPass(IDObject<AutoCleanupRenderPass> renderPassID, IDObject<AutoCleanupFramebuffer> framebufferID, std::uint32_t startX, std::uint32_t startY,
 		std::uint32_t width, std::uint32_t height, const std::vector<std::optional<RenderPassClearValuesID>>& clearValues, bool usesSecondaryBuffers);
 	void EndRenderPass();
+
+	void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
+	void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
 };
 
 export class SecondaryNIRCommandBufferInternal : public AutoCleanUpCommandBuffer
 {
 public:
-	SecondaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+	SecondaryNIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+		const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+		const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~SecondaryNIRCommandBufferInternal();
 
 	SecondaryNIRCommandBufferInternal(const SecondaryNIRCommandBufferInternal&) noexcept = delete;
@@ -113,9 +122,9 @@ public:
 export class PrimaryIRCommandBufferInternal : public PrimaryNIRCommandBufferInternal
 {
 public:
-	PrimaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+	PrimaryIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+		const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+		const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~PrimaryIRCommandBufferInternal();
 
 	PrimaryIRCommandBufferInternal(const PrimaryIRCommandBufferInternal&) noexcept = delete;
@@ -129,14 +138,17 @@ public:
 	void EndRenderPass();
 
 	void ResetCommandBuffer(bool freeResources);
+
+	void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
+	void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
 };
 
 export class SecondaryIRCommandBufferInternal : public SecondaryNIRCommandBufferInternal
 {
 public:
-	SecondaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-		WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
+	SecondaryIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+		const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+		const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue);
 	~SecondaryIRCommandBufferInternal();
 
 	SecondaryIRCommandBufferInternal(const SecondaryIRCommandBufferInternal&) noexcept = delete;

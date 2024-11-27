@@ -4,11 +4,11 @@ module;
 
 module VulkanSimplifiers.CommandBuffer.Internal;
 
-AutoCleanUpCommandBuffer::AutoCleanUpCommandBuffer(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) : _deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData),
-	_devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList), _imageList(imageList), _windowList(windowList), _device(device),
-	_buffer(buffer), _queue(queue)
+AutoCleanUpCommandBuffer::AutoCleanUpCommandBuffer(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+	const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+	const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) : _core(core),
+	_deviceRenderPassData(deviceRenderPassData), _sharedRenderPassData(sharedRenderPassData), _devicePipelineData(devicePipelineData), _synchronizationList(synchronizationList),
+	_imageList(imageList), _windowList(windowList), _device(device), _buffer(buffer), _queue(queue)
 {
 }
 
@@ -77,10 +77,10 @@ bool AutoCleanUpCommandBuffer::AcquireNextImage(std::uint64_t timeout, std::opti
 	return window.AcquireNextImage(_device, timeout, semaphore, fence, returnIndex);
 }
 
-PrimaryNIRCommandBufferInternal::PrimaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	AutoCleanUpCommandBuffer(deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
+PrimaryNIRCommandBufferInternal::PrimaryNIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+	const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+	const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	AutoCleanUpCommandBuffer(core, deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
 {
 }
 
@@ -139,10 +139,65 @@ void PrimaryNIRCommandBufferInternal::EndRenderPass()
 	vkCmdEndRenderPass(_buffer);
 }
 
-SecondaryNIRCommandBufferInternal::SecondaryNIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	AutoCleanUpCommandBuffer(deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
+void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs,
+	std::uint32_t imagesIndex)
+{
+	VkImageMemoryBarrier barrier{};
+	barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+	barrier.srcAccessMask = 0;
+	barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+	barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+	barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+	
+	if (queuesIDs.has_value())
+	{
+		barrier.srcQueueFamilyIndex = _core.GetQueueFamily(queuesIDs.value().first);
+		barrier.dstQueueFamilyIndex = _core.GetQueueFamily(queuesIDs.value().second);
+	}
+
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	barrier.image = window.GetSwapchainImage(imagesIndex);
+	barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	barrier.subresourceRange.baseMipLevel = 0;
+	barrier.subresourceRange.levelCount = 1;
+	barrier.subresourceRange.baseArrayLayer = 0;
+	barrier.subresourceRange.layerCount = 1;
+
+	vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
+}
+
+void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex)
+{
+	VkImageMemoryBarrier barrier{};
+	barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+	barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+	barrier.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+	barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+	barrier.newLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+
+	if (queuesIDs.has_value())
+	{
+		barrier.srcQueueFamilyIndex = _core.GetQueueFamily(queuesIDs.value().first);
+		barrier.dstQueueFamilyIndex = _core.GetQueueFamily(queuesIDs.value().second);
+	}
+
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	barrier.image = window.GetSwapchainImage(imagesIndex);
+	barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	barrier.subresourceRange.baseMipLevel = 0;
+	barrier.subresourceRange.levelCount = 1;
+	barrier.subresourceRange.baseArrayLayer = 0;
+	barrier.subresourceRange.layerCount = 1;
+
+	vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
+}
+
+SecondaryNIRCommandBufferInternal::SecondaryNIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+	const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+	const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	AutoCleanUpCommandBuffer(core, deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
 {
 }
 
@@ -150,10 +205,10 @@ SecondaryNIRCommandBufferInternal::~SecondaryNIRCommandBufferInternal()
 {
 }
 
-PrimaryIRCommandBufferInternal::PrimaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	PrimaryNIRCommandBufferInternal(deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
+PrimaryIRCommandBufferInternal::PrimaryIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+	const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+	const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	PrimaryNIRCommandBufferInternal(core, deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
 {
 }
 
@@ -221,10 +276,64 @@ void PrimaryIRCommandBufferInternal::ResetCommandBuffer(bool freeResources)
 	vkResetCommandBuffer(_buffer, flags);
 }
 
-SecondaryIRCommandBufferInternal::SecondaryIRCommandBufferInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
-	const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
-	WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
-	SecondaryNIRCommandBufferInternal(deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
+void PrimaryIRCommandBufferInternal::TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex)
+{
+	VkImageMemoryBarrier barrier{};
+	barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+	barrier.srcAccessMask = 0;
+	barrier.dstAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+	barrier.oldLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+	barrier.newLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+
+	if (queuesIDs.has_value())
+	{
+		barrier.srcQueueFamilyIndex = _core.GetQueueFamily(queuesIDs.value().first);
+		barrier.dstQueueFamilyIndex = _core.GetQueueFamily(queuesIDs.value().second);
+	}
+
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	barrier.image = window.GetSwapchainImage(imagesIndex);
+	barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	barrier.subresourceRange.baseMipLevel = 0;
+	barrier.subresourceRange.levelCount = 1;
+	barrier.subresourceRange.baseArrayLayer = 0;
+	barrier.subresourceRange.layerCount = 1;
+
+	vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT, VK_PIPELINE_STAGE_TRANSFER_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
+}
+
+void PrimaryIRCommandBufferInternal::TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex)
+{
+	VkImageMemoryBarrier barrier{};
+	barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
+	barrier.srcAccessMask = VK_ACCESS_TRANSFER_WRITE_BIT;
+	barrier.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+	barrier.oldLayout = VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
+	barrier.newLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+
+	if (queuesIDs.has_value())
+	{
+		barrier.srcQueueFamilyIndex = _core.GetQueueFamily(queuesIDs.value().first);
+		barrier.dstQueueFamilyIndex = _core.GetQueueFamily(queuesIDs.value().second);
+	}
+
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	barrier.image = window.GetSwapchainImage(imagesIndex);
+	barrier.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	barrier.subresourceRange.baseMipLevel = 0;
+	barrier.subresourceRange.levelCount = 1;
+	barrier.subresourceRange.baseArrayLayer = 0;
+	barrier.subresourceRange.layerCount = 1;
+
+	vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
+}
+
+SecondaryIRCommandBufferInternal::SecondaryIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
+	const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
+	const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
+	SecondaryNIRCommandBufferInternal(core, deviceRenderPassData, sharedRenderPassData, devicePipelineData, synchronizationList, imageList, windowList, device, buffer, queue)
 {
 }
 

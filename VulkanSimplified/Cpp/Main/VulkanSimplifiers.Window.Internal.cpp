@@ -163,6 +163,17 @@ VkSurfaceKHR WindowInternal::GetSurface() const
 	return _surface;
 }
 
+VkImage WindowInternal::GetSwapchainImage(std::uint32_t imageIndex) const
+{
+	if (_swapchain == VK_NULL_HANDLE)
+		throw std::runtime_error("WindowInternal::GetSwapchainImage Error: Program tried to get an image from a non-existent swapchain!");
+
+	if (_swapchainImages.size() <= imageIndex)
+		throw std::runtime_error("WindowInternal::GetSwapchainImage Error: Program tried to get read beyond swapchain images list!");
+
+	return _swapchainImages[imageIndex];
+}
+
 void WindowInternal::CreateSwapchain(SwapchainInitData swapchainInit, bool throwOnSwapchainExist, bool throwOnDeviceChange)
 {
 	if (_swapchain != VK_NULL_HANDLE && throwOnSwapchainExist)

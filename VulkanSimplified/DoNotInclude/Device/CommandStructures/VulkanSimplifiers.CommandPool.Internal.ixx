@@ -36,10 +36,14 @@ import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Window.InternalData;
 import VulkanSimplifiers.Window.Data;
 
+import VulkanSimplifiers.LogicalDeviceCore.Internal;
+import VulkanSimplifiers.LogicalDeviceCore.InternalData;
+import VulkanSimplifiers.LogicalDeviceCore.Data;
+
 export class NIRCommandPoolInternal
 {
 public:
-	NIRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	NIRCommandPoolInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
 		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
 		WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
 	~NIRCommandPoolInternal();
@@ -62,6 +66,8 @@ public:
 	void ResetCommandPool(bool freeResources);
 
 private:
+	const LogicalDeviceCoreInternal& _core;
+
 	const DeviceRenderPassDataInternal& _deviceRenderPassData;
 	const SharedRenderPassDataInternal& _sharedRenderPassData;
 
@@ -84,7 +90,7 @@ private:
 export class IRCommandPoolInternal
 {
 public:
-	IRCommandPoolInternal(const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
+	IRCommandPoolInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData, const SharedRenderPassDataInternal& sharedRenderPassData,
 		const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList, const ImageDataListInternal& imageList,
 		WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue, size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity);
 	~IRCommandPoolInternal();
@@ -107,6 +113,8 @@ public:
 	void ResetCommandPool(bool freeResources);
 
 private:
+	const LogicalDeviceCoreInternal& _core;
+
 	const DeviceRenderPassDataInternal& _deviceRenderPassData;
 	const SharedRenderPassDataInternal& _sharedRenderPassData;
 

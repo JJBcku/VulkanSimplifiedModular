@@ -11,6 +11,8 @@ import VulkanSimplifiers.ImageDataList.Data;
 import VulkanSimplifiers.DeviceRenderPassData.Data;
 import VulkanSimplifiers.SharedRenderPassData.Data;
 
+import VulkanSimplifiers.WindowList.Data;
+
 export class PrimaryIRCommandBufferSimplifier : public CommonCommandBuffer
 {
 public:
@@ -24,6 +26,9 @@ public:
 	void EndRenderPass();
 
 	void ResetCommandBuffer(bool freeResources);
+
+	void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
+	void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
 
 private:
 	PrimaryIRCommandBufferInternal& _internal;

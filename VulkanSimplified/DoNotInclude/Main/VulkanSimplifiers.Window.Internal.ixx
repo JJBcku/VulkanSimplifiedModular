@@ -33,6 +33,8 @@ public:
 	SDL_Window* GetWindow() const;
 	VkSurfaceKHR GetSurface() const;
 
+	VkImage GetSwapchainImage(std::uint32_t imageIndex) const;
+
 	void CreateSwapchain(SwapchainInitData swapchainInit, bool throwOnSwapchainExist, bool throwOnDeviceChange);
 
 	bool AcquireNextImage(VkDevice device, std::uint64_t timeout, VkSemaphore semaphore, VkFence fence, std::uint32_t& returnIndex);

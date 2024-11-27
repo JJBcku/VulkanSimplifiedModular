@@ -17,7 +17,7 @@ void CreateRenderPassData(VulkanData& data)
 	auto& renderPassData = *data.renderPassData;
 
 	renderPassData.renderPassAttachments.push_back(renderPassSharedDataList.AddRenderPassAttachment(format, SAMPLE_1, RenderPassAttachmentLoadOP::CLEAR,
-		RenderPassAttachmentStoreOP::STORE, ImageLayoutFlags::UNDEFINED, ImageLayoutFlags::PRESENT));
+		RenderPassAttachmentStoreOP::STORE, ImageLayoutFlags::UNDEFINED, ImageLayoutFlags::TRANSFER_SOURCE));
 
 	renderPassData.colorAttachmentReference = renderPassSharedDataList.AddRenderPassAttachmentReference(0, ImageLayoutFlags::COLOR_ATTACHMENT);
 

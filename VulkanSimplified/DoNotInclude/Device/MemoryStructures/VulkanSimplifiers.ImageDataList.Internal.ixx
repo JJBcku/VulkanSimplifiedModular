@@ -42,11 +42,21 @@ public:
 
 	std::pair<std::uint64_t, std::uint64_t> GetSizeAndAligment(IDObject<AutoCleanup2DSimpleImage> imageID) const;
 
+	std::uint32_t GetImageWidth(IDObject<AutoCleanup2DSimpleImage> imageID) const;
+	std::uint32_t GetImageHeight(IDObject<AutoCleanup2DSimpleImage> imageID) const;
+
+	VkImage GetImage(IDObject<AutoCleanup2DSimpleImage> imageID) const;
+
 	std::uint64_t GetImageRequiredAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
 	std::uint64_t GetImageSize(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
 	std::uint32_t GetImageMemoryTypeMask(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
 
 	std::pair<std::uint64_t, std::uint64_t> GetSizeAndAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
+
+	std::uint32_t GetImageWidth(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
+	std::uint32_t GetImageHeight(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
+
+	VkImage GetImage(IDObject<AutoCleanupMipMapped2DImage> imageID) const;
 
 	void BindImage(IDObject<AutoCleanup2DSimpleImage> imageID, AllocationFullID allocationID, size_t addOnReserve);
 	void BindImage(IDObject<AutoCleanupMipMapped2DImage> imageID, AllocationFullID allocationID, size_t addOnReserve);

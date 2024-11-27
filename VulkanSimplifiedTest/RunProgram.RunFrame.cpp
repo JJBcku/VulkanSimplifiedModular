@@ -32,6 +32,9 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 
 	deviceGraphicsBuffer.EndRenderPass();
 
+	deviceGraphicsBuffer.BlitToSwapchainImage(data.basicData->windowID, data.pipelinesList->attachmentData->colorAttachmentImage, 0, 0, data.pipelinesList->attachmentData->width,
+		data.pipelinesList->attachmentData->height, nextFrame);
+
 	deviceGraphicsBuffer.TransitionSwapchainImageToPresent(data.basicData->windowID, {}, nextFrame);
 	
 	deviceGraphicsBuffer.EndRecording();

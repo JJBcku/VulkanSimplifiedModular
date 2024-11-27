@@ -179,6 +179,21 @@ std::pair<std::uint64_t, std::uint64_t> ImageDataListInternal::GetSizeAndAligmen
 	return _singleSampled2DImage.GetConstObject(imageID).GetSizeAndAligment();
 }
 
+std::uint32_t ImageDataListInternal::GetImageWidth(IDObject<AutoCleanup2DSimpleImage> imageID) const
+{
+	return _singleSampled2DImage.GetConstObject(imageID).GetWidth();
+}
+
+std::uint32_t ImageDataListInternal::GetImageHeight(IDObject<AutoCleanup2DSimpleImage> imageID) const
+{
+	return _singleSampled2DImage.GetConstObject(imageID).GetHeight();
+}
+
+VkImage ImageDataListInternal::GetImage(IDObject<AutoCleanup2DSimpleImage> imageID) const
+{
+	return _singleSampled2DImage.GetConstObject(imageID).GetImage();
+}
+
 std::uint64_t ImageDataListInternal::GetImageRequiredAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const
 {
 	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetImageRequiredAligment();
@@ -197,6 +212,21 @@ std::uint32_t ImageDataListInternal::GetImageMemoryTypeMask(IDObject<AutoCleanup
 std::pair<std::uint64_t, std::uint64_t> ImageDataListInternal::GetSizeAndAligment(IDObject<AutoCleanupMipMapped2DImage> imageID) const
 {
 	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetSizeAndAligment();
+}
+
+std::uint32_t ImageDataListInternal::GetImageWidth(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetWidth();
+}
+
+std::uint32_t ImageDataListInternal::GetImageHeight(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetHeight();
+}
+
+VkImage ImageDataListInternal::GetImage(IDObject<AutoCleanupMipMapped2DImage> imageID) const
+{
+	return _singleSampledMipMapped2DImage.GetConstObject(imageID).GetImage();
 }
 
 void ImageDataListInternal::BindImage(IDObject<AutoCleanup2DSimpleImage> imageID, AllocationFullID allocationID, size_t addOnReserve)

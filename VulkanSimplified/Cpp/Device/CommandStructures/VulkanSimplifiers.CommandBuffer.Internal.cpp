@@ -194,6 +194,40 @@ void PrimaryNIRCommandBufferInternal::TransitionSwapchainImageToPresent(IDObject
 	vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
 }
 
+void PrimaryNIRCommandBufferInternal::BlitToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<AutoCleanup2DSimpleImage> imageID, std::uint32_t startX, std::uint32_t startY,
+	std::uint32_t width, std::uint32_t height, std::uint32_t swapchainImageIndex)
+{
+	VkImageBlit blitData{};
+	blitData.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	blitData.srcSubresource.mipLevel = 0;
+	blitData.srcSubresource.baseArrayLayer = 0;
+	blitData.srcSubresource.layerCount = 1;
+
+	blitData.srcOffsets[0].x = static_cast<std::int32_t>(startX);
+	blitData.srcOffsets[0].y = static_cast<std::int32_t>(startY);
+	blitData.srcOffsets[0].z = 0;
+	blitData.srcOffsets[1].x = static_cast<std::int32_t>(width);
+	blitData.srcOffsets[1].y = static_cast<std::int32_t>(height);
+	blitData.srcOffsets[1].z = 1;
+
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	blitData.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	blitData.dstSubresource.mipLevel = 0;
+	blitData.dstSubresource.baseArrayLayer = 0;
+	blitData.dstSubresource.layerCount = 1;
+
+	blitData.dstOffsets[0].x = 0;
+	blitData.dstOffsets[0].y = 0;
+	blitData.dstOffsets[0].z = 0;
+	blitData.dstOffsets[1].x = static_cast<std::int32_t>(window.GetWidth());
+	blitData.dstOffsets[1].y = static_cast<std::int32_t>(window.GetHeight());
+	blitData.dstOffsets[1].z = 1;
+
+	vkCmdBlitImage(_buffer, _imageList.GetImage(imageID), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, window.GetSwapchainImage(swapchainImageIndex), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+		1, &blitData, VK_FILTER_LINEAR);
+}
+
 SecondaryNIRCommandBufferInternal::SecondaryNIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
 	const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
 	const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandBuffer buffer, VkQueue queue) :
@@ -328,6 +362,39 @@ void PrimaryIRCommandBufferInternal::TransitionSwapchainImageToPresent(IDObject<
 	barrier.subresourceRange.layerCount = 1;
 
 	vkCmdPipelineBarrier(_buffer, VK_PIPELINE_STAGE_TRANSFER_BIT, VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT, 0, 0, nullptr, 0, nullptr, 1, &barrier);
+}
+
+void PrimaryIRCommandBufferInternal::BlitToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<AutoCleanup2DSimpleImage> imageID, std::uint32_t startX, std::uint32_t startY, std::uint32_t width, std::uint32_t height, std::uint32_t swapchainImageIndex)
+{
+	VkImageBlit blitData{};
+	blitData.srcSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	blitData.srcSubresource.mipLevel = 0;
+	blitData.srcSubresource.baseArrayLayer = 0;
+	blitData.srcSubresource.layerCount = 1;
+
+	blitData.srcOffsets[0].x = static_cast<std::int32_t>(startX);
+	blitData.srcOffsets[0].y = static_cast<std::int32_t>(startY);
+	blitData.srcOffsets[0].z = 0;
+	blitData.srcOffsets[1].x = static_cast<std::int32_t>(width);
+	blitData.srcOffsets[1].y = static_cast<std::int32_t>(height);
+	blitData.srcOffsets[1].z = 1;
+
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	blitData.dstSubresource.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+	blitData.dstSubresource.mipLevel = 0;
+	blitData.dstSubresource.baseArrayLayer = 0;
+	blitData.dstSubresource.layerCount = 1;
+
+	blitData.dstOffsets[0].x = 0;
+	blitData.dstOffsets[0].y = 0;
+	blitData.dstOffsets[0].z = 0;
+	blitData.dstOffsets[1].x = static_cast<std::int32_t>(window.GetWidth());
+	blitData.dstOffsets[1].y = static_cast<std::int32_t>(window.GetHeight());
+	blitData.dstOffsets[1].z = 1;
+
+	vkCmdBlitImage(_buffer, _imageList.GetImage(imageID), VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, window.GetSwapchainImage(swapchainImageIndex), VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
+		1, &blitData, VK_FILTER_LINEAR);
 }
 
 SecondaryIRCommandBufferInternal::SecondaryIRCommandBufferInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,

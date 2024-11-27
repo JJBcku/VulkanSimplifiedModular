@@ -31,3 +31,9 @@ void PrimaryNIRCommandBufferSimplifier::TransitionSwapchainImageToPresent(IDObje
 {
 	_internal.TransitionSwapchainImageToPresent(windowID, queuesIDs, imagesIndex);
 }
+
+void PrimaryNIRCommandBufferSimplifier::BlitToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<AutoCleanup2DSimpleImage> imageID, std::uint32_t startX, std::uint32_t startY,
+	std::uint32_t width, std::uint32_t height, std::uint32_t swapchainImageIndex)
+{
+	_internal.BlitToSwapchainImage(windowID, imageID, startX, startY, width, height, swapchainImageIndex);
+}

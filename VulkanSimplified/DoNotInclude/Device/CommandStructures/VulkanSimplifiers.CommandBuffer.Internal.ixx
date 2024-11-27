@@ -102,6 +102,9 @@ public:
 
 	void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
 	void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
+
+	void BlitToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<AutoCleanup2DSimpleImage> imageID, std::uint32_t startX, std::uint32_t startY,
+		std::uint32_t width, std::uint32_t height, std::uint32_t swapchainImageIndex);
 };
 
 export class SecondaryNIRCommandBufferInternal : public AutoCleanUpCommandBuffer
@@ -141,6 +144,9 @@ public:
 
 	void TransitionSwapchainImageToTrasferDestination(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
 	void TransitionSwapchainImageToPresent(IDObject<WindowPointer> windowID, std::optional<std::pair<size_t, size_t>> queuesIDs, std::uint32_t imagesIndex);
+
+	void BlitToSwapchainImage(IDObject<WindowPointer> windowID, IDObject<AutoCleanup2DSimpleImage> imageID, std::uint32_t startX, std::uint32_t startY,
+		std::uint32_t width, std::uint32_t height, std::uint32_t swapchainImageIndex);
 };
 
 export class SecondaryIRCommandBufferInternal : public SecondaryNIRCommandBufferInternal

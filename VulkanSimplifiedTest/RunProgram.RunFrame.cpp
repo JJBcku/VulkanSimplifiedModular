@@ -53,5 +53,7 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 
 	deviceCommandPoolList.SubmitBuffers(data.instanceDependent->graphicsQueue, submitInfo, data.deviceDependent->inFlightFences[frameNumber]);
 
+	deviceGraphicsCommandPool.PresentSwapchainToQueue(data.basicData->windowID, { data.deviceDependent->renderingFinishedSemaphores[frameNumber] }, nextFrame);
+
 	std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(1));
 }

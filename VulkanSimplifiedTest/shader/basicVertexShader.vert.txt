@@ -7,11 +7,11 @@
           %1 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
                OpEntryPoint Vertex %4 "main" %33 %gl_VertexIndex %47
+               OpDecorate %_struct_31 Block
                OpMemberDecorate %_struct_31 0 BuiltIn Position
                OpMemberDecorate %_struct_31 1 BuiltIn PointSize
                OpMemberDecorate %_struct_31 2 BuiltIn ClipDistance
                OpMemberDecorate %_struct_31 3 BuiltIn CullDistance
-               OpDecorate %_struct_31 Block
                OpDecorate %gl_VertexIndex BuiltIn VertexIndex
                OpDecorate %47 Location 0
        %void = OpTypeVoid
@@ -22,11 +22,11 @@
      %uint_3 = OpConstant %uint 3
 %_arr_v2float_uint_3 = OpTypeArray %v2float %uint_3
     %float_0 = OpConstant %float 0
-  %float_0_5 = OpConstant %float 0.5
-         %15 = OpConstantComposite %v2float %float_0 %float_0_5
  %float_n0_5 = OpConstant %float -0.5
-         %17 = OpConstantComposite %v2float %float_0_5 %float_n0_5
-         %18 = OpConstantComposite %v2float %float_n0_5 %float_n0_5
+         %15 = OpConstantComposite %v2float %float_0 %float_n0_5
+  %float_0_5 = OpConstant %float 0.5
+         %17 = OpConstantComposite %v2float %float_0_5 %float_0_5
+         %18 = OpConstantComposite %v2float %float_n0_5 %float_0_5
          %19 = OpConstantComposite %_arr_v2float_uint_3 %15 %17 %18
     %v4float = OpTypeVector %float 4
 %_arr_v4float_uint_3 = OpTypeArray %v4float %uint_3

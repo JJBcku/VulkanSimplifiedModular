@@ -163,6 +163,11 @@ VkSurfaceKHR WindowInternal::GetSurface() const
 	return _surface;
 }
 
+VkSwapchainKHR WindowInternal::GetSwapchain() const
+{
+	return _swapchain;
+}
+
 VkImage WindowInternal::GetSwapchainImage(std::uint32_t imageIndex) const
 {
 	if (_swapchain == VK_NULL_HANDLE)

@@ -42,3 +42,8 @@ void NIRCommandPoolSimplifier::ResetCommandPool(bool freeResources)
 {
 	_internal.ResetCommandPool(freeResources);
 }
+
+bool NIRCommandPoolSimplifier::PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs, std::uint32_t imageIndex)
+{
+	return _internal.PresentSwapchainToQueue(windowID, waitSemaphoreIDs, imageIndex);
+}

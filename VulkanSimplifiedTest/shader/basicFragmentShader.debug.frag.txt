@@ -77,5 +77,6 @@ void main()
          %36 = OpCompositeExtract %float %28 2
          %37 = OpCompositeConstruct %v4float %34 %35 %36 %33
                OpStore %outColor %37
+               OpLine %1 13 0
                OpReturn
                OpFunctionEnd

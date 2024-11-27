@@ -3,9 +3,9 @@
 layout(location = 0) out vec4 outColor;
 
 vec2 positions[3] = vec2[](
-	vec2(0.0, 0.5),
-	vec2(0.5, -0.5),
-	vec2(-0.5, -0.5)
+	vec2(0.0, -0.5),
+	vec2(0.5, 0.5),
+	vec2(-0.5, 0.5)
 );
 
 vec4 colors[3] = vec4[](

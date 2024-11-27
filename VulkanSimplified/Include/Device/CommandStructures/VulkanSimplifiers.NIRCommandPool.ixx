@@ -9,6 +9,9 @@ import VulkanSimplifiers.NIRCommandPool.Data;
 import VulkanSimplifiers.PrimaryNIRCommandBuffer;
 import VulkanSimplifiers.SecondaryNIRCommandBuffer;
 
+import VulkanSimplifiers.SynchronizationList.Data;
+import VulkanSimplifiers.WindowList.Data;
+
 export class NIRCommandPoolSimplifier
 {
 public:
@@ -31,6 +34,8 @@ public:
 	const SecondaryNIRCommandBufferSimplifier GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> bufferID) const;
 
 	void ResetCommandPool(bool freeResources);
+
+	bool PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs, std::uint32_t imageIndex);
 
 private:
 	NIRCommandPoolInternal& _internal;

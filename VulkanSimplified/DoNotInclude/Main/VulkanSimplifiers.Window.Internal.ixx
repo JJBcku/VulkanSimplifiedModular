@@ -32,6 +32,7 @@ public:
 
 	SDL_Window* GetWindow() const;
 	VkSurfaceKHR GetSurface() const;
+	VkSwapchainKHR GetSwapchain() const;
 
 	VkImage GetSwapchainImage(std::uint32_t imageIndex) const;
 

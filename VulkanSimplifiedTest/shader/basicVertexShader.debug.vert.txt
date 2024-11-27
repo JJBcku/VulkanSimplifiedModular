@@ -9,7 +9,6 @@
                OpEntryPoint Vertex %main "main" %_ %gl_VertexIndex %outColor
           %1 = OpString "basicVertexShader.vert"
                OpSource GLSL 450 %1 "// OpModuleProcessed entry-point main
-// OpModuleProcessed invert-y
 // OpModuleProcessed client vulkan100
 // OpModuleProcessed target-env vulkan1.0
 // OpModuleProcessed entry-point main
@@ -19,9 +18,9 @@
 layout(location = 0) out vec4 outColor;
 
 vec2 positions[3] = vec2[](
-	vec2(0.0, 0.5),
-	vec2(0.5, -0.5),
-	vec2(-0.5, -0.5)
+	vec2(0.0, -0.5),
+	vec2(0.5, 0.5),
+	vec2(-0.5, 0.5)
 );
 
 vec4 colors[3] = vec4[](
@@ -49,11 +48,11 @@ void main()
                OpName %_ ""
                OpName %gl_VertexIndex "gl_VertexIndex"
                OpName %outColor "outColor"
+               OpDecorate %gl_PerVertex Block
                OpMemberDecorate %gl_PerVertex 0 BuiltIn Position
                OpMemberDecorate %gl_PerVertex 1 BuiltIn PointSize
                OpMemberDecorate %gl_PerVertex 2 BuiltIn ClipDistance
                OpMemberDecorate %gl_PerVertex 3 BuiltIn CullDistance
-               OpDecorate %gl_PerVertex Block
                OpDecorate %gl_VertexIndex BuiltIn VertexIndex
                OpDecorate %outColor Location 0
        %void = OpTypeVoid
@@ -66,11 +65,11 @@ void main()
 %_ptr_Private__arr_v2float_uint_3 = OpTypePointer Private %_arr_v2float_uint_3
   %positions = OpVariable %_ptr_Private__arr_v2float_uint_3 Private
     %float_0 = OpConstant %float 0
-  %float_0_5 = OpConstant %float 0.5
-         %16 = OpConstantComposite %v2float %float_0 %float_0_5
  %float_n0_5 = OpConstant %float -0.5
-         %18 = OpConstantComposite %v2float %float_0_5 %float_n0_5
-         %19 = OpConstantComposite %v2float %float_n0_5 %float_n0_5
+         %16 = OpConstantComposite %v2float %float_0 %float_n0_5
+  %float_0_5 = OpConstant %float 0.5
+         %18 = OpConstantComposite %v2float %float_0_5 %float_0_5
+         %19 = OpConstantComposite %v2float %float_n0_5 %float_0_5
          %20 = OpConstantComposite %_arr_v2float_uint_3 %16 %18 %19
     %v4float = OpTypeVector %float 4
 %_arr_v4float_uint_3 = OpTypeArray %v4float %uint_3
@@ -115,5 +114,6 @@ void main()
          %51 = OpAccessChain %_ptr_Private_v4float %colors %49
          %52 = OpLoad %v4float %51
                OpStore %outColor %52
+               OpLine %1 21 0
                OpReturn
                OpFunctionEnd

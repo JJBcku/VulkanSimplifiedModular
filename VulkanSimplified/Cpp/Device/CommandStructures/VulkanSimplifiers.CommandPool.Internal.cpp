@@ -108,6 +108,37 @@ void NIRCommandPoolInternal::ResetCommandPool(bool freeResources)
 	vkResetCommandPool(_device, _commandPool, flags);
 }
 
+bool NIRCommandPoolInternal::PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs, std::uint32_t imageIndex)
+{
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	std::vector<VkSemaphore> semaphores;
+	semaphores.reserve(waitSemaphoreIDs.size());
+
+	for (auto& semaphore : waitSemaphoreIDs)
+		semaphores.push_back(_synchronizationList.GetSemaphore(semaphore));
+
+	VkSwapchainKHR swapchain = window.GetSwapchain();
+
+	if (swapchain == VK_NULL_HANDLE)
+		throw std::runtime_error("NIRCommandPoolInternal::PresentSwapchainToQueue Error: Program tried to present image from a non-existent swapchain!");
+
+	VkPresentInfoKHR presentInfo{};
+	presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+	presentInfo.waitSemaphoreCount = static_cast<std::uint32_t>(semaphores.size());
+	presentInfo.pWaitSemaphores = semaphores.data();
+	presentInfo.swapchainCount = 1;
+	presentInfo.pSwapchains = &swapchain;
+	presentInfo.pImageIndices = &imageIndex;
+
+	VkResult result = vkQueuePresentKHR(_queue, &presentInfo);
+
+	if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+		throw std::runtime_error("NIRCommandPoolInternal::PresentSwapchainToQueue Error: Program failed to present a swapchain image to queue!");
+
+	return result == VK_SUCCESS;
+}
+
 IRCommandPoolInternal::IRCommandPoolInternal(const LogicalDeviceCoreInternal& core, const DeviceRenderPassDataInternal& deviceRenderPassData,
 	const SharedRenderPassDataInternal& sharedRenderPassData, const DevicePipelineDataInternal& devicePipelineData, const SynchronizationListInternal& synchronizationList,
 	const ImageDataListInternal& imageList, WindowListInternal& windowList, VkDevice device, VkCommandPool commandPool, VkQueue queue,
@@ -210,4 +241,35 @@ void IRCommandPoolInternal::ResetCommandPool(bool freeResources)
 		flags = VK_COMMAND_POOL_RESET_RELEASE_RESOURCES_BIT;
 
 	vkResetCommandPool(_device, _commandPool, flags);
+}
+
+bool IRCommandPoolInternal::PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs, std::uint32_t imageIndex)
+{
+	auto& window = _windowList.GetWindowSimplifier(windowID);
+
+	std::vector<VkSemaphore> semaphores;
+	semaphores.reserve(waitSemaphoreIDs.size());
+
+	for (auto& semaphore : waitSemaphoreIDs)
+		semaphores.push_back(_synchronizationList.GetSemaphore(semaphore));
+
+	VkSwapchainKHR swapchain = window.GetSwapchain();
+
+	if (swapchain == VK_NULL_HANDLE)
+		throw std::runtime_error("NIRCommandPoolInternal::PresentSwapchainToQueue Error: Program tried to present image from a non-existent swapchain!");
+
+	VkPresentInfoKHR presentInfo{};
+	presentInfo.sType = VK_STRUCTURE_TYPE_PRESENT_INFO_KHR;
+	presentInfo.waitSemaphoreCount = static_cast<std::uint32_t>(semaphores.size());
+	presentInfo.pWaitSemaphores = semaphores.data();
+	presentInfo.swapchainCount = 1;
+	presentInfo.pSwapchains = &swapchain;
+	presentInfo.pImageIndices = &imageIndex;
+
+	VkResult result = vkQueuePresentKHR(_queue, &presentInfo);
+
+	if (result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+		throw std::runtime_error("NIRCommandPoolInternal::PresentSwapchainToQueue Error: Program failed to present a swapchain image to queue!");
+
+	return result == VK_SUCCESS;
 }

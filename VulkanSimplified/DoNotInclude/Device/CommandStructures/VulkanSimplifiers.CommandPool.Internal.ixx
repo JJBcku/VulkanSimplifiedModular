@@ -65,6 +65,8 @@ public:
 
 	void ResetCommandPool(bool freeResources);
 
+	bool PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs, std::uint32_t imageIndex);
+
 private:
 	const LogicalDeviceCoreInternal& _core;
 
@@ -111,6 +113,8 @@ public:
 	const SecondaryIRCommandBufferInternal& GetSecondaryCommandBufferSimplifier(IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> bufferID) const;
 
 	void ResetCommandPool(bool freeResources);
+
+	bool PresentSwapchainToQueue(IDObject<WindowPointer> windowID, const std::vector<IDObject<AutoCleanupSemaphore>>& waitSemaphoreIDs, std::uint32_t imageIndex);
 
 private:
 	const LogicalDeviceCoreInternal& _core;

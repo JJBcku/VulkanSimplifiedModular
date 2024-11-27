@@ -222,6 +222,12 @@ void LogicalDeviceCoreInternal::CreateSwapchain(IDObject<WindowPointer> windowID
 	window.CreateSwapchain(initData, throwOnSwapchainExist, throwOnDeviceChange);
 }
 
+void LogicalDeviceCoreInternal::WaitIdle()
+{
+	if (vkDeviceWaitIdle(_logicalDevice) != VK_SUCCESS)
+		throw std::runtime_error("LogicalDeviceCoreInternal::WaitIdle Error: Program failed to wait on a logical device to go idle!");
+}
+
 VkPhysicalDeviceFeatures LogicalDeviceCoreInternal::CompileRequestedVulkan10Features(VulkanDeviceFeatureFlags featureFlags)
 {
 	VkPhysicalDeviceFeatures ret{};

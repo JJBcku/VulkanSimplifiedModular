@@ -13,3 +13,8 @@ void LogicalDeviceCoreSimplifier::CreateSwapchain(IDObject<WindowPointer> window
 {
 	_internal.CreateSwapchain(windowID, surfaceCreateInfo, createProtected, throwOnSwapchainExist, throwOnDeviceChange);
 }
+
+void LogicalDeviceCoreSimplifier::WaitIdle()
+{
+	_internal.WaitIdle();
+}

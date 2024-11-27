@@ -36,6 +36,8 @@ public:
 
 	void CreateSwapchain(IDObject<WindowPointer> windowID, const SwapchainCreationData& surfaceCreateInfo, bool createProtected, bool throwOnSwapchainExist, bool throwOnDeviceChange);
 
+	void WaitIdle();
+
 private:
 	WindowListInternal& _windowList;
 

@@ -30,6 +30,7 @@ export struct VulkanDataDeviceDependent
 	std::vector<IDObject<AutoCleanupFence>> inFlightFences;
 	std::vector<IDObject<AutoCleanupSemaphore>> imageAvailableSemaphores;
 	std::vector<IDObject<AutoCleanupSemaphore>> renderingFinishedSemaphores;
+	std::vector<IDObject<AutoCleanupSemaphore>> queueTransferFinishedSemaphores;
 
 	VulkanDataDeviceDependent() = default;
 };

@@ -16,5 +16,7 @@ export struct LogicalDeviceInitData
 	std::uint32_t apiVersion;
 	std::uint32_t padding;
 
+	size_t queueFamiliesCount;
+
 	LogicalDeviceInitData();
 };

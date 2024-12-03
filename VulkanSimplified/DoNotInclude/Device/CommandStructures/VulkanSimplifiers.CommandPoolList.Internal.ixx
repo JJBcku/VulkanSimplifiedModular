@@ -8,7 +8,7 @@ import std;
 import ListTemplates.UnsortedList;
 
 import VulkanSimplifiers.CommandPoolList.CreationData;
-import VulkanSimplifiers.CommandPool.Internal;
+import VulkanSimplifiers.CommandPoolQFGroupList.Internal;
 
 import VulkanSimplifiers.LogicalDeviceCore.Internal;
 
@@ -39,7 +39,6 @@ import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Window.InternalData;
 import VulkanSimplifiers.Window.Data;
 
-import VulkanSimplifiers.CommandPoolList.Data;
 import VulkanSimplifiers.Common.PipelineStageFlags.Internal;
 
 export class CommandPoolListInternal
@@ -56,18 +55,9 @@ public:
 	CommandPoolListInternal& operator=(const CommandPoolListInternal&) noexcept = delete;
 	CommandPoolListInternal& operator=(CommandPoolListInternal&&) noexcept = delete;
 
-	IDObject<std::unique_ptr<NIRCommandPoolInternal>> AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
-		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve);
-	IDObject<std::unique_ptr<IRCommandPoolInternal>> AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
-		size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve);
+	CommandPoolQFGroupListInternal& GetCommandPoolQFGroupListSimplifier(size_t queuesID);
 
-	NIRCommandPoolInternal& GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID);
-	IRCommandPoolInternal& GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID);
-
-	const NIRCommandPoolInternal& GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID) const;
-	const IRCommandPoolInternal& GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID) const;
-
-	void SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmitInfo>& submitInfos, std::optional<IDObject<AutoCleanupFence>> fenceID);
+	const CommandPoolQFGroupListInternal& GetCommandPoolQFGroupListSimplifier(size_t queuesID) const;
 
 private:
 	const LogicalDeviceCoreInternal& _deviceCore;
@@ -84,17 +74,5 @@ private:
 
 	VkDevice _device;
 
-	UnsortedList<std::unique_ptr<NIRCommandPoolInternal>> _noIndividualResetCommandPoolList;
-	UnsortedList<std::unique_ptr<IRCommandPoolInternal>> _individualResetCommandPoolList;
-
-	VkCommandBuffer GetCommandBuffer(CommandBufferGenericID bufferID) const;
-
-	VkCommandBuffer GetCommandBuffer(IDObject<std::unique_ptr<NIRCommandPoolInternal>> commandPoolID,
-		IDObject<std::unique_ptr<PrimaryNIRCommandBufferInternal>> commandBufferID) const;
-	VkCommandBuffer GetCommandBuffer(IDObject<std::unique_ptr<NIRCommandPoolInternal>> commandPoolID,
-		IDObject<std::unique_ptr<SecondaryNIRCommandBufferInternal>> commandBufferID) const;
-	VkCommandBuffer GetCommandBuffer(IDObject<std::unique_ptr<IRCommandPoolInternal>> commandPoolID,
-		IDObject<std::unique_ptr<PrimaryIRCommandBufferInternal>> commandBufferID) const;
-	VkCommandBuffer GetCommandBuffer(IDObject<std::unique_ptr<IRCommandPoolInternal>> commandPoolID,
-		IDObject<std::unique_ptr<SecondaryIRCommandBufferInternal>> commandBufferID) const;
+	std::forward_list<CommandPoolQFGroupListInternal> _queueFamilies;
 };

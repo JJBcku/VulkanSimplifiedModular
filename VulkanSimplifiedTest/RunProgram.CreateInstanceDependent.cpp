@@ -463,7 +463,12 @@ void CreateInstanceDependent(VulkanData& data)
 
 	mainCreationData.shaderList.initialFragmentListCapacity = 1;
 	mainCreationData.shaderList.initialVertexListCapacity = 1;
-	mainCreationData.commandPoolList.noIndividualResetCommandPoolListInitialReservation = 4;
+	mainCreationData.commandPoolList.queueGroupCreationData.resize(deviceProperties.queueFamilies.size());
+
+	for (size_t i = 0; i < mainCreationData.commandPoolList.queueGroupCreationData.size(); ++i)
+	{
+		mainCreationData.commandPoolList.queueGroupCreationData[i].individualResetCommandPoolListInitialReservation = 1;
+	}
 
 	mainCreationData.imageList.framebuffersListInitialCapacity = 1;
 

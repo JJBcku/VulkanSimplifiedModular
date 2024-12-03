@@ -8,39 +8,12 @@ CommandPoolListSimplifier::~CommandPoolListSimplifier()
 {
 }
 
-IDObject<std::unique_ptr<NIRCommandPoolInternal>> CommandPoolListSimplifier::AddCommandPoolWithoutIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
-	size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve)
+CommandPoolQFGroupListSimplifier CommandPoolListSimplifier::GetCommandPoolQFGroupListSimplifier(size_t queuesID)
 {
-	return _internal.AddCommandPoolWithoutIndividualReset(frequentlyRedoneBuffers, queueID, primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity, addOnReserve);
+	return _internal.GetCommandPoolQFGroupListSimplifier(queuesID);
 }
 
-IDObject<std::unique_ptr<IRCommandPoolInternal>> CommandPoolListSimplifier::AddCommandPoolWithIndividualReset(bool frequentlyRedoneBuffers, size_t queueID,
-	size_t primaryBufferListInitialCapacity, size_t secondaryBufferListInitialCapacity, size_t addOnReserve)
+const CommandPoolQFGroupListSimplifier CommandPoolListSimplifier::GetCommandPoolQFGroupListSimplifier(size_t queuesID) const
 {
-	return _internal.AddCommandPoolWithIndividualReset(frequentlyRedoneBuffers, queueID, primaryBufferListInitialCapacity, secondaryBufferListInitialCapacity, addOnReserve);
-}
-
-NIRCommandPoolSimplifier CommandPoolListSimplifier::GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID)
-{
-	return _internal.GetCommandPoolWithoutIndividualResetSimplifier(poolID);
-}
-
-IRCommandPoolSimplifier CommandPoolListSimplifier::GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID)
-{
-	return _internal.GetCommandPoolWithIndividualResetSimplifier(poolID);
-}
-
-const NIRCommandPoolSimplifier CommandPoolListSimplifier::GetCommandPoolWithoutIndividualResetSimplifier(IDObject<std::unique_ptr<NIRCommandPoolInternal>> poolID) const
-{
-	return _internal.GetCommandPoolWithoutIndividualResetSimplifier(poolID);
-}
-
-const IRCommandPoolSimplifier CommandPoolListSimplifier::GetCommandPoolWithIndividualResetSimplifier(IDObject<std::unique_ptr<IRCommandPoolInternal>> poolID) const
-{
-	return _internal.GetCommandPoolWithIndividualResetSimplifier(poolID);
-}
-
-void CommandPoolListSimplifier::SubmitBuffers(size_t queueID, const std::vector<CommandBufferSubmitInfo>& submitInfos, std::optional<IDObject<AutoCleanupFence>> fenceID)
-{
-	_internal.SubmitBuffers(queueID, submitInfos, fenceID);
+	return _internal.GetCommandPoolQFGroupListSimplifier(queuesID);
 }

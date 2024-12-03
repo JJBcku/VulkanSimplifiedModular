@@ -10,6 +10,8 @@ LogicalDeviceInitData::LogicalDeviceInitData()
 
 	apiVersion = 0;
 	padding = 0;
+
+	queueFamiliesCount = 0;
 }
 
 LogicalDeviceCoreInternal::LogicalDeviceCoreInternal(const LogicalDeviceInitData& initData, WindowListInternal& windowList) : _windowList(windowList)
@@ -26,6 +28,8 @@ LogicalDeviceCoreInternal::LogicalDeviceCoreInternal(const LogicalDeviceInitData
 
 	if (queuesCreateData.empty())
 		throw std::runtime_error("LogicalDeviceCoreInternal Contructor Error: Program tried to create a device with no queues!");
+
+	_queueFamiliesCount = initData.queueFamiliesCount;
 
 	std::vector<std::uint32_t> uniqueQueueFamilies;
 	std::vector<std::uint32_t> familiesQueueCount;
@@ -181,6 +185,11 @@ std::uint32_t LogicalDeviceCoreInternal::GetQueueFamily(size_t queueID) const
 		throw std::runtime_error("LogicalDeviceCoreInternal::GetQueueFamily Error: Program tried to read past the queues list!");
 
 	return _queues[queueID].second;
+}
+
+size_t LogicalDeviceCoreInternal::GetQueueFamiliesCount() const
+{
+	return _queueFamiliesCount;
 }
 
 VkQueue LogicalDeviceCoreInternal::GetQueue(size_t queueID) const

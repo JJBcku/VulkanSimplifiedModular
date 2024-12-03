@@ -1,4 +1,4 @@
-module VulkanSimplifiers.CommandPoolList.Data;
+module VulkanSimplifiers.CommandPoolQFGroupList.Data;
 
 CommandBufferGenericID::CommandBufferGenericID()
 {

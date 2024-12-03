@@ -134,6 +134,9 @@
     <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolList.Data.cpp" />
     <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolList.Internal.cpp" />
     <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPool.Internal.cpp" />
+    <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.cpp" />
+    <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.CreationData.cpp" />
+    <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.Internal.cpp" />
     <ClCompile Include="Cpp\Device\DescriptorStructures\VulkanSimplifiers.DeviceDescriptorData.cpp" />
     <ClCompile Include="Cpp\Device\DescriptorStructures\VulkanSimplifiers.DeviceDescriptorData.CreationData.cpp" />
     <ClCompile Include="Cpp\Device\DescriptorStructures\VulkanSimplifiers.DeviceDescriptorData.Data.cpp" />
@@ -236,6 +239,7 @@
     <ClCompile Include="DoNotInclude\Device\CommandStructures\VulkanSimplifiers.CommandBuffer.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\CommandStructures\VulkanSimplifiers.CommandPoolList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\CommandStructures\VulkanSimplifiers.CommandPool.Internal.ixx" />
+    <ClCompile Include="DoNotInclude\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\DescriptorStructures\VulkanSimplifiers.DeviceDescriptorData.Internal.ixx" />
     <ClCompile Include="DoNotInclude\Device\DescriptorStructures\VulkanSimplifiers.DeviceDescriptorData.InternalData.ixx" />
     <ClCompile Include="DoNotInclude\Device\MemoryStructures\VulkanSimplifiers.ImageDataList.Internal.ixx" />
@@ -266,7 +270,9 @@
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.PipelineStageFlags.ixx" />
     <ClCompile Include="Include\Common\VulkanSimplifiers.Common.ShaderTypeFlags.ixx" />
     <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPool.Data.ixx" />
-    <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPoolList.Data.ixx" />
+    <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.Data.ixx" />
+    <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.CreationData.ixx" />
+    <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.ixx" />
     <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommonCommandBuffer.Data.ixx" />
     <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.IRCommandPool.Data.ixx" />
     <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.IRCommandPool.ixx" />

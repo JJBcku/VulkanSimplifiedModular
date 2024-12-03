@@ -91,22 +91,27 @@ void CreateDeviceDependent(VulkanData& data)
 	data.deviceDependent->vertexShader = shaderList.AddVertexShader(vertexData);
 
 	auto commandPoolList = deviceMain.GetCommandPoolListSimplifier();
+	auto commandPoolQFGraphics = commandPoolList.GetCommandPoolQFGroupListSimplifier(data.instanceDependent->graphicsQueue);
 
-	data.deviceDependent->graphicsCommandPool = commandPoolList.AddCommandPoolWithIndividualReset(true, data.instanceDependent->graphicsQueue, swapchainCreation.imageAmount, 0, 4);
-	auto graphicsPool = commandPoolList.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
+	data.deviceDependent->graphicsCommandPool = commandPoolQFGraphics.AddCommandPoolWithIndividualReset(true, data.instanceDependent->graphicsQueue, swapchainCreation.imageAmount, 0, 4);
+	auto graphicsPool = commandPoolQFGraphics.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
 	data.deviceDependent->graphicsCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
 
 	if (data.instanceDependent->transferQueue.has_value())
 	{
-		data.deviceDependent->transferCommandPool = commandPoolList.AddCommandPoolWithIndividualReset(true, data.instanceDependent->transferQueue.value(), swapchainCreation.imageAmount, 0, 4);
-		auto transferPool = commandPoolList.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->transferCommandPool.value());
+		auto commandPoolQFTransfer = commandPoolList.GetCommandPoolQFGroupListSimplifier(data.instanceDependent->transferQueue.value());
+
+		data.deviceDependent->transferCommandPool = commandPoolQFTransfer.AddCommandPoolWithIndividualReset(true, data.instanceDependent->transferQueue.value(), swapchainCreation.imageAmount, 0, 4);
+		auto transferPool = commandPoolQFTransfer.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->transferCommandPool.value());
 		data.deviceDependent->transferCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
 	}
 
 	if (data.instanceDependent->graphicsQueue != data.instanceDependent->presentQueue)
 	{
-		data.deviceDependent->presentCommandPool = commandPoolList.AddCommandPoolWithIndividualReset(true, data.instanceDependent->presentQueue, swapchainCreation.imageAmount, 0, 4);
-		auto presentPool = commandPoolList.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->presentCommandPool.value());
+		auto commandPoolQFPresent = commandPoolList.GetCommandPoolQFGroupListSimplifier(data.instanceDependent->presentQueue);
+
+		data.deviceDependent->presentCommandPool = commandPoolQFPresent.AddCommandPoolWithIndividualReset(true, data.instanceDependent->presentQueue, swapchainCreation.imageAmount, 0, 4);
+		auto presentPool = commandPoolQFPresent.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->presentCommandPool.value());
 		data.deviceDependent->presentCommandBuffers = graphicsPool.AllocatePrimaryCommandBuffers(swapchainCreation.imageAmount);
 	}
 

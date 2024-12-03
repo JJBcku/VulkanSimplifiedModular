@@ -894,7 +894,7 @@
     <ClCompile Include="Include\Device\SynchronizationStructures\VulkanSimplifiers.SynchronizationList.ixx">
       <Filter>Source Files\Include\Device\SynchronizationStructures</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPoolList.Data.ixx">
+    <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.Data.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolList.Data.cpp">
@@ -904,6 +904,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cpp\Common\VulkanSimplifiers.Common.PipelineStageFlags.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DoNotInclude\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.Internal.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.CreationData.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.CreationData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.Internal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Include\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cpp\Device\CommandStructures\VulkanSimplifiers.CommandPoolQFGroupList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

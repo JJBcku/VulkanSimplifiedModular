@@ -1,4 +1,4 @@
-export module VulkanSimplifiers.CommandPoolList.Data;
+export module VulkanSimplifiers.CommandPoolQFGroupList.Data;
 
 import std;
 export import ListTemplates.IDObject;

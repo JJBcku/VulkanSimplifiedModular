@@ -1,0 +1,9 @@
+export module VulkanSimplifiers.CommandPoolQFGroupList.CreationData;
+
+export struct CommandPoolQFGroupListCreationData
+{
+	size_t noIndividualResetCommandPoolListInitialReservation;
+	size_t individualResetCommandPoolListInitialReservation;
+
+	CommandPoolQFGroupListCreationData();
+};

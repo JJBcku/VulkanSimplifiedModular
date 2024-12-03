@@ -6,7 +6,8 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 	auto deviceList = instance.GetDeviceListSimplifier();
 	auto deviceMain = deviceList.GetLogicalDeviceMainSimplifier(data.instanceDependent->deviceID);
 	auto deviceCommandPoolList = deviceMain.GetCommandPoolListSimplifier();
-	auto deviceGraphicsCommandPool = deviceCommandPoolList.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
+	auto deviceCommandPoolQFGraphicsList = deviceCommandPoolList.GetCommandPoolQFGroupListSimplifier(data.instanceDependent->graphicsQueue);
+	auto deviceGraphicsCommandPool = deviceCommandPoolQFGraphicsList.GetCommandPoolWithIndividualResetSimplifier(data.deviceDependent->graphicsCommandPool);
 	auto deviceGraphicsBuffer = deviceGraphicsCommandPool.GetPrimaryCommandBufferSimplifier(data.deviceDependent->graphicsCommandBuffers[frameNumber]);
 	auto synchronizationList = deviceMain.GetSynchronizationListSimplifier();
 
@@ -51,7 +52,7 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 
 	submitInfo[0].signalSemaphores.push_back(data.deviceDependent->renderingFinishedSemaphores[frameNumber]);
 
-	deviceCommandPoolList.SubmitBuffers(data.instanceDependent->graphicsQueue, submitInfo, data.deviceDependent->inFlightFences[frameNumber]);
+	deviceCommandPoolQFGraphicsList.SubmitBuffers(data.instanceDependent->graphicsQueue, submitInfo, data.deviceDependent->inFlightFences[frameNumber]);
 
 	deviceGraphicsCommandPool.PresentSwapchainToQueue(data.basicData->windowID, { data.deviceDependent->renderingFinishedSemaphores[frameNumber] }, nextFrame);
 

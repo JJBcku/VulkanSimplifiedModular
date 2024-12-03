@@ -32,6 +32,8 @@ public:
 	std::vector<std::uint32_t> GetQueueFamilies(const std::vector<size_t>& queueIDs) const;
 	std::uint32_t GetQueueFamily(size_t queueID) const;
 
+	size_t GetQueueFamiliesCount() const;
+
 	VkQueue GetQueue(size_t queueID) const;
 
 	void CreateSwapchain(IDObject<WindowPointer> windowID, const SwapchainCreationData& surfaceCreateInfo, bool createProtected, bool throwOnSwapchainExist, bool throwOnDeviceChange);
@@ -47,6 +49,7 @@ private:
 	std::string _logicalDeviceName;
 	std::uint32_t _apiVersion;
 	std::uint32_t _padding;
+	size_t _queueFamiliesCount;
 	std::vector<std::pair<VkQueue, std::uint32_t>> _queues;
 
 	VkPhysicalDeviceFeatures CompileRequestedVulkan10Features(VulkanDeviceFeatureFlags featureFlags);

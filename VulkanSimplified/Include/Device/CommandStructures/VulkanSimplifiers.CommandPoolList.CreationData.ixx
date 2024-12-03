@@ -2,10 +2,11 @@ export module VulkanSimplifiers.CommandPoolList.CreationData;
 
 import std;
 
+export import VulkanSimplifiers.CommandPoolQFGroupList.CreationData;
+
 export struct CommandPoolListCreationData
 {
-	size_t noIndividualResetCommandPoolListInitialReservation;
-	size_t individualResetCommandPoolListInitialReservation;
+	std::vector<CommandPoolQFGroupListCreationData> queueGroupCreationData;
 
 	CommandPoolListCreationData();
 };

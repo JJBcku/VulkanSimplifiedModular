@@ -54,11 +54,11 @@ AllocationFullID MemoryObjectsListInternal::AllocateMemory(size_t memorySize, si
 			ret.emplace(memoryTypeData[j].value().AddMemoryAllocation(memorySize, initialSuballocationsReserved, addOnReserve), j);
 
 			memoryHeapData[heapIndex].usedSize += memorySize;
+
+			if (ret.has_value())
+				return ret.value();
 		}
 	}
-
-	if (ret.has_value())
-		return ret.value();
 
 	throw std::runtime_error("MemoryObjectsListInternal::AddMemoryAllocation Error: Program failed to allocate memory!");
 }
@@ -91,7 +91,13 @@ std::optional<AllocationFullID> MemoryObjectsListInternal::TryToAllocateMemory(s
 
 			ret.emplace(memoryTypeData[j].value().AddMemoryAllocation(memorySize, initialSuballocationsReserved, addOnReserve), j);
 			memoryHeapData[heapIndex].usedSize += memorySize;
+
+			if (ret.has_value())
+				break;
 		}
+
+		if (ret.has_value())
+			break;
 	}
 
 	return ret;

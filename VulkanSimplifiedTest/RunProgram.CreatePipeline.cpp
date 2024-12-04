@@ -104,8 +104,14 @@ void CreatePipeline(VulkanData& data, std::uint32_t width, std::uint32_t height)
 		std::uint32_t memoryTypeMask = deviceImageList.GetImageMemoryTypeMask(attachmentData.colorAttachmentImage);
 
 		std::vector<MemoryTypeProperties> acceptableMemoryTypes;
-		acceptableMemoryTypes.reserve(1);
+		acceptableMemoryTypes.reserve(7);
 		acceptableMemoryTypes.push_back(DEVICE_LOCAL);
+		acceptableMemoryTypes.push_back(DEVICE_LOCAL | HOST_VISIBLE | HOST_CACHED);
+		acceptableMemoryTypes.push_back(DEVICE_LOCAL | HOST_COHERENT | HOST_VISIBLE | HOST_CACHED);
+		acceptableMemoryTypes.push_back(DEVICE_LOCAL | HOST_COHERENT | HOST_VISIBLE);
+		acceptableMemoryTypes.push_back(HOST_VISIBLE | HOST_CACHED);
+		acceptableMemoryTypes.push_back(HOST_COHERENT | HOST_VISIBLE | HOST_CACHED);
+		acceptableMemoryTypes.push_back(HOST_COHERENT | HOST_VISIBLE);
 
 		attachmentData.imageMemory = memoryList.AllocateMemory(allocationSize, 4, acceptableMemoryTypes, memoryTypeMask);
 		deviceImageList.BindImage(attachmentData.colorAttachmentImage, attachmentData.imageMemory);

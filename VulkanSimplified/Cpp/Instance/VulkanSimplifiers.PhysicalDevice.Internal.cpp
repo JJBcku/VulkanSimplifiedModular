@@ -1351,7 +1351,7 @@ MemoryTypeProperties PhysicalDeviceInternal::GetMemoryTypeProperties(VkMemoryPro
 		ret |= HOST_COHERENT;
 
 	if ((propertyFlags & VK_MEMORY_PROPERTY_HOST_CACHED_BIT) == VK_MEMORY_PROPERTY_HOST_CACHED_BIT)
-		ret |= HOST_UNCACHED;
+		ret |= HOST_CACHED;
 
 	if ((propertyFlags & VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT) == VK_MEMORY_PROPERTY_LAZILY_ALLOCATED_BIT)
 		ret |= LAZYLY_ALLOCATED;

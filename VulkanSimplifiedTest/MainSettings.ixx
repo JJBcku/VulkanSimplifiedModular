@@ -13,7 +13,7 @@ public:
 
 	MainSettings& operator=(const MainSettings&) noexcept = delete;
 
-	bool GetQuit() const;
+	bool IsClosingRequested() const;
 
 	static bool QuitEventCallback(const SDLModuleQuitEvent&, void* instance);
 

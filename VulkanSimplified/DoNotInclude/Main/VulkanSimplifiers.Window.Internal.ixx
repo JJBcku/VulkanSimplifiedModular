@@ -6,26 +6,31 @@ module;
 export module VulkanSimplifiers.Window.Internal;
 
 import std;
+import ListTemplates.IDObject;
+
 import VulkanSimplifiers.Window.Data;
 import VulkanSimplifiers.Window.InternalData;
+
+import VulkanSimplifiers.EventHandling.Internal;
+import VulkanSimplifiers.EventHandling.SDLModule.WindowEvent;
 
 export class WindowInternal
 {
 public:
-	WindowInternal(WindowCreationData data, VkInstance instance);
+	WindowInternal(WindowCreationData data, VkInstance instance, EventHandlingInternal& eventHandler);
 	~WindowInternal();
 
 	WindowInternal(const WindowInternal&) = delete;
 	WindowInternal(WindowInternal&& other);
 
 	WindowInternal& operator=(const WindowInternal&) = delete;
-	WindowInternal& operator=(WindowInternal&& other);
+	WindowInternal& operator=(WindowInternal&& other) = delete;
 
 	void SetInstace(VkInstance instance);
 
-	bool GetQuit() const;
-	bool GetPaused() const;
-	bool GetResized() const;
+	bool IsClosingRequested() const;
+	bool IsPaused() const;
+	bool IsResized();
 
 	std::uint32_t GetWidth() const;
 	std::uint32_t GetHeight() const;
@@ -40,15 +45,23 @@ public:
 
 	bool AcquireNextImage(VkDevice device, std::uint64_t timeout, VkSemaphore semaphore, VkFence fence, std::uint32_t& returnIndex);
 
+	static bool HandleWindowEventStatic(const SDLModuleWindowEvent& event, void* windowptr);
+
 private:
+	EventHandlingInternal& _eventHandler;
+	std::optional<IDObject<std::pair<WindowEventFunction, void*>>> _eventHandlingID;
+
 	std::uint32_t _width, _height;
 
 	SDL_Window* _window;
+	std::uint64_t _windowID;
+
 	VkInstance _instance;
 
 	VkSurfaceKHR _surface;
 
 	VkDevice _device;
+	VkPhysicalDevice _physicalDevice;
 	VkSwapchainKHR _swapchain;
 
 	std::vector<VkImage> _swapchainImages;
@@ -69,4 +82,6 @@ private:
 
 	void ReCreateSwapchain();
 	void DestroySwapchain();
+
+	bool HandleWindowEvent(const SDLModuleWindowEvent& event);
 };

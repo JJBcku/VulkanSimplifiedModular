@@ -208,6 +208,7 @@ void LogicalDeviceCoreInternal::CreateSwapchain(IDObject<WindowPointer> windowID
 	SwapchainInitData initData;
 
 	initData.device = _logicalDevice;
+	initData.physicalDevice = _physicalDevice;
 	initData.surfacePresentMode = TranslatePresentMode(surfaceCreateInfo.surfacePresentMode);
 	initData.format = TranslateDataFormatToVkFormat(surfaceCreateInfo.format);
 	if (createProtected)

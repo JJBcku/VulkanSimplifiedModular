@@ -17,5 +17,5 @@ export struct WindowCreationData
 	std::int32_t windowWidth = 0;
 	std::int32_t windowHeight = 0;
 
-	WindowProperties properties = WindowProperties::NONE;
+	WindowProperties properties = static_cast<WindowProperties>(std::numeric_limits<std::uint64_t>::max());
 };

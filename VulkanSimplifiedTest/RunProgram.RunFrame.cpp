@@ -139,6 +139,4 @@ void RunFrame(VulkanData& data, size_t frameNumber)
 		
 		devicePresentCommandPool.PresentSwapchainToQueue(data.basicData->windowID, { data.deviceDependent->queueTransferFinishedSemaphores[frameNumber] }, nextFrame);
 	}
-
-	std::this_thread::sleep_for(std::chrono::duration<double, std::milli>(1));
 }

@@ -4,7 +4,8 @@ module;
 
 module VulkanSimplifiers.WindowList.Internal;
 
-WindowListInternal::WindowListInternal(size_t initialListCapacity) : _windowList(initialListCapacity), _instance(VK_NULL_HANDLE)
+WindowListInternal::WindowListInternal(size_t initialListCapacity, EventHandlingInternal& eventHandler) : _windowList(initialListCapacity), _instance(VK_NULL_HANDLE),
+_eventHandler(eventHandler)
 {
 }
 
@@ -14,7 +15,7 @@ WindowListInternal::~WindowListInternal()
 
 IDObject<WindowPointer> WindowListInternal::CreateWindow(WindowCreationData data, size_t addReserved)
 {
-	return _windowList.AddObject(std::make_unique<WindowInternal>(data, _instance), addReserved);
+	return _windowList.AddObject(std::make_unique<WindowInternal>(data, _instance, _eventHandler), addReserved);
 }
 
 bool WindowListInternal::DeleteWindow(IDObject<WindowPointer> windowID, bool throwOnIDNotFound)

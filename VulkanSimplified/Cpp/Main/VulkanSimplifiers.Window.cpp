@@ -8,19 +8,19 @@ WindowSimplifier::~WindowSimplifier()
 {
 }
 
-bool WindowSimplifier::GetQuit() const
+bool WindowSimplifier::IsClosingRequested() const
 {
-	return _internal.GetQuit();
+	return _internal.IsClosingRequested();
 }
 
-bool WindowSimplifier::GetPaused() const
+bool WindowSimplifier::IsPaused() const
 {
-	return _internal.GetPaused();
+	return _internal.IsPaused();
 }
 
-bool WindowSimplifier::GetResized()
+bool WindowSimplifier::IsResized()
 {
-	return _internal.GetResized();
+	return _internal.IsResized();
 }
 
 std::uint32_t WindowSimplifier::GetWidth() const

@@ -6,12 +6,13 @@ module;
 
 module VulkanSimplifiers.Window.Internal;
 
-WindowInternal::WindowInternal(WindowCreationData data, VkInstance instance)
+WindowInternal::WindowInternal(WindowCreationData data, VkInstance instance, EventHandlingInternal& eventHandler) : _eventHandler(eventHandler)
 {
 	_width = static_cast<uint32_t>(data.windowWidth);
 	_height = static_cast<uint32_t>(data.windowHeight);
 	
 	_window = nullptr;
+	_windowID = std::numeric_limits<std::uint64_t>::max();
 	_instance = VK_NULL_HANDLE;
 	CreateWindow(data);
 
@@ -19,6 +20,7 @@ WindowInternal::WindowInternal(WindowCreationData data, VkInstance instance)
 	SetInstace(instance);
 
 	_device = VK_NULL_HANDLE;
+	_physicalDevice = VK_NULL_HANDLE;
 	_swapchain = VK_NULL_HANDLE;
 
 	_surfacePresentMode = VK_PRESENT_MODE_IMMEDIATE_KHR;
@@ -35,6 +37,8 @@ WindowInternal::WindowInternal(WindowCreationData data, VkInstance instance)
 	_cpadding[1] = 0;
 	_cpadding[2] = 0;
 	_cpadding[3] = 0;
+
+	_eventHandlingID = _eventHandler.RegisterWindowEventCallback(WindowInternal::HandleWindowEventStatic, this, 0);
 }
 
 WindowInternal::~WindowInternal()
@@ -42,10 +46,11 @@ WindowInternal::~WindowInternal()
 	DestroyWindow();
 }
 
-WindowInternal::WindowInternal(WindowInternal&& other) : _width(other._width), _height(other._height), _window(other._window), _instance(other._instance), _surface(other._surface),
-_device(other._device), _swapchain(other._swapchain), _swapchainImages(std::move(other._swapchainImages)),
-_surfacePresentMode(other._surfacePresentMode), _format(other._format), _swapchainFlags(other._swapchainFlags),
-_imageAmount(other._imageAmount), _queueFamilies(std::move(other._queueFamilies)), _minimized(other._minimized), _hidden(other._hidden), _quit(other._quit), _resized(other._resized)
+WindowInternal::WindowInternal(WindowInternal&& other) : _eventHandler(other._eventHandler), _eventHandlingID(std::move(other._eventHandlingID)), _width(other._width),
+_height(other._height), _window(other._window), _instance(other._instance), _surface(other._surface), _device(other._device), _physicalDevice(other._physicalDevice),
+_swapchain(other._swapchain), _swapchainImages(std::move(other._swapchainImages)), _surfacePresentMode(other._surfacePresentMode), _format(other._format),
+_swapchainFlags(other._swapchainFlags), _imageAmount(other._imageAmount), _queueFamilies(std::move(other._queueFamilies)),
+_minimized(other._minimized), _hidden(other._hidden), _quit(other._quit), _resized(other._resized)
 {
 	_cpadding[0] = 0;
 	_cpadding[1] = 0;
@@ -58,6 +63,7 @@ _imageAmount(other._imageAmount), _queueFamilies(std::move(other._queueFamilies)
 	other._instance = VK_NULL_HANDLE;
 	other._surface = VK_NULL_HANDLE;
 	other._device = VK_NULL_HANDLE;
+	other._physicalDevice = VK_NULL_HANDLE;
 	other._swapchain = VK_NULL_HANDLE;
 	other._surfacePresentMode = VK_PRESENT_MODE_IMMEDIATE_KHR;
 	other._format = VK_FORMAT_UNDEFINED;
@@ -67,51 +73,6 @@ _imageAmount(other._imageAmount), _queueFamilies(std::move(other._queueFamilies)
 	other._hidden = false;
 	other._quit = false;
 	other._resized = false;
-}
-
-WindowInternal& WindowInternal::operator=(WindowInternal&& other)
-{
-	DestroyWindow();
-
-	_width = other._width;
-	_height = other._height;
-	_window = other._window;
-	_instance = other._instance;
-	_surface = other._surface;
-	_device = other._device;
-	_swapchain = other._swapchain;
-	_surfacePresentMode = other._surfacePresentMode;
-	_format = other._format;
-	_swapchainFlags = other._swapchainFlags;
-	_imageAmount = other._imageAmount;
-	_swapchainImages = std::move(other._swapchainImages);
-	_queueFamilies = std::move(other._queueFamilies);
-	_minimized = other._minimized;
-	_hidden = other._hidden;
-	_quit = other._quit;
-	_resized = other._resized;
-	_cpadding[0] = 0;
-	_cpadding[1] = 0;
-	_cpadding[2] = 0;
-	_cpadding[3] = 0;
-
-	other._width = 0;
-	other._height = 0;
-	other._window = nullptr;
-	other._instance = VK_NULL_HANDLE;
-	other._surface = VK_NULL_HANDLE;
-	other._device = VK_NULL_HANDLE;
-	other._swapchain = VK_NULL_HANDLE;
-	other._surfacePresentMode = VK_PRESENT_MODE_IMMEDIATE_KHR;
-	other._format = VK_FORMAT_UNDEFINED;
-	other._swapchainFlags = 0;
-	other._imageAmount = 0;
-	other._minimized = false;
-	other._hidden = false;
-	other._quit = false;
-	other._resized = false;
-
-	return *this;
 }
 
 void WindowInternal::SetInstace(VkInstance instance)
@@ -128,19 +89,22 @@ void WindowInternal::SetInstace(VkInstance instance)
 	}
 }
 
-bool WindowInternal::GetQuit() const
+bool WindowInternal::IsClosingRequested() const
 {
 	return _quit;
 }
 
-bool WindowInternal::GetPaused() const
+bool WindowInternal::IsPaused() const
 {
 	return _minimized || _hidden;
 }
 
-bool WindowInternal::GetResized() const
+bool WindowInternal::IsResized()
 {
-	return _resized;
+	bool ret = _resized;
+	_resized = false;
+
+	return ret;
 }
 
 std::uint32_t WindowInternal::GetWidth() const
@@ -184,10 +148,16 @@ void WindowInternal::CreateSwapchain(SwapchainInitData swapchainInit, bool throw
 	if (_swapchain != VK_NULL_HANDLE && throwOnSwapchainExist)
 		throw std::runtime_error("WindowInternal::CreateSwapchain Error: Program tried to create an existing swapchain!");
 
-	if (_device != VK_NULL_HANDLE && swapchainInit.device != _device && throwOnDeviceChange)
-		throw std::runtime_error("WindowInternal::CreateSwapchain Error: Program tried to create a swapchain using different device!");
+	if (_device != VK_NULL_HANDLE && swapchainInit.device != _device)
+	{
+		if (throwOnDeviceChange)
+			throw std::runtime_error("WindowInternal::CreateSwapchain Error: Program tried to create a swapchain using different device!");
+		else
+			DestroySwapchain();
+	}
 
 	_device = swapchainInit.device;
+	_physicalDevice = swapchainInit.physicalDevice;
 	_surfacePresentMode = swapchainInit.surfacePresentMode;
 	_format = swapchainInit.format;
 	_swapchainFlags = swapchainInit.flags;
@@ -208,6 +178,11 @@ bool WindowInternal::AcquireNextImage(VkDevice device, std::uint64_t timeout, Vk
 		throw std::runtime_error("WindowInternal::AcquireNextImage Error: Program failed to acquire next image!");
 
 	return result == VK_SUCCESS;
+}
+
+bool WindowInternal::HandleWindowEventStatic(const SDLModuleWindowEvent& event, void* windowptr)
+{
+	return static_cast<WindowInternal*>(windowptr)->HandleWindowEvent(event);
 }
 
 void WindowInternal::CreateWindow(WindowCreationData data)
@@ -241,11 +216,19 @@ void WindowInternal::CreateWindow(WindowCreationData data)
 
 	if (_window == nullptr)
 		throw std::runtime_error("Error: Program failed to create a window!");
+
+	_windowID = SDL_GetWindowID(_window);
 }
 
 void WindowInternal::DestroyWindow()
 {
-	if (_instance != VK_NULL_HANDLE)
+	if (_eventHandlingID.has_value())
+	{
+		_eventHandler.UnRegisterWindowEventCallback(_eventHandlingID.value(), true);
+		_eventHandlingID.reset();
+	}
+
+	if (_surface != VK_NULL_HANDLE)
 	{
 		DestroySwapchain();
 
@@ -264,6 +247,10 @@ void WindowInternal::ReCreateSwapchain()
 {
 	DestroySwapchain();
 
+	VkSurfaceCapabilitiesKHR capabilities{};
+
+	vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_physicalDevice, _surface, &capabilities);
+
 	VkSwapchainCreateInfoKHR createInfo{};
 	createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
 	createInfo.flags = _swapchainFlags;
@@ -271,8 +258,8 @@ void WindowInternal::ReCreateSwapchain()
 	createInfo.minImageCount = _imageAmount;
 	createInfo.imageFormat = _format;
 	createInfo.imageColorSpace = VK_COLOR_SPACE_SRGB_NONLINEAR_KHR;
-	createInfo.imageExtent.width = _width;
-	createInfo.imageExtent.height = _height;
+	createInfo.imageExtent.width = capabilities.currentExtent.width;
+	createInfo.imageExtent.height = capabilities.currentExtent.height;
 	createInfo.imageArrayLayers = 1;
 	createInfo.imageUsage = VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
@@ -301,9 +288,55 @@ void WindowInternal::DestroySwapchain()
 {
 	if (_swapchain != VK_NULL_HANDLE)
 	{
+		vkDeviceWaitIdle(_device);
+
 		_swapchainImages.clear();
 
 		vkDestroySwapchainKHR(_device, _swapchain, nullptr);
 		_swapchain = VK_NULL_HANDLE;
 	}
+}
+
+bool WindowInternal::HandleWindowEvent(const SDLModuleWindowEvent& event)
+{
+	if (event.windowID != _windowID)
+		return true;
+
+	switch (event.event)
+	{
+	case SDL_MODULE_WINDOWEVENT_SHOWN:
+		_hidden = false;
+		break;
+	case SDL_MODULE_WINDOWEVENT_HIDDEN:
+		_hidden = true;
+		break;
+	case SDL_MODULE_WINDOWEVENT_RESIZED:
+		_width = static_cast<std::uint32_t>(event.data1);
+		_height = static_cast<std::uint32_t>(event.data2);
+		if (_swapchain != VK_NULL_HANDLE)
+			ReCreateSwapchain();
+		break;
+	case SDL_MODULE_WINDOWEVENT_SIZE_CHANGED:
+		_width = static_cast<std::uint32_t>(event.data1);
+		_height = static_cast<std::uint32_t>(event.data2);
+		if (_swapchain != VK_NULL_HANDLE)
+			ReCreateSwapchain();
+		break;
+	case SDL_MODULE_WINDOWEVENT_MINIMIZED:
+		_minimized = true;
+		break;
+	case SDL_MODULE_WINDOWEVENT_MAXIMIZED:
+		_minimized = false;
+		break;
+	case SDL_MODULE_WINDOWEVENT_RESTORED:
+		_minimized = false;
+		break;
+	case SDL_MODULE_WINDOWEVENT_CLOSE:
+		_quit = true;
+		break;
+	default:
+		break;
+	}
+
+	return false;
 }

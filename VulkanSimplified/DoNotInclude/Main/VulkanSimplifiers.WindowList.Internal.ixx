@@ -10,10 +10,13 @@ import VulkanSimplifiers.Window.Internal;
 import VulkanSimplifiers.Window.Data;
 import VulkanSimplifiers.WindowList.Data;
 
+import VulkanSimplifiers.EventHandling.Internal;
+import VulkanSimplifiers.EventHandling.SDLModule.WindowEvent;
+
 export class WindowListInternal
 {
 public:
-	WindowListInternal(size_t initialListCapacity);
+	WindowListInternal(size_t initialListCapacity, EventHandlingInternal& eventHandler);
 	~WindowListInternal();
 
 	WindowListInternal(const WindowListInternal&) noexcept = delete;
@@ -33,4 +36,6 @@ public:
 private:
 	IterativeUnsortedList<WindowPointer> _windowList;
 	VkInstance _instance;
+
+	EventHandlingInternal& _eventHandler;
 };

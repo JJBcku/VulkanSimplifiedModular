@@ -11,6 +11,7 @@ export import VulkanSimplifiers.Window.Data;
 export struct SwapchainInitData
 {
 	VkDevice device;
+	VkPhysicalDevice physicalDevice;
 	VkPresentModeKHR surfacePresentMode;
 	VkFormat format;
 	VkSwapchainCreateFlagsKHR flags;

@@ -38,6 +38,7 @@ void CreateBasics(VulkanData& data, MainSettings& settings)
 	window.windowTitle = "Module Test Window";
 	window.windowWidth = 800;
 	window.windowHeight = 600;
+	window.properties = WindowProperties::RESIZABLE;
 
 	auto windowList = main.GetWindowListSimplifier();
 

@@ -207,3 +207,198 @@ IDObject<std::pair<RenderDeviceResetEventFunction, void*>> EventHandlingSimplifi
 {
 	return _internal.RegisterRenderDeviceResetEventCallback(function, data, add);
 }
+
+bool EventHandlingSimplifier::UnRegisterQuitEventCallback(IDObject<std::pair<QuitEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterQuitEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterAppTerminatingEventCallback(IDObject<std::pair<AppTerminatingEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterAppTerminatingEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterAppLowMemoryEventCallback(IDObject<std::pair<AppLowMemoryEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterAppLowMemoryEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterAppWillEnterBackgroundEventCallback(IDObject<std::pair<AppWillEnterBackgroundEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterAppWillEnterBackgroundEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterAppDidEnterBackgroundEventCallback(IDObject<std::pair<AppDidEnterBackgroundEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterAppDidEnterBackgroundEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterAppWillEnterForegroundEventCallback(IDObject<std::pair<AppWillEnterForegroundEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterAppWillEnterForegroundEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterAppDidEnterForegroundEventCallback(IDObject<std::pair<AppDidEnterForegroundEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterAppDidEnterForegroundEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterLocaleChangedEventCallback(IDObject<std::pair<LocaleChangedEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterLocaleChangedEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterDisplayEventCallback(IDObject<std::pair<DisplayEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterDisplayEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterWindowEventCallback(IDObject<std::pair<WindowEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterWindowEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterKeyboardEventCallback(IDObject<std::pair<KeyboardEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterKeyboardEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterKeymapChangeEventCallback(IDObject<std::pair<KeymapChangeEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterKeymapChangeEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterTextEditingEventCallback(IDObject<std::pair<TextEditingEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterTextEditingEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterTextEditingExtendedEventCallback(IDObject<std::pair<TextEditingExtendedEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterTextEditingExtendedEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterTextInputEventCallback(IDObject<std::pair<TextInputEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterTextInputEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterMouseMotionEventCallback(IDObject<std::pair<MouseMotionEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterMouseMotionEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterMouseButtonEventCallback(IDObject<std::pair<MouseButtonEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterMouseButtonEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterMouseWheelEventCallback(IDObject<std::pair<MouseWheelEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterMouseWheelEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterJoyAxisEventCallback(IDObject<std::pair<JoyAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterJoyAxisEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterJoyBallEventCallback(IDObject<std::pair<JoyBallEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterJoyBallEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterJoyHatEventCallback(IDObject<std::pair<JoyHatEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterJoyHatEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterJoyButtonEventCallback(IDObject<std::pair<JoyButtonEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterJoyButtonEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterJoyDeviceEventCallback(IDObject<std::pair<JoyDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterJoyDeviceEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterJoyBatteryEventCallback(IDObject<std::pair<JoyBatteryEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterJoyBatteryEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterControllerAxisEventCallback(IDObject<std::pair<ControllerAxisEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterControllerAxisEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterControllerButtonEventCallback(IDObject<std::pair<ControllerButtonEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterControllerButtonEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterControllerDeviceEventCallback(IDObject<std::pair<ControllerDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterControllerDeviceEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterControllerTouchpadEventCallback(IDObject<std::pair<ControllerTouchpadEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterControllerTouchpadEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterControllerSensorEventCallback(IDObject<std::pair<ControllerSensorEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterControllerSensorEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterAudioDeviceEventCallback(IDObject<std::pair<AudioDeviceEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterAudioDeviceEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterTouchFingerEventCallback(IDObject<std::pair<TouchFingerEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterTouchFingerEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterMultiGestureEventCallback(IDObject<std::pair<MultiGestureEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterMultiGestureEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterDollarGestureEventCallback(IDObject<std::pair<DollarGestureEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterDollarGestureEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterClipboardEventCallback(IDObject<std::pair<ClipboardEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterClipboardEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterDropEventCallback(IDObject<std::pair<DropEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterDropEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterSensorEventCallback(IDObject<std::pair<SensorEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterSensorEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterUserEventCallback(IDObject<std::pair<UserEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterUserEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterRenderTargetsResetEventCallback(IDObject<std::pair<RenderTargetsResetEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterRenderTargetsResetEventCallback(ID, throwOnIDNotFound);
+}
+
+bool EventHandlingSimplifier::UnRegisterRenderDeviceResetEventCallback(IDObject<std::pair<RenderDeviceResetEventFunction, void*>> ID, bool throwOnIDNotFound)
+{
+	return _internal.UnRegisterRenderDeviceResetEventCallback(ID, throwOnIDNotFound);
+}

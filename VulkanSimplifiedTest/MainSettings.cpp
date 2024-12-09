@@ -11,7 +11,7 @@ MainSettings::~MainSettings()
 {
 }
 
-bool MainSettings::GetQuit() const
+bool MainSettings::IsClosingRequested() const
 {
 	return _quit;
 }

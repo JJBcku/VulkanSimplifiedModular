@@ -77,7 +77,6 @@ export typedef std::function<bool(const SDLModuleUserEvent&, void*)> UserEventFu
 
 export typedef std::function<bool(const SDLModuleRenderTargetsResetEvent&, void*)> RenderTargetsResetEventFunction;
 export typedef std::function<bool(const SDLModuleRenderDeviceResetEvent&, void*)> RenderDeviceResetEventFunction;
-//export typedef std::function<bool(const SDL_SysWMEvent&, void*)> SystemWindowsManagerEventFunction;
 
 export class EventHandlingInternal
 {

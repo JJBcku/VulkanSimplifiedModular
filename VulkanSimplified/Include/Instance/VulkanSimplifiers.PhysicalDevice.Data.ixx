@@ -159,7 +159,7 @@ export enum QueueTypeFlagBits : QueueTypeFlags
 	QUEUE_TYPE_OPTICAL_FLOW = 0x100,
 };
 
-struct QueueFamily
+export struct QueueFamily
 {
 	QueueTypeFlags queueTypes;
 	std::uint32_t queueCount;

@@ -11,6 +11,11 @@ _sharedData(initData.sharedDataListInitData)
 {
 	int result = SDL_InitSubSystem(SDL_INIT_VIDEO);
 
+	auto ret = SDL_Vulkan_LoadLibrary(nullptr);
+
+	if (ret < 0)
+		throw std::runtime_error(SDL_GetError());
+
 	 if (result < 0)
 		throw std::runtime_error("Program failed to initialize SDL, error code" + std::to_string(result));
 
@@ -67,13 +72,20 @@ _sharedData(initData.sharedDataListInitData)
 #endif
 
 	 _availableExtensions = CompileAvailableExtensionList(availableExtensions);
+
+	 std::vector<const char*> sdlRequired;
+
+	 std::uint32_t size = 0;
+	 auto res = SDL_Vulkan_GetInstanceExtensions(nullptr, &size, nullptr);
+
+	 sdlRequired.resize(size);
+	 res =  SDL_Vulkan_GetInstanceExtensions(nullptr, &size, sdlRequired.data());
 }
 
 MainInternal::~MainInternal()
 {
 	_windowList.DeleteAll();
 	_instance.reset();
-	SDL_QuitSubSystem(SDL_INIT_VIDEO);
 	SDL_Quit();
 }
 

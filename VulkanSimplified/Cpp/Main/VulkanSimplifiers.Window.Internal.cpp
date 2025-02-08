@@ -188,7 +188,7 @@ bool WindowInternal::HandleWindowEventStatic(const SDLModuleWindowEvent& event, 
 void WindowInternal::CreateWindow(WindowCreationData data)
 {
 	if (_window != nullptr)
-		throw std::runtime_error("Error: Program tried to create an already existing window!");
+		throw std::runtime_error("WindowInternal::CreateWindow Error: Program tried to create an already existing window!");
 
 	Uint32 flags = SDL_WINDOW_VULKAN;
 
@@ -209,13 +209,13 @@ void WindowInternal::CreateWindow(WindowCreationData data)
 		flags |= SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_BORDERLESS;
 		break;
 	default:
-		throw std::runtime_error("Error: Unknown window creation properties!");
+		throw std::runtime_error("WindowInternal::CreateWindow Error: Unknown window creation properties!");
 	}
 
 	_window = SDL_CreateWindow(data.windowTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, data.windowWidth, data.windowHeight, flags);
 
 	if (_window == nullptr)
-		throw std::runtime_error("Error: Program failed to create a window!");
+		throw std::runtime_error("WindowInternal::CreateWindow Error: Program failed to create a window!");
 
 	_windowID = SDL_GetWindowID(_window);
 }

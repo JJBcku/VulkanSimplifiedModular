@@ -515,7 +515,7 @@ VkPipelineMultisampleStateCreateInfo SharedPipelineDataInternal::GetMultisamplin
 
 VkPipelineDepthStencilStateCreateInfo SharedPipelineDataInternal::GetDepthStencilState(IDObject<PipelineDepthStencilStateData> depthStencilID) const
 {
-	VkPipelineDepthStencilStateCreateInfo ret;
+	VkPipelineDepthStencilStateCreateInfo ret{};
 	ret.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
 
 	auto& data = _pipelineDepthStencilInfo.GetConstObject(depthStencilID);

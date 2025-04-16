@@ -54,7 +54,7 @@ IDObject<DescriptorSetLayoutBindingData> SharedDescriptorDataInternal::AddDescri
 		add.descriptorType = VK_DESCRIPTOR_TYPE_SAMPLER;
 		break;
 	default:
-		std::runtime_error("SharedDescriptorDataInternal::AddDescriptorSetLayoutBindingsData Error: Program was given an erroneous descriptor type value!");
+		throw std::runtime_error("SharedDescriptorDataInternal::AddDescriptorSetLayoutBindingsData Error: Program was given an erroneous descriptor type value!");
 	}
 
 	add.descriptorCount = descriptorAmount;

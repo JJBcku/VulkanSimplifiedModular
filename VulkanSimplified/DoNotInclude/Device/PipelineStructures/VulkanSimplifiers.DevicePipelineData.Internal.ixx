@@ -23,7 +23,7 @@ export class DevicePipelineDataInternal
 {
 public:
 	DevicePipelineDataInternal(const DevicePipelineDataCreationData& creationInfo, const SharedPipelineDataInternal& pipelineData, const DeviceDescriptorDataInternal& descriptorData,
-		const ShaderListInternal& shaderList, const DeviceRenderPassDataInternal& _renderPassList, VkDevice device);
+		const ShaderListInternal& shaderList, const DeviceRenderPassDataInternal& renderPassList, VkDevice device);
 	~DevicePipelineDataInternal();
 
 	DevicePipelineDataInternal& operator=(const DevicePipelineDataInternal&) noexcept = delete;

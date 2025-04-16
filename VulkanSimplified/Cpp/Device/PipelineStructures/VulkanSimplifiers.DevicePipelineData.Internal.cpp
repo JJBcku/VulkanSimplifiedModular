@@ -5,8 +5,8 @@ module;
 module VulkanSimplifiers.DevicePipelineData.Internal;
 
 DevicePipelineDataInternal::DevicePipelineDataInternal(const DevicePipelineDataCreationData& creationInfo, const SharedPipelineDataInternal& pipelineData,
-	const DeviceDescriptorDataInternal& descriptorData, const ShaderListInternal& shaderList, const DeviceRenderPassDataInternal& _renderPassList, VkDevice device) :
-	_pipelineData(pipelineData), _descriptorData(descriptorData), _shaderList(shaderList), _renderPassList(_renderPassList), _device(device),
+	const DeviceDescriptorDataInternal& descriptorData, const ShaderListInternal& shaderList, const DeviceRenderPassDataInternal& renderPassList, VkDevice device) :
+	_pipelineData(pipelineData), _descriptorData(descriptorData), _shaderList(shaderList), _renderPassList(renderPassList), _device(device),
 	_pipelineLayouts(creationInfo.pipelineLayoutListInitialCapacity), _graphicPipelines(creationInfo.graphicsPipelineListInitialCapacity)
 {
 }

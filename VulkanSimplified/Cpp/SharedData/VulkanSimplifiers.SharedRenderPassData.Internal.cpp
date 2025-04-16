@@ -446,8 +446,8 @@ std::pair<VkClearValue, VkClearValue> SharedRenderPassDataInternal::GetInt64Colo
 
 	auto& data = _int64ClearValues.GetConstObject(valueID);
 
-	std::memcpy(&ret.first.color, &data.r, sizeof(double) << 1);
-	std::memcpy(&ret.second.color, &data.b, sizeof(double) << 1);
+	std::memcpy(&ret.first.color, &data.r, sizeof(int64_t) << 1);
+	std::memcpy(&ret.second.color, &data.b, sizeof(int64_t) << 1);
 
 	return ret;
 }
@@ -458,8 +458,8 @@ std::pair<VkClearValue, VkClearValue> SharedRenderPassDataInternal::GetUInt64Col
 
 	auto& data = _uint64ClearValues.GetConstObject(valueID);
 
-	std::memcpy(&ret.first.color, &data.r, sizeof(double) << 1);
-	std::memcpy(&ret.second.color, &data.b, sizeof(double) << 1);
+	std::memcpy(&ret.first.color, &data.r, sizeof(uint64_t) << 1);
+	std::memcpy(&ret.second.color, &data.b, sizeof(uint64_t) << 1);
 
 	return ret;
 }

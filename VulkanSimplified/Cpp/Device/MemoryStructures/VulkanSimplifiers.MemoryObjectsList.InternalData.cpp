@@ -184,7 +184,6 @@ std::pair<size_t, size_t> MemoryAllocationData::FindMemoryAdressAndVectorIndexFo
 				if (endSize >= size)
 				{
 					beggining = currentPoint;
-					i++;
 				}
 			}
 		}
